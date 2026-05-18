@@ -37,8 +37,8 @@ public sealed class ProductDocumentService : IProductDocumentService
         var now = DateTime.UtcNow;
         var document = new ProductDocument
         {
-            Id = $"doc-{Guid.NewGuid():N}",
-            ProductId = request.ProductId,
+            Id = Guid.NewGuid(),
+            ProductId = Guid.Parse(request.ProductId),
             DocumentType = Enum.TryParse<DocumentType>(request.DocumentType, true, out var type) ? type : DocumentType.TechnicalSheet,
             Status = Enum.TryParse<ContentStatus>(request.Status, true, out var status) ? status : ContentStatus.Draft,
             Title = request.Title?.Trim() ?? string.Empty,
@@ -78,8 +78,8 @@ public sealed class ProductDocumentService : IProductDocumentService
 
     private static ProductDocumentResponse Map(ProductDocument d) => new()
     {
-        Id = d.Id,
-        ProductId = d.ProductId,
+        Id = d.Id.ToString(),
+        ProductId = d.ProductId.ToString(),
         DocumentType = d.DocumentType.ToString(),
         Status = d.Status.ToString(),
         Title = d.Title,

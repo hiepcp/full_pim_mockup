@@ -6,6 +6,7 @@ namespace Pim.Application.Interfaces.Services;
 public interface IProductService
 {
     Task<IReadOnlyList<ProductResponse>> GetAllAsync(CancellationToken ct = default);
+    Task<(IReadOnlyList<ProductResponse> Items, int Total)> GetPagedAsync(int start, int end, CancellationToken ct = default);
     Task<IReadOnlyList<ProductResponse>> SearchAsync(string? rangeName, string? masterNumber, ProductLevel? level, CancellationToken ct = default);
     Task<ProductResponse?> GetByIdAsync(string id, CancellationToken ct = default);
     Task<ProductResponse?> GetByD365ItemAsync(string d365ItemNumber, CancellationToken ct = default);

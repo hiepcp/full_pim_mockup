@@ -1,6 +1,6 @@
 using System.Data;
 using Dapper;
-using MySqlConnector;
+using Npgsql;
 using Pim.Application.Interfaces.Repositories;
 using Pim.Domain.Entities;
 using Pim.Domain.Enums;
@@ -17,7 +17,7 @@ public sealed class SqlProductDocumentRepository : IProductDocumentRepository, I
         _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
     }
 
-    private IDbConnection Connection => _connection ??= new MySqlConnection(_connectionString);
+    private IDbConnection Connection => _connection ??= new NpgsqlConnection(_connectionString);
 
     public async Task<IReadOnlyList<ProductDocument>> GetByProductAsync(string productId, CancellationToken ct = default)
     {

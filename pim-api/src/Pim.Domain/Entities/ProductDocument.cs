@@ -4,8 +4,8 @@ namespace Pim.Domain.Entities;
 
 public sealed class ProductDocument
 {
-    public string Id { get; set; } = string.Empty;
-    public string ProductId { get; set; } = string.Empty;
+    public Guid Id { get; set; }
+    public Guid ProductId { get; set; }
 
     public DocumentType DocumentType { get; set; } = DocumentType.TechnicalSheet;
     public ContentStatus Status { get; set; } = ContentStatus.Draft;

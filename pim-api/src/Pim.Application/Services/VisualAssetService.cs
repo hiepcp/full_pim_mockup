@@ -37,8 +37,8 @@ public sealed class VisualAssetService : IVisualAssetService
         var now = DateTime.UtcNow;
         var asset = new VisualAsset
         {
-            Id = $"asset-{Guid.NewGuid():N}",
-            ProductId = request.ProductId,
+            Id = Guid.NewGuid(),
+            ProductId = Guid.Parse(request.ProductId),
             AssetType = Enum.TryParse<AssetType>(request.AssetType, true, out var type) ? type : AssetType.Packshot,
             Status = Enum.TryParse<AssetStatus>(request.Status, true, out var status) ? status : AssetStatus.Draft,
             FileName = request.FileName.Trim(),
@@ -79,8 +79,8 @@ public sealed class VisualAssetService : IVisualAssetService
 
     private static VisualAssetResponse Map(VisualAsset a) => new()
     {
-        Id = a.Id,
-        ProductId = a.ProductId,
+        Id = a.Id.ToString(),
+        ProductId = a.ProductId.ToString(),
         AssetType = a.AssetType.ToString(),
         Status = a.Status.ToString(),
         FileName = a.FileName,

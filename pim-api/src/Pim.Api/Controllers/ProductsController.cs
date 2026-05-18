@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Pim.Api.Common;
 using Pim.Application.Dtos;
+using Pim.Application.Interfaces.Repositories;
 using Pim.Application.Interfaces.Services;
 using Pim.Domain.Enums;
 
@@ -11,17 +12,19 @@ namespace Pim.Api.Controllers;
 public sealed class ProductsController : ControllerBase
 {
     private readonly IProductService _service;
+    private readonly IProductVariantRepository _variantRepository;
 
-    public ProductsController(IProductService service)
+    public ProductsController(IProductService service, IProductVariantRepository variantRepository)
     {
         _service = service;
+        _variantRepository = variantRepository;
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(CancellationToken ct)
+    public async Task<IActionResult> GetAll([FromQuery] int _start = 0, [FromQuery] int _end = 25, CancellationToken ct = default)
     {
-        var result = await _service.GetAllAsync(ct);
-        return Ok(ApiResponse<IReadOnlyList<ProductResponse>>.Ok(result));
+        var (items, total) = await _service.GetPagedAsync(_start, _end, ct);
+        return Ok(new { success = true, message = "Success", data = items, total });
     }
 
     [HttpGet("search")]
@@ -81,5 +84,30 @@ public sealed class ProductsController : ControllerBase
         if (!deleted)
             return NotFound(ApiResponse<string>.Fail("Product not found."));
         return Ok(ApiResponse<string>.Ok(string.Empty, "Product deleted successfully."));
+    }
+
+    [HttpGet("{id}/variants")]
+    public async Task<IActionResult> GetVariants(string id, CancellationToken ct)
+    {
+        var product = await _service.GetByIdAsync(id, ct);
+        if (product is null)
+            return NotFound(ApiResponse<string>.Fail("Product not found."));
+
+        var variants = await _variantRepository.GetByMasterNumberAsync(product.D365ItemNumber, ct);
+        var response = variants.Select(v => new ProductVariantResponse
+        {
+            Id = v.Id.ToString(),
+            ProductMasterNumber = v.ProductMasterNumber,
+            VariantNumber = v.VariantNumber,
+            ProductName = v.ProductName,
+            ColorId = v.ColorId,
+            SizeId = v.SizeId,
+            StyleId = v.StyleId,
+            ConfigurationId = v.ConfigurationId,
+            RangeName = v.RangeName,
+            Status = v.Status
+        }).ToList();
+
+        return Ok(new { success = true, data = response, total = response.Count });
     }
 }

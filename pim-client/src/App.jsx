@@ -1,122 +1,106 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { Refine } from "@refinedev/core";
+import { RefineThemes, ThemedLayout, ThemedSider, useNotificationProvider, RefineSnackbarProvider } from "@refinedev/mui";
+import { ThemeProvider, CssBaseline, GlobalStyles, Typography, Box } from "@mui/material";
+import routerProvider, { NavigateToResource, UnsavedChangesNotifier, DocumentTitleHandler } from "@refinedev/react-router";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import dataProvider from "./dataProvider";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { ProductList, ProductShow, ProductEdit, ProductCreate } from "./pages/products";
+import { AssetList, AssetShow } from "./pages/assets";
+import { Dashboard } from "./pages/dashboard";
+
+import InventoryIcon from "@mui/icons-material/Inventory2Outlined";
+import ImageIcon from "@mui/icons-material/ImageOutlined";
+import DashboardIcon from "@mui/icons-material/DashboardOutlined";
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
+function RefineApp() {
+  const notificationProvider = useNotificationProvider();
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+    <Refine
+      routerProvider={routerProvider}
+      dataProvider={dataProvider}
+      notificationProvider={notificationProvider}
+      resources={[
+        {
+          name: "dashboard",
+          list: "/",
+          meta: { label: "Dashboard", icon: <DashboardIcon /> },
+        },
+        {
+          name: "products",
+          list: "/products",
+          show: "/products/show/:id",
+          edit: "/products/edit/:id",
+          create: "/products/create",
+          meta: { icon: <InventoryIcon /> },
+        },
+        {
+          name: "visual-assets",
+          list: "/assets",
+          show: "/assets/show/:id",
+          meta: { label: "Visual Assets", icon: <ImageIcon /> },
+        },
+      ]}
+      options={{
+        syncWithLocation: true,
+        warnWhenUnsavedChanges: true,
+      }}
+    >
+      <Routes>
+        <Route
+          element={
+            <ThemedLayout
+              Title={({ collapsed }) => (
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1, p: 1 }}>
+                  <InventoryIcon color="primary" />
+                  {!collapsed && (
+                    <Typography variant="h6" color="primary" noWrap>
+                      PIM System
+                    </Typography>
+                  )}
+                </Box>
+              )}
+              Sider={() => <ThemedSider />}
+            >
+              <Outlet />
+            </ThemedLayout>
+          }
         >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+          <Route index element={<Dashboard />} />
+          <Route path="/products">
+            <Route index element={<ProductList />} />
+            <Route path="show/:id" element={<ProductShow />} />
+            <Route path="edit/:id" element={<ProductEdit />} />
+            <Route path="create" element={<ProductCreate />} />
+          </Route>
+          <Route path="/assets">
+            <Route index element={<AssetList />} />
+            <Route path="show/:id" element={<AssetShow />} />
+          </Route>
+          <Route path="*" element={<NavigateToResource resource="dashboard" />} />
+        </Route>
+      </Routes>
+      <UnsavedChangesNotifier />
+      <DocumentTitleHandler />
+    </Refine>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <BrowserRouter>
+      <ThemeProvider theme={RefineThemes.Blue}>
+        <CssBaseline />
+        <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
+        <RefineSnackbarProvider>
+          <RefineApp />
+        </RefineSnackbarProvider>
+      </ThemeProvider>
+    </BrowserRouter>
+  );
+}
+
+export default App;

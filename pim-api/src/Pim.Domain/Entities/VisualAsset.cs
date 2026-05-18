@@ -4,8 +4,8 @@ namespace Pim.Domain.Entities;
 
 public sealed class VisualAsset
 {
-    public string Id { get; set; } = string.Empty;
-    public string ProductId { get; set; } = string.Empty;
+    public Guid Id { get; set; }
+    public Guid ProductId { get; set; }
 
     public AssetType AssetType { get; set; } = AssetType.Packshot;
     public AssetStatus Status { get; set; } = AssetStatus.Draft;

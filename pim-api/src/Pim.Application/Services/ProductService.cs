@@ -18,6 +18,12 @@ public sealed class ProductService : IProductService
     public async Task<IReadOnlyList<ProductResponse>> GetAllAsync(CancellationToken ct = default)
         => (await _repository.GetAllAsync(ct)).Select(Map).ToList();
 
+    public async Task<(IReadOnlyList<ProductResponse> Items, int Total)> GetPagedAsync(int start, int end, CancellationToken ct = default)
+    {
+        var (items, total) = await _repository.GetPagedAsync(start, end, ct);
+        return (items.Select(Map).ToList(), total);
+    }
+
     public async Task<IReadOnlyList<ProductResponse>> SearchAsync(string? rangeName, string? masterNumber, ProductLevel? level, CancellationToken ct = default)
         => (await _repository.SearchAsync(rangeName, masterNumber, level, ct)).Select(Map).ToList();
 
@@ -41,15 +47,14 @@ public sealed class ProductService : IProductService
         var now = DateTime.UtcNow;
         var product = new Product
         {
-            Id = $"prd-{Guid.NewGuid():N}",
-            Level = Enum.TryParse<ProductLevel>(request.Level, true, out var level) ? level : ProductLevel.Variant,
+            Id = Guid.NewGuid(),
+            Name = request.Name.Trim(),
             RangeName = request.RangeName?.Trim() ?? string.Empty,
             MasterNumber = request.MasterNumber?.Trim() ?? string.Empty,
             VariantNumber = request.VariantNumber?.Trim() ?? string.Empty,
-            Name = request.Name.Trim(),
             Description = request.Description?.Trim() ?? string.Empty,
-            Designer = request.Designer?.Trim() ?? string.Empty,
-            D365EntityName = request.D365EntityName?.Trim() ?? string.Empty,
+            Usp = request.Usp?.Trim() ?? string.Empty,
+            Status = request.Status?.Trim() ?? "Draft",
             D365ItemNumber = request.D365ItemNumber?.Trim() ?? string.Empty,
             CreatedAt = now,
             UpdatedAt = now
@@ -65,14 +70,13 @@ public sealed class ProductService : IProductService
         if (string.IsNullOrWhiteSpace(request.Name))
             throw new ArgumentException("Product name is required.");
 
-        existing.Level = Enum.TryParse<ProductLevel>(request.Level, true, out var level) ? level : existing.Level;
+        existing.Name = request.Name.Trim();
         existing.RangeName = request.RangeName?.Trim() ?? existing.RangeName;
         existing.MasterNumber = request.MasterNumber?.Trim() ?? existing.MasterNumber;
         existing.VariantNumber = request.VariantNumber?.Trim() ?? existing.VariantNumber;
-        existing.Name = request.Name.Trim();
         existing.Description = request.Description?.Trim() ?? existing.Description;
-        existing.Designer = request.Designer?.Trim() ?? existing.Designer;
-        existing.D365EntityName = request.D365EntityName?.Trim() ?? existing.D365EntityName;
+        existing.Usp = request.Usp?.Trim() ?? existing.Usp;
+        existing.Status = request.Status?.Trim() ?? existing.Status;
         existing.D365ItemNumber = request.D365ItemNumber?.Trim() ?? existing.D365ItemNumber;
         existing.UpdatedAt = DateTime.UtcNow;
 
@@ -84,16 +88,17 @@ public sealed class ProductService : IProductService
 
     private static ProductResponse Map(Product p) => new()
     {
-        Id = p.Id,
-        Level = p.Level.ToString(),
+        Id = p.Id.ToString(),
+        Name = p.Name,
         RangeName = p.RangeName,
         MasterNumber = p.MasterNumber,
         VariantNumber = p.VariantNumber,
-        Name = p.Name,
         Description = p.Description,
-        Designer = p.Designer,
-        D365EntityName = p.D365EntityName,
+        Usp = p.Usp,
+        Status = p.Status,
+        CompletenessScore = p.CompletenessScore,
         D365ItemNumber = p.D365ItemNumber,
+        VariantCount = p.VariantCount,
         LastSyncedAt = p.LastSyncedAt,
         CreatedAt = p.CreatedAt,
         UpdatedAt = p.UpdatedAt

@@ -37,8 +37,8 @@ public sealed class TextContentService : ITextContentService
         var now = DateTime.UtcNow;
         var content = new TextContent
         {
-            Id = $"text-{Guid.NewGuid():N}",
-            ProductId = request.ProductId,
+            Id = Guid.NewGuid(),
+            ProductId = Guid.Parse(request.ProductId),
             ContentType = Enum.TryParse<TextContentType>(request.ContentType, true, out var type) ? type : TextContentType.DesignDescriptionB2B,
             Status = Enum.TryParse<ContentStatus>(request.Status, true, out var status) ? status : ContentStatus.Draft,
             LanguageCode = string.IsNullOrWhiteSpace(request.LanguageCode) ? "en" : request.LanguageCode.Trim(),
@@ -87,8 +87,8 @@ public sealed class TextContentService : ITextContentService
 
     private static TextContentResponse Map(TextContent c) => new()
     {
-        Id = c.Id,
-        ProductId = c.ProductId,
+        Id = c.Id.ToString(),
+        ProductId = c.ProductId.ToString(),
         ContentType = c.ContentType.ToString(),
         Status = c.Status.ToString(),
         LanguageCode = c.LanguageCode,

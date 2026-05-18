@@ -1,0 +1,175 @@
+version: "3.8"
+
+services:
+  # ─── ASP.NET Core Backend ───────────────────────────────────────────
+  api:
+    build:
+      context: ./pim-api
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=pim;Username=pim_user;Password=pim_secret
+      - ConnectionStrings__Redis=redis:6379
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Username=pim
+      - RabbitMQ__Password=pim_secret
+      - Typesense__Host=typesense
+      - Typesense__Port=8108
+      - Typesense__ApiKey=pim_typesense_key
+      - AzureBlob__ConnectionString=${AZURE_BLOB_CONNECTION_STRING:-UseDevelopmentStorage=true}
+      - Hangfire__Dashboard=true
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - pim-network
+
+  # ─── React Frontend (Vite Dev Server) ───────────────────────────────
+  client:
+    build:
+      context: ./pim-client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+    volumes:
+      - ./pim-client/src:/app/src
+      - ./pim-client/public:/app/public
+    depends_on:
+      - api
+    networks:
+      - pim-network
+
+  # ─── Python AI Service ──────────────────────────────────────────────
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - RABBITMQ_URL=amqp://pim:pim_secret@rabbitmq:5672/
+      - POSTGRES_URL=postgresql://pim_user:pim_secret@postgres:5432/pim
+      - CHROMA_HOST=chromadb
+      - CHROMA_PORT=8001
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      chromadb:
+        condition: service_started
+    networks:
+      - pim-network
+
+  # ─── PostgreSQL + TimescaleDB ───────────────────────────────────────
+  postgres:
+    image: timescale/timescaledb:latest-pg16
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=pim
+      - POSTGRES_USER=pim_user
+      - POSTGRES_PASSWORD=pim_secret
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init-db.sql:/docker-entrypoint-initdb.d/01-init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pim_user -d pim"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - pim-network
+
+  # ─── Redis ─────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - pim-network
+
+  # ─── RabbitMQ ──────────────────────────────────────────────────────
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=pim
+      - RABBITMQ_DEFAULT_PASS=pim_secret
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+      - pim-network
+
+  # ─── Typesense (Search Engine) ─────────────────────────────────────
+  typesense:
+    image: typesense/typesense:27.1
+    ports:
+      - "8108:8108"
+    environment:
+      - TYPESENSE_API_KEY=pim_typesense_key
+      - TYPESENSE_DATA_DIR=/data
+    volumes:
+      - typesense_data:/data
+    networks:
+      - pim-network
+
+  # ─── ChromaDB (Vector Embeddings) ──────────────────────────────────
+  chromadb:
+    image: chromadb/chroma:latest
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - ANONYMIZED_TELEMETRY=FALSE
+    networks:
+      - pim-network
+
+  # ─── Azurite (Local Azure Blob Emulator) ───────────────────────────
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+    volumes:
+      - azurite_data:/data
+    command: "azurite --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0 -l /data"
+    networks:
+      - pim-network
+
+volumes:
+  postgres_data:
+  redis_data:
+  rabbitmq_data:
+  typesense_data:
+  chroma_data:
+  azurite_data:
+
+networks:
+  pim-network:
+    driver: bridge

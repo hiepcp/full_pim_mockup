@@ -4,8 +4,8 @@ namespace Pim.Domain.Entities;
 
 public sealed class TextContent
 {
-    public string Id { get; set; } = string.Empty;
-    public string ProductId { get; set; } = string.Empty;
+    public Guid Id { get; set; }
+    public Guid ProductId { get; set; }
 
     public TextContentType ContentType { get; set; } = TextContentType.DesignDescriptionB2B;
     public ContentStatus Status { get; set; } = ContentStatus.Draft;
