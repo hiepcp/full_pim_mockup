@@ -5,6 +5,7 @@ namespace Pim.Application.Interfaces.Repositories;
 
 public interface ITextContentRepository
 {
+    Task<(IReadOnlyList<TextContent> Items, int Total)> GetPagedAsync(int start, int end, string? sort, string? order, string? productId, string? contentType, string? status, string? languageCode, CancellationToken ct = default);
     Task<IReadOnlyList<TextContent>> GetByProductAsync(string productId, CancellationToken ct = default);
     Task<IReadOnlyList<TextContent>> GetByTypeAsync(string productId, TextContentType contentType, string? languageCode, CancellationToken ct = default);
     Task<TextContent?> GetByIdAsync(string id, CancellationToken ct = default);

@@ -11,8 +11,13 @@ export function ProductList() {
     { field: "id", headerName: "ID", width: 70 },
     { field: "rangeName", headerName: "Range", flex: 1, minWidth: 150 },
     { field: "masterNumber", headerName: "Master #", width: 130 },
-    { field: "variantNumber", headerName: "Variant #", width: 130 },
     { field: "name", headerName: "Product Name", flex: 1, minWidth: 200 },
+    {
+      field: "variantCount",
+      headerName: "Variants",
+      width: 100,
+      renderCell: ({ value }) => value || 0,
+    },
     {
       field: "status",
       headerName: "Status",

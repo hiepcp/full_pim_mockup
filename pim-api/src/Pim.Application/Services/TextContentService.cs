@@ -15,6 +15,12 @@ public sealed class TextContentService : ITextContentService
         _repository = repository;
     }
 
+    public async Task<(IReadOnlyList<TextContentResponse> Items, int Total)> GetPagedAsync(int start, int end, string? sort, string? order, string? productId, string? contentType, string? status, string? languageCode, CancellationToken ct = default)
+    {
+        var (items, total) = await _repository.GetPagedAsync(start, end, sort, order, productId, contentType, status, languageCode, ct);
+        return (items.Select(Map).ToList(), total);
+    }
+
     public async Task<IReadOnlyList<TextContentResponse>> GetByProductAsync(string productId, CancellationToken ct = default)
         => (await _repository.GetByProductAsync(productId, ct)).Select(Map).ToList();
 

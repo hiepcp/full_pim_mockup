@@ -17,6 +17,22 @@ public sealed class TextContentsController : ControllerBase
         _service = service;
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetAll(
+        [FromQuery] int _start = 0,
+        [FromQuery] int _end = 25,
+        [FromQuery] string? _sort = null,
+        [FromQuery] string? _order = null,
+        [FromQuery] string? productId = null,
+        [FromQuery] string? contentType = null,
+        [FromQuery] string? status = null,
+        [FromQuery] string? languageCode = null,
+        CancellationToken ct = default)
+    {
+        var (items, total) = await _service.GetPagedAsync(_start, _end, _sort, _order, productId, contentType, status, languageCode, ct);
+        return Ok(new { success = true, message = "Success", data = items, total });
+    }
+
     [HttpGet("by-product/{productId}")]
     public async Task<IActionResult> GetByProduct(string productId, [FromQuery] string? contentType, [FromQuery] string? languageCode, CancellationToken ct)
     {

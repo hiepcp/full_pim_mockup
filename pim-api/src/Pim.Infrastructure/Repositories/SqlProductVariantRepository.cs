@@ -18,6 +18,17 @@ public sealed class SqlProductVariantRepository : IProductVariantRepository, IDi
 
     private IDbConnection Connection => _connection ??= new NpgsqlConnection(_connectionString);
 
+    public async Task<(IReadOnlyList<ProductVariant> Items, int Total)> GetPagedAsync(int start, int end, CancellationToken ct = default)
+    {
+        var limit = end - start;
+        var offset = start;
+        var total = await Connection.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM product_variants");
+        var rows = await Connection.QueryAsync<ProductVariant>(
+            "SELECT id, product_master_number, variant_number, product_name, color_id, size_id, style_id, configuration_id, range_name, status, created_at, updated_at FROM product_variants ORDER BY product_master_number, variant_number LIMIT @limit OFFSET @offset",
+            new { limit, offset });
+        return (rows.ToList(), total);
+    }
+
     public async Task<IReadOnlyList<ProductVariant>> GetByMasterNumberAsync(string masterNumber, CancellationToken ct = default)
     {
         var rows = await Connection.QueryAsync<ProductVariant>(

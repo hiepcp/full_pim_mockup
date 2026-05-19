@@ -7,11 +7,15 @@ import dataProvider from "./dataProvider";
 
 import { ProductList, ProductShow, ProductEdit, ProductCreate } from "./pages/products";
 import { AssetList, AssetShow } from "./pages/assets";
+import { VariantList } from "./pages/variants";
+import { TextContentList, TextContentShow, TextContentCreate, TextContentEdit } from "./pages/text-contents";
 import { Dashboard } from "./pages/dashboard";
 
 import InventoryIcon from "@mui/icons-material/Inventory2Outlined";
 import ImageIcon from "@mui/icons-material/ImageOutlined";
 import DashboardIcon from "@mui/icons-material/DashboardOutlined";
+import CategoryIcon from "@mui/icons-material/CategoryOutlined";
+import ArticleIcon from "@mui/icons-material/ArticleOutlined";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
@@ -38,10 +42,23 @@ function RefineApp() {
           meta: { icon: <InventoryIcon /> },
         },
         {
+          name: "variants",
+          list: "/variants",
+          meta: { label: "Variants", icon: <CategoryIcon /> },
+        },
+        {
           name: "visual-assets",
           list: "/assets",
           show: "/assets/show/:id",
           meta: { label: "Visual Assets", icon: <ImageIcon /> },
+        },
+        {
+          name: "text-contents",
+          list: "/text-contents",
+          show: "/text-contents/show/:id",
+          edit: "/text-contents/edit/:id",
+          create: "/text-contents/create",
+          meta: { label: "Text Contents", icon: <ArticleIcon /> },
         },
       ]}
       options={{
@@ -79,6 +96,15 @@ function RefineApp() {
           <Route path="/assets">
             <Route index element={<AssetList />} />
             <Route path="show/:id" element={<AssetShow />} />
+          </Route>
+          <Route path="/variants">
+            <Route index element={<VariantList />} />
+          </Route>
+          <Route path="/text-contents">
+            <Route index element={<TextContentList />} />
+            <Route path="show/:id" element={<TextContentShow />} />
+            <Route path="edit/:id" element={<TextContentEdit />} />
+            <Route path="create" element={<TextContentCreate />} />
           </Route>
           <Route path="*" element={<NavigateToResource resource="dashboard" />} />
         </Route>
