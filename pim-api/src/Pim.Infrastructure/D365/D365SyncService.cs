@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Pim.Application.Interfaces.Repositories;
@@ -12,6 +13,17 @@ public sealed class D365SyncService : ID365SyncService
     private readonly D365HttpClient _d365Client;
     private readonly IProductRepository _productRepository;
     private readonly IProductVariantRepository _variantRepository;
+    private readonly IProductCategoryHierarchyRepository _hierarchyRepository;
+    private readonly IProductCategoryRepository _categoryRepository;
+    private readonly IProductCategoryAssignmentRepository _categoryAssignmentRepository;
+    private readonly IProductAttributeDefinitionRepository _attributeDefRepository;
+    private readonly IProductAttributeValueRepository _attributeValueRepository;
+    private readonly IProductTranslationRepository _translationRepository;
+    private readonly IVariantDimensionTranslationRepository _dimTranslationRepository;
+    private readonly IProductLifecycleStateRepository _lifecycleRepository;
+    private readonly IProductPricingRepository _pricingRepository;
+    private readonly IProductDimensionRepository _dimensionRepository;
+    private readonly ISyncLogRepository _syncLogRepository;
     private readonly D365Options _options;
     private readonly ILogger<D365SyncService> _logger;
 
@@ -19,12 +31,34 @@ public sealed class D365SyncService : ID365SyncService
         D365HttpClient d365Client,
         IProductRepository productRepository,
         IProductVariantRepository variantRepository,
+        IProductCategoryHierarchyRepository hierarchyRepository,
+        IProductCategoryRepository categoryRepository,
+        IProductCategoryAssignmentRepository categoryAssignmentRepository,
+        IProductAttributeDefinitionRepository attributeDefRepository,
+        IProductAttributeValueRepository attributeValueRepository,
+        IProductTranslationRepository translationRepository,
+        IVariantDimensionTranslationRepository dimTranslationRepository,
+        IProductLifecycleStateRepository lifecycleRepository,
+        IProductPricingRepository pricingRepository,
+        IProductDimensionRepository dimensionRepository,
+        ISyncLogRepository syncLogRepository,
         IOptions<D365Options> options,
         ILogger<D365SyncService> logger)
     {
         _d365Client = d365Client;
         _productRepository = productRepository;
         _variantRepository = variantRepository;
+        _hierarchyRepository = hierarchyRepository;
+        _categoryRepository = categoryRepository;
+        _categoryAssignmentRepository = categoryAssignmentRepository;
+        _attributeDefRepository = attributeDefRepository;
+        _attributeValueRepository = attributeValueRepository;
+        _translationRepository = translationRepository;
+        _dimTranslationRepository = dimTranslationRepository;
+        _lifecycleRepository = lifecycleRepository;
+        _pricingRepository = pricingRepository;
+        _dimensionRepository = dimensionRepository;
+        _syncLogRepository = syncLogRepository;
         _options = options.Value;
         _logger = logger;
     }
