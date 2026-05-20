@@ -78,7 +78,7 @@ Gộp về **2 vendor chính** + 1 self-host cho 3D:
 2. **Self-host** khi volume lớn hoặc cần custom (Florence-2, BGE-M3, Blender, ComfyUI)
 3. **Proven .NET ecosystem** cho core (MassTransit, Polly, Hangfire, Stateless)
 4. **Chuẩn mở** cho integration (CloudEvents, OIDC, OData)
-5. **Giá không phải vấn đề** → chọn vendor tốt nhất cho mỗi task, không compromise chất lượng
+5. **Chọn vendor tốt nhất cho mỗi task, không compromise chất lượng
 
 ---
 
