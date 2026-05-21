@@ -28,6 +28,9 @@ dist/
 Thumbs.db
 .DS_Store
 
+# Office temporary files
+~$*.pptx
+
 # Env (keep .env.example committed)
 .env.local
 *.local
