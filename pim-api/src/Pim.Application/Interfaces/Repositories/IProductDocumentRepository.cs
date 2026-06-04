@@ -11,4 +11,5 @@ public interface IProductDocumentRepository
     Task<ProductDocument> CreateAsync(ProductDocument document, CancellationToken ct = default);
     Task<bool> UpdateAsync(ProductDocument document, CancellationToken ct = default);
     Task<bool> DeleteAsync(string id, CancellationToken ct = default);
+    Task BulkArchiveByProductIdAsync(Guid productId, CancellationToken ct = default);
 }

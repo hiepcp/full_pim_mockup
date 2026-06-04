@@ -304,7 +304,7 @@ sequenceDiagram
 
 ### Quyết định công nghệ trọng yếu
 
-| Lựa chọn | Thay vì | Lý do (xem [Tech_Stack_Overview.md](Tech_Stack_Overview.md)) |
+| Lựa chọn | Thay vì | Lý do (xem [Recommended_Stack_Summary.md](../tech-stack/Recommended_Stack_Summary.md)) |
 |----------|---------|----------------------------------------------------------------|
 | PostgreSQL + TimescaleDB | Azure SQL | Self-host, chi phí thấp, time-series sẵn cho audit/analytics |
 | Typesense | Azure Cognitive Search | Open-source, latency thấp, cấu hình đơn giản |
@@ -445,7 +445,7 @@ SQL trong [pim-api/migrations/db/pim_db](../pim-api/migrations/db/pim_db) hiện
 | Tài liệu | Nội dung |
 |----------|----------|
 | [Business_Requirements_Document_PIM.md](Business_Requirements_Document_PIM.md) | BRD đầy đủ: scope, persona, user story, success metric |
-| [Tech_Stack_Overview.md](Tech_Stack_Overview.md) | So sánh stack BRD-Azure vs. stack thực tế self-host và lý do |
+| [Recommended_Stack_Summary.md](../tech-stack/Recommended_Stack_Summary.md) | So sánh stack BRD-Azure vs. stack thực tế self-host, lựa chọn cho cả 3 phase |
 | [PIM_Implementation_Plan_and_Technical_Skills_Matrix.md](PIM_Implementation_Plan_and_Technical_Skills_Matrix.md) | Lộ trình triển khai theo phase + ma trận kỹ năng |
 | [PIM_Entity_Gap_Analysis.md](PIM_Entity_Gap_Analysis.md) | Phân tích entity D365 còn thiếu |
 | [D365_Entity_Whitelist_for_PIM.md](D365_Entity_Whitelist_for_PIM.md) | Danh sách entity D365 trong scope |

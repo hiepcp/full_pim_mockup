@@ -12,6 +12,9 @@ public class ProductVariant
     public string ConfigurationId { get; set; } = string.Empty;
     public string RangeName { get; set; } = string.Empty;
     public int Status { get; set; }
+    public Guid? ProductId { get; set; }
+    public bool IsDeleted { get; set; }
+    public DateTime? DeletedAt { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 }

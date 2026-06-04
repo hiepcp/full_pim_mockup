@@ -399,16 +399,7 @@ Mỗi spike timeboxed **1-2 ngày**; output là **1 ADR** (Architecture Decision
 
 ## Acceptance Criteria Phase 1
 
-Phase 1 chỉ kết thúc khi:
-
-1. Upload ảnh ≤50 MB qua direct SAS thành công, sinh 3 size pre-generated, hiển thị trong UI gallery.
-2. CRUD text content đa ngôn ngữ với version + status, audit log đầy đủ.
-3. Sync D365 product hourly chạy ổn định 7 ngày liên tục, tỷ lệ lỗi <1%, có dashboard sync log.
-4. Document upload + extract metadata + thumbnail trang đầu cho PDF.
-5. Tạo / sửa / xóa attribute definition; gán giá trị; filter list product theo 2 attribute.
-6. Event `product.updated` publish thành công, ai-service consume và log.
-7. Image engine: gọi `/api/assets/{id}?w=400` trả ảnh đúng size, hit cache lần 2.
-8. AI text gen: API `POST /api/ai/generate-text` với `productId` + `contentType` trả JSON structured trong <30s, marketing chấp nhận ≥60% draft mà không phải sửa lớn.
+8 tiêu chí nghiệm thu (AC1–AC8) + trạng thái theo dõi tại [Phase1_Goal_Completion.md §Acceptance Criteria](../Phase1_Goal_Completion.md). Tóm tắt: upload asset qua SAS, CRUD text đa ngôn ngữ có version/audit, D365 sync ổn định 7 ngày <1% lỗi, document metadata + thumbnail PDF, EAV attribute filter, event publish + consume, image engine resize/cache, AI text gen JSON <30s.
 
 ---
 
@@ -447,9 +438,9 @@ ADR file mẫu: `docs/adr/0001-container-layout.md` — title, context, decision
 
 - [00_System_Overview.md](00_System_Overview.md) — kiến trúc tổng quan
 - [PIM_Implementation_Plan_and_Technical_Skills_Matrix.md](PIM_Implementation_Plan_and_Technical_Skills_Matrix.md) — nguồn gốc Phase 1 từng feature
-- [Tech_Stack_Overview.md](Tech_Stack_Overview.md) — quyết định stack
+- [Recommended_Stack_Summary.md](../tech-stack/Recommended_Stack_Summary.md) — quyết định stack
 - [PIM_Entity_Gap_Analysis.md](PIM_Entity_Gap_Analysis.md) — gap entity cần Phase 1 lấp
-- [AI_Image_Rendering_Overview.md](AI_Image_Rendering_Overview.md) — landscape AI rendering (chuẩn bị Phase 3)
+- AI_Image_Rendering_Overview.md — landscape AI rendering, chuẩn bị Phase 3 *(tài liệu chưa có)*
 - [D365_PIM_Field_Mapping.md](D365_PIM_Field_Mapping.md) — chi tiết mapping cho C5
 - Polly: <https://github.com/App-vNext/Polly>
 - CloudEvents 1.0: <https://github.com/cloudevents/spec>

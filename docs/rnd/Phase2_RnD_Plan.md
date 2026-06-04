@@ -446,7 +446,7 @@ Phase 2 kết thúc khi:
 - [Phase1_RnD_Plan.md](Phase1_RnD_Plan.md) — Phase 1 nền tảng
 - [00_System_Overview.md](00_System_Overview.md) — kiến trúc tổng
 - [PIM_Implementation_Plan_and_Technical_Skills_Matrix.md](PIM_Implementation_Plan_and_Technical_Skills_Matrix.md) — nguồn capability
-- [AI_Image_Rendering_Overview.md](AI_Image_Rendering_Overview.md) — landscape AI rendering
+- AI_Image_Rendering_Overview.md — landscape AI rendering *(tài liệu chưa có)*
 - Microsoft.Identity.Web: <https://github.com/AzureAD/microsoft-identity-web>
 - Stateless: <https://github.com/dotnet-state-machine/stateless>
 - Typesense docs: <https://typesense.org/docs/>

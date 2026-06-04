@@ -159,6 +159,8 @@ These are managed entirely by PIM and **do not flow from D365**:
 
 ## 9. Direction & Sync Strategy
 
+> Chiến lược sync tổng thể (initial load, incremental, conflict handling) tại [PIM_D365_Metadata_Guide.md §9](PIM_D365_Metadata_Guide.md). Bảng dưới chỉ liệt kê hướng dữ liệu per-field-group.
+
 | Field Group | Direction | Trigger |
 |-------------|-----------|---------|
 | Core product data, prices, dimensions, lifecycle | **D365 → PIM** | Event-driven (D365 Business Events via Service Bus) + scheduled fallback |

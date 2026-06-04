@@ -7,8 +7,8 @@ Docs are grouped by topic so the root folder stays small and easy to scan.
 - `overview/` - system-level overview documents.
 - `requirements/` - business requirements, implementation plan, skills matrix, and gap analysis.
 - `dynamics365/` - D365 entity, field mapping, metadata, and whitelist references.
-- `rnd/` - R&D plans and AI image rendering research notes.
-- `tech-stack/` - recommended stack and stack overview documents.
+- `rnd/` - R&D plans (Phase 1 & Phase 2).
+- `tech-stack/` - recommended tech stack across all phases.
 - `workflows/` - user workflow documentation.
 - `presentations/` - PPTX slide decks.
 - `scripts/` - documentation support scripts.

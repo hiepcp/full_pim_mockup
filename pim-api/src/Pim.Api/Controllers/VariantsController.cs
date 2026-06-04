@@ -39,4 +39,16 @@ public sealed class VariantsController : ControllerBase
 
         return Ok(new { success = true, data = response, total });
     }
+
+    [HttpPost("{variantNumber}/disable")]
+    public async Task<IActionResult> Disable(string variantNumber, [FromBody] DisableProductRequest? request, CancellationToken ct = default)
+    {
+        var variant = await _repository.GetByVariantNumberAsync(variantNumber, ct);
+        if (variant is null)
+            return NotFound(ApiResponse<string>.Fail("Variant not found."));
+
+        await _repository.BulkDisableByMasterNumberAsync(variant.ProductMasterNumber, ct);
+
+        return Ok(ApiResponse<string>.Ok(string.Empty, "Variant disabled successfully."));
+    }
 }

@@ -80,10 +80,74 @@ public sealed class ProductsController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(string id, CancellationToken ct)
     {
+        try
+        {
+            var result = await _service.SoftDeleteAsync(id, ct);
+            return Ok(ApiResponse<string>.Ok(string.Empty, "Product soft-deleted successfully."));
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound(ApiResponse<string>.Fail("Product not found."));
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ApiResponse<string>.Fail(ex.Message));
+        }
+    }
+
+    [HttpDelete("{id}/permanent")]
+    public async Task<IActionResult> DeletePermanent(string id, CancellationToken ct)
+    {
         var deleted = await _service.DeleteAsync(id, ct);
         if (!deleted)
             return NotFound(ApiResponse<string>.Fail("Product not found."));
-        return Ok(ApiResponse<string>.Ok(string.Empty, "Product deleted successfully."));
+        return Ok(ApiResponse<string>.Ok(string.Empty, "Product permanently deleted."));
+    }
+
+    [HttpPost("{id}/disable")]
+    public async Task<IActionResult> Disable(string id, [FromBody] DisableProductRequest? request, CancellationToken ct)
+    {
+        try
+        {
+            var result = await _service.DisableAsync(id, request?.Reason, ct);
+            return Ok(ApiResponse<ProductResponse>.Ok(result, "Product disabled successfully."));
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound(ApiResponse<string>.Fail("Product not found."));
+        }
+    }
+
+    [HttpPost("{id}/enable")]
+    public async Task<IActionResult> Enable(string id, CancellationToken ct)
+    {
+        try
+        {
+            var result = await _service.EnableAsync(id, ct);
+            return Ok(ApiResponse<ProductResponse>.Ok(result, "Product enabled successfully."));
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound(ApiResponse<string>.Fail("Product not found."));
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ApiResponse<string>.Fail(ex.Message));
+        }
+    }
+
+    [HttpPost("{id}/restore")]
+    public async Task<IActionResult> Restore(string id, CancellationToken ct)
+    {
+        try
+        {
+            var result = await _service.RestoreAsync(id, ct);
+            return Ok(ApiResponse<ProductResponse>.Ok(result, "Product restored successfully."));
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound(ApiResponse<string>.Fail("Product not found."));
+        }
     }
 
     [HttpGet("{id}/variants")]

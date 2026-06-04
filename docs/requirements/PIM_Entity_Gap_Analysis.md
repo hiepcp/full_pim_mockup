@@ -190,7 +190,7 @@
 ## 5. Ghi Chú Kỹ Thuật
 
 1. **EAV cho Attributes**: Dùng pattern Entity-Attribute-Value cho custom attributes thay vì thêm column cứng. Linh hoạt khi D365 thêm attribute mới.
-2. **Sync Strategy**: Pricing, Dimensions, Lifecycle nên sync event-driven (Service Bus) + scheduled fallback (mỗi 15 phút).
+2. **Sync Strategy**: Pricing, Dimensions, Lifecycle nên sync event-driven (Service Bus) + scheduled fallback (mỗi 15 phút). Chi tiết tại [PIM_D365_Metadata_Guide.md §9](../dynamics365/PIM_D365_Metadata_Guide.md).
 3. **Category Tree**: Dùng `ParentId` self-referencing hoặc Materialized Path cho query hiệu quả.
 4. **Renditions**: Không lưu binary trong DB — chỉ metadata + Blob URI.
 5. **Translations**: Tách riêng bảng translation thay vì nhúng vào entity chính để dễ scale ngôn ngữ mới.

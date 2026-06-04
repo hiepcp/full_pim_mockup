@@ -15,6 +15,10 @@ public sealed class Product
     public int CompletenessScore { get; set; }
     public string D365ItemNumber { get; set; } = string.Empty;
     public int VariantCount { get; set; }
+    public bool IsDeleted { get; set; }
+    public DateTime? DeletedAt { get; set; }
+    public DateTime? DisabledAt { get; set; }
+    public string? DisabledReason { get; set; }
     public DateTime? LastSyncedAt { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }

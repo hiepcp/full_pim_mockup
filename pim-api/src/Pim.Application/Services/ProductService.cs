@@ -9,10 +9,23 @@ namespace Pim.Application.Services;
 public sealed class ProductService : IProductService
 {
     private readonly IProductRepository _repository;
+    private readonly IProductVariantRepository _variantRepository;
+    private readonly IVisualAssetRepository _visualAssetRepository;
+    private readonly ITextContentRepository _textContentRepository;
+    private readonly IProductDocumentRepository _productDocumentRepository;
 
-    public ProductService(IProductRepository repository)
+    public ProductService(
+        IProductRepository repository,
+        IProductVariantRepository variantRepository,
+        IVisualAssetRepository visualAssetRepository,
+        ITextContentRepository textContentRepository,
+        IProductDocumentRepository productDocumentRepository)
     {
         _repository = repository;
+        _variantRepository = variantRepository;
+        _visualAssetRepository = visualAssetRepository;
+        _textContentRepository = textContentRepository;
+        _productDocumentRepository = productDocumentRepository;
     }
 
     public async Task<IReadOnlyList<ProductResponse>> GetAllAsync(CancellationToken ct = default)
@@ -86,6 +99,109 @@ public sealed class ProductService : IProductService
     public Task<bool> DeleteAsync(string id, CancellationToken ct = default)
         => _repository.DeleteAsync(id, ct);
 
+    public async Task<ProductResponse> DisableAsync(string id, string? reason, CancellationToken ct = default)
+    {
+        var product = await _repository.GetByIdAsync(id, ct);
+        if (product is null)
+            throw new KeyNotFoundException("Product not found.");
+
+        if (string.Equals(product.Status, "Discontinued", StringComparison.OrdinalIgnoreCase))
+            return Map(product);
+
+        var now = DateTime.UtcNow;
+        product.Status = "Discontinued";
+        product.DisabledAt = now;
+        product.DisabledReason = reason;
+        product.UpdatedAt = now;
+
+        await _repository.UpdateAsync(product, ct);
+
+        var productId = product.Id;
+
+        await _repository.BulkArchiveVisualAssetsAsync(productId, ct);
+        await _repository.BulkArchiveTextContentsAsync(productId, ct);
+        await _repository.BulkArchiveProductDocumentsAsync(productId, ct);
+
+        if (!string.IsNullOrWhiteSpace(product.D365ItemNumber))
+        {
+            await _variantRepository.BulkDisableByMasterNumberAsync(product.D365ItemNumber, ct);
+        }
+
+        return Map(product);
+    }
+
+    public async Task<ProductResponse> EnableAsync(string id, CancellationToken ct = default)
+    {
+        var product = await _repository.GetByIdAsync(id, ct);
+        if (product is null)
+            throw new KeyNotFoundException("Product not found.");
+
+        if (product.IsDeleted)
+            throw new InvalidOperationException("Cannot enable a deleted product.");
+
+        product.Status = "Active";
+        product.DisabledAt = null;
+        product.DisabledReason = null;
+        product.UpdatedAt = DateTime.UtcNow;
+
+        await _repository.UpdateAsync(product, ct);
+
+        if (!string.IsNullOrWhiteSpace(product.D365ItemNumber))
+        {
+            await _variantRepository.BulkReEnableByMasterNumberAsync(product.D365ItemNumber, ct);
+        }
+
+        return Map(product);
+    }
+
+    public async Task<bool> SoftDeleteAsync(string id, CancellationToken ct = default)
+    {
+        var product = await _repository.GetByIdAsync(id, ct);
+        if (product is null)
+            throw new KeyNotFoundException("Product not found.");
+
+        if (product.IsDeleted)
+            throw new InvalidOperationException("Product is already deleted.");
+
+        var now = DateTime.UtcNow;
+        product.IsDeleted = true;
+        product.DeletedAt = now;
+        product.UpdatedAt = now;
+
+        await _repository.UpdateAsync(product, ct);
+
+        var productId = product.Id;
+
+        await _repository.BulkArchiveVisualAssetsAsync(productId, ct);
+        await _repository.BulkArchiveTextContentsAsync(productId, ct);
+        await _repository.BulkArchiveProductDocumentsAsync(productId, ct);
+
+        if (!string.IsNullOrWhiteSpace(product.D365ItemNumber))
+        {
+            await _variantRepository.BulkSoftDeleteByMasterNumberAsync(product.D365ItemNumber, ct);
+        }
+
+        return true;
+    }
+
+    public async Task<ProductResponse> RestoreAsync(string id, CancellationToken ct = default)
+    {
+        // GetByIdAsync excludes deleted, but we need to find it even if soft-deleted.
+        // Use the repo's raw query via GetByIdAsync which doesn't filter is_deleted.
+        var product = await _repository.GetByIdAsync(id, ct);
+        if (product is null)
+            throw new KeyNotFoundException("Product not found.");
+
+        product.IsDeleted = false;
+        product.DeletedAt = null;
+        product.Status = "Draft";
+        product.UpdatedAt = DateTime.UtcNow;
+
+        await _repository.UpdateAsync(product, ct);
+
+        return Map(product);
+    }
+
     private static ProductResponse Map(Product p) => new()
     {
         Id = p.Id.ToString(),
@@ -99,6 +215,10 @@ public sealed class ProductService : IProductService
         CompletenessScore = p.CompletenessScore,
         D365ItemNumber = p.D365ItemNumber,
         VariantCount = p.VariantCount,
+        IsDeleted = p.IsDeleted,
+        DeletedAt = p.DeletedAt,
+        DisabledAt = p.DisabledAt,
+        DisabledReason = p.DisabledReason,
         LastSyncedAt = p.LastSyncedAt,
         CreatedAt = p.CreatedAt,
         UpdatedAt = p.UpdatedAt

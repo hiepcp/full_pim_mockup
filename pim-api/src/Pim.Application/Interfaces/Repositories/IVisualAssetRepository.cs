@@ -11,4 +11,5 @@ public interface IVisualAssetRepository
     Task<VisualAsset> CreateAsync(VisualAsset asset, CancellationToken ct = default);
     Task<bool> UpdateAsync(VisualAsset asset, CancellationToken ct = default);
     Task<bool> DeleteAsync(string id, CancellationToken ct = default);
+    Task BulkArchiveByProductIdAsync(Guid productId, CancellationToken ct = default);
 }

@@ -75,5 +75,12 @@ public sealed class SqlVisualAssetRepository : IVisualAssetRepository, IDisposab
         return rows > 0;
     }
 
+    public async Task BulkArchiveByProductIdAsync(Guid productId, CancellationToken ct = default)
+    {
+        await Connection.ExecuteAsync(
+            "UPDATE visual_assets SET status = @status, updated_at = NOW() WHERE product_id = @productId AND status != @status",
+            new { productId, status = (int)AssetStatus.Archived });
+    }
+
     public void Dispose() => _connection?.Dispose();
 }

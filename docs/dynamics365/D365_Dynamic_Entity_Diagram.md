@@ -307,6 +307,8 @@ graph TD
 
 ## Bảng tóm tắt D365 Entities
 
+> Danh sách entity chuẩn (~30, cho codegen) tại [D365_Entity_Whitelist_for_PIM.md §10](D365_Entity_Whitelist_for_PIM.md). Bảng dưới tập trung vào trạng thái sync runtime + kết quả test API UAT.
+
 | # | D365 Entity | OData Endpoint | PIM Table | Sync Direction | Priority | API Status |
 |---|-------------|----------------|-----------|----------------|----------|------------|
 | 1 | `ProductLifecycleState` | `ProductLifecycleStates` | `product_lifecycle_states` | D365 → PIM | P0 | ⚠️ EMPTY (no data in UAT) |

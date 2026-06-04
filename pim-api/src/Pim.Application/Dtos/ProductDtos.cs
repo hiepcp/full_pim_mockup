@@ -13,6 +13,10 @@ public sealed class ProductResponse
     public int CompletenessScore { get; init; }
     public string D365ItemNumber { get; init; } = string.Empty;
     public int VariantCount { get; set; }
+    public bool IsDeleted { get; init; }
+    public DateTime? DeletedAt { get; init; }
+    public DateTime? DisabledAt { get; init; }
+    public string? DisabledReason { get; init; }
     public DateTime? LastSyncedAt { get; init; }
     public DateTime CreatedAt { get; init; }
     public DateTime UpdatedAt { get; init; }
@@ -54,4 +58,9 @@ public sealed class UpdateProductRequest
     public string Usp { get; init; } = string.Empty;
     public string Status { get; init; } = "Draft";
     public string D365ItemNumber { get; init; } = string.Empty;
+}
+
+public sealed class DisableProductRequest
+{
+    public string? Reason { get; init; }
 }

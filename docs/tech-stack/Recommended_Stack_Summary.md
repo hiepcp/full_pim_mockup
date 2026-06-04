@@ -36,6 +36,8 @@
 | **Quality Check** | pgvector similarity (brand voice) + LLM judge (factual) | Tận dụng DB có sẵn, tự động flag draft kém |
 | **Completeness Score** | Rule engine config DB (`completeness_rules` table) | Admin sửa rule không cần deploy |
 
+> **Lưu ý vector store:** tài liệu này khuyến nghị **pgvector** (gộp vào Postgres, không thêm service). Stack hiện tại trong [00_System_Overview.md](../overview/00_System_Overview.md) và [Phase2_RnD_Plan.md](../rnd/Phase2_RnD_Plan.md) đang dùng **ChromaDB** (container riêng). Quyết định cuối chốt sau spike S12 — nếu vectors <100k thì pgvector đủ.
+
 ---
 
 ## Phase 3 — AI Image Rendering (gọn)

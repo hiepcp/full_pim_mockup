@@ -12,4 +12,5 @@ public interface ITextContentRepository
     Task<TextContent> CreateAsync(TextContent content, CancellationToken ct = default);
     Task<bool> UpdateAsync(TextContent content, CancellationToken ct = default);
     Task<bool> DeleteAsync(string id, CancellationToken ct = default);
+    Task BulkArchiveByProductIdAsync(Guid productId, CancellationToken ct = default);
 }

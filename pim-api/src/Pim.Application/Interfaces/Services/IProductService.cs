@@ -13,4 +13,8 @@ public interface IProductService
     Task<ProductResponse> CreateAsync(CreateProductRequest request, CancellationToken ct = default);
     Task<bool> UpdateAsync(string id, UpdateProductRequest request, CancellationToken ct = default);
     Task<bool> DeleteAsync(string id, CancellationToken ct = default);
+    Task<ProductResponse> DisableAsync(string id, string? reason, CancellationToken ct = default);
+    Task<ProductResponse> EnableAsync(string id, CancellationToken ct = default);
+    Task<bool> SoftDeleteAsync(string id, CancellationToken ct = default);
+    Task<ProductResponse> RestoreAsync(string id, CancellationToken ct = default);
 }

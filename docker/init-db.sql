@@ -19,6 +19,10 @@ CREATE TABLE products (
     status VARCHAR(50) DEFAULT 'Draft',
     completeness_score INTEGER DEFAULT 0,
     d365_item_number VARCHAR(100),
+    is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    deleted_at TIMESTAMPTZ,
+    disabled_at TIMESTAMPTZ,
+    disabled_reason VARCHAR(500),
     last_synced_at TIMESTAMPTZ,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -28,6 +32,7 @@ CREATE INDEX idx_products_range ON products(range_name);
 CREATE INDEX idx_products_master ON products(master_number);
 CREATE INDEX idx_products_status ON products(status);
 CREATE INDEX idx_products_d365 ON products(d365_item_number);
+CREATE INDEX idx_products_active ON products (id) WHERE is_deleted = FALSE AND status != 'Discontinued';
 
 -- ─── Visual Assets ───────────────────────────────────────────────────
 CREATE TABLE visual_assets (
@@ -79,6 +84,29 @@ CREATE TABLE product_documents (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- ─── Product Variants ────────────────────────────────────────────────
+CREATE TABLE product_variants (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    product_master_number VARCHAR(100) NOT NULL,
+    variant_number VARCHAR(100) NOT NULL,
+    product_name VARCHAR(500),
+    color_id VARCHAR(50),
+    size_id VARCHAR(50),
+    style_id VARCHAR(50),
+    configuration_id VARCHAR(50),
+    range_name VARCHAR(200),
+    status INTEGER DEFAULT 0,
+    product_id UUID REFERENCES products(id) ON DELETE SET NULL,
+    is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    deleted_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_variants_master ON product_variants(product_master_number);
+CREATE INDEX idx_variants_variant ON product_variants(variant_number);
+CREATE INDEX idx_variants_active ON product_variants (product_master_number) WHERE is_deleted = FALSE;
+
 -- ─── Campaigns (Social Campaign Builder) ─────────────────────────────
 CREATE TABLE campaigns (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -89,6 +117,8 @@ CREATE TABLE campaigns (
     platforms TEXT[] DEFAULT '{}',
     caption TEXT,
     ai_caption TEXT,
+    needs_review BOOLEAN NOT NULL DEFAULT FALSE,
+    review_reason VARCHAR(1000),
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );

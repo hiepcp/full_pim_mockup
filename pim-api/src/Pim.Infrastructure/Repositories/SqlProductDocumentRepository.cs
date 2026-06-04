@@ -76,5 +76,12 @@ public sealed class SqlProductDocumentRepository : IProductDocumentRepository, I
         return rows > 0;
     }
 
+    public async Task BulkArchiveByProductIdAsync(Guid productId, CancellationToken ct = default)
+    {
+        await Connection.ExecuteAsync(
+            "UPDATE product_documents SET status = @status, updated_at = NOW() WHERE product_id = @productId AND status != @status",
+            new { productId, status = (int)ContentStatus.Archived });
+    }
+
     public void Dispose() => _connection?.Dispose();
 }

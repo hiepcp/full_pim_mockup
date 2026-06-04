@@ -10,4 +10,7 @@ public interface IProductVariantRepository
     Task<ProductVariant> CreateAsync(ProductVariant variant, CancellationToken ct = default);
     Task<bool> UpdateAsync(ProductVariant variant, CancellationToken ct = default);
     Task<int> GetCountByMasterNumberAsync(string masterNumber, CancellationToken ct = default);
+    Task BulkDisableByMasterNumberAsync(string masterNumber, CancellationToken ct = default);
+    Task BulkSoftDeleteByMasterNumberAsync(string masterNumber, CancellationToken ct = default);
+    Task BulkReEnableByMasterNumberAsync(string masterNumber, CancellationToken ct = default);
 }
