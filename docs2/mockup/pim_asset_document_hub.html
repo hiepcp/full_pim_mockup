@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIM — Asset & Document Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f3;
+    --bg-tertiary: #eeede9;
+    --text-primary: #1a1a18;
+    --text-secondary: #6b6b67;
+    --text-tertiary: #a0a09c;
+    --border-light: rgba(0,0,0,0.10);
+    --border-mid: rgba(0,0,0,0.18);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --blue-50: #E6F1FB;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --green-50: #EAF3DE;
+    --green-600: #3B6D11;
+    --amber-50: #FAEEDA;
+    --amber-600: #854F0B;
+    --amber-800: #633806;
+    --red-50: #FCEBEB;
+    --red-400: #D95B5B;
+    --red-600: #A32D2D;
+    --gray-100: #D3D1C7;
+    --gray-600: #5F5E5A;
+    --purple-50: #F0ECFB;
+    --purple-600: #5B35A5;
+    --teal-50: #E6F5F4;
+    --teal-600: #1A7A72;
+    --bluegray-50: #EEF2F6;
+    --bluegray-600: #3D5A7A;
+    --sidebar-w: 200px;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    min-height: 100vh;
+  }
+
+  .shell { display: flex; min-height: 100vh; }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: var(--sidebar-w); flex-shrink: 0;
+    background: var(--bg-primary);
+    border-right: 0.5px solid var(--border-light);
+    display: flex; flex-direction: column;
+    position: fixed; top: 0; left: 0; height: 100vh;
+    overflow-y: auto; z-index: 10;
+  }
+  .logo { padding: 18px 16px 14px; border-bottom: 0.5px solid var(--border-light); }
+  .logo-name { font-size: 14px; font-weight: 600; }
+  .logo-sub  { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+  .nav { padding: 8px 0; }
+  .nav-section {
+    font-size: 10px; color: var(--text-tertiary); text-transform: uppercase;
+    letter-spacing: 0.6px; padding: 14px 14px 4px; font-weight: 500;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 14px; font-size: 13px; color: var(--text-secondary);
+    cursor: pointer; border-left: 2px solid transparent;
+    transition: background 0.12s; text-decoration: none;
+  }
+  .nav-item:hover { background: var(--bg-secondary); color: var(--text-primary); }
+  .nav-item.active { color: var(--blue-600); background: var(--blue-50); border-left-color: var(--blue-600); font-weight: 500; }
+  .nav-item i { font-size: 16px; }
+
+  /* ── Main ── */
+  .main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+
+  /* ── Topbar ── */
+  .topbar {
+    background: var(--bg-primary); border-bottom: 0.5px solid var(--border-light);
+    padding: 10px 24px; display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 5;
+  }
+  .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+  .breadcrumb strong { color: var(--text-primary); font-weight: 500; }
+  .breadcrumb i { font-size: 12px; }
+  .topbar-actions { display: flex; align-items: center; gap: 8px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 7px 13px; border-radius: var(--radius-md);
+    font-size: 12px; font-weight: 500; cursor: pointer;
+    border: 0.5px solid var(--border-mid);
+    background: var(--bg-primary); color: var(--text-primary);
+    font-family: inherit; transition: background 0.1s;
+  }
+  .btn:hover { background: var(--bg-secondary); }
+  .btn-primary { background: var(--blue-600); color: #fff; border-color: var(--blue-600); }
+  .btn-primary:hover { background: var(--blue-800); }
+  .btn-danger { background: var(--red-600); color: #fff; border-color: var(--red-600); }
+  .btn-danger:hover { background: #7a1f1f; }
+  .btn-sm { padding: 4px 10px; font-size: 11px; }
+  .btn i { font-size: 15px; }
+
+  /* ── View nav tabs ── */
+  .view-tabs {
+    background: var(--bg-primary); border-bottom: 0.5px solid var(--border-light);
+    padding: 0 24px; display: flex; gap: 0;
+  }
+  .view-tab {
+    padding: 10px 16px; font-size: 13px; color: var(--text-secondary);
+    cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -0.5px;
+    display: flex; align-items: center; gap: 6px; transition: color 0.1s;
+    white-space: nowrap;
+  }
+  .view-tab:hover { color: var(--text-primary); }
+  .view-tab.active { color: var(--blue-600); border-bottom-color: var(--blue-600); font-weight: 500; }
+  .view-tab i { font-size: 14px; }
+  .view-tab .tab-badge {
+    font-size: 10px; background: var(--red-50); color: var(--red-600);
+    padding: 1px 6px; border-radius: 99px; font-weight: 600;
+  }
+
+  /* ── Content ── */
+  .content { padding: 20px 24px 40px; display: flex; flex-direction: column; gap: 16px; }
+  .view { display: none; }
+  .view.active { display: contents; }
+
+  /* ── Stat strip ── */
+  .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat-card { background: var(--bg-primary); border: 0.5px solid var(--border-light); border-radius: var(--radius-lg); padding: 16px; }
+  .stat-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
+  .stat-label i { font-size: 13px; }
+  .stat-value { font-size: 28px; font-weight: 600; color: var(--text-primary); }
+  .stat-sub { font-size: 11px; color: var(--text-secondary); margin-top: 3px; }
+  .stat-sub.warn { color: var(--amber-600); }
+  .stat-sub.danger { color: var(--red-600); }
+
+  /* ── Doc type tiles ── */
+  .section-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+  .section-title i { font-size: 14px; }
+
+  .doctype-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+  .doctype-tile {
+    background: var(--bg-primary); border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg); padding: 14px 12px; cursor: pointer;
+    transition: border-color 0.12s, box-shadow 0.12s; position: relative;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .doctype-tile:hover { border-color: var(--blue-400); box-shadow: 0 2px 8px rgba(55,138,221,0.12); }
+  .doctype-icon {
+    width: 36px; height: 36px; border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .doctype-icon i { font-size: 18px; }
+  .doctype-name { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+  .doctype-count { font-size: 11px; color: var(--text-secondary); }
+  .doctype-pending {
+    position: absolute; top: 8px; right: 8px;
+    background: var(--amber-600); color: #fff;
+    font-size: 9px; font-weight: 600; padding: 1px 6px; border-radius: 99px;
+  }
+
+  /* doc type colours */
+  .dt-pi     .doctype-icon { background: var(--blue-50);     } .dt-pi     .doctype-icon i { color: var(--blue-600); }
+  .dt-ai     .doctype-icon { background: var(--amber-50);    } .dt-ai     .doctype-icon i { color: var(--amber-600); }
+  .dt-sm     .doctype-icon { background: var(--red-50);      } .dt-sm     .doctype-icon i { color: var(--red-600); }
+  .dt-bom    .doctype-icon { background: var(--green-50);    } .dt-bom    .doctype-icon i { color: var(--green-600); }
+  .dt-tr     .doctype-icon { background: var(--bluegray-50); } .dt-tr     .doctype-icon i { color: var(--bluegray-600); }
+  .dt-cert   .doctype-icon { background: var(--purple-50);   } .dt-cert   .doctype-icon i { color: var(--purple-600); }
+  .dt-comp   .doctype-icon { background: var(--teal-50);     } .dt-comp   .doctype-icon i { color: var(--teal-600); }
+
+  /* ── Recent activity table ── */
+  .panel {
+    background: var(--bg-primary); border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg); overflow: hidden;
+  }
+  .panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px; border-bottom: 0.5px solid var(--border-light);
+  }
+  .panel-title { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  .panel-title i { font-size: 15px; color: var(--text-secondary); }
+  .panel-action { font-size: 11px; color: var(--blue-600); cursor: pointer; }
+
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    padding: 8px 16px; font-size: 11px; font-weight: 500; text-align: left;
+    color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.4px;
+    border-bottom: 0.5px solid var(--border-light); background: var(--bg-secondary);
+  }
+  tbody tr { border-bottom: 0.5px solid var(--border-light); transition: background 0.1s; cursor: pointer; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg-secondary); }
+  td { padding: 10px 16px; font-size: 12px; }
+
+  /* ── Badge ── */
+  .badge {
+    font-size: 10px; padding: 2px 8px; border-radius: 99px;
+    font-weight: 500; white-space: nowrap; display: inline-flex; align-items: center; gap: 3px;
+  }
+  .badge i { font-size: 11px; }
+  .badge-blue      { background: var(--blue-50); color: var(--blue-600); }
+  .badge-green     { background: var(--green-50); color: var(--green-600); }
+  .badge-amber     { background: var(--amber-50); color: var(--amber-600); }
+  .badge-red       { background: var(--red-50); color: var(--red-600); }
+  .badge-gray      { background: var(--bg-secondary); color: var(--gray-600); }
+  .badge-purple    { background: var(--purple-50); color: var(--purple-600); }
+  .badge-teal      { background: var(--teal-50); color: var(--teal-600); }
+  .badge-bluegray  { background: var(--bluegray-50); color: var(--bluegray-600); }
+
+  /* ── UPLOAD VIEW ── */
+  .upload-stepper {
+    display: flex; align-items: center; gap: 0; padding: 16px 24px;
+    background: var(--bg-primary); border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+  }
+  .step {
+    display: flex; align-items: center; gap: 8px; flex: 1;
+  }
+  .step-dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; flex-shrink: 0;
+    border: 1.5px solid var(--border-mid); color: var(--text-tertiary); background: var(--bg-secondary);
+  }
+  .step.done .step-dot   { background: var(--green-50); border-color: var(--green-600); color: var(--green-600); }
+  .step.active .step-dot { background: var(--blue-600); border-color: var(--blue-600); color: #fff; }
+  .step-label { font-size: 12px; color: var(--text-secondary); }
+  .step.active .step-label { color: var(--text-primary); font-weight: 500; }
+  .step.done .step-label  { color: var(--text-secondary); }
+  .step-connector { flex: 0 0 24px; height: 1px; background: var(--border-mid); margin: 0 8px; }
+
+  /* Step 1 — doc type cards */
+  .doctype-select-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+  .doctype-select-card {
+    border: 1.5px solid var(--border-light); border-radius: var(--radius-lg);
+    padding: 16px 10px; cursor: pointer; transition: all 0.15s;
+    display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
+  }
+  .doctype-select-card:hover { border-color: var(--blue-400); background: var(--blue-50); }
+  .doctype-select-card.selected { border-width: 2px; }
+  .dt-pi.selected     { border-color: var(--blue-600);     background: var(--blue-50);     }
+  .dt-ai.selected     { border-color: var(--amber-600);    background: var(--amber-50);    }
+  .dt-sm.selected     { border-color: var(--red-600);      background: var(--red-50);      }
+  .dt-bom.selected    { border-color: var(--green-600);    background: var(--green-50);    }
+  .dt-tr.selected     { border-color: var(--bluegray-600); background: var(--bluegray-50); }
+  .dt-cert.selected   { border-color: var(--purple-600);   background: var(--purple-50);   }
+  .dt-comp.selected   { border-color: var(--teal-600);     background: var(--teal-50);     }
+  .doctype-select-icon {
+    width: 44px; height: 44px; border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .doctype-select-icon i { font-size: 22px; }
+  .doctype-select-name { font-size: 11px; font-weight: 600; color: var(--text-primary); }
+  .doctype-select-desc { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
+
+  /* Step 2 — entity attachment */
+  .attach-panel {
+    background: var(--bg-primary); border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg); overflow: hidden;
+  }
+  .attach-header {
+    padding: 12px 16px; border-bottom: 0.5px solid var(--border-light);
+    display: flex; align-items: center; gap: 8px; background: var(--amber-50);
+  }
+  .attach-header i { font-size: 16px; color: var(--amber-600); }
+  .attach-header-text { font-size: 13px; font-weight: 500; color: var(--amber-800); }
+  .attach-body { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .field-row { display: flex; flex-direction: column; gap: 5px; }
+  .field-label {
+    font-size: 11px; font-weight: 600; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.4px;
+  }
+  .field-required { color: var(--red-600); }
+  .hierarchy-picker { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .hier-select {
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 0.5px solid var(--border-mid); border-radius: var(--radius-md);
+    padding: 6px 10px; font-size: 12px; color: var(--text-primary);
+    background: var(--bg-primary); cursor: pointer; font-family: inherit;
+  }
+  .hier-select.filled  { border-color: var(--blue-400); background: var(--blue-50); color: var(--blue-600); }
+  .hier-select.dimmed  { opacity: 0.4; pointer-events: none; }
+  .hier-select i { font-size: 12px; color: var(--text-secondary); }
+  .hier-arrow { font-size: 12px; color: var(--text-tertiary); }
+
+  .input-field {
+    border: 0.5px solid var(--border-mid); border-radius: var(--radius-md);
+    padding: 7px 10px; font-size: 12px; font-family: inherit; color: var(--text-primary);
+    background: var(--bg-primary); width: 100%; outline: none;
+  }
+  .input-field:focus { border-color: var(--blue-400); }
+  .input-field.readonly { background: var(--bg-secondary); color: var(--text-secondary); cursor: default; }
+
+  .customer-picker-row { display: flex; gap: 8px; align-items: center; }
+  .customer-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px; background: var(--blue-50); border: 0.5px solid var(--blue-400);
+    border-radius: 99px; font-size: 11px; font-weight: 500; color: var(--blue-600);
+    cursor: pointer;
+  }
+  .customer-chip i { font-size: 12px; }
+  .no-approval-flag {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 12px; background: var(--green-50); border: 0.5px solid var(--green-600);
+    border-radius: var(--radius-md); font-size: 12px; color: var(--green-600); font-weight: 500;
+  }
+  .no-approval-flag i { font-size: 14px; }
+
+  /* Step 3 — drop zone + approval rule */
+  .step3-layout { display: grid; grid-template-columns: 1fr 300px; gap: 16px; }
+  .drop-zone {
+    border: 1.5px dashed var(--border-mid); border-radius: var(--radius-md);
+    padding: 40px 20px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; cursor: pointer; transition: border-color 0.15s, background 0.15s;
+    text-align: center; background: var(--bg-primary);
+  }
+  .drop-zone:hover { border-color: var(--blue-400); background: var(--blue-50); }
+  .drop-zone i { font-size: 40px; color: var(--blue-400); }
+  .drop-zone-title { font-size: 14px; font-weight: 600; }
+  .drop-zone-sub { font-size: 12px; color: var(--text-secondary); }
+  .upload-rules { display: flex; gap: 14px; margin-top: 4px; flex-wrap: wrap; justify-content: center; }
+  .upload-rule { font-size: 10px; color: var(--text-tertiary); display: flex; align-items: center; gap: 3px; }
+  .upload-rule i { font-size: 11px; }
+
+  .approval-rule-panel {
+    background: var(--bg-primary); border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg); overflow: hidden;
+  }
+  .approval-rule-header {
+    padding: 10px 14px; background: var(--amber-50);
+    border-bottom: 0.5px solid var(--border-light);
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; color: var(--amber-800);
+  }
+  .approval-rule-header i { font-size: 14px; }
+  .approval-step-list { padding: 12px 14px; display: flex; flex-direction: column; gap: 0; }
+  .approval-step {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; position: relative;
+  }
+  .approval-step + .approval-step::before {
+    content: ''; position: absolute; left: 11px; top: -10px;
+    width: 1px; height: 12px; background: var(--border-mid);
+  }
+  .approval-step-dot {
+    width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600;
+    border: 1.5px solid var(--border-mid); color: var(--text-tertiary); background: var(--bg-secondary);
+    margin-top: 1px;
+  }
+  .approval-step.current .approval-step-dot { background: var(--blue-600); border-color: var(--blue-600); color: #fff; }
+  .approval-step.done .approval-step-dot { background: var(--green-50); border-color: var(--green-600); color: var(--green-600); }
+  .approval-step-info { flex: 1; }
+  .approval-step-name { font-size: 12px; font-weight: 500; }
+  .approval-step-who  { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+
+  /* ── BROWSE VIEW ── */
+  .browse-layout { display: grid; grid-template-columns: 340px 1fr; gap: 16px; align-items: start; }
+
+  .filter-tabs { display: flex; gap: 0; border-bottom: 0.5px solid var(--border-light); overflow-x: auto; }
+  .filter-tab {
+    padding: 8px 12px; font-size: 12px; color: var(--text-secondary);
+    cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -0.5px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .filter-tab:hover { color: var(--text-primary); }
+  .filter-tab.active { color: var(--blue-600); border-bottom-color: var(--blue-600); font-weight: 500; }
+
+  .doc-list-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-bottom: 0.5px solid var(--border-light);
+    cursor: pointer; transition: background 0.1s;
+  }
+  .doc-list-item:hover   { background: var(--bg-secondary); }
+  .doc-list-item.selected { background: var(--blue-50); }
+  .doc-list-item:last-child { border-bottom: none; }
+  .doc-file-icon {
+    width: 36px; height: 36px; border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .doc-file-icon i { font-size: 18px; }
+  .doc-info { flex: 1; min-width: 0; }
+  .doc-name { font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .doc-meta { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
+
+  /* Detail panel right */
+  .detail-hero {
+    background: var(--bg-secondary); padding: 18px;
+    border-bottom: 0.5px solid var(--border-light);
+    display: flex; align-items: center; gap: 14px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  .detail-file-icon {
+    width: 60px; height: 60px; border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .detail-file-icon i { font-size: 30px; }
+  .detail-name { font-size: 15px; font-weight: 600; }
+  .detail-sub  { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+  .detail-badges { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+
+  .linked-entity-bar {
+    padding: 10px 16px; background: var(--bg-secondary);
+    border-bottom: 0.5px solid var(--border-light);
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .linked-label { font-size: 10px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.4px; }
+  .linked-path { display: flex; align-items: center; gap: 5px; flex: 1; flex-wrap: wrap; }
+  .linked-sep { font-size: 11px; color: var(--text-tertiary); }
+  .linked-change { font-size: 11px; color: var(--blue-600); cursor: pointer; white-space: nowrap; }
+  .linked-change:hover { text-decoration: underline; }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .meta-item { padding: 10px 16px; border-bottom: 0.5px solid var(--border-light); border-right: 0.5px solid var(--border-light); }
+  .meta-item:nth-child(even) { border-right: none; }
+  .meta-item:nth-last-child(-n+2) { border-bottom: none; }
+  .meta-key { font-size: 10px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 3px; }
+  .meta-val { font-size: 12px; font-weight: 500; }
+  .meta-val.expiry-warn { color: var(--amber-600); }
+
+  .timeline-list { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+  .timeline-item { display: flex; gap: 10px; align-items: flex-start; }
+  .timeline-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .tl-green  { background: var(--green-600); }
+  .tl-blue   { background: var(--blue-400); }
+  .tl-amber  { background: var(--amber-600); }
+  .tl-gray   { background: var(--gray-100); }
+  .timeline-text { font-size: 12px; }
+  .timeline-time { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
+
+  .version-row { display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-top: 0.5px solid var(--border-light); }
+  .version-num { font-size: 11px; font-weight: 600; color: var(--text-secondary); width: 36px; }
+  .version-info { flex: 1; font-size: 11px; color: var(--text-primary); }
+  .version-date { font-size: 10px; color: var(--text-secondary); }
+
+  /* Map to entity inline panel */
+  .map-panel {
+    margin: 12px 16px;
+    background: var(--blue-50); border: 1px solid var(--blue-400);
+    border-radius: var(--radius-md); padding: 14px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .map-panel-title { font-size: 12px; font-weight: 600; color: var(--blue-600); display: flex; align-items: center; gap: 6px; }
+  .map-panel-title i { font-size: 14px; }
+  .map-search {
+    display: flex; align-items: center; gap: 8px;
+    border: 0.5px solid var(--blue-400); border-radius: var(--radius-md);
+    padding: 6px 10px; background: var(--bg-primary);
+  }
+  .map-search i { font-size: 14px; color: var(--text-secondary); }
+  .map-search input {
+    border: none; outline: none; font-size: 12px; font-family: inherit;
+    flex: 1; background: transparent; color: var(--text-primary);
+  }
+  .map-result { display: flex; flex-direction: column; gap: 4px; }
+  .map-result-item {
+    padding: 6px 10px; border-radius: var(--radius-md);
+    font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+    background: var(--bg-primary); border: 0.5px solid var(--border-light);
+  }
+  .map-result-item:hover { background: var(--blue-50); border-color: var(--blue-400); }
+  .map-result-item i { font-size: 13px; color: var(--blue-600); }
+  .map-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+  /* ── APPROVAL QUEUE VIEW ── */
+  .queue-sub-tabs { display: flex; gap: 0; padding: 0 16px; border-bottom: 0.5px solid var(--border-light); background: var(--bg-primary); border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+  .queue-sub-tab {
+    padding: 10px 14px; font-size: 12px; color: var(--text-secondary);
+    cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -0.5px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .queue-sub-tab.active { color: var(--blue-600); border-bottom-color: var(--blue-600); font-weight: 500; }
+  .queue-sub-tab .count {
+    background: var(--amber-50); color: var(--amber-600);
+    font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 99px;
+  }
+
+  .approval-card {
+    border-bottom: 0.5px solid var(--border-light); padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+    transition: background 0.1s; cursor: pointer;
+  }
+  .approval-card:hover { background: var(--bg-secondary); }
+  .approval-card:last-child { border-bottom: none; }
+  .approval-card-icon {
+    width: 44px; height: 44px; border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .approval-card-icon i { font-size: 22px; }
+  .approval-card-info { flex: 1; min-width: 0; }
+  .approval-card-name { font-size: 13px; font-weight: 500; }
+  .approval-card-meta { font-size: 11px; color: var(--text-secondary); margin-top: 3px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .approval-card-meta span { display: flex; align-items: center; gap: 4px; }
+  .approval-card-meta i { font-size: 12px; }
+  .approval-card-actions { display: flex; gap: 6px; flex-shrink: 0; }
+  .approval-days {
+    font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 99px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .days-warn   { background: var(--amber-50); color: var(--amber-600); }
+  .days-danger { background: var(--red-50);   color: var(--red-600); }
+  .days-ok     { background: var(--bg-secondary); color: var(--gray-600); }
+
+  /* divider helper */
+  .divider { height: 0.5px; background: var(--border-light); }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ═══ Sidebar ═══ -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-name">PIM Studio</div>
+      <div class="logo-sub">Product Info Management</div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">Catalogue</div>
+      <a class="nav-item" href="pim_product_dashboard.html"><i class="ti ti-box"></i> Products</a>
+      <a class="nav-item" href="pim_product_set.html"><i class="ti ti-components"></i> Product Sets</a>
+      <a class="nav-item" href="#"><i class="ti ti-color-swatch"></i> Materials</a>
+
+      <div class="nav-section">Assets</div>
+      <a class="nav-item" href="pim_image_engine.html"><i class="ti ti-photo"></i> Image Engine</a>
+      <a class="nav-item active" href="pim_asset_document_hub.html"><i class="ti ti-file-stack"></i> Document Hub</a>
+
+      <div class="nav-section">Publishing</div>
+      <a class="nav-item" href="pim_social_campaign.html"><i class="ti ti-speakerphone"></i> Social Campaign</a>
+      <a class="nav-item" href="#"><i class="ti ti-send"></i> Publish Flow</a>
+
+      <div class="nav-section">System</div>
+      <a class="nav-item" href="#"><i class="ti ti-refresh"></i> D365 Sync</a>
+      <a class="nav-item" href="pim_settings_connected_accounts.html"><i class="ti ti-settings"></i> Settings</a>
+    </nav>
+  </aside>
+
+  <!-- ═══ Main ═══ -->
+  <div class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="breadcrumb">
+        <span>Assets</span>
+        <i class="ti ti-chevron-right"></i>
+        <strong id="topbar-title">Document Hub</strong>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn"><i class="ti ti-filter"></i> Filter</button>
+        <button class="btn btn-primary" onclick="switchView('upload')"><i class="ti ti-upload"></i> Upload Document</button>
+      </div>
+    </header>
+
+    <!-- View tab nav -->
+    <div class="view-tabs">
+      <div class="view-tab active" data-view="overview" onclick="switchView('overview')">
+        <i class="ti ti-layout-dashboard"></i> Hub Overview
+      </div>
+      <div class="view-tab" data-view="upload" onclick="switchView('upload')">
+        <i class="ti ti-cloud-upload"></i> Upload
+      </div>
+      <div class="view-tab" data-view="browse" onclick="switchView('browse')">
+        <i class="ti ti-files"></i> Browse &amp; Detail
+      </div>
+      <div class="view-tab" data-view="approval" onclick="switchView('approval')">
+        <i class="ti ti-checks"></i> Approval Queue <span class="tab-badge">7</span>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         VIEW 1 — HUB OVERVIEW
+    ════════════════════════════════════════ -->
+    <main class="content">
+
+    <div id="view-overview" class="view active">
+
+      <!-- Stats strip -->
+      <div class="stat-strip">
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-photo-video"></i> Total Media</div>
+          <div class="stat-value">1,842</div>
+          <div class="stat-sub">Images &amp; assets</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-files"></i> Total Documents</div>
+          <div class="stat-value">634</div>
+          <div class="stat-sub">Across 7 types</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-clock-hour-4"></i> Pending Approval</div>
+          <div class="stat-value" style="color:var(--amber-600)">7</div>
+          <div class="stat-sub warn">4 internal · 3 customer</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-calendar-exclamation"></i> Expiring &lt; 30d</div>
+          <div class="stat-value" style="color:var(--red-600)">3</div>
+          <div class="stat-sub danger">Certifications</div>
+        </div>
+      </div>
+
+      <!-- Doc type tiles -->
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="section-title"><i class="ti ti-category"></i> Document Types</div>
+        <div class="doctype-grid">
+
+          <div class="doctype-tile dt-pi" onclick="switchView('browse')">
+            <div class="doctype-icon"><i class="ti ti-file-spreadsheet"></i></div>
+            <div class="doctype-name">PI</div>
+            <div class="doctype-count">128 docs</div>
+          </div>
+
+          <div class="doctype-tile dt-ai" onclick="switchView('browse')">
+            <div class="doctype-icon"><i class="ti ti-tools"></i></div>
+            <div class="doctype-name">Assembly Instruction</div>
+            <div class="doctype-count">54 docs</div>
+            <div class="doctype-pending">4 pending</div>
+          </div>
+
+          <div class="doctype-tile dt-sm" onclick="switchView('browse')">
+            <div class="doctype-icon"><i class="ti ti-tag"></i></div>
+            <div class="doctype-name">Shipping Mark</div>
+            <div class="doctype-count">97 docs</div>
+            <div class="doctype-pending">3 pending</div>
+          </div>
+
+          <div class="doctype-tile dt-bom" onclick="switchView('browse')">
+            <div class="doctype-icon"><i class="ti ti-list-tree"></i></div>
+            <div class="doctype-name">BOM</div>
+            <div class="doctype-count">203 docs</div>
+          </div>
+
+          <div class="doctype-tile dt-tr" onclick="switchView('browse')">
+            <div class="doctype-icon"><i class="ti ti-test-pipe"></i></div>
+            <div class="doctype-name">Test Report</div>
+            <div class="doctype-count">88 docs</div>
+          </div>
+
+          <div class="doctype-tile dt-cert" onclick="switchView('browse')">
+            <div class="doctype-icon"><i class="ti ti-certificate"></i></div>
+            <div class="doctype-name">Certification</div>
+            <div class="doctype-count">41 docs</div>
+          </div>
+
+          <div class="doctype-tile dt-comp" onclick="switchView('browse')">
+            <div class="doctype-icon"><i class="ti ti-shield-check"></i></div>
+            <div class="doctype-name">Compliance Test</div>
+            <div class="doctype-count">23 docs</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Recent activity -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title"><i class="ti ti-activity"></i> Recent Activity</div>
+          <span class="panel-action" onclick="switchView('browse')">View all →</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Document</th>
+              <th>Type</th>
+              <th>Linked Entity</th>
+              <th>Status</th>
+              <th>Uploaded by</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span style="font-weight:500">AI_SkyChair_Zara_v2.pdf</span></td>
+              <td><span class="badge badge-amber"><i class="ti ti-tools"></i> Assembly Instr.</span></td>
+              <td style="color:var(--text-secondary);font-size:11px">Sky Chair 3P · Zara Home</td>
+              <td><span class="badge badge-amber"><i class="ti ti-clock"></i> Pending Internal</span></td>
+              <td style="color:var(--text-secondary)">Linh N.</td>
+              <td style="color:var(--text-secondary)">2026-06-12</td>
+            </tr>
+            <tr>
+              <td><span style="font-weight:500">SM_DiningSET_IKEA_v1.pdf</span></td>
+              <td><span class="badge badge-red"><i class="ti ti-tag"></i> Shipping Mark</span></td>
+              <td style="color:var(--text-secondary);font-size:11px">Dining Set 4S · IKEA</td>
+              <td><span class="badge badge-amber"><i class="ti ti-clock"></i> Pending Customer</span></td>
+              <td style="color:var(--text-secondary)">Hoa T.</td>
+              <td style="color:var(--text-secondary)">2026-06-11</td>
+            </tr>
+            <tr>
+              <td><span style="font-weight:500">CERT_FSC_2026_LoungeChair.pdf</span></td>
+              <td><span class="badge badge-purple"><i class="ti ti-certificate"></i> Certification</span></td>
+              <td style="color:var(--text-secondary);font-size:11px">Lounge Chair · Item #LC-07</td>
+              <td><span class="badge badge-green"><i class="ti ti-check"></i> Approved</span></td>
+              <td style="color:var(--text-secondary)">Minh D.</td>
+              <td style="color:var(--text-secondary)">2026-06-10</td>
+            </tr>
+            <tr>
+              <td><span style="font-weight:500">PI_GardenSet_Supreme.pdf</span></td>
+              <td><span class="badge badge-blue"><i class="ti ti-file-spreadsheet"></i> PI</span></td>
+              <td style="color:var(--text-secondary);font-size:11px">Garden Set · Supreme Green JL FSC</td>
+              <td><span class="badge badge-green"><i class="ti ti-check"></i> Approved</span></td>
+              <td style="color:var(--text-secondary)">Linh N.</td>
+              <td style="color:var(--text-secondary)">2026-06-09</td>
+            </tr>
+            <tr>
+              <td><span style="font-weight:500">TR_StressTest_SwingChair_v3.pdf</span></td>
+              <td><span class="badge badge-bluegray"><i class="ti ti-test-pipe"></i> Test Report</span></td>
+              <td style="color:var(--text-secondary);font-size:11px">Swing Chair · Item #SW-03</td>
+              <td><span class="badge badge-blue"><i class="ti ti-file"></i> Draft</span></td>
+              <td style="color:var(--text-secondary)">Hoa T.</td>
+              <td style="color:var(--text-secondary)">2026-06-08</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- /view-overview -->
+
+
+    <!-- ════════════════════════════════════════
+         VIEW 2 — UPLOAD DOCUMENT
+    ════════════════════════════════════════ -->
+    <div id="view-upload" class="view">
+
+      <!-- Stepper -->
+      <div class="upload-stepper">
+        <div class="step done" id="step1-indicator">
+          <div class="step-dot"><i class="ti ti-check" style="font-size:13px"></i></div>
+          <div class="step-label">1. Choose Type</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step active" id="step2-indicator">
+          <div class="step-dot">2</div>
+          <div class="step-label">2. Attach Entity</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step" id="step3-indicator">
+          <div class="step-dot">3</div>
+          <div class="step-label">3. Upload File</div>
+        </div>
+      </div>
+
+      <!-- Step 1 — Doc type selector (shown collapsed/selected) -->
+      <div class="panel" id="step1-panel">
+        <div class="panel-header" style="cursor:pointer" onclick="toggleStep1()">
+          <div class="panel-title"><i class="ti ti-category"></i> Step 1 — Document Type &nbsp;<span class="badge badge-amber">Assembly Instruction</span></div>
+          <span class="panel-action">Change</span>
+        </div>
+        <div id="step1-body" style="display:none;padding:16px">
+          <div class="doctype-select-grid">
+
+            <div class="doctype-select-card dt-pi" onclick="selectDocType(this,'pi')">
+              <div class="doctype-select-icon dt-pi" style="background:var(--blue-50)"><i class="ti ti-file-spreadsheet" style="color:var(--blue-600)"></i></div>
+              <div class="doctype-select-name">PI</div>
+              <div class="doctype-select-desc">Packing &amp; Price Info</div>
+            </div>
+
+            <div class="doctype-select-card dt-ai selected" onclick="selectDocType(this,'ai')">
+              <div class="doctype-select-icon dt-ai" style="background:var(--amber-50)"><i class="ti ti-tools" style="color:var(--amber-600)"></i></div>
+              <div class="doctype-select-name">Assembly Instr.</div>
+              <div class="doctype-select-desc">Requires approval</div>
+            </div>
+
+            <div class="doctype-select-card dt-sm" onclick="selectDocType(this,'sm')">
+              <div class="doctype-select-icon dt-sm" style="background:var(--red-50)"><i class="ti ti-tag" style="color:var(--red-600)"></i></div>
+              <div class="doctype-select-name">Shipping Mark</div>
+              <div class="doctype-select-desc">Per customer</div>
+            </div>
+
+            <div class="doctype-select-card dt-bom" onclick="selectDocType(this,'bom')">
+              <div class="doctype-select-icon dt-bom" style="background:var(--green-50)"><i class="ti ti-list-tree" style="color:var(--green-600)"></i></div>
+              <div class="doctype-select-name">BOM</div>
+              <div class="doctype-select-desc">D365 reference</div>
+            </div>
+
+            <div class="doctype-select-card dt-tr" onclick="selectDocType(this,'tr')">
+              <div class="doctype-select-icon dt-tr" style="background:var(--bluegray-50)"><i class="ti ti-test-pipe" style="color:var(--bluegray-600)"></i></div>
+              <div class="doctype-select-name">Test Report</div>
+              <div class="doctype-select-desc">Versioned</div>
+            </div>
+
+            <div class="doctype-select-card dt-cert" onclick="selectDocType(this,'cert')">
+              <div class="doctype-select-icon dt-cert" style="background:var(--purple-50)"><i class="ti ti-certificate" style="color:var(--purple-600)"></i></div>
+              <div class="doctype-select-name">Certification</div>
+              <div class="doctype-select-desc">Has expiry date</div>
+            </div>
+
+            <div class="doctype-select-card dt-comp" onclick="selectDocType(this,'comp')">
+              <div class="doctype-select-icon dt-comp" style="background:var(--teal-50)"><i class="ti ti-shield-check" style="color:var(--teal-600)"></i></div>
+              <div class="doctype-select-name">Compliance Test</div>
+              <div class="doctype-select-desc">EU / US tags</div>
+            </div>
+
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:14px">
+            <button class="btn btn-primary btn-sm">Confirm Type <i class="ti ti-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 — Entity attachment (example: Assembly Instruction) -->
+      <div class="attach-panel" id="step2-panel">
+        <div class="attach-header">
+          <i class="ti ti-tools"></i>
+          <span class="attach-header-text">Assembly Instruction — Entity Attachment</span>
+        </div>
+        <div class="attach-body">
+
+          <!-- Hierarchy picker -->
+          <div class="field-row">
+            <div class="field-label">Product Hierarchy <span class="field-required">*</span></div>
+            <div class="hierarchy-picker">
+              <div class="hier-select filled"><i class="ti ti-components"></i> Outdoor Collection 2026 <i class="ti ti-chevron-down"></i></div>
+              <span class="hier-arrow">›</span>
+              <div class="hier-select filled"><i class="ti ti-box"></i> Sky Chair 3P <i class="ti ti-chevron-down"></i></div>
+              <span class="hier-arrow">›</span>
+              <div class="hier-select filled"><i class="ti ti-git-branch"></i> Natural / White <i class="ti ti-chevron-down"></i></div>
+              <span class="hier-arrow">›</span>
+              <div class="hier-select" style="color:var(--text-secondary)"><i class="ti ti-git-fork"></i> Daughter Variant <i class="ti ti-chevron-down"></i></div>
+            </div>
+          </div>
+
+          <!-- Customer picker -->
+          <div class="field-row">
+            <div class="field-label">Customer <span class="field-required">*</span></div>
+            <div class="customer-picker-row">
+              <div class="customer-chip"><i class="ti ti-building-store"></i> Zara Home <i class="ti ti-x" style="font-size:10px;opacity:0.7"></i></div>
+              <button class="btn btn-sm"><i class="ti ti-plus"></i> Add customer</button>
+            </div>
+          </div>
+
+          <!-- External Item ID (auto-fill) -->
+          <div class="field-row">
+            <div class="field-label">External Item ID <span style="font-size:10px;font-weight:400;color:var(--text-secondary)">(auto-filled from SO Variant)</span></div>
+            <input class="input-field readonly" value="ZH-SKY3P-NAT-001" readonly>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Step 3 — Drop zone + approval rule -->
+      <div class="step3-layout">
+
+        <div class="panel" style="overflow:hidden">
+          <div class="panel-header">
+            <div class="panel-title"><i class="ti ti-cloud-upload"></i> Upload File</div>
+          </div>
+          <div style="padding:16px">
+            <div class="drop-zone">
+              <i class="ti ti-file-upload"></i>
+              <div class="drop-zone-title">Drop file here or click to browse</div>
+              <div class="drop-zone-sub">PDF, DOCX, XLSX — max 50 MB per file</div>
+              <div class="upload-rules">
+                <div class="upload-rule"><i class="ti ti-check"></i> PDF</div>
+                <div class="upload-rule"><i class="ti ti-check"></i> DOCX</div>
+                <div class="upload-rule"><i class="ti ti-check"></i> XLSX</div>
+                <div class="upload-rule"><i class="ti ti-check"></i> Max 50MB</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:0 16px 16px;display:flex;justify-content:flex-end;gap:8px">
+            <button class="btn">Cancel</button>
+            <button class="btn btn-primary"><i class="ti ti-upload"></i> Upload &amp; Submit</button>
+          </div>
+        </div>
+
+        <!-- Approval rule sidebar -->
+        <div class="approval-rule-panel">
+          <div class="approval-rule-header"><i class="ti ti-git-branch"></i> Approval Flow</div>
+          <div class="approval-step-list">
+            <div class="approval-step done">
+              <div class="approval-step-dot"><i class="ti ti-check" style="font-size:11px"></i></div>
+              <div class="approval-step-info">
+                <div class="approval-step-name">Draft</div>
+                <div class="approval-step-who">Created by uploader</div>
+              </div>
+            </div>
+            <div class="approval-step current">
+              <div class="approval-step-dot">2</div>
+              <div class="approval-step-info">
+                <div class="approval-step-name">Pending Internal</div>
+                <div class="approval-step-who">→ Christian B. (Product)</div>
+              </div>
+            </div>
+            <div class="approval-step">
+              <div class="approval-step-dot">3</div>
+              <div class="approval-step-info">
+                <div class="approval-step-name">Pending Customer</div>
+                <div class="approval-step-who">→ Zara Home contact</div>
+              </div>
+            </div>
+            <div class="approval-step">
+              <div class="approval-step-dot">4</div>
+              <div class="approval-step-info">
+                <div class="approval-step-name">Approved</div>
+                <div class="approval-step-who">Final state</div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:10px 14px;border-top:0.5px solid var(--border-light)">
+            <div style="font-size:11px;color:var(--text-secondary)">
+              <i class="ti ti-info-circle" style="vertical-align:middle;font-size:13px"></i>
+              Assembly Instructions always require internal review by Christian B. before being sent to the customer.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- /view-upload -->
+
+
+    <!-- ════════════════════════════════════════
+         VIEW 3 — BROWSE & DETAIL
+    ════════════════════════════════════════ -->
+    <div id="view-browse" class="view">
+      <div class="browse-layout">
+
+        <!-- Left: filter + list -->
+        <div class="panel" style="overflow:hidden">
+          <div class="panel-header">
+            <div class="panel-title"><i class="ti ti-files"></i> Documents</div>
+            <span class="panel-action">634 total</span>
+          </div>
+
+          <!-- Search -->
+          <div style="padding:10px 14px;border-bottom:0.5px solid var(--border-light)">
+            <div style="display:flex;align-items:center;gap:7px;border:0.5px solid var(--border-mid);border-radius:var(--radius-md);padding:6px 10px;background:var(--bg-secondary)">
+              <i class="ti ti-search" style="font-size:14px;color:var(--text-secondary)"></i>
+              <input style="border:none;outline:none;font-size:12px;font-family:inherit;flex:1;background:transparent;color:var(--text-primary)" placeholder="Search filename, entity…">
+            </div>
+          </div>
+
+          <!-- Filter tabs -->
+          <div class="filter-tabs">
+            <div class="filter-tab active">All</div>
+            <div class="filter-tab">PI</div>
+            <div class="filter-tab">AI</div>
+            <div class="filter-tab">SM</div>
+            <div class="filter-tab">BOM</div>
+            <div class="filter-tab">TR</div>
+            <div class="filter-tab">Cert</div>
+            <div class="filter-tab">Compliance</div>
+          </div>
+
+          <!-- List -->
+          <div class="doc-list-item selected">
+            <div class="doc-file-icon dt-ai" style="background:var(--amber-50);border:0.5px solid #EFC96B">
+              <i class="ti ti-tools" style="color:var(--amber-600)"></i>
+            </div>
+            <div class="doc-info">
+              <div class="doc-name">AI_SkyChair_Zara_v2.pdf</div>
+              <div class="doc-meta">Assembly Instr. · Sky Chair 3P · Zara Home</div>
+            </div>
+            <span class="badge badge-amber">Pending</span>
+          </div>
+
+          <div class="doc-list-item">
+            <div class="doc-file-icon dt-sm" style="background:var(--red-50);border:0.5px solid #F1B0B0">
+              <i class="ti ti-tag" style="color:var(--red-600)"></i>
+            </div>
+            <div class="doc-info">
+              <div class="doc-name">SM_DiningSET_IKEA_v1.pdf</div>
+              <div class="doc-meta">Shipping Mark · Dining Set 4S · IKEA</div>
+            </div>
+            <span class="badge badge-amber">Pending</span>
+          </div>
+
+          <div class="doc-list-item">
+            <div class="doc-file-icon dt-cert" style="background:var(--purple-50);border:0.5px solid #C4B5F4">
+              <i class="ti ti-certificate" style="color:var(--purple-600)"></i>
+            </div>
+            <div class="doc-info">
+              <div class="doc-name">CERT_FSC_2026_LoungeChair.pdf</div>
+              <div class="doc-meta">Certification · Lounge Chair · expires 2026-08-01</div>
+            </div>
+            <span class="badge badge-amber" style="background:#fff3e0;color:#854F0B">Exp. soon</span>
+          </div>
+
+          <div class="doc-list-item">
+            <div class="doc-file-icon dt-pi" style="background:var(--blue-50);border:0.5px solid #B5D4F4">
+              <i class="ti ti-file-spreadsheet" style="color:var(--blue-600)"></i>
+            </div>
+            <div class="doc-info">
+              <div class="doc-name">PI_GardenSet_Supreme.pdf</div>
+              <div class="doc-meta">PI · Garden Set · Supreme Green JL FSC</div>
+            </div>
+            <span class="badge badge-green">Approved</span>
+          </div>
+
+          <div class="doc-list-item">
+            <div class="doc-file-icon dt-tr" style="background:var(--bluegray-50);border:0.5px solid #B0C8E0">
+              <i class="ti ti-test-pipe" style="color:var(--bluegray-600)"></i>
+            </div>
+            <div class="doc-info">
+              <div class="doc-name">TR_StressTest_SwingChair_v3.pdf</div>
+              <div class="doc-meta">Test Report · Swing Chair · v3</div>
+            </div>
+            <span class="badge badge-gray">Draft</span>
+          </div>
+
+          <div class="doc-list-item">
+            <div class="doc-file-icon dt-bom" style="background:var(--green-50);border:0.5px solid #B5D4A4">
+              <i class="ti ti-list-tree" style="color:var(--green-600)"></i>
+            </div>
+            <div class="doc-info">
+              <div class="doc-name">BOM_OutdoorSofa_2026.xlsx</div>
+              <div class="doc-meta">BOM · Outdoor Sofa · Mother Variant</div>
+            </div>
+            <span class="badge badge-green">Reference</span>
+          </div>
+
+          <div class="doc-list-item">
+            <div class="doc-file-icon dt-comp" style="background:var(--teal-50);border:0.5px solid #9AD4CF">
+              <i class="ti ti-shield-check" style="color:var(--teal-600)"></i>
+            </div>
+            <div class="doc-info">
+              <div class="doc-name">COMP_REACH_EU_BambooChair.pdf</div>
+              <div class="doc-meta">Compliance · Bamboo Chair · EU REACH</div>
+            </div>
+            <span class="badge badge-green">Approved</span>
+          </div>
+
+        </div><!-- /left panel -->
+
+        <!-- Right: Document detail -->
+        <div class="panel" style="overflow:hidden">
+
+          <!-- Detail hero -->
+          <div class="detail-hero">
+            <div class="detail-file-icon dt-ai" style="background:var(--amber-50);border:0.5px solid #EFC96B">
+              <i class="ti ti-tools" style="color:var(--amber-600)"></i>
+            </div>
+            <div style="flex:1">
+              <div class="detail-name">AI_SkyChair_Zara_v2.pdf</div>
+              <div class="detail-sub">Assembly Instruction · 2.4 MB · PDF · Uploaded 2026-06-12</div>
+              <div class="detail-badges">
+                <span class="badge badge-amber"><i class="ti ti-clock"></i> Pending Internal</span>
+                <span class="badge badge-gray">v2</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;flex-shrink:0;align-items:flex-start">
+              <button class="btn btn-sm"><i class="ti ti-download"></i> Download</button>
+              <button class="btn btn-sm"><i class="ti ti-pencil"></i> Edit</button>
+            </div>
+          </div>
+
+          <!-- Linked entity bar -->
+          <div class="linked-entity-bar">
+            <div class="linked-label">Linked to</div>
+            <div class="linked-path">
+              <span class="badge badge-gray" style="font-size:11px">Outdoor Collection 2026</span>
+              <span class="linked-sep">›</span>
+              <span class="badge badge-blue" style="font-size:11px"><i class="ti ti-box"></i> Sky Chair 3P</span>
+              <span class="linked-sep">›</span>
+              <span class="badge badge-amber" style="font-size:11px"><i class="ti ti-git-fork"></i> Natural / White · DV-9712</span>
+              <span class="linked-sep">·</span>
+              <span class="badge badge-blue" style="font-size:11px"><i class="ti ti-building-store"></i> Zara Home</span>
+            </div>
+            <span class="linked-change" onclick="toggleMapPanel()">Map to Entity →</span>
+          </div>
+
+          <!-- Map to entity panel (hidden by default) -->
+          <div class="map-panel" id="map-panel" style="display:none">
+            <div class="map-panel-title"><i class="ti ti-arrows-exchange"></i> Map / Re-link to Entity</div>
+            <div class="map-search">
+              <i class="ti ti-search"></i>
+              <input placeholder="Search range, item, variant…" value="Sky Chair">
+            </div>
+            <div class="map-result">
+              <div class="map-result-item">
+                <i class="ti ti-git-fork"></i>
+                <span>Sky Chair 3P · Natural / White · DV-9711 (current)</span>
+              </div>
+              <div class="map-result-item">
+                <i class="ti ti-git-fork"></i>
+                <span>Sky Chair 3P · Natural / Grey · DV-9713</span>
+              </div>
+              <div class="map-result-item">
+                <i class="ti ti-git-fork"></i>
+                <span>Sky Chair 2P · Natural / White · DV-9654</span>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--text-secondary)"><i class="ti ti-info-circle" style="vertical-align:middle;font-size:12px"></i> A new link will be created — existing links are not removed.</div>
+            <div class="map-actions">
+              <button class="btn btn-sm" onclick="toggleMapPanel()">Cancel</button>
+              <button class="btn btn-primary btn-sm">Confirm Link</button>
+            </div>
+          </div>
+
+          <!-- Meta grid -->
+          <div class="meta-grid">
+            <div class="meta-item">
+              <div class="meta-key">Doc Type</div>
+              <div class="meta-val"><span class="badge badge-amber"><i class="ti ti-tools"></i> Assembly Instruction</span></div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-key">External Item ID</div>
+              <div class="meta-val" style="font-family:monospace">ZH-SKY3P-NAT-001</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-key">File Size</div>
+              <div class="meta-val">2.4 MB</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-key">Version</div>
+              <div class="meta-val">v2 (latest)</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-key">Uploaded by</div>
+              <div class="meta-val">Linh Nguyen</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-key">Upload Date</div>
+              <div class="meta-val">2026-06-12</div>
+            </div>
+          </div>
+
+          <!-- Approval timeline -->
+          <div style="padding:10px 16px;border-top:0.5px solid var(--border-light);font-size:12px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.4px">Approval Timeline</div>
+          <div class="timeline-list">
+            <div class="timeline-item">
+              <div class="timeline-dot tl-green"></div>
+              <div>
+                <div class="timeline-text">Uploaded &amp; Draft created</div>
+                <div class="timeline-time">2026-06-12 · Linh Nguyen</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot tl-blue"></div>
+              <div>
+                <div class="timeline-text">Submitted for Internal Review</div>
+                <div class="timeline-time">2026-06-12 · Auto-triggered</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot tl-amber"></div>
+              <div>
+                <div class="timeline-text" style="color:var(--amber-600);font-weight:500">Awaiting Internal Approval — Christian B.</div>
+                <div class="timeline-time">Since 2026-06-12</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Version history -->
+          <div style="padding:10px 16px;border-top:0.5px solid var(--border-light);font-size:12px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.4px">Version History</div>
+          <div class="version-row">
+            <div class="version-num">v2</div>
+            <div class="version-info">Current version — revised assembly diagram section 3</div>
+            <div class="version-date">2026-06-12</div>
+            <button class="btn btn-sm" style="margin-left:8px"><i class="ti ti-download"></i></button>
+          </div>
+          <div class="version-row" style="opacity:0.7">
+            <div class="version-num">v1</div>
+            <div class="version-info">Initial upload</div>
+            <div class="version-date">2026-05-30</div>
+            <button class="btn btn-sm" style="margin-left:8px"><i class="ti ti-download"></i></button>
+          </div>
+
+        </div><!-- /right detail panel -->
+
+      </div>
+    </div><!-- /view-browse -->
+
+
+    <!-- ════════════════════════════════════════
+         VIEW 4 — APPROVAL QUEUE
+    ════════════════════════════════════════ -->
+    <div id="view-approval" class="view">
+      <div class="panel">
+
+        <!-- Sub-tabs -->
+        <div class="queue-sub-tabs">
+          <div class="queue-sub-tab active" onclick="switchQueueTab(this,'internal')">
+            <i class="ti ti-building"></i> Pending Internal <span class="count">4</span>
+          </div>
+          <div class="queue-sub-tab" onclick="switchQueueTab(this,'customer')">
+            <i class="ti ti-building-store"></i> Pending Customer <span class="count">3</span>
+          </div>
+        </div>
+
+        <!-- Internal queue -->
+        <div id="queue-internal">
+
+          <div class="approval-card">
+            <div class="approval-card-icon dt-ai" style="background:var(--amber-50);border:0.5px solid #EFC96B">
+              <i class="ti ti-tools" style="color:var(--amber-600)"></i>
+            </div>
+            <div class="approval-card-info">
+              <div class="approval-card-name">AI_SkyChair_Zara_v2.pdf</div>
+              <div class="approval-card-meta">
+                <span><i class="ti ti-git-fork"></i> Sky Chair 3P · DV-9712</span>
+                <span><i class="ti ti-building-store"></i> Zara Home</span>
+                <span><i class="ti ti-user"></i> Linh Nguyen</span>
+              </div>
+            </div>
+            <span class="approval-days days-warn">2 days waiting</span>
+            <div class="approval-card-actions">
+              <button class="btn btn-sm" style="color:var(--green-600);border-color:var(--green-600)"><i class="ti ti-check"></i> Approve</button>
+              <button class="btn btn-sm" style="color:var(--blue-600);border-color:var(--blue-600)"><i class="ti ti-send"></i> Send to Customer</button>
+              <button class="btn btn-sm" style="color:var(--red-600);border-color:var(--red-600)"><i class="ti ti-x"></i> Reject</button>
+            </div>
+          </div>
+
+          <div class="approval-card">
+            <div class="approval-card-icon dt-ai" style="background:var(--amber-50);border:0.5px solid #EFC96B">
+              <i class="ti ti-tools" style="color:var(--amber-600)"></i>
+            </div>
+            <div class="approval-card-info">
+              <div class="approval-card-name">AI_LoungeSofa_IKEA_v1.pdf</div>
+              <div class="approval-card-meta">
+                <span><i class="ti ti-git-fork"></i> Lounge Sofa 3S · DV-9856</span>
+                <span><i class="ti ti-building-store"></i> IKEA</span>
+                <span><i class="ti ti-user"></i> Hoa Tran</span>
+              </div>
+            </div>
+            <span class="approval-days days-danger">5 days waiting</span>
+            <div class="approval-card-actions">
+              <button class="btn btn-sm" style="color:var(--green-600);border-color:var(--green-600)"><i class="ti ti-check"></i> Approve</button>
+              <button class="btn btn-sm" style="color:var(--blue-600);border-color:var(--blue-600)"><i class="ti ti-send"></i> Send to Customer</button>
+              <button class="btn btn-sm" style="color:var(--red-600);border-color:var(--red-600)"><i class="ti ti-x"></i> Reject</button>
+            </div>
+          </div>
+
+          <div class="approval-card">
+            <div class="approval-card-icon dt-ai" style="background:var(--amber-50);border:0.5px solid #EFC96B">
+              <i class="ti ti-tools" style="color:var(--amber-600)"></i>
+            </div>
+            <div class="approval-card-info">
+              <div class="approval-card-name">AI_DiningChair_Target_v2.pdf</div>
+              <div class="approval-card-meta">
+                <span><i class="ti ti-git-fork"></i> Dining Chair 4P · DV-9788</span>
+                <span><i class="ti ti-building-store"></i> Target</span>
+                <span><i class="ti ti-user"></i> Minh Dao</span>
+              </div>
+            </div>
+            <span class="approval-days days-ok">1 day waiting</span>
+            <div class="approval-card-actions">
+              <button class="btn btn-sm" style="color:var(--green-600);border-color:var(--green-600)"><i class="ti ti-check"></i> Approve</button>
+              <button class="btn btn-sm" style="color:var(--blue-600);border-color:var(--blue-600)"><i class="ti ti-send"></i> Send to Customer</button>
+              <button class="btn btn-sm" style="color:var(--red-600);border-color:var(--red-600)"><i class="ti ti-x"></i> Reject</button>
+            </div>
+          </div>
+
+          <div class="approval-card">
+            <div class="approval-card-icon dt-ai" style="background:var(--amber-50);border:0.5px solid #EFC96B">
+              <i class="ti ti-tools" style="color:var(--amber-600)"></i>
+            </div>
+            <div class="approval-card-info">
+              <div class="approval-card-name">AI_RockingChair_WestElm_v1.pdf</div>
+              <div class="approval-card-meta">
+                <span><i class="ti ti-git-fork"></i> Rocking Chair · DV-9801</span>
+                <span><i class="ti ti-building-store"></i> West Elm</span>
+                <span><i class="ti ti-user"></i> Linh Nguyen</span>
+              </div>
+            </div>
+            <span class="approval-days days-ok">Today</span>
+            <div class="approval-card-actions">
+              <button class="btn btn-sm" style="color:var(--green-600);border-color:var(--green-600)"><i class="ti ti-check"></i> Approve</button>
+              <button class="btn btn-sm" style="color:var(--blue-600);border-color:var(--blue-600)"><i class="ti ti-send"></i> Send to Customer</button>
+              <button class="btn btn-sm" style="color:var(--red-600);border-color:var(--red-600)"><i class="ti ti-x"></i> Reject</button>
+            </div>
+          </div>
+
+        </div><!-- /queue-internal -->
+
+        <!-- Customer queue (hidden) -->
+        <div id="queue-customer" style="display:none">
+
+          <div class="approval-card">
+            <div class="approval-card-icon dt-sm" style="background:var(--red-50);border:0.5px solid #F1B0B0">
+              <i class="ti ti-tag" style="color:var(--red-600)"></i>
+            </div>
+            <div class="approval-card-info">
+              <div class="approval-card-name">SM_DiningSET_IKEA_v1.pdf</div>
+              <div class="approval-card-meta">
+                <span><i class="ti ti-git-fork"></i> Dining Set 4S · DV-9780</span>
+                <span><i class="ti ti-building-store"></i> IKEA</span>
+                <span><i class="ti ti-send"></i> Sent to customer 2026-06-11</span>
+              </div>
+            </div>
+            <span class="approval-days days-warn">1 day waiting</span>
+            <div class="approval-card-actions">
+              <button class="btn btn-sm" style="color:var(--green-600);border-color:var(--green-600)"><i class="ti ti-check"></i> Mark Approved</button>
+              <button class="btn btn-sm" style="color:var(--red-600);border-color:var(--red-600)"><i class="ti ti-x"></i> Reject</button>
+            </div>
+          </div>
+
+          <div class="approval-card">
+            <div class="approval-card-icon dt-ai" style="background:var(--amber-50);border:0.5px solid #EFC96B">
+              <i class="ti ti-tools" style="color:var(--amber-600)"></i>
+            </div>
+            <div class="approval-card-info">
+              <div class="approval-card-name">AI_GardenBench_Wayfair_v1.pdf</div>
+              <div class="approval-card-meta">
+                <span><i class="ti ti-git-fork"></i> Garden Bench 2S · DV-9745</span>
+                <span><i class="ti ti-building-store"></i> Wayfair</span>
+                <span><i class="ti ti-send"></i> Sent to customer 2026-06-10</span>
+              </div>
+            </div>
+            <span class="approval-days days-danger">2 days waiting</span>
+            <div class="approval-card-actions">
+              <button class="btn btn-sm" style="color:var(--green-600);border-color:var(--green-600)"><i class="ti ti-check"></i> Mark Approved</button>
+              <button class="btn btn-sm" style="color:var(--red-600);border-color:var(--red-600)"><i class="ti ti-x"></i> Reject</button>
+            </div>
+          </div>
+
+          <div class="approval-card">
+            <div class="approval-card-icon dt-sm" style="background:var(--red-50);border:0.5px solid #F1B0B0">
+              <i class="ti ti-tag" style="color:var(--red-600)"></i>
+            </div>
+            <div class="approval-card-info">
+              <div class="approval-card-name">SM_SwingChair_ZaraHome_v2.pdf</div>
+              <div class="approval-card-meta">
+                <span><i class="ti ti-git-fork"></i> Swing Chair · DV-9762</span>
+                <span><i class="ti ti-building-store"></i> Zara Home</span>
+                <span><i class="ti ti-send"></i> Sent to customer 2026-06-09</span>
+              </div>
+            </div>
+            <span class="approval-days days-danger">3 days waiting</span>
+            <div class="approval-card-actions">
+              <button class="btn btn-sm" style="color:var(--green-600);border-color:var(--green-600)"><i class="ti ti-check"></i> Mark Approved</button>
+              <button class="btn btn-sm" style="color:var(--red-600);border-color:var(--red-600)"><i class="ti ti-x"></i> Reject</button>
+            </div>
+          </div>
+
+        </div><!-- /queue-customer -->
+
+      </div>
+    </div><!-- /view-approval -->
+
+    </main>
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<script>
+  function switchView(name) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('view-' + name).classList.add('active');
+    document.querySelector('[data-view="' + name + '"]').classList.add('active');
+    const titles = { overview: 'Document Hub', upload: 'Upload Document', browse: 'Browse & Detail', approval: 'Approval Queue' };
+    document.getElementById('topbar-title').textContent = titles[name] || 'Document Hub';
+  }
+
+  function toggleStep1() {
+    const body = document.getElementById('step1-body');
+    body.style.display = body.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function selectDocType(card, type) {
+    document.querySelectorAll('.doctype-select-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+  }
+
+  function toggleMapPanel() {
+    const p = document.getElementById('map-panel');
+    p.style.display = p.style.display === 'none' ? 'flex' : 'none';
+  }
+
+  function switchQueueTab(tab, name) {
+    document.querySelectorAll('.queue-sub-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('queue-internal').style.display  = name === 'internal' ? 'block' : 'none';
+    document.getElementById('queue-customer').style.display  = name === 'customer' ? 'block' : 'none';
+  }
+</script>
+</body>
+</html>

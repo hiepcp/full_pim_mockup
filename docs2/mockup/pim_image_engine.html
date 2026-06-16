@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIM Image Engine — Asset Processing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f3;
+    --bg-tertiary: #eeede9;
+    --text-primary: #1a1a18;
+    --text-secondary: #6b6b67;
+    --text-tertiary: #a0a09c;
+    --border-light: rgba(0,0,0,0.10);
+    --border-mid: rgba(0,0,0,0.18);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --blue-50: #E6F1FB;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --green-50: #EAF3DE;
+    --green-600: #3B6D11;
+    --amber-50: #FAEEDA;
+    --amber-600: #854F0B;
+    --amber-800: #633806;
+    --red-50: #FCEBEB;
+    --red-400: #D95B5B;
+    --red-600: #A32D2D;
+    --gray-100: #D3D1C7;
+    --gray-600: #5F5E5A;
+    --purple-50: #F0ECFB;
+    --purple-600: #5B35A5;
+    --sidebar-w: 200px;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    min-height: 100vh;
+  }
+
+  .shell { display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar {
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    background: var(--bg-primary);
+    border-right: 0.5px solid var(--border-light);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 10;
+  }
+  .logo { padding: 18px 16px 14px; border-bottom: 0.5px solid var(--border-light); }
+  .logo-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .logo-sub { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+  .nav { padding: 8px 0; }
+  .nav-section {
+    font-size: 10px; color: var(--text-tertiary); text-transform: uppercase;
+    letter-spacing: 0.6px; padding: 14px 14px 4px; font-weight: 500;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 14px; font-size: 13px; color: var(--text-secondary);
+    cursor: pointer; border-left: 2px solid transparent;
+    transition: background 0.12s; text-decoration: none;
+  }
+  .nav-item:hover { background: var(--bg-secondary); color: var(--text-primary); }
+  .nav-item.active { color: var(--blue-600); background: var(--blue-50); border-left-color: var(--blue-600); font-weight: 500; }
+  .nav-item i { font-size: 16px; }
+
+  /* Main */
+  .main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+
+  /* Topbar */
+  .topbar {
+    background: var(--bg-primary);
+    border-bottom: 0.5px solid var(--border-light);
+    padding: 10px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 5;
+  }
+  .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+  .breadcrumb strong { color: var(--text-primary); font-weight: 500; }
+  .breadcrumb i { font-size: 12px; }
+  .topbar-actions { display: flex; align-items: center; gap: 8px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 7px 13px; border-radius: var(--radius-md);
+    font-size: 12px; font-weight: 500; cursor: pointer;
+    border: 0.5px solid var(--border-mid);
+    background: var(--bg-primary); color: var(--text-primary);
+    font-family: inherit; transition: background 0.1s;
+  }
+  .btn:hover { background: var(--bg-secondary); }
+  .btn-primary { background: var(--blue-600); color: #fff; border-color: var(--blue-600); }
+  .btn-primary:hover { background: var(--blue-800); }
+  .btn i { font-size: 15px; }
+
+  /* Content */
+  .content { padding: 20px 24px 40px; display: flex; flex-direction: column; gap: 16px; }
+
+  /* Upload panel */
+  .upload-panel {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .upload-panel-header {
+    padding: 12px 16px;
+    border-bottom: 0.5px solid var(--border-light);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .upload-panel-title { font-size: 13px; font-weight: 500; color: var(--text-primary); display: flex; align-items: center; gap: 6px; }
+  .upload-panel-title i { font-size: 15px; color: var(--text-secondary); }
+
+  /* Entity type selector */
+  .entity-selector { padding: 14px 16px; border-bottom: 0.5px solid var(--border-light); display: flex; flex-direction: column; gap: 10px; }
+  .entity-selector-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.4px; }
+  .entity-type-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .entity-type-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 11px; border-radius: var(--radius-md);
+    font-size: 12px; font-weight: 500; cursor: pointer;
+    border: 1px solid var(--border-mid);
+    background: var(--bg-secondary); color: var(--text-secondary);
+    font-family: inherit; transition: all 0.1s;
+  }
+  .entity-type-btn i { font-size: 13px; }
+  .entity-type-btn.active-item { border-color: var(--blue-600); background: var(--blue-50); color: var(--blue-600); }
+  .entity-type-btn.active-range { border-color: #7B5EA7; background: var(--purple-50, #F0ECFB); color: #5B35A5; }
+  .entity-type-btn.active-mother { border-color: #3B6D11; background: var(--green-50); color: var(--green-600); }
+  .entity-type-btn.active-daughter { border-color: var(--amber-600); background: var(--amber-50); color: var(--amber-600); }
+  .entity-type-btn.active-so { border-color: var(--red-600); background: var(--red-50); color: var(--red-600); }
+  .entity-type-btn.active-material { border-color: var(--gray-600); background: var(--bg-secondary); color: var(--gray-600); }
+  .entity-type-btn.active-standalone { border-color: var(--text-tertiary); background: var(--bg-tertiary); color: var(--text-secondary); }
+
+  /* Entity path picker */
+  .entity-path-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .entity-path-select {
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 0.5px solid var(--border-mid); border-radius: var(--radius-md);
+    padding: 5px 10px; font-size: 12px; color: var(--text-primary);
+    background: var(--bg-primary); cursor: pointer; font-family: inherit;
+    white-space: nowrap;
+  }
+  .entity-path-select i { font-size: 12px; color: var(--text-secondary); }
+  .entity-path-select.filled { border-color: var(--blue-400); background: var(--blue-50); color: var(--blue-600); }
+  .entity-path-select.filled i { color: var(--blue-600); }
+  .entity-path-arrow { font-size: 12px; color: var(--text-tertiary); }
+  .entity-path-select.dimmed { opacity: 0.4; pointer-events: none; }
+
+  /* Entity context chip */
+  .entity-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 9px; border-radius: 99px; font-size: 11px; font-weight: 500;
+  }
+  .entity-chip i { font-size: 12px; }
+  .chip-item { background: var(--blue-50); color: var(--blue-600); border: 0.5px solid #B5D4F4; }
+  .chip-range { background: #F0ECFB; color: #5B35A5; border: 0.5px solid #C4B5F4; }
+  .chip-mother { background: var(--green-50); color: var(--green-600); border: 0.5px solid #B5D4A4; }
+  .chip-daughter { background: var(--amber-50); color: var(--amber-600); border: 0.5px solid #EFC96B; }
+  .chip-so { background: var(--red-50); color: var(--red-600); border: 0.5px solid #F1B0B0; }
+  .chip-material { background: var(--bg-secondary); color: var(--gray-600); border: 0.5px solid var(--gray-100); }
+  .chip-standalone { background: var(--bg-tertiary); color: var(--text-secondary); border: 0.5px solid var(--border-mid); }
+
+  /* Drop zone (inside panel) */
+  .drop-zone {
+    margin: 14px 16px;
+    border: 1.5px dashed var(--border-mid);
+    border-radius: var(--radius-md);
+    padding: 22px 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px; cursor: pointer; transition: border-color 0.15s, background 0.15s;
+    text-align: center;
+  }
+  .drop-zone:hover { border-color: var(--blue-400); background: var(--blue-50); }
+  .drop-zone i { font-size: 30px; color: var(--blue-400); }
+  .drop-zone-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+  .drop-zone-sub { font-size: 11px; color: var(--text-secondary); }
+  .upload-rules { display: flex; gap: 14px; margin-top: 4px; flex-wrap: wrap; justify-content: center; }
+  .upload-rule { font-size: 10px; color: var(--text-tertiary); display: flex; align-items: center; gap: 3px; }
+  .upload-rule i { font-size: 11px; }
+
+  /* Linked entity row (in detail panel) */
+  .linked-entity-row {
+    padding: 10px 16px; border-bottom: 0.5px solid var(--border-light);
+    display: flex; align-items: center; gap: 8px; background: var(--bg-secondary);
+  }
+  .linked-entity-label { font-size: 10px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.4px; white-space: nowrap; }
+  .linked-entity-path { display: flex; align-items: center; gap: 5px; flex: 1; flex-wrap: wrap; }
+  .linked-entity-path .sep { font-size: 11px; color: var(--text-tertiary); }
+  .linked-entity-change { font-size: 11px; color: var(--blue-600); cursor: pointer; white-space: nowrap; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 0; border-bottom: 0.5px solid var(--border-light); background: var(--bg-primary); border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+  .tab {
+    padding: 10px 16px; font-size: 13px; color: var(--text-secondary);
+    cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -0.5px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tab.active { color: var(--blue-600); border-bottom-color: var(--blue-600); font-weight: 500; }
+  .tab i { font-size: 14px; }
+  .tab-count { font-size: 10px; background: var(--bg-tertiary); color: var(--text-secondary); padding: 1px 6px; border-radius: 99px; }
+  .tab.active .tab-count { background: var(--blue-50); color: var(--blue-600); }
+
+  /* Two-column layout */
+  .two-col { display: grid; grid-template-columns: 320px 1fr; gap: 16px; }
+
+  /* Panel */
+  .panel {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+  }
+  .panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px; border-bottom: 0.5px solid var(--border-light);
+  }
+  .panel-title { font-size: 13px; font-weight: 500; color: var(--text-primary); display: flex; align-items: center; gap: 6px; }
+  .panel-title i { font-size: 15px; color: var(--text-secondary); }
+  .panel-action { font-size: 11px; color: var(--blue-600); cursor: pointer; }
+  .panel-body { padding: 12px 16px; }
+
+  /* Asset queue list */
+  .asset-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px; border-bottom: 0.5px solid var(--border-light);
+    cursor: pointer; transition: background 0.1s;
+  }
+  .asset-row:last-child { border-bottom: none; }
+  .asset-row:hover { background: var(--bg-secondary); }
+  .asset-row.selected { background: var(--blue-50); }
+  .asset-icon {
+    width: 40px; height: 40px; border-radius: var(--radius-md);
+    background: var(--bg-secondary); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; border: 0.5px solid var(--border-light);
+  }
+  .asset-icon i { font-size: 18px; color: var(--text-secondary); }
+  .asset-icon.ready { background: var(--blue-50); border-color: #B5D4F4; }
+  .asset-icon.ready i { color: var(--blue-600); }
+  .asset-icon.processing { background: var(--amber-50); border-color: #EFC96B; }
+  .asset-icon.processing i { color: var(--amber-600); }
+  .asset-icon.failed { background: var(--red-50); border-color: #F1B0B0; }
+  .asset-icon.failed i { color: var(--red-600); }
+  .asset-info { flex: 1; min-width: 0; }
+  .asset-name { font-size: 12px; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .asset-meta-row { font-size: 10px; color: var(--text-secondary); margin-top: 2px; display: flex; gap: 6px; }
+
+  /* Badge */
+  .badge {
+    font-size: 10px; padding: 2px 8px; border-radius: 99px;
+    font-weight: 500; white-space: nowrap; display: inline-flex; align-items: center; gap: 3px;
+  }
+  .badge i { font-size: 11px; }
+  .badge-blue { background: var(--blue-50); color: var(--blue-600); }
+  .badge-green { background: var(--green-50); color: var(--green-600); }
+  .badge-amber { background: var(--amber-50); color: var(--amber-600); }
+  .badge-red { background: var(--red-50); color: var(--red-600); }
+  .badge-gray { background: var(--bg-secondary); color: var(--gray-600); }
+
+  /* Progress bar */
+  .progress-wrap { margin-top: 5px; }
+  .progress-bar { height: 3px; background: var(--bg-tertiary); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 99px; }
+  .progress-fill.amber { background: var(--amber-600); width: 60%; }
+  .progress-fill.blue { background: var(--blue-400); width: 100%; }
+
+  /* Asset detail panel */
+  .detail-panel {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    display: flex; flex-direction: column;
+  }
+
+  /* Detail hero */
+  .detail-hero {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: 20px;
+    display: flex; align-items: center; gap: 16px;
+    border-bottom: 0.5px solid var(--border-light);
+  }
+  .detail-img {
+    width: 100px; height: 100px; border-radius: var(--radius-md);
+    background: var(--blue-50); display: flex; align-items: center; justify-content: center;
+    border: 0.5px solid #B5D4F4; flex-shrink: 0;
+  }
+  .detail-img i { font-size: 44px; color: var(--blue-400); }
+  .detail-info { flex: 1; }
+  .detail-name { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+  .detail-sub { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+  .detail-badges { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+
+  /* Metadata grid */
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .meta-item { padding: 10px 16px; border-bottom: 0.5px solid var(--border-light); border-right: 0.5px solid var(--border-light); }
+  .meta-item:nth-child(even) { border-right: none; }
+  .meta-item:nth-last-child(-n+2) { border-bottom: none; }
+  .meta-key { font-size: 10px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 3px; }
+  .meta-val { font-size: 12px; font-weight: 500; color: var(--text-primary); }
+
+  /* CDN URL row */
+  .cdn-row {
+    padding: 12px 16px;
+    border-bottom: 0.5px solid var(--border-light);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cdn-label { font-size: 11px; color: var(--text-secondary); white-space: nowrap; }
+  .cdn-url {
+    flex: 1; font-size: 11px; color: var(--blue-600);
+    font-family: monospace; background: var(--blue-50);
+    padding: 4px 8px; border-radius: var(--radius-md);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .cdn-copy { font-size: 11px; color: var(--text-secondary); cursor: pointer; flex-shrink: 0; }
+  .cdn-copy:hover { color: var(--blue-600); }
+
+  /* Variant grid */
+  .variant-section { padding: 16px; }
+  .variant-section-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .variant-section-title i { font-size: 14px; }
+
+  .variant-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .variant-card {
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-md);
+    overflow: hidden; cursor: pointer;
+    transition: border-color 0.12s, box-shadow 0.12s;
+  }
+  .variant-card:hover { border-color: var(--blue-400); box-shadow: 0 1px 6px rgba(55,138,221,0.15); }
+  .variant-card.active { border-color: var(--blue-600); }
+  .variant-thumb {
+    height: 68px; background: var(--bg-secondary);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .variant-thumb i { font-size: 24px; color: var(--text-tertiary); }
+  .variant-thumb.ready { background: var(--blue-50); }
+  .variant-thumb.ready i { color: var(--blue-400); }
+  .variant-thumb.processing { background: var(--amber-50); }
+  .variant-thumb.processing i { color: var(--amber-600); }
+  .variant-thumb.failed { background: var(--red-50); }
+  .variant-thumb.failed i { color: var(--red-400); }
+  .variant-overlay {
+    position: absolute; top: 4px; right: 4px;
+  }
+  .variant-footer { padding: 6px 8px; background: var(--bg-primary); border-top: 0.5px solid var(--border-light); }
+  .variant-name { font-size: 10px; font-weight: 600; color: var(--text-primary); }
+  .variant-dim { font-size: 9px; color: var(--text-tertiary); margin-top: 1px; }
+  .variant-actions { display: flex; gap: 4px; margin-top: 6px; }
+  .variant-btn {
+    flex: 1; font-size: 9px; padding: 3px 0; border-radius: 4px;
+    border: 0.5px solid var(--border-light); background: var(--bg-secondary);
+    color: var(--text-secondary); cursor: pointer; font-family: inherit;
+    display: flex; align-items: center; justify-content: center; gap: 2px;
+  }
+  .variant-btn i { font-size: 10px; }
+  .variant-btn.primary { background: var(--blue-50); color: var(--blue-600); border-color: #B5D4F4; }
+  .variant-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Social variants row */
+  .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+
+  /* Processing log */
+  .log-area { padding: 12px 16px; background: #1a1a18; border-radius: 0 0 var(--radius-lg) var(--radius-lg); font-size: 11px; font-family: monospace; color: #a0a09c; line-height: 1.7; max-height: 130px; overflow-y: auto; }
+  .log-ok { color: #7EC87E; }
+  .log-warn { color: #EFC96B; }
+  .log-err { color: #F07070; }
+  .log-info { color: #70B8F0; }
+
+  /* Retry state */
+  .failed-bar { background: var(--red-50); border: 0.5px solid #F1B0B0; border-radius: var(--radius-md); padding: 10px 14px; display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--red-600); margin: 12px 16px 0; }
+  .failed-bar i { font-size: 16px; flex-shrink: 0; }
+  .failed-bar .spacer { flex: 1; }
+
+  /* Stat strip */
+  .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat-card { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
+  .stat-label i { font-size: 13px; }
+  .stat-value { font-size: 24px; font-weight: 600; color: var(--text-primary); }
+  .stat-sub { font-size: 11px; color: var(--text-secondary); margin-top: 3px; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-name">PIM Studio</div>
+      <div class="logo-sub">Product Info Management</div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">Catalogue</div>
+      <a class="nav-item" href="pim_product_dashboard.html"><i class="ti ti-box"></i> Products</a>
+      <a class="nav-item" href="pim_product_set.html"><i class="ti ti-components"></i> Product Sets</a>
+      <a class="nav-item" href="#"><i class="ti ti-color-swatch"></i> Materials</a>
+
+      <div class="nav-section">Assets</div>
+      <a class="nav-item active" href="pim_image_engine.html"><i class="ti ti-photo"></i> Image Engine</a>
+      <a class="nav-item" href="pim_asset_document_hub.html"><i class="ti ti-file-stack"></i> Document Hub</a>
+
+      <div class="nav-section">Publishing</div>
+      <a class="nav-item" href="pim_social_campaign.html"><i class="ti ti-speakerphone"></i> Social Campaign</a>
+      <a class="nav-item" href="#"><i class="ti ti-send"></i> Publish Flow</a>
+
+      <div class="nav-section">System</div>
+      <a class="nav-item" href="#"><i class="ti ti-refresh"></i> D365 Sync</a>
+      <a class="nav-item" href="pim_settings_connected_accounts.html"><i class="ti ti-settings"></i> Settings</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="breadcrumb">
+        <span>Asset Hub</span>
+        <i class="ti ti-chevron-right"></i>
+        <strong>Image Engine</strong>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn"><i class="ti ti-filter"></i> Filter</button>
+        <button class="btn btn-primary"><i class="ti ti-upload"></i> Upload Assets</button>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- Stats -->
+      <div class="stat-strip">
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-photo"></i> Total assets</div>
+          <div class="stat-value">1,284</div>
+          <div class="stat-sub">across all products</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-circle-check" style="color:var(--green-600)"></i> Ready</div>
+          <div class="stat-value" style="color:var(--green-600)">1,261</div>
+          <div class="stat-sub">all variants generated</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-loader" style="color:var(--amber-600)"></i> Processing</div>
+          <div class="stat-value" style="color:var(--amber-600)">18</div>
+          <div class="stat-sub">avg. 12s remaining</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-alert-circle" style="color:var(--red-600)"></i> Failed</div>
+          <div class="stat-value" style="color:var(--red-600)">5</div>
+          <div class="stat-sub">require attention</div>
+        </div>
+      </div>
+
+      <!-- Upload panel -->
+      <div class="upload-panel">
+        <div class="upload-panel-header">
+          <div class="upload-panel-title"><i class="ti ti-cloud-upload"></i> Upload asset</div>
+          <span style="font-size:11px; color:var(--text-tertiary)">Upload 1 lần → auto-generate đủ size/format trong &lt; 30s</span>
+        </div>
+
+        <!-- Step 1: Entity type -->
+        <div class="entity-selector">
+          <div class="entity-selector-label">① Gắn asset vào</div>
+          <div class="entity-type-row">
+            <button class="entity-type-btn active-item"><i class="ti ti-box"></i> Item</button>
+            <button class="entity-type-btn"><i class="ti ti-components"></i> Range</button>
+            <button class="entity-type-btn"><i class="ti ti-circle-dot"></i> Mother Variant</button>
+            <button class="entity-type-btn"><i class="ti ti-circle-dot"></i> Daughter Variant</button>
+            <button class="entity-type-btn"><i class="ti ti-point"></i> SO Variant</button>
+            <button class="entity-type-btn"><i class="ti ti-color-swatch"></i> Material</button>
+            <button class="entity-type-btn"><i class="ti ti-photo"></i> Non-product</button>
+          </div>
+
+          <!-- Step 2: Entity path selector — shown based on type chosen -->
+          <div class="entity-path-row">
+            <button class="entity-path-select filled"><i class="ti ti-components"></i> Greenwood <i class="ti ti-chevron-down"></i></button>
+            <span class="entity-path-arrow"><i class="ti ti-chevron-right"></i></span>
+            <button class="entity-path-select filled"><i class="ti ti-box"></i> 30317 — Lounge Chair <i class="ti ti-chevron-down"></i></button>
+            <!-- Variant selector only visible when type = variant -->
+            <span class="entity-path-arrow dimmed"><i class="ti ti-chevron-right"></i></span>
+            <button class="entity-path-select dimmed"><i class="ti ti-circle-dot"></i> Chọn variant… <i class="ti ti-chevron-down"></i></button>
+          </div>
+
+          <!-- Resolved context preview -->
+          <div style="display:flex; align-items:center; gap:8px; padding:8px 12px; background:var(--blue-50); border-radius:var(--radius-md); border:0.5px solid #B5D4F4;">
+            <i class="ti ti-circle-check" style="font-size:14px; color:var(--blue-600); flex-shrink:0"></i>
+            <span style="font-size:12px; color:var(--blue-800);">Asset sẽ được gắn vào</span>
+            <span class="entity-chip chip-range"><i class="ti ti-components"></i> Greenwood</span>
+            <span style="font-size:11px; color:var(--text-tertiary)">›</span>
+            <span class="entity-chip chip-item"><i class="ti ti-box"></i> Item 30317</span>
+            <span style="font-size:11px; color:var(--text-secondary); margin-left:4px;">Packshot / Lifestyle / Line Drawing / Swatch…</span>
+          </div>
+        </div>
+
+        <!-- Step 3: Drop zone -->
+        <div class="drop-zone">
+          <i class="ti ti-cloud-upload"></i>
+          <div class="drop-zone-title">Kéo thả file vào đây hoặc click để chọn</div>
+          <div class="drop-zone-sub">Hỗ trợ multi-file — tất cả file sẽ gắn vào entity đã chọn ở trên</div>
+          <div class="upload-rules">
+            <span class="upload-rule"><i class="ti ti-check"></i> JPG · PNG · WEBP · TIFF · PDF · BMP</span>
+            <span class="upload-rule"><i class="ti ti-check"></i> Max 500 MB / file</span>
+            <span class="upload-rule"><i class="ti ti-check"></i> Min 500 × 500 px</span>
+            <span class="upload-rule"><i class="ti ti-check"></i> MIME validation bắt buộc</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-col: Queue + Detail -->
+      <div class="two-col">
+
+        <!-- Left: Asset queue -->
+        <div>
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title"><i class="ti ti-list"></i> Processing queue</div>
+              <span class="panel-action">Auto-refresh</span>
+            </div>
+
+            <!-- Processing: Item asset -->
+            <div class="asset-row selected">
+              <div class="asset-icon processing"><i class="ti ti-loader"></i></div>
+              <div class="asset-info">
+                <div class="asset-name">30317_packshot_walnut.jpg</div>
+                <div class="asset-meta-row" style="gap:4px; flex-wrap:wrap;">
+                  <span class="entity-chip chip-item" style="font-size:9px; padding:1px 6px;"><i class="ti ti-box"></i> Item 30317</span>
+                  <span style="color:var(--text-tertiary)">·</span><span>4.2 MB</span><span>·</span><span>Packshot</span>
+                </div>
+                <div class="progress-wrap">
+                  <div class="progress-bar"><div class="progress-fill amber"></div></div>
+                </div>
+              </div>
+              <span class="badge badge-amber"><i class="ti ti-loader"></i> Processing</span>
+            </div>
+
+            <!-- Processing: SO Variant asset -->
+            <div class="asset-row">
+              <div class="asset-icon processing"><i class="ti ti-loader"></i></div>
+              <div class="asset-info">
+                <div class="asset-name">30317_lifestyle_green.jpg</div>
+                <div class="asset-meta-row" style="gap:4px; flex-wrap:wrap;">
+                  <span class="entity-chip chip-so" style="font-size:9px; padding:1px 6px;"><i class="ti ti-point"></i> SO 30317-042</span>
+                  <span style="color:var(--text-tertiary)">·</span><span>6.8 MB</span><span>·</span><span>Lifestyle</span>
+                </div>
+                <div class="progress-wrap">
+                  <div class="progress-bar"><div class="progress-fill amber" style="width:30%"></div></div>
+                </div>
+              </div>
+              <span class="badge badge-amber"><i class="ti ti-loader"></i> Processing</span>
+            </div>
+
+            <!-- Failed: Item asset -->
+            <div class="asset-row">
+              <div class="asset-icon failed"><i class="ti ti-alert-circle"></i></div>
+              <div class="asset-info">
+                <div class="asset-name">alaska_linedrawing_v3.tiff</div>
+                <div class="asset-meta-row" style="gap:4px; flex-wrap:wrap;">
+                  <span class="entity-chip chip-item" style="font-size:9px; padding:1px 6px;"><i class="ti ti-box"></i> Item 29104</span>
+                  <span style="color:var(--text-tertiary)">·</span><span>38 MB</span><span>·</span><span>Line Drawing</span>
+                </div>
+              </div>
+              <span class="badge badge-red"><i class="ti ti-x"></i> Failed</span>
+            </div>
+
+            <!-- Ready: Item asset -->
+            <div class="asset-row">
+              <div class="asset-icon ready"><i class="ti ti-photo"></i></div>
+              <div class="asset-info">
+                <div class="asset-name">greenwood_packshot_hero.jpg</div>
+                <div class="asset-meta-row" style="gap:4px; flex-wrap:wrap;">
+                  <span class="entity-chip chip-item" style="font-size:9px; padding:1px 6px;"><i class="ti ti-box"></i> Item 30317</span>
+                  <span style="color:var(--text-tertiary)">·</span><span>3.1 MB</span><span>·</span><span>Packshot</span>
+                </div>
+              </div>
+              <span class="badge badge-green"><i class="ti ti-check"></i> Ready</span>
+            </div>
+
+            <!-- Ready: Material swatch -->
+            <div class="asset-row">
+              <div class="asset-icon ready"><i class="ti ti-photo"></i></div>
+              <div class="asset-info">
+                <div class="asset-name">greenwood_swatch_oak.png</div>
+                <div class="asset-meta-row" style="gap:4px; flex-wrap:wrap;">
+                  <span class="entity-chip chip-material" style="font-size:9px; padding:1px 6px;"><i class="ti ti-color-swatch"></i> WOODWO-00003</span>
+                  <span style="color:var(--text-tertiary)">·</span><span>1.4 MB</span><span>·</span><span>Swatch</span>
+                </div>
+              </div>
+              <span class="badge badge-green"><i class="ti ti-check"></i> Ready</span>
+            </div>
+
+            <!-- Ready: Range asset -->
+            <div class="asset-row">
+              <div class="asset-icon ready"><i class="ti ti-photo"></i></div>
+              <div class="asset-info">
+                <div class="asset-name">calia_rendering_bedroom.jpg</div>
+                <div class="asset-meta-row" style="gap:4px; flex-wrap:wrap;">
+                  <span class="entity-chip chip-range" style="font-size:9px; padding:1px 6px;"><i class="ti ti-components"></i> Calia</span>
+                  <span style="color:var(--text-tertiary)">·</span><span>8.7 MB</span><span>·</span><span>Lifestyle</span>
+                </div>
+              </div>
+              <span class="badge badge-green"><i class="ti ti-check"></i> Ready</span>
+            </div>
+
+            <!-- Ready: Item PDF line drawing -->
+            <div class="asset-row">
+              <div class="asset-icon ready"><i class="ti ti-file-type-pdf"></i></div>
+              <div class="asset-info">
+                <div class="asset-name">30317_linedrawing_v4.pdf</div>
+                <div class="asset-meta-row" style="gap:4px; flex-wrap:wrap;">
+                  <span class="entity-chip chip-item" style="font-size:9px; padding:1px 6px;"><i class="ti ti-box"></i> Item 30317</span>
+                  <span style="color:var(--text-tertiary)">·</span><span>2.3 MB</span><span>·</span><span>Line Drawing · PDF → 3p</span>
+                </div>
+              </div>
+              <span class="badge badge-green"><i class="ti ti-check"></i> Ready</span>
+            </div>
+
+            <!-- Pending: Non-product (standalone) -->
+            <div class="asset-row">
+              <div class="asset-icon" style="background:var(--bg-secondary)"><i class="ti ti-clock" style="color:var(--text-tertiary)"></i></div>
+              <div class="asset-info">
+                <div class="asset-name">alaska_portrait_campaign.jpg</div>
+                <div class="asset-meta-row" style="gap:4px; flex-wrap:wrap;">
+                  <span class="entity-chip chip-standalone" style="font-size:9px; padding:1px 6px;"><i class="ti ti-photo"></i> Non-product</span>
+                  <span style="color:var(--text-tertiary)">·</span><span>5.5 MB</span><span>·</span><span>Campaign portrait</span>
+                </div>
+              </div>
+              <span class="badge badge-gray">Pending</span>
+            </div>
+
+          </div>
+
+          <!-- Pipeline legend -->
+          <div class="panel" style="margin-top:12px">
+            <div class="panel-header">
+              <div class="panel-title"><i class="ti ti-route"></i> Processing pipeline</div>
+            </div>
+            <div class="panel-body">
+              <div style="display:flex; flex-direction:column; gap:0;">
+                <div style="display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:0.5px solid var(--border-light); font-size:12px;">
+                  <i class="ti ti-upload" style="font-size:14px; color:var(--blue-400); width:18px"></i>
+                  <span style="flex:1; color:var(--text-primary)">Validate (format · size · MIME · corrupt)</span>
+                  <span class="badge badge-green"><i class="ti ti-check"></i> Done</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:0.5px solid var(--border-light); font-size:12px;">
+                  <i class="ti ti-database" style="font-size:14px; color:var(--blue-400); width:18px"></i>
+                  <span style="flex:1; color:var(--text-primary)">Store original → Azure Blob /original</span>
+                  <span class="badge badge-green"><i class="ti ti-check"></i> Done</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:0.5px solid var(--border-light); font-size:12px;">
+                  <i class="ti ti-scan" style="font-size:14px; color:var(--blue-400); width:18px"></i>
+                  <span style="flex:1; color:var(--text-primary)">Extract metadata (dimensions · DPI · color space)</span>
+                  <span class="badge badge-green"><i class="ti ti-check"></i> Done</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:0.5px solid var(--border-light); font-size:12px;">
+                  <i class="ti ti-photo" style="font-size:14px; color:var(--amber-600); width:18px"></i>
+                  <span style="flex:1; color:var(--text-primary)">Generate web + thumbnail + preview + print</span>
+                  <span class="badge badge-amber"><i class="ti ti-loader"></i> Running</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:0.5px solid var(--border-light); font-size:12px;">
+                  <i class="ti ti-brand-instagram" style="font-size:14px; color:var(--text-tertiary); width:18px"></i>
+                  <span style="flex:1; color:var(--text-tertiary)">Generate social variants (FB · IG sq · IG pt)</span>
+                  <span class="badge badge-gray">Waiting</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; padding:7px 0; font-size:12px;">
+                  <i class="ti ti-world" style="font-size:14px; color:var(--text-tertiary); width:18px"></i>
+                  <span style="flex:1; color:var(--text-tertiary)">CDN invalidate + update Asset status = ready</span>
+                  <span class="badge badge-gray">Waiting</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Asset detail -->
+        <div class="detail-panel">
+
+          <!-- Hero -->
+          <div class="detail-hero">
+            <div class="detail-img"><i class="ti ti-photo"></i></div>
+            <div class="detail-info">
+              <div class="detail-name">30317_packshot_walnut.jpg</div>
+              <div class="detail-sub">Item 30317 — Greenwood Lounge Chair &nbsp;·&nbsp; Packshot</div>
+              <div class="detail-badges">
+                <span class="badge badge-amber"><i class="ti ti-loader"></i> Processing</span>
+                <span class="badge badge-blue">Packshot</span>
+                <span class="badge badge-gray">v2</span>
+                <span class="badge badge-gray">Public</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Linked entity breadcrumb -->
+          <div class="linked-entity-row">
+            <span class="linked-entity-label">Gắn vào</span>
+            <div class="linked-entity-path">
+              <span class="entity-chip chip-range"><i class="ti ti-components"></i> Greenwood</span>
+              <span class="sep"><i class="ti ti-chevron-right" style="font-size:10px"></i></span>
+              <span class="entity-chip chip-item"><i class="ti ti-box"></i> Item 30317</span>
+              <span style="font-size:11px; color:var(--text-secondary); margin-left:4px;">Packshot</span>
+            </div>
+            <span class="linked-entity-change"><i class="ti ti-edit" style="font-size:12px"></i> Thay đổi</span>
+          </div>
+
+          <!-- Metadata grid -->
+          <div class="meta-grid">
+            <div class="meta-item">
+              <div class="meta-key">Original size</div>
+              <div class="meta-val">5 400 × 4 050 px</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-key">File size</div>
+              <div class="meta-val">4.2 MB</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-key">Color space</div>
+              <div class="meta-val">sRGB</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-key">DPI</div>
+              <div class="meta-val">300 DPI</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-key">Format</div>
+              <div class="meta-val">JPEG</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-key">Uploaded</div>
+              <div class="meta-val">Today, 09:14</div>
+            </div>
+          </div>
+
+          <!-- CDN dynamic alias -->
+          <div class="cdn-row">
+            <span class="cdn-label">CDN alias</span>
+            <span class="cdn-url">cdn.pim.io/asset/a7f9c2/web/latest-approved</span>
+            <span class="cdn-copy"><i class="ti ti-copy"></i></span>
+          </div>
+
+          <!-- Variants -->
+          <div class="variant-section">
+
+            <!-- Standard variants -->
+            <div class="variant-section-title"><i class="ti ti-layout-grid"></i> Generated variants</div>
+            <div class="variant-grid">
+
+              <div class="variant-card active">
+                <div class="variant-thumb ready">
+                  <i class="ti ti-photo"></i>
+                  <div class="variant-overlay"><span class="badge badge-green" style="font-size:9px"><i class="ti ti-check"></i></span></div>
+                </div>
+                <div class="variant-footer">
+                  <div class="variant-name">original</div>
+                  <div class="variant-dim">5 400 × 4 050 · JPEG</div>
+                  <div class="variant-actions">
+                    <button class="variant-btn primary"><i class="ti ti-eye"></i> View</button>
+                    <button class="variant-btn"><i class="ti ti-download"></i> DL</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="variant-card">
+                <div class="variant-thumb ready">
+                  <i class="ti ti-photo"></i>
+                  <div class="variant-overlay"><span class="badge badge-green" style="font-size:9px"><i class="ti ti-check"></i></span></div>
+                </div>
+                <div class="variant-footer">
+                  <div class="variant-name">thumbnail</div>
+                  <div class="variant-dim">300 × 300 · WEBP</div>
+                  <div class="variant-actions">
+                    <button class="variant-btn primary"><i class="ti ti-eye"></i> View</button>
+                    <button class="variant-btn"><i class="ti ti-download"></i> DL</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="variant-card">
+                <div class="variant-thumb ready">
+                  <i class="ti ti-photo"></i>
+                  <div class="variant-overlay"><span class="badge badge-green" style="font-size:9px"><i class="ti ti-check"></i></span></div>
+                </div>
+                <div class="variant-footer">
+                  <div class="variant-name">preview</div>
+                  <div class="variant-dim">max 2 000 px · WEBP</div>
+                  <div class="variant-actions">
+                    <button class="variant-btn primary"><i class="ti ti-eye"></i> View</button>
+                    <button class="variant-btn"><i class="ti ti-download"></i> DL</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="variant-card">
+                <div class="variant-thumb processing">
+                  <i class="ti ti-loader"></i>
+                </div>
+                <div class="variant-footer">
+                  <div class="variant-name">web</div>
+                  <div class="variant-dim">max 1 200 px · WEBP</div>
+                  <div class="variant-actions">
+                    <button class="variant-btn" disabled><i class="ti ti-eye"></i> View</button>
+                    <button class="variant-btn" disabled><i class="ti ti-download"></i> DL</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="variant-card" style="grid-column: span 4">
+                <div style="display:flex">
+                  <div style="flex:1; padding:10px 14px; border-right:0.5px solid var(--border-light);">
+                    <div class="variant-name" style="font-size:11px">print</div>
+                    <div class="variant-dim" style="font-size:10px; margin-top:2px">300 DPI · TIFF — for iPaper / catalogue</div>
+                  </div>
+                  <div style="display:flex; align-items:center; padding:0 14px;">
+                    <span class="badge badge-amber"><i class="ti ti-loader"></i> Processing</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Social variants -->
+            <div class="variant-section-title" style="margin-top:16px"><i class="ti ti-brand-instagram"></i> Social variants</div>
+            <div class="social-grid">
+
+              <div class="variant-card">
+                <div class="variant-thumb processing" style="height:54px; aspect-ratio: 1200/630;">
+                  <i class="ti ti-brand-facebook" style="font-size:22px"></i>
+                </div>
+                <div class="variant-footer">
+                  <div class="variant-name">facebook_feed</div>
+                  <div class="variant-dim">1 200 × 630 · JPG</div>
+                  <div class="variant-actions">
+                    <button class="variant-btn" disabled><i class="ti ti-eye"></i> Preview</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="variant-card">
+                <div class="variant-thumb processing" style="height:80px; aspect-ratio:1;">
+                  <i class="ti ti-brand-instagram" style="font-size:22px"></i>
+                </div>
+                <div class="variant-footer">
+                  <div class="variant-name">instagram_square</div>
+                  <div class="variant-dim">1 080 × 1 080 · JPG</div>
+                  <div class="variant-actions">
+                    <button class="variant-btn" disabled><i class="ti ti-eye"></i> Preview</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="variant-card">
+                <div class="variant-thumb processing" style="height:80px;">
+                  <i class="ti ti-brand-instagram" style="font-size:22px"></i>
+                </div>
+                <div class="variant-footer">
+                  <div class="variant-name">instagram_portrait</div>
+                  <div class="variant-dim">1 080 × 1 350 · JPG</div>
+                  <div class="variant-actions">
+                    <button class="variant-btn" disabled><i class="ti ti-eye"></i> Preview</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Note -->
+            <div style="margin-top:10px; font-size:10px; color:var(--text-tertiary); display:flex; align-items:center; gap:5px;">
+              <i class="ti ti-info-circle"></i>
+              Center-crop thông minh · Watermark tắt mặc định cho social variants · Original không bao giờ bị sửa
+            </div>
+
+          </div>
+
+          <!-- Processing log -->
+          <div class="log-area">
+            <span class="log-info">[09:14:02]</span> <span class="log-ok">✓ Upload received — 4.2 MB · JPEG · 5400×4050px</span><br>
+            <span class="log-info">[09:14:02]</span> <span class="log-ok">✓ MIME validated: image/jpeg</span><br>
+            <span class="log-info">[09:14:03]</span> <span class="log-ok">✓ Stored original → azure://product-assets-public/assets/a7f9c2/original/</span><br>
+            <span class="log-info">[09:14:03]</span> <span class="log-ok">✓ ImageProcessingJob created — id: job_8c4d1e</span><br>
+            <span class="log-info">[09:14:04]</span> <span class="log-ok">✓ Metadata extracted: 5400×4050 · 300dpi · sRGB</span><br>
+            <span class="log-info">[09:14:05]</span> <span class="log-ok">✓ thumbnail generated → /thumbnail/thumb.webp (32 KB)</span><br>
+            <span class="log-info">[09:14:06]</span> <span class="log-ok">✓ preview generated → /preview/preview.webp (310 KB)</span><br>
+            <span class="log-info">[09:14:08]</span> <span class="log-warn">⟳ web variant — processing…</span><br>
+            <span class="log-info">[09:14:08]</span> <span class="log-warn">⟳ print variant — processing…</span><br>
+            <span class="log-info">[09:14:09]</span> <span class="log-warn">⟳ social variants — queued behind web/print…</span>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+</body>
+</html>

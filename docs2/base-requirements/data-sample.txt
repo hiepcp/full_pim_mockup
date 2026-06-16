@@ -1,0 +1,2849 @@
+đây là item 30317 của Range Alaska
+productVariantType: Master -> Mother, Child -> Daughter, SO Variant -> Variant
+[
+  {
+    "distinctProductVariant": 5637476083,
+    "productCode": "30317",
+    "configId": "001",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, White Oil. Seat and Back Charcoal Wool Andorra 017",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-001"
+  },
+  {
+    "distinctProductVariant": 5637518076,
+    "productCode": "30317",
+    "configId": "002",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, White Oil. Seat and Back Black Artificial Leather Fenice 901 FR",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-002"
+  },
+  {
+    "distinctProductVariant": 5637518077,
+    "productCode": "30317",
+    "configId": "003",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, White Oil. Seat and Back Elephant Grey Fabric Fame 150 FR",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-003"
+  },
+  {
+    "distinctProductVariant": 5637556332,
+    "productCode": "30317",
+    "configId": "004",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, White Oil. Seat and Back Camel Leather 2342",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-004"
+  },
+  {
+    "distinctProductVariant": 5637556333,
+    "productCode": "30317",
+    "configId": "005",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, White Oil. Seat and Back Kit Fabric Diego 003",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-005"
+  },
+  {
+    "distinctProductVariant": 5637556334,
+    "productCode": "30317",
+    "configId": "006",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, White Oil. Seat and Back Black Leather Bali 7004",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-006"
+  },
+  {
+    "distinctProductVariant": 5637608828,
+    "productCode": "30317",
+    "configId": "007",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Walnut, Lacquer. Seat and Back Antrazit Fabric  Danny A 017",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-007"
+  },
+  {
+    "distinctProductVariant": 5637608829,
+    "productCode": "30317",
+    "configId": "008",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, Bianco Lacquer. Seat and Back Black Leather Bali 7004",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-008"
+  },
+  {
+    "distinctProductVariant": 5637995078,
+    "productCode": "30317",
+    "configId": "009",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Walnut, Lacquer. Seat and Back Black Leather Maldonado 6747",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-009"
+  },
+  {
+    "distinctProductVariant": 5638020581,
+    "productCode": "30317",
+    "configId": "010",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, Bianco Oil. Seat and Back Black Leather Maldonado 6747",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-010"
+  },
+  {
+    "distinctProductVariant": 5638020582,
+    "productCode": "30317",
+    "configId": "011",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Walnut, Oil. Seat and Back Black Leather Maldonado 6747",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-011"
+  },
+  {
+    "distinctProductVariant": 5638020583,
+    "productCode": "30317",
+    "configId": "012",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, Bianco Oil. Seat and Back Cognac Leather Bali 1343",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-012"
+  },
+  {
+    "distinctProductVariant": 5638020584,
+    "productCode": "30317",
+    "configId": "013",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, Bianco Oil. Seat and Back Kit Fabric Diego 003",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-013"
+  },
+  {
+    "distinctProductVariant": 5638221583,
+    "productCode": "30317",
+    "configId": "014",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, Bianco Lacquer. Seat and Back Elephant Grey Fabric Cute 021",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-014"
+  },
+  {
+    "distinctProductVariant": 5638221590,
+    "productCode": "30317",
+    "configId": "015",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Oil, Leather Corda Aline K TT 1318, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-015"
+  },
+  {
+    "distinctProductVariant": 5638221609,
+    "productCode": "30317",
+    "configId": "016",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, Bianco Oil. Seat and Back Off White Fabric Boucle 001",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-016"
+  },
+  {
+    "distinctProductVariant": 5638335597,
+    "productCode": "30317",
+    "configId": "017",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Walnut Lacquer. Seat and Back Black Artifical Leather Fenice 901",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-017"
+  },
+  {
+    "distinctProductVariant": 5638387338,
+    "productCode": "30317",
+    "configId": "018",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Walnut, Lacquer. Seat and Back Camel Leather 2342",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-018"
+  },
+  {
+    "distinctProductVariant": 5638387339,
+    "productCode": "30317",
+    "configId": "019",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Walnut, Lacquer. Seat and Back Black Leather Bali 7004",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-019"
+  },
+  {
+    "distinctProductVariant": 5638533644,
+    "productCode": "30317",
+    "configId": "020",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Walnut, Lacquer. Seat and Back Kit Fabric Diego 003",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-020"
+  },
+  {
+    "distinctProductVariant": 5638571841,
+    "productCode": "30317",
+    "configId": "021",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Leather Black Maldonado 6747, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-021"
+  },
+  {
+    "distinctProductVariant": 5638571842,
+    "productCode": "30317",
+    "configId": "022",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Oil, Leather Black Maldonado 6747, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-022"
+  },
+  {
+    "distinctProductVariant": 5638571843,
+    "productCode": "30317",
+    "configId": "023",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Leather Cognac Bali 1343, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-023"
+  },
+  {
+    "distinctProductVariant": 5638571844,
+    "productCode": "30317",
+    "configId": "024",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Fabric Kit Diego 003, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-024"
+  },
+  {
+    "distinctProductVariant": 5638571845,
+    "productCode": "30317",
+    "configId": "025",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Fabric Off White Boucle 001, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-025"
+  },
+  {
+    "distinctProductVariant": 5638650587,
+    "productCode": "30317",
+    "configId": "026",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Smoked Oil, Artificial Leather Black Fenice 901, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-026"
+  },
+  {
+    "distinctProductVariant": 5638650588,
+    "productCode": "30317",
+    "configId": "027",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Artificial Leather Cognac Fenice 512, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-027"
+  },
+  {
+    "distinctProductVariant": 5638717343,
+    "productCode": "30317",
+    "configId": "028",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, Black Lacquer. Seat and Back Cognac Leather Bali 1343",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-028"
+  },
+  {
+    "distinctProductVariant": 5638814081,
+    "productCode": "30317",
+    "configId": "029",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Walnut, Lacquer. Seat and Back Antrazit Fabric Danny A 017",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-029"
+  },
+  {
+    "distinctProductVariant": 5638904088,
+    "productCode": "30317",
+    "configId": "030",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Soap Lacquer, Leather Black Maldonado 6747, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-030"
+  },
+  {
+    "distinctProductVariant": 5639085078,
+    "productCode": "30317",
+    "configId": "031",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Lacquer, Leather Black Bali 7004, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-031"
+  },
+  {
+    "distinctProductVariant": 5639139828,
+    "productCode": "30317",
+    "configId": "032",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Leather Almond Eisenhower 12254, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-032"
+  },
+  {
+    "distinctProductVariant": 5639249338,
+    "productCode": "30317",
+    "configId": "033",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Fabric Kit Diego 003, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-033"
+  },
+  {
+    "distinctProductVariant": 5639265825,
+    "productCode": "30317",
+    "configId": "034",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Black Lacquer, Leather Black Maldonado 6747, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-034"
+  },
+  {
+    "distinctProductVariant": 5639265826,
+    "productCode": "30317",
+    "configId": "035",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Fabric Olive Moss 008, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-035"
+  },
+  {
+    "distinctProductVariant": 5639268825,
+    "productCode": "30317",
+    "configId": "036",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Leather Green Colmar 15035, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-036"
+  },
+  {
+    "distinctProductVariant": 5639282325,
+    "productCode": "30317",
+    "configId": "037",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Lacquer, Fabric Sand Cute 26, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-037"
+  },
+  {
+    "distinctProductVariant": 5639282326,
+    "productCode": "30317",
+    "configId": "038",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Lacquer, Leather Camel 2342, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-038"
+  },
+  {
+    "distinctProductVariant": 5639309341,
+    "productCode": "30317",
+    "configId": "039",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Oil, Leather Cognac Bali 1343, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-039"
+  },
+  {
+    "distinctProductVariant": 5639309342,
+    "productCode": "30317",
+    "configId": "040",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Oil, Leather Green Colmar 15035, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-040"
+  },
+  {
+    "distinctProductVariant": 5639310109,
+    "productCode": "30317",
+    "configId": "041",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Error Created",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-041"
+  },
+  {
+    "distinctProductVariant": 5639388093,
+    "productCode": "30317",
+    "configId": "042",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Lacquer, Leather Cognac Bali 1343, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-042"
+  },
+  {
+    "distinctProductVariant": 5639388094,
+    "productCode": "30317",
+    "configId": "043",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Soap Lacquer, Leather Antique Brown V107, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid and Veneered",
+    "productVariant": "30317-043"
+  },
+  {
+    "distinctProductVariant": 5639388095,
+    "productCode": "30317",
+    "configId": "044",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Lacquer, Fabric Light Brown Cute 41, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-044"
+  },
+  {
+    "distinctProductVariant": 5639388096,
+    "productCode": "30317",
+    "configId": "045",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Soap Lacquer, Fabric Sand Cute 26, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-045"
+  },
+  {
+    "distinctProductVariant": 5639439827,
+    "productCode": "30317",
+    "configId": "046",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Walnut, Oil. Seat and Back Antique Brown Leather V107",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-046"
+  },
+  {
+    "distinctProductVariant": 5639439828,
+    "productCode": "30317",
+    "configId": "047",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Oil, Fabric Olive Moss 008, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-047"
+  },
+  {
+    "distinctProductVariant": 5639476577,
+    "productCode": "30317",
+    "configId": "048",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, Bianco Oil. Seat and Back Antique Brown Leather V107",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-048"
+  },
+  {
+    "distinctProductVariant": 5639476579,
+    "productCode": "30317",
+    "configId": "049",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Oil, Leather Chocolate Brown Colmar 13967, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-049"
+  },
+  {
+    "distinctProductVariant": 5639476583,
+    "productCode": "30317",
+    "configId": "050",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Leather Chocolate Brown Colmar 13967, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-050"
+  },
+  {
+    "distinctProductVariant": 5639485739,
+    "productCode": "30317",
+    "configId": "965",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Child",
+    "productDescription": "Walnut, Lacquer, Leather Gr.2, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-965"
+  },
+  {
+    "distinctProductVariant": 5639485740,
+    "productCode": "30317",
+    "configId": "966",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Child",
+    "productDescription": "Walnut, Lacquer, Artificial Leather, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-966"
+  },
+  {
+    "distinctProductVariant": 5639485741,
+    "productCode": "30317",
+    "configId": "967",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Child",
+    "productDescription": "Walnut, Lacquer, Fabric Gr.2, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-967"
+  },
+  {
+    "distinctProductVariant": 5639485742,
+    "productCode": "30317",
+    "configId": "975",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Child",
+    "productDescription": "Oak, Bianco Oil, Leather Gr.2, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-975"
+  },
+  {
+    "distinctProductVariant": 5639485743,
+    "productCode": "30317",
+    "configId": "976",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Child",
+    "productDescription": "Oak, Bianco Oil, Artificial Leather, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-976"
+  },
+  {
+    "distinctProductVariant": 5639485744,
+    "productCode": "30317",
+    "configId": "977",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Child",
+    "productDescription": "Oak, Bianco Oil, Fabric Gr.2, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-977"
+  },
+  {
+    "distinctProductVariant": 5639485745,
+    "productCode": "30317",
+    "configId": "987",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Master",
+    "productDescription": "Walnut, Lacquer, Leather Gr.1, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-987"
+  },
+  {
+    "distinctProductVariant": 5639485746,
+    "productCode": "30317",
+    "configId": "988",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Master",
+    "productDescription": "Walnut, Lacquer, Fabric Gr.1, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-988"
+  },
+  {
+    "distinctProductVariant": 5639485747,
+    "productCode": "30317",
+    "configId": "997",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Master",
+    "productDescription": "Oak, Bianco Oil, Leather Gr.1, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-997"
+  },
+  {
+    "distinctProductVariant": 5639485748,
+    "productCode": "30317",
+    "configId": "998",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Master",
+    "productDescription": "Oak, Bianco Oil, Fabric Gr.1, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-998"
+  },
+  {
+    "distinctProductVariant": 5639499077,
+    "productCode": "30317",
+    "configId": "052",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Oil, Leather Almond Eisenhower 12254, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-052"
+  },
+  {
+    "distinctProductVariant": 5639588356,
+    "productCode": "30317",
+    "configId": "100",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Lacquer, Leather Black Bali 7004, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-100"
+  },
+  {
+    "distinctProductVariant": 5639670098,
+    "productCode": "30317",
+    "configId": "101",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Lacquer, Fabric Gr.2, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-101"
+  },
+  {
+    "distinctProductVariant": 5639670099,
+    "productCode": "30317",
+    "configId": "102",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Lacquer, Fabric Gr.2, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-102"
+  },
+  {
+    "distinctProductVariant": 5639709086,
+    "productCode": "30317",
+    "configId": "107",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Fabric Gr.1, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-107"
+  },
+  {
+    "distinctProductVariant": 5639709087,
+    "productCode": "30317",
+    "configId": "108",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Leather Gr.1, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-108"
+  },
+  {
+    "distinctProductVariant": 5639709088,
+    "productCode": "30317",
+    "configId": "109",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Oil, Fabric Gr.1, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-109"
+  },
+  {
+    "distinctProductVariant": 5639709089,
+    "productCode": "30317",
+    "configId": "110",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Oil, Leather Gr.1, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-110"
+  },
+  {
+    "distinctProductVariant": 5639812579,
+    "productCode": "30317",
+    "configId": "111",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, White Oil, Fabric Antrazit Fame 140, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-111"
+  },
+  {
+    "distinctProductVariant": 5639812580,
+    "productCode": "30317",
+    "configId": "112",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Smoked Oil, Fabric Antrazit Fame 140, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-112"
+  },
+  {
+    "distinctProductVariant": 5639949075,
+    "productCode": "30317",
+    "configId": "113",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Fabric Sand Belfast 23, Supreme Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-113"
+  },
+  {
+    "distinctProductVariant": 5639962581,
+    "productCode": "30317",
+    "configId": "114",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Fabric Light Grey Belfast 40 FR, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-114"
+  },
+  {
+    "distinctProductVariant": 5640060076,
+    "productCode": "30317",
+    "configId": "115",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Lacquer, Fabric Antrazit Fame 140, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-115"
+  },
+  {
+    "distinctProductVariant": 5640060077,
+    "productCode": "30317",
+    "configId": "116",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Soap Lacquer, Fabric Grey Fame 160, Green FSC Packaging",
+    "productName": "Alaska Dining Chair, Upholstered Seat and Back, Solid",
+    "productVariant": "30317-116"
+  }
+]
+
+
+item 31256 của Range: Greenwood
+[
+  {
+    "distinctProductVariant": 5638708330,
+    "productCode": "31256",
+    "configId": "001",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Soap Lacquer, Green FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-001"
+  },
+  {
+    "distinctProductVariant": 5638708331,
+    "productCode": "31256",
+    "configId": "002",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Lacquer, Green FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-002"
+  },
+  {
+    "distinctProductVariant": 5638708332,
+    "productCode": "31256",
+    "configId": "003",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Solid Oak, Scandic Oil",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-003"
+  },
+  {
+    "distinctProductVariant": 5638774327,
+    "productCode": "31256",
+    "configId": "004",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Green FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-004"
+  },
+  {
+    "distinctProductVariant": 5639022834,
+    "productCode": "31256",
+    "configId": "005",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, White Oil, Supreme Green JL FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-005"
+  },
+  {
+    "distinctProductVariant": 5639310104,
+    "productCode": "31256",
+    "configId": "006",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Supreme Green JL FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-006"
+  },
+  {
+    "distinctProductVariant": 5639361092,
+    "productCode": "31256",
+    "configId": "007",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, White Oil, Green FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-007"
+  },
+  {
+    "distinctProductVariant": 5639486478,
+    "productCode": "31256",
+    "configId": "988",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Master",
+    "productDescription": "Walnut, Lacquer, Green FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-988"
+  },
+  {
+    "distinctProductVariant": 5639486479,
+    "productCode": "31256",
+    "configId": "998",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Master",
+    "productDescription": "Oak, Bianco Oil, Green FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-998"
+  },
+  {
+    "distinctProductVariant": 5639596575,
+    "productCode": "31256",
+    "configId": "100",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Oil, Green FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-100"
+  },
+  {
+    "distinctProductVariant": 5639624328,
+    "productCode": "31256",
+    "configId": "101",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Bianco Lacquer, Green FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-101"
+  },
+  {
+    "distinctProductVariant": 5639963343,
+    "productCode": "31256",
+    "configId": "102",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Walnut, Oil, Green FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-102"
+  },
+  {
+    "distinctProductVariant": 5640045077,
+    "productCode": "31256",
+    "configId": "103",
+    "languageId": "en-US",
+    "areaId": "cog",
+    "productVariantType": "Variant",
+    "productDescription": "Oak, Walnut Stain, Supreme Green JL FSC Packaging",
+    "productName": "Greenwood Dining Table, Non-Extendable, 130x80, Solid",
+    "productVariant": "31256-103"
+  }
+]
+
+
+ví dụ: 1 SO
+[
+    {
+        "salesId": "SO006940",
+        "interSalesId": "cogSO006940",
+        "countryRegionId": "GBR",
+        "countryName": "United Kingdom of Great Britain and Northern Ireland",
+        "areaId": "rvn",
+        "salesStatus": "Backorder",
+        "customerCode": "10532",
+        "customerName": "John Lewis PLC",
+        "details": [
+            {
+                "productCode": "31256",
+                "productName": "Greenwood Dining Table 130x80",
+                "externalItemId": "836 00201",
+                "configId": "006",
+                "variantDescription": "Oak, Bianco Oil, Supreme Green JL FSC Packaging",
+                "productType": "Dining Table, Non-Extendable",
+                "productGroup": "Dining",
+                "productRange": "Greenwood",
+                "materials": [
+                    {
+                        "materialCode": "530002002",
+                        "materialName": "Chemical, Water-based Crosslinker, 530.00.2002-0.5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000850.1.RES",
+                        "materialName": "Chemical, Water-based Topcoat 10%, 710.00.0850.1.RES-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "720000802",
+                        "materialName": "Chemical, Water-based sealer, 720.00.0802.20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730250601",
+                        "materialName": "Chemical, Water-based Yellow Transparent, 730.25.0601-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730350602",
+                        "materialName": "Chemical, Water-based Red Transparent Oxide, 730.35.0602-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730500131",
+                        "materialName": "Chemical, Water-based Blue Pigment, 730.50.0131-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "908009620.RES",
+                        "materialName": "Chemical, PNZ Object Oil, 908.00.9620.RES-5L (Density 0.81 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "BOXSJL31256/006",
+                        "materialName": "Carton box FSC Recycle 100%, AD, 31256, Greenwood, 1390x895x130mm, 150Lbs.",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "BOXSJL31256/01",
+                        "materialName": "Carton box FSC Recycle 100%, TT, 31256, Greenwood, 200x200x7mm, 150Lbs. (See detail)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "BOXSJL31256/02",
+                        "materialName": "Carton box FSC Recycle 100%, TT, 31256, Greenwood, 200x200x7mm, 150Lbs. (See detail)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSH_10x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T10mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSJLSET31256/01",
+                        "materialName": "Honeycomb FSC Recycle 100%, 31256, Greenwood, 113x133x133mm.",
+                        "materialType": "",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSJLSET31256/02",
+                        "materialName": "Honeycomb FSC Recycle 100%, 31256, Greenwood, 113x200x133mm.",
+                        "materialType": "",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "FOAMPA-00015",
+                        "materialName": "Foam packing (60% Recycle material), 3mm x 1.0M x 100m, 5.5kg/roll",
+                        "materialType": "EPE FOAM",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00001",
+                        "materialName": "Glue KR-560, 1200Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00006",
+                        "materialName": "Glue, Hardener AP 250Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "HW01ST-0020-BLP",
+                        "materialName": "Mushroom screw 4x25, ST ,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW01ST-0026-BLP",
+                        "materialName": "Mushroom screw 4x55 ,ST, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW01ST-0057-BLP",
+                        "materialName": "Mushroom screw 4x15 Head Ø10.5,ST, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW02ST-0092-BLP",
+                        "materialName": "HEADLESS BOLT M8x90 , ST, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW03ST-0004-BLP",
+                        "materialName": "Hex nut 8x6.5 ,Hex 13, ST, BLACK PLATING",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW03ST-0042-BLP",
+                        "materialName": "Cross nut Ø12x60-32,ST, BLACK PLATING",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW04ST-0047-BLP",
+                        "materialName": "Steel pat 30x50 (t4),BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0005-BLP",
+                        "materialName": "Plain washer Ø13xØ6, 1.5,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0009-BLP",
+                        "materialName": "Plain washer Ø19xØ8.5, 1.5 ,ST,Black plating",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0013-BLP",
+                        "materialName": "Spring washer Ø12-Ø8x1,5,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW10ST-0007-YZP",
+                        "materialName": "Spanner 13xT2 (25x117) ,ST, YELLOW PLATING\n",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW12ST-0064-BLP",
+                        "materialName": "Support Bar 15x20x680 (t4),BLACK PLATING",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "WOODWO-00003",
+                        "materialName": "Wood, American White Oak, 4/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    }
+                ],
+                "attributes": [
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881183",
+                        "attributeValueName": "Bianco Oil",
+                        "attributeType": "5637149828",
+                        "attributeTypeName": "Wood Surface"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881203",
+                        "attributeValueName": "Supreme Green JL FSC",
+                        "attributeType": "5637149829",
+                        "attributeTypeName": "Packing"
+                    }
+                ]
+            },
+            {
+                "productCode": "10602",
+                "productName": "Calia Dining Table, Extendable w/2 End Leaves Included, 190-290x95, Brushed, Solid",
+                "externalItemId": "836 03007",
+                "configId": "003",
+                "variantDescription": "Oak, Bianco Oil, Legs Vintage Black Metal, Supreme Green JL FSC Packaging",
+                "productType": "Dining Table, Extendable",
+                "productGroup": "Dining",
+                "productRange": "Calia",
+                "materials": [
+                    {
+                        "materialCode": "230056B",
+                        "materialName": "Chemical, PU HARDENER, 230:056/B-4.00K, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "236022",
+                        "materialName": "Chemical, PU Thinner, 236:022-180.00K (Density 0.9 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "23800870004/5K",
+                        "materialName": "Chemical, UNIVERSAL COLOR PASTE, 238:008:70004-5.00K, EXP Date: 360 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "530002002",
+                        "materialName": "Chemical, Water-based Crosslinker, 530.00.2002-0.5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000003.1",
+                        "materialName": "Chemical, 1K Water-based Topcoat 10%, 710.00.0003.1-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000850.1.RES",
+                        "materialName": "Chemical, Water-based Topcoat 10%, 710.00.0850.1.RES-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "720000802",
+                        "materialName": "Chemical, Water-based sealer, 720.00.0802.20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730250601",
+                        "materialName": "Chemical, Water-based Yellow Transparent, 730.25.0601-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730350602",
+                        "materialName": "Chemical, Water-based Red Transparent Oxide, 730.35.0602-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730400190",
+                        "materialName": "Chemical, Water-based Black Pigment, 730.40.0190-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730500131",
+                        "materialName": "Chemical, Water-based Blue Pigment, 730.50.0131-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "750001000",
+                        "materialName": "Chemical, Diluent, 750.00.1000-20L (Density 0.96 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "908009620.RES",
+                        "materialName": "Chemical, PNZ Object Oil, 908.00.9620.RES-5L (Density 0.81 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "BASTBL-00033",
+                        "materialName": "V steel bar, black, 30x6000_T3mm (V30=8.7-9.3kg)",
+                        "materialType": "METAL",
+                        "costGroupId": "METAL-RAW"
+                    },
+                    {
+                        "materialCode": "BKSTBL-00005",
+                        "materialName": "Rectangle Steel bracket, black, 20x70_T4mm, with 2 holes dia 6mm",
+                        "materialType": "",
+                        "costGroupId": "METAL-SOUR"
+                    },
+                    {
+                        "materialCode": "BKSTBL-00007",
+                        "materialName": "Rectangle Steel bracket, black, 20x35_T4mm, with 1 hole dia 6mm",
+                        "materialType": "",
+                        "costGroupId": "METAL-SOUR"
+                    },
+                    {
+                        "materialCode": "BKSTBL-00009",
+                        "materialName": "Rectangle Steel bracket, black, 20x30_T4mm, with 1 Taro hole M6",
+                        "materialType": "",
+                        "costGroupId": "METAL-SOUR"
+                    },
+                    {
+                        "materialCode": "BKSTBL-00146",
+                        "materialName": "Square Steel bracket, black, 90x90_T6mm, with 4 holes dia 14mm",
+                        "materialType": "",
+                        "costGroupId": "METAL-SOUR"
+                    },
+                    {
+                        "materialCode": "BOXSJL10602/003",
+                        "materialName": "Carton box FSC Recycle 100%, AD, 10602, Calia, 2060x1110x290mm, 150Lbs.",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "BOXSJL10602/01",
+                        "materialName": "Carton box FSC Recycle 100%, TT, 10602, Calia, 1400x920x7mm, 150Lbs.(See Detail)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "BOXSJL10602/02",
+                        "materialName": "Carton box FSC Recycle 100%, TT, 10602, Calia, 1390x340x7mm, 150Lbs.(See Detail)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "BOXSJL10602/03",
+                        "materialName": "Carton box FSC Recycle 100%, TT, 10602, Calia, 625x300x7mm, 150Lbs.(See Detail)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "BOXSJL10602/04",
+                        "materialName": "Carton box FSC Recycle 100%, TT, 10602, Calia, 715x230x7mm, 150Lbs.(See Detail)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "BOXSJL10602/05",
+                        "materialName": "Carton box FSC Recycle 100%, TT, 10602, Calia, 255x200x7mm, 150Lbs.(See Detail)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "BOXSJL10602/06",
+                        "materialName": "Carton box FSC Recycle 100%, TT, 10602, Calia, 355x200x7mm, 150Lbs.(See Detail)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "COROVI-00003",
+                        "materialName": "Black Corovin, Width 1600mm, 70g/m2.",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "CTTOSH_10x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T10mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSH_20x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T20mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSH_30x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T30mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSJLSET10602/02",
+                        "materialName": "Honeycomb FSC Recycle 100%, 10602, Calia, 153x153x268mm.",
+                        "materialType": "",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSJLSET10602/05",
+                        "materialName": "Honeycomb FSC Recycle 100%, 10602, Calia, 268x200x153mm.",
+                        "materialType": "",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "F63FN0571K",
+                        "materialName": "Chemical, Topcoat F63FN0571-18.00K, EXP Date: 360 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "FOAMPA-00015",
+                        "materialName": "Foam packing (60% Recycle material), 3mm x 1.0M x 100m, 5.5kg/roll",
+                        "materialType": "EPE FOAM",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00001",
+                        "materialName": "Glue KR-560, 1200Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00006",
+                        "materialName": "Glue, Hardener AP 250Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "HW01ST-0004-BLP",
+                        "materialName": "Chipboard screw 4x15, ST ,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW01ST-0005-BLP",
+                        "materialName": "Chipboard screw 4x20, ST,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW01ST-0021-BLP",
+                        "materialName": "Mushroom screw 4x30, ST ,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW01ST-0042-BLP",
+                        "materialName": "Washer mushroom screw 4x20, Head 10.5, ST ,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW02ST-0004-BLP",
+                        "materialName": "F-bolt M6x30, HEX4, ST, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW02ST-0036-BLP",
+                        "materialName": "HEX-bolt M8x25, HEX13, ST, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW03ST-0012-YZP",
+                        "materialName": "Insert nut 8x20, ST, with collar ,YELLOW ZINC PLATING",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW03ST-0032-YZP",
+                        "materialName": "Insert nut 6x13 with collar ,ST,YELLOW ZINC PLATING",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW06PL-0025-BLP",
+                        "materialName": "Adjust Foot, Round Head Ø20x10-M6x20, BLACK PLATING.",
+                        "materialType": "HARDWARE (Adjust foot)",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW06PL-0086-BEI",
+                        "materialName": "Felt Ø80x2mm with 3M self adhesive tape, PL, Beige",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0005-BLP",
+                        "materialName": "Plain washer Ø13xØ6, 1.5,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0009-BLP",
+                        "materialName": "Plain washer Ø19xØ8.5, 1.5 ,ST,Black plating",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0013-BLP",
+                        "materialName": "Spring washer Ø12-Ø8x1,5,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0021-BLP",
+                        "materialName": "Plain washer with oval hole Ø16x2, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW08WD-0002.F",
+                        "materialName": "Wood dowel Ø10x30, Beech FSC",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW10ST-0007-YZP",
+                        "materialName": "Spanner 13xT2 (25x117) ,ST, YELLOW PLATING\n",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW13ST-0002-BLP",
+                        "materialName": "Safety lock-on-off(83x57x22),BLACK PLATING",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "TUSTWH-00010",
+                        "materialName": "Rectangular steel tube, 30x60x6000_T1.2mm, White, 9.94 kg/pc",
+                        "materialType": "METAL",
+                        "costGroupId": "METAL-RAW"
+                    },
+                    {
+                        "materialCode": "TUSTWH-00011",
+                        "materialName": "Rectangular steel tube, 30x90x6000_T1.2mm, White\n",
+                        "materialType": "METAL",
+                        "costGroupId": "METAL-RAW"
+                    },
+                    {
+                        "materialCode": "UPHOTM-00034.BL-H",
+                        "materialName": "Hook fastener, W30xL25mm, black",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "UPHOTM-00034.BL-L",
+                        "materialName": "Loop fastener, W30xL25mm, black",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "WOODWO-00003",
+                        "materialName": "Wood, American White Oak, 4/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    },
+                    {
+                        "materialCode": "WOODWO-00007",
+                        "materialName": "Wood, American White Oak, 5/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    }
+                ],
+                "attributes": [
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881203",
+                        "attributeValueName": "Supreme Green JL FSC",
+                        "attributeType": "5637149829",
+                        "attributeTypeName": "Packing"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881183",
+                        "attributeValueName": "Bianco Oil",
+                        "attributeType": "5637149828",
+                        "attributeTypeName": "Wood Surface"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637678732",
+                        "attributeValueName": "Vintage Black Metal",
+                        "attributeType": "5637149081",
+                        "attributeTypeName": "Primary Metal Surface"
+                    }
+                ]
+            },
+            {
+                "productCode": "31283",
+                "productName": "X-Ray Arm Chair",
+                "externalItemId": "836 13203",
+                "configId": "001",
+                "variantDescription": "Oak, Bianco Oil, Fabric Sand Belfast 23 FR, Supreme Green JL FSC Packaging",
+                "productType": "Arm Chair",
+                "productGroup": "Dining",
+                "productRange": "X-Ray",
+                "materials": [
+                    {
+                        "materialCode": "530002002",
+                        "materialName": "Chemical, Water-based Crosslinker, 530.00.2002-0.5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000850.1.RES",
+                        "materialName": "Chemical, Water-based Topcoat 10%, 710.00.0850.1.RES-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "720000802",
+                        "materialName": "Chemical, Water-based sealer, 720.00.0802.20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730250601",
+                        "materialName": "Chemical, Water-based Yellow Transparent, 730.25.0601-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730350602",
+                        "materialName": "Chemical, Water-based Red Transparent Oxide, 730.35.0602-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730500131",
+                        "materialName": "Chemical, Water-based Blue Pigment, 730.50.0131-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "908009620.RES",
+                        "materialName": "Chemical, PNZ Object Oil, 908.00.9620.RES-5L (Density 0.81 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "BOXSJL31283/001",
+                        "materialName": "Carton box FSC Recycle 100%, A1, 31283, X-Ray, 585x585x885mm, 150Lbs.",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSH_10x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T10mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "FABWFR-00043",
+                        "materialName": "FR Fabric, BELFAST-23, width 145cm.",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "FOAMPA-00015",
+                        "materialName": "Foam packing (60% Recycle material), 3mm x 1.0M x 100m, 5.5kg/roll",
+                        "materialType": "EPE FOAM",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "FOBCUK-00111",
+                        "materialName": "UK Foam 3070, 30424/31283/30425/31284, Back (20x265x555mm)",
+                        "materialType": "UK FOAM 3570 (3070)",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "FOSEUK-00149",
+                        "materialName": "UK Foam 3070, 30424/31283/30425/31284/30808/30809, Seat (20x505x510mm)",
+                        "materialType": "UK FOAM 3570 (3070)",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00001",
+                        "materialName": "Glue KR-560, 1200Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00006",
+                        "materialName": "Glue, Hardener AP 250Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00011",
+                        "materialName": "Glue, 3801, Sababond, blue 1100kg/drum, EXP Date: 270 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00012",
+                        "materialName": "Glue, 3914, Saba Activator, 225kg/drum, EXP Date: 360 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00023",
+                        "materialName": "Glue UF hot melt veneer for Bentwood Jowat 950, E0 / CARB P2 TSCA, 25Kg/bag",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "HW01ST-0005-BLP",
+                        "materialName": "Chipboard screw 4x20, ST,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW01ST-0006-BLP",
+                        "materialName": "Chipboard screw 4x25, ST ,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW06PL-0065-BEI",
+                        "materialName": "Felt Ø20x2mm with 3M self adhesive tape, PL, Beige",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW08WD-0024.F",
+                        "materialName": "Wood dowel Ø10x40, Beech FSC",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "PEPACK-00001",
+                        "materialName": "PE bag, 1000x1400mm_T3.5z, 2 sides with 4 layout print and air outlet (1Kg = 12 pcs)\n",
+                        "materialType": "",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "V5LCAR-00032",
+                        "materialName": "V carton FSC Recycle 100% 5 layersx3, 565x80x80mm.",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "V5LCAR-00089",
+                        "materialName": "V carton FSC Recycle 100% 5 layers, 865x100x100mm (one top with curver)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "VEN-OAK-21",
+                        "materialName": "W/OAK A 0.5mm, 70% straight grain - 30% crown grain, random, same color, w/knotty (<30mm), FSC control wood",
+                        "materialType": "",
+                        "costGroupId": "OUTSOURCE"
+                    },
+                    {
+                        "materialCode": "VEPCRW-00007",
+                        "materialName": "Rubberwood panel FSC 100% (1.8x650x1300mm), Type A-B",
+                        "materialType": "",
+                        "costGroupId": "WHITE WOOD"
+                    },
+                    {
+                        "materialCode": "WOODWO-00003",
+                        "materialName": "Wood, American White Oak, 4/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    },
+                    {
+                        "materialCode": "WOODWO-00007",
+                        "materialName": "Wood, American White Oak, 5/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    }
+                ],
+                "attributes": [
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881183",
+                        "attributeValueName": "Bianco Oil",
+                        "attributeType": "5637149828",
+                        "attributeTypeName": "Wood Surface"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881338",
+                        "attributeValueName": "Sand Belfast 23 FR",
+                        "attributeType": "5637149832",
+                        "attributeTypeName": "Upholstery name"
+                    },
+                    {
+                        "groupValue": "Fabric",
+                        "attributeValue": "5637881221",
+                        "attributeValueName": "Belfast",
+                        "attributeType": "5637149831",
+                        "attributeTypeName": "Upholstery type"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881203",
+                        "attributeValueName": "Supreme Green JL FSC",
+                        "attributeType": "5637149829",
+                        "attributeTypeName": "Packing"
+                    }
+                ]
+            },
+            {
+                "productCode": "31279",
+                "productName": "Santino Arm Chair, Upholstered Seat and Back, Solid",
+                "externalItemId": "836 16408",
+                "configId": "004",
+                "variantDescription": "Oak, Bianco Oil, Artificial Leather Cognac Fenice 512 FR, Supreme Green JL FSC Packaging",
+                "productType": "Arm Chair",
+                "productGroup": "Dining",
+                "productRange": "Santino",
+                "materials": [
+                    {
+                        "materialCode": "530002002",
+                        "materialName": "Chemical, Water-based Crosslinker, 530.00.2002-0.5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000850.1.RES",
+                        "materialName": "Chemical, Water-based Topcoat 10%, 710.00.0850.1.RES-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "720000802",
+                        "materialName": "Chemical, Water-based sealer, 720.00.0802.20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730250601",
+                        "materialName": "Chemical, Water-based Yellow Transparent, 730.25.0601-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730350602",
+                        "materialName": "Chemical, Water-based Red Transparent Oxide, 730.35.0602-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730500131",
+                        "materialName": "Chemical, Water-based Blue Pigment, 730.50.0131-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "908009620.RES",
+                        "materialName": "Chemical, PNZ Object Oil, 908.00.9620.RES-5L (Density 0.81 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "BOXSJL31279/004",
+                        "materialName": "Carton box FSC Recycle 100%, A1, 31279, Santino, 630x610x820mm, 150Lbs.",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "COROVI-00003",
+                        "materialName": "Black Corovin, Width 1600mm, 70g/m2.",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "CTTOSH_10x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T10mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "FOAMPA-00006",
+                        "materialName": "White PP non-wovens 25gr, W1.6mxL1000m, 42kg/roll",
+                        "materialType": "",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "FOAMPA-00015",
+                        "materialName": "Foam packing (60% Recycle material), 3mm x 1.0M x 100m, 5.5kg/roll",
+                        "materialType": "EPE FOAM",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "FOBCUK-00056",
+                        "materialName": "UK foam 3070, 20900/31279, In Back (20x345x1150mm)",
+                        "materialType": "UK FOAM 3570 (3070)",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "FOBCUK-00057",
+                        "materialName": "UK foam 3070, 20900/31279, Out Back (10x260x1235mm)",
+                        "materialType": "UK FOAM 3570 (3070)",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "FOBCUK-00141",
+                        "materialName": "UK Foam 3070, 20900/31279, In Back  (10x190x640mm)",
+                        "materialType": "UK FOAM 3570 (3070)",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "FOSEUK-00041",
+                        "materialName": "UK foam 3070, 20900/31279, Seat 1( 20x473x500 mm)",
+                        "materialType": "UK FOAM 3570 (3070)",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "FOSEUK-00098",
+                        "materialName": "UK foam 3070, 20900/20901/31280, Seat 2 (10x582x605mm)",
+                        "materialType": "UK FOAM 3570 (3070)",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00001",
+                        "materialName": "Glue KR-560, 1200Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00006",
+                        "materialName": "Glue, Hardener AP 250Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00011",
+                        "materialName": "Glue, 3801, Sababond, blue 1100kg/drum, EXP Date: 270 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00012",
+                        "materialName": "Glue, 3914, Saba Activator, 225kg/drum, EXP Date: 360 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00023",
+                        "materialName": "Glue UF hot melt veneer for Bentwood Jowat 950, E0 / CARB P2 TSCA, 25Kg/bag",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "HW01ST-0006-BLP",
+                        "materialName": "Chipboard screw 4x25, ST ,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW02ST-0007-BLP",
+                        "materialName": "F-bolt M6x45, HEX4, ST, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW02ST-0010-BLP",
+                        "materialName": "F-bolt M6x60, HEX4, ST, BLACK PLATING \n",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW03ST-0040-YZP",
+                        "materialName": "T nut Ø18-M6x10mm, YELLOW ZINC PLATING",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW06PL-0065-BEI",
+                        "materialName": "Felt Ø20x2mm with 3M self adhesive tape, PL, Beige",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW08ST-0043-YZP",
+                        "materialName": "Steel dowel 1 dash (Cross nut) with 1 middle hole M6 -  Ø10x27 ,ST,YELLOW ZINC PLATING",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "LEAART-00008",
+                        "materialName": "Cognac Artificial Leather Fenice 512, Width 1400mm",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "PEPACK-00001",
+                        "materialName": "PE bag, 1000x1400mm_T3.5z, 2 sides with 4 layout print and air outlet (1Kg = 12 pcs)\n",
+                        "materialType": "",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "V5LCAR-00069",
+                        "materialName": "V Carton sheet 150lbs FSC Recycle 100%, 5 layers, 800x100x100 (mm), (one top with curver)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "V5LCAR-00097",
+                        "materialName": "V carton FSC Recycle 100% 5 layersx3, 590x80x80mm",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "VEPCRW-00007",
+                        "materialName": "Rubberwood panel FSC 100% (1.8x650x1300mm), Type A-B",
+                        "materialType": "",
+                        "costGroupId": "WHITE WOOD"
+                    },
+                    {
+                        "materialCode": "WOODPO-00004",
+                        "materialName": "Wood, American Poplar, 5/4 1C, MC +/- 10%, wood come from North and Appalachian region, Latin name: Liviodebdron tulipifera.",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OTH"
+                    },
+                    {
+                        "materialCode": "WOODWO-00003",
+                        "materialName": "Wood, American White Oak, 4/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    },
+                    {
+                        "materialCode": "WOODWO-00007",
+                        "materialName": "Wood, American White Oak, 5/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    }
+                ],
+                "attributes": [
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881203",
+                        "attributeValueName": "Supreme Green JL FSC",
+                        "attributeType": "5637149829",
+                        "attributeTypeName": "Packing"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881343",
+                        "attributeValueName": "Cognac Fenice 512 FR",
+                        "attributeType": "5637149832",
+                        "attributeTypeName": "Upholstery name"
+                    },
+                    {
+                        "groupValue": "Fabric",
+                        "attributeValue": "5637881236",
+                        "attributeValueName": "Artificial Leather",
+                        "attributeType": "5637149831",
+                        "attributeTypeName": "Upholstery type"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881183",
+                        "attributeValueName": "Bianco Oil",
+                        "attributeType": "5637149828",
+                        "attributeTypeName": "Wood Surface"
+                    }
+                ]
+            },
+            {
+                "productCode": "10617",
+                "productName": "Calia Bench 117 cm",
+                "externalItemId": "836 23002",
+                "configId": "004",
+                "variantDescription": "Oak, Bianco Oil, Legs Vintage Black Metal, Supreme Green JL FSC Packaging",
+                "productType": "Dining Bench",
+                "productGroup": "Dining",
+                "productRange": "Calia",
+                "materials": [
+                    {
+                        "materialCode": "530002002",
+                        "materialName": "Chemical, Water-based Crosslinker, 530.00.2002-0.5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000003.1",
+                        "materialName": "Chemical, 1K Water-based Topcoat 10%, 710.00.0003.1-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000850.1.RES",
+                        "materialName": "Chemical, Water-based Topcoat 10%, 710.00.0850.1.RES-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "720000802",
+                        "materialName": "Chemical, Water-based sealer, 720.00.0802.20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730250601",
+                        "materialName": "Chemical, Water-based Yellow Transparent, 730.25.0601-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730350602",
+                        "materialName": "Chemical, Water-based Red Transparent Oxide, 730.35.0602-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730400190",
+                        "materialName": "Chemical, Water-based Black Pigment, 730.40.0190-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730500131",
+                        "materialName": "Chemical, Water-based Blue Pigment, 730.50.0131-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "750001000",
+                        "materialName": "Chemical, Diluent, 750.00.1000-20L (Density 0.96 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "908009620.RES",
+                        "materialName": "Chemical, PNZ Object Oil, 908.00.9620.RES-5L (Density 0.81 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "BKSTBL-00110",
+                        "materialName": "Rectangle Steel bracket, black, 80x100_T6mm, 2 holes dia 14mm",
+                        "materialType": "",
+                        "costGroupId": "METAL-SOUR"
+                    },
+                    {
+                        "materialCode": "BOXSJL10617/004.3",
+                        "materialName": "Carton box FSC Recycle 100%, AD, 10617, Calia, 1220x470x165mm, 150Lbs.",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "C5LCAR-00003",
+                        "materialName": "Corner carton pieces 150lbs FSC Recycle 100%, 5x3 layers, 7x150x150 (mm)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSH_10x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T10mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSH_30x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T30mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "FOAMPA-00015",
+                        "materialName": "Foam packing (60% Recycle material), 3mm x 1.0M x 100m, 5.5kg/roll",
+                        "materialType": "EPE FOAM",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00001",
+                        "materialName": "Glue KR-560, 1200Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00006",
+                        "materialName": "Glue, Hardener AP 250Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "HW01ST-0020-BLP",
+                        "materialName": "Mushroom screw 4x25, ST ,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW02ST-0036-BLP",
+                        "materialName": "HEX-bolt M8x25, HEX13, ST, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW03ST-0041-YZP",
+                        "materialName": "T nut Ø22-M8x10mm, YELLOW ZINC PLATING",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW06PL-0088-BEI",
+                        "materialName": "Felt Ø50x2mm with 3M self adhesive tape, PL, Beige",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0009-BLP",
+                        "materialName": "Plain washer Ø19xØ8.5, 1.5 ,ST,Black plating",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0013-BLP",
+                        "materialName": "Spring washer Ø12-Ø8x1,5,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0021-BLP",
+                        "materialName": "Plain washer with oval hole Ø16x2, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW10ST-0007-YZP",
+                        "materialName": "Spanner 13xT2 (25x117) ,ST, YELLOW PLATING\n",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "TUSTWH-00010",
+                        "materialName": "Rectangular steel tube, 30x60x6000_T1.2mm, White, 9.94 kg/pc",
+                        "materialType": "METAL",
+                        "costGroupId": "METAL-RAW"
+                    },
+                    {
+                        "materialCode": "V5LCAR-00004",
+                        "materialName": "V carton FSC Recycle 100% 5 layersx3, 200x80x80mm",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "WOODWO-00003",
+                        "materialName": "Wood, American White Oak, 4/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    }
+                ],
+                "attributes": [
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637678732",
+                        "attributeValueName": "Vintage Black Metal",
+                        "attributeType": "5637149081",
+                        "attributeTypeName": "Primary Metal Surface"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881183",
+                        "attributeValueName": "Bianco Oil",
+                        "attributeType": "5637149828",
+                        "attributeTypeName": "Wood Surface"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881203",
+                        "attributeValueName": "Supreme Green JL FSC",
+                        "attributeType": "5637149829",
+                        "attributeTypeName": "Packing"
+                    }
+                ]
+            },
+            {
+                "productCode": "30771",
+                "productName": "Calia Wide Sofa Side Table 50x40",
+                "externalItemId": "862 23011",
+                "configId": "003",
+                "variantDescription": "Oak, Bianco Oil, Base Vintage Black Metal, Supreme Green JL FSC Packaging",
+                "productType": "Sofa Side Table",
+                "productGroup": "Living",
+                "productRange": "Calia",
+                "materials": [
+                    {
+                        "materialCode": "530002002",
+                        "materialName": "Chemical, Water-based Crosslinker, 530.00.2002-0.5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000003.1",
+                        "materialName": "Chemical, 1K Water-based Topcoat 10%, 710.00.0003.1-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000850.1.RES",
+                        "materialName": "Chemical, Water-based Topcoat 10%, 710.00.0850.1.RES-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "720000802",
+                        "materialName": "Chemical, Water-based sealer, 720.00.0802.20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730250601",
+                        "materialName": "Chemical, Water-based Yellow Transparent, 730.25.0601-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730350602",
+                        "materialName": "Chemical, Water-based Red Transparent Oxide, 730.35.0602-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730400190",
+                        "materialName": "Chemical, Water-based Black Pigment, 730.40.0190-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730500131",
+                        "materialName": "Chemical, Water-based Blue Pigment, 730.50.0131-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "750001000",
+                        "materialName": "Chemical, Diluent, 750.00.1000-20L (Density 0.96 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "908009620.RES",
+                        "materialName": "Chemical, PNZ Object Oil, 908.00.9620.RES-5L (Density 0.81 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "BKSTBL-00002",
+                        "materialName": "Square steel bracket, 25x25_T2mm, with 1 hole dia 8mm",
+                        "materialType": "",
+                        "costGroupId": "METAL-RAW"
+                    },
+                    {
+                        "materialCode": "BOXSJL30771/003.2",
+                        "materialName": "Carton box FSC Recycle 100%, A1, 30771, Calia, 550x450x645mm, 150Lbs.",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSH_10x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T10mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSH_20x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T20mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "HW01ST-0057-BLP",
+                        "materialName": "Mushroom screw 4x15 Head Ø10.5,ST, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW06PL-0066-BEI",
+                        "materialName": "Felt Ø15x2mm with 3M self adhesive tape, PL, Beige",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "TUSTWH-00007",
+                        "materialName": "Square steel tube, white, 16x16x6000_T1.2mm, 3.39kg/pc",
+                        "materialType": "METAL",
+                        "costGroupId": "METAL-RAW"
+                    },
+                    {
+                        "materialCode": "V5LCAR-00108",
+                        "materialName": "V carton FSC Recycle 100% 5 layersx3, 340x80x80mm",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "V5LCAR-00188",
+                        "materialName": "V carton FSC Recycle 100% 5 layersx3, 440x80x80mm",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "WOODWO-00003",
+                        "materialName": "Wood, American White Oak, 4/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    }
+                ],
+                "attributes": [
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881183",
+                        "attributeValueName": "Bianco Oil",
+                        "attributeType": "5637149828",
+                        "attributeTypeName": "Wood Surface"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881203",
+                        "attributeValueName": "Supreme Green JL FSC",
+                        "attributeType": "5637149829",
+                        "attributeTypeName": "Packing"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637678732",
+                        "attributeValueName": "Vintage Black Metal",
+                        "attributeType": "5637149081",
+                        "attributeTypeName": "Primary Metal Surface"
+                    }
+                ]
+            },
+            {
+                "productCode": "31293",
+                "productName": "Calia Low Bookcase",
+                "externalItemId": "862 73002",
+                "configId": "001",
+                "variantDescription": "Oak, Bianco Oil, Frame Vintage Black Metal, Supreme Green JL FSC Packaging",
+                "productType": "Shelving Unit",
+                "productGroup": "Living",
+                "productRange": "Calia",
+                "materials": [
+                    {
+                        "materialCode": "530002002",
+                        "materialName": "Chemical, Water-based Crosslinker, 530.00.2002-0.5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000003.1",
+                        "materialName": "Chemical, 1K Water-based Topcoat 10%, 710.00.0003.1-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000850.1.RES",
+                        "materialName": "Chemical, Water-based Topcoat 10%, 710.00.0850.1.RES-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "720000802",
+                        "materialName": "Chemical, Water-based sealer, 720.00.0802.20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730250601",
+                        "materialName": "Chemical, Water-based Yellow Transparent, 730.25.0601-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730350602",
+                        "materialName": "Chemical, Water-based Red Transparent Oxide, 730.35.0602-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730400190",
+                        "materialName": "Chemical, Water-based Black Pigment, 730.40.0190-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730500131",
+                        "materialName": "Chemical, Water-based Blue Pigment, 730.50.0131-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "750001000",
+                        "materialName": "Chemical, Diluent, 750.00.1000-20L (Density 0.96 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "908009620.RES",
+                        "materialName": "Chemical, PNZ Object Oil, 908.00.9620.RES-5L (Density 0.81 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "BKSTBL-00002",
+                        "materialName": "Square steel bracket, 25x25_T2mm, with 1 hole dia 8mm",
+                        "materialType": "",
+                        "costGroupId": "METAL-RAW"
+                    },
+                    {
+                        "materialCode": "BKSTBL-00150",
+                        "materialName": "Rectangle Steel bracket 30x20_T5, with 1 Hole Ø6, taro M6",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "BOXSJL31293/001",
+                        "materialName": "Carton box FSC Recycle 100%, A1, 31293, Calia, 845x395x860mm, 150Lbs.",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "C5LCAR-00003",
+                        "materialName": "Corner carton pieces 150lbs FSC Recycle 100%, 5x3 layers, 7x150x150 (mm)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSH_20x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T20mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "FOAMPA-00015",
+                        "materialName": "Foam packing (60% Recycle material), 3mm x 1.0M x 100m, 5.5kg/roll",
+                        "materialType": "EPE FOAM",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00001",
+                        "materialName": "Glue KR-560, 1200Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00006",
+                        "materialName": "Glue, Hardener AP 250Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00007",
+                        "materialName": "Glue, Finger joint, F502H, 20kg/box, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "HW01ST-0057-BLP",
+                        "materialName": "Mushroom screw 4x15 Head Ø10.5,ST, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW02ST-0002-BLP",
+                        "materialName": "F-bolt M6x20, HEX4, ST, BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW04ST-0001-BLP",
+                        "materialName": "Wall fitting 30x35x140 (t 3.0),BLACK PLATING",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW06PL-0066-BEI",
+                        "materialName": "Felt Ø15x2mm with 3M self adhesive tape, PL, Beige",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0006-BLP",
+                        "materialName": "Plain washer Ø16-Ø6.5, 1,5,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW07ST-0007-BLP",
+                        "materialName": "Spring washer Ø10-Ø6.5x1,5,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW10ST-0002-YZP",
+                        "materialName": "Allen key K4x106,YELLOW ZINC PLATING",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "MDFNOR-00008.FSC",
+                        "materialName": "MDF FSC Certificate, 2440x1830_T25mm",
+                        "materialType": "",
+                        "costGroupId": "MDF-PLY"
+                    },
+                    {
+                        "materialCode": "TUSTWH-00008",
+                        "materialName": "Square steel tube, white, 20x20x6000_T1.2mm, 4.3kg/pc",
+                        "materialType": "METAL",
+                        "costGroupId": "METAL-RAW"
+                    },
+                    {
+                        "materialCode": "V5LCAR-00006",
+                        "materialName": "V carton FSC Recycle 100% 5 layersx3, 600x80x80mm",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "V5LCAR-00063",
+                        "materialName": "V carton FSC Recycle 100% 5 layersx3, 150x80x80mm",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "VEN-OAK-24",
+                        "materialName": "W/OAK FA 1mm, 70% straight grain - 30% crown grain, random, same color, w/knotty (<30mm), FSC control wood",
+                        "materialType": "",
+                        "costGroupId": "OUTSOURCE"
+                    },
+                    {
+                        "materialCode": "VEROLL-00007",
+                        "materialName": "Veneer roll, 0.030x100m_T0.6mm, White Oak",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "WOODWO-00007",
+                        "materialName": "Wood, American White Oak, 5/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    }
+                ],
+                "attributes": [
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637678732",
+                        "attributeValueName": "Vintage Black Metal",
+                        "attributeType": "5637149081",
+                        "attributeTypeName": "Primary Metal Surface"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881203",
+                        "attributeValueName": "Supreme Green JL FSC",
+                        "attributeType": "5637149829",
+                        "attributeTypeName": "Packing"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881183",
+                        "attributeValueName": "Bianco Oil",
+                        "attributeType": "5637149828",
+                        "attributeTypeName": "Wood Surface"
+                    }
+                ]
+            },
+            {
+                "productCode": "31284",
+                "productName": "X-Ray Dining Chair",
+                "externalItemId": "836 13204",
+                "configId": "002",
+                "variantDescription": "Oak, Bianco Oil, Fabric Sand Belfast 23 FR, Supreme Green JL FSC Packaging",
+                "productType": "Dining Chair",
+                "productGroup": "Dining",
+                "productRange": "X-Ray",
+                "materials": [
+                    {
+                        "materialCode": "530002002",
+                        "materialName": "Chemical, Water-based Crosslinker, 530.00.2002-0.5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "710000850.1.RES",
+                        "materialName": "Chemical, Water-based Topcoat 10%, 710.00.0850.1.RES-20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "720000802",
+                        "materialName": "Chemical, Water-based sealer, 720.00.0802.20K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730250601",
+                        "materialName": "Chemical, Water-based Yellow Transparent, 730.25.0601-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730350602",
+                        "materialName": "Chemical, Water-based Red Transparent Oxide, 730.35.0602-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "730500131",
+                        "materialName": "Chemical, Water-based Blue Pigment, 730.50.0131-5K",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "908009620.RES",
+                        "materialName": "Chemical, PNZ Object Oil, 908.00.9620.RES-5L (Density 0.81 g/ml)",
+                        "materialType": "",
+                        "costGroupId": "PAINTING"
+                    },
+                    {
+                        "materialCode": "BOXSJL31284/002",
+                        "materialName": "Carton box FSC Recycle 100%, A1, 31284, X-Ray, 585x585x885mm, 150Lbs.",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "CTTOSH_10x2400x1200",
+                        "materialName": "Honeycomb FSC Recycle 100%, 2400x1200_T10mm",
+                        "materialType": "HONEYCOMB",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "FABWFR-00043",
+                        "materialName": "FR Fabric, BELFAST-23, width 145cm.",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "FOAMPA-00015",
+                        "materialName": "Foam packing (60% Recycle material), 3mm x 1.0M x 100m, 5.5kg/roll",
+                        "materialType": "EPE FOAM",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "FOBCUK-00055",
+                        "materialName": "UK Foam 3070, 30424/30425/31284, Back (20x250x547mm)",
+                        "materialType": "UK FOAM 3570 (3070)",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "FOSEUK-00095",
+                        "materialName": "UK Foam 3070, 30424/30425/31284, Seat (20x490x506mm)",
+                        "materialType": "UK FOAM 3570 (3070)",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00001",
+                        "materialName": "Glue KR-560, 1200Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00006",
+                        "materialName": "Glue, Hardener AP 250Kg/Tank, EXP Date: 180 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00011",
+                        "materialName": "Glue, 3801, Sababond, blue 1100kg/drum, EXP Date: 270 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00012",
+                        "materialName": "Glue, 3914, Saba Activator, 225kg/drum, EXP Date: 360 days against MFG Date",
+                        "materialType": "",
+                        "costGroupId": "FAB-LEA"
+                    },
+                    {
+                        "materialCode": "GLUEWO-00023",
+                        "materialName": "Glue UF hot melt veneer for Bentwood Jowat 950, E0 / CARB P2 TSCA, 25Kg/bag",
+                        "materialType": "",
+                        "costGroupId": "OTHER 2"
+                    },
+                    {
+                        "materialCode": "HW01ST-0005-BLP",
+                        "materialName": "Chipboard screw 4x20, ST,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW01ST-0006-BLP",
+                        "materialName": "Chipboard screw 4x25, ST ,BLACK PLATING",
+                        "materialType": "HARDWARE",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "HW06PL-0065-BEI",
+                        "materialName": "Felt Ø20x2mm with 3M self adhesive tape, PL, Beige",
+                        "materialType": "",
+                        "costGroupId": "HARDWARE"
+                    },
+                    {
+                        "materialCode": "PEPACK-00001",
+                        "materialName": "PE bag, 1000x1400mm_T3.5z, 2 sides with 4 layout print and air outlet (1Kg = 12 pcs)\n",
+                        "materialType": "",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "V5LCAR-00032",
+                        "materialName": "V carton FSC Recycle 100% 5 layersx3, 565x80x80mm.",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "V5LCAR-00089",
+                        "materialName": "V carton FSC Recycle 100% 5 layers, 865x100x100mm (one top with curver)",
+                        "materialType": "CARTON",
+                        "costGroupId": "PACK"
+                    },
+                    {
+                        "materialCode": "VEN-OAK-21",
+                        "materialName": "W/OAK A 0.5mm, 70% straight grain - 30% crown grain, random, same color, w/knotty (<30mm), FSC control wood",
+                        "materialType": "",
+                        "costGroupId": "OUTSOURCE"
+                    },
+                    {
+                        "materialCode": "VEPCRW-00007",
+                        "materialName": "Rubberwood panel FSC 100% (1.8x650x1300mm), Type A-B",
+                        "materialType": "",
+                        "costGroupId": "WHITE WOOD"
+                    },
+                    {
+                        "materialCode": "WOODWO-00003",
+                        "materialName": "Wood, American White Oak, 4/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    },
+                    {
+                        "materialCode": "WOODWO-00007",
+                        "materialName": "Wood, American White Oak, 5/4 3C",
+                        "materialType": "",
+                        "costGroupId": "WOOD-OAK"
+                    }
+                ],
+                "attributes": [
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881183",
+                        "attributeValueName": "Bianco Oil",
+                        "attributeType": "5637149828",
+                        "attributeTypeName": "Wood Surface"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881338",
+                        "attributeValueName": "Sand Belfast 23 FR",
+                        "attributeType": "5637149832",
+                        "attributeTypeName": "Upholstery name"
+                    },
+                    {
+                        "groupValue": "Fabric",
+                        "attributeValue": "5637881221",
+                        "attributeValueName": "Belfast",
+                        "attributeType": "5637149831",
+                        "attributeTypeName": "Upholstery type"
+                    },
+                    {
+                        "groupValue": "",
+                        "attributeValue": "5637881203",
+                        "attributeValueName": "Supreme Green JL FSC",
+                        "attributeType": "5637149829",
+                        "attributeTypeName": "Packing"
+                    }
+                ]
+            }
+        ]
+    }
+]

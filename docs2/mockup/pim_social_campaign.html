@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIM Social Campaign — Campaign Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f3;
+    --bg-tertiary: #eeede9;
+    --text-primary: #1a1a18;
+    --text-secondary: #6b6b67;
+    --text-tertiary: #a0a09c;
+    --border-light: rgba(0,0,0,0.10);
+    --border-mid: rgba(0,0,0,0.18);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --blue-50: #E6F1FB;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --green-50: #EAF3DE;
+    --green-600: #3B6D11;
+    --amber-50: #FAEEDA;
+    --amber-600: #854F0B;
+    --amber-800: #633806;
+    --red-50: #FCEBEB;
+    --red-600: #A32D2D;
+    --purple-50: #F0ECFB;
+    --purple-600: #5B35A5;
+    --gray-100: #D3D1C7;
+    --gray-600: #5F5E5A;
+    --sidebar-w: 200px;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    min-height: 100vh;
+  }
+
+  .shell { display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar {
+    width: var(--sidebar-w); flex-shrink: 0;
+    background: var(--bg-primary); border-right: 0.5px solid var(--border-light);
+    display: flex; flex-direction: column;
+    position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; z-index: 10;
+  }
+  .logo { padding: 18px 16px 14px; border-bottom: 0.5px solid var(--border-light); }
+  .logo-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .logo-sub { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+  .nav { padding: 8px 0; }
+  .nav-section { font-size: 10px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.6px; padding: 14px 14px 4px; font-weight: 500; }
+  .nav-item { display: flex; align-items: center; gap: 8px; padding: 7px 14px; font-size: 13px; color: var(--text-secondary); cursor: pointer; border-left: 2px solid transparent; transition: background 0.12s; text-decoration: none; }
+  .nav-item:hover { background: var(--bg-secondary); color: var(--text-primary); }
+  .nav-item.active { color: var(--blue-600); background: var(--blue-50); border-left-color: var(--blue-600); font-weight: 500; }
+  .nav-item i { font-size: 16px; }
+
+  /* Main */
+  .main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+
+  /* Topbar */
+  .topbar { background: var(--bg-primary); border-bottom: 0.5px solid var(--border-light); padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 5; }
+  .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+  .breadcrumb strong { color: var(--text-primary); font-weight: 500; }
+  .breadcrumb i { font-size: 12px; }
+  .topbar-actions { display: flex; align-items: center; gap: 8px; }
+
+  .btn { display: inline-flex; align-items: center; gap: 5px; padding: 7px 13px; border-radius: var(--radius-md); font-size: 12px; font-weight: 500; cursor: pointer; border: 0.5px solid var(--border-mid); background: var(--bg-primary); color: var(--text-primary); font-family: inherit; transition: background 0.1s; }
+  .btn:hover { background: var(--bg-secondary); }
+  .btn-primary { background: var(--blue-600); color: #fff; border-color: var(--blue-600); }
+  .btn-primary:hover { background: var(--blue-800); }
+  .btn-green { background: var(--green-600); color: #fff; border-color: var(--green-600); }
+  .btn i { font-size: 15px; }
+
+  /* Content */
+  .content { padding: 20px 24px 40px; display: flex; flex-direction: column; gap: 16px; }
+
+  /* Badge */
+  .badge { font-size: 10px; padding: 2px 8px; border-radius: 99px; font-weight: 500; white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; }
+  .badge i { font-size: 11px; }
+  .badge-blue { background: var(--blue-50); color: var(--blue-600); }
+  .badge-green { background: var(--green-50); color: var(--green-600); }
+  .badge-amber { background: var(--amber-50); color: var(--amber-600); }
+  .badge-red { background: var(--red-50); color: var(--red-600); }
+  .badge-gray { background: var(--bg-secondary); color: var(--gray-600); }
+  .badge-purple { background: var(--purple-50); color: var(--purple-600); }
+
+  /* Panel */
+  .panel { background: var(--bg-primary); border: 0.5px solid var(--border-light); border-radius: var(--radius-lg); }
+  .panel-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 0.5px solid var(--border-light); }
+  .panel-title { font-size: 13px; font-weight: 500; color: var(--text-primary); display: flex; align-items: center; gap: 6px; }
+  .panel-title i { font-size: 15px; color: var(--text-secondary); }
+  .panel-action { font-size: 11px; color: var(--blue-600); cursor: pointer; }
+  .panel-body { padding: 14px 16px; }
+
+  /* Campaign header card */
+  .campaign-card {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .campaign-icon {
+    width: 52px; height: 52px; border-radius: var(--radius-md);
+    background: var(--purple-50); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .campaign-icon i { font-size: 26px; color: var(--purple-600); }
+  .campaign-info { flex: 1; }
+  .campaign-name { font-size: 17px; font-weight: 600; color: var(--text-primary); }
+  .campaign-sub { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+  .campaign-badges { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .campaign-stats { display: flex; gap: 20px; flex-shrink: 0; text-align: center; }
+  .campaign-stat-val { font-size: 22px; font-weight: 600; color: var(--text-primary); }
+  .campaign-stat-lbl { font-size: 10px; color: var(--text-secondary); margin-top: 1px; }
+
+  /* Campaign list */
+  .campaign-list { display: flex; flex-direction: column; gap: 10px; }
+  .campaign-row {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 12px 16px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; transition: border-color 0.12s;
+  }
+  .campaign-row:hover { border-color: var(--blue-400); }
+  .campaign-row.active { border-color: var(--blue-600); background: var(--blue-50); }
+  .camp-icon { width: 36px; height: 36px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .camp-icon.launch { background: var(--purple-50); }
+  .camp-icon.launch i { color: var(--purple-600); }
+  .camp-icon.seasonal { background: var(--amber-50); }
+  .camp-icon.seasonal i { color: var(--amber-600); }
+  .camp-icon.brand { background: var(--green-50); }
+  .camp-icon.brand i { color: var(--green-600); }
+  .camp-icon i { font-size: 18px; }
+  .camp-info { flex: 1; min-width: 0; }
+  .camp-name { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .camp-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+  .camp-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+
+  /* Three col */
+  .three-col { display: grid; grid-template-columns: 260px 1fr 300px; gap: 16px; align-items: start; }
+
+  /* Post composer */
+  .composer {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  /* Step indicator */
+  .steps { display: flex; border-bottom: 0.5px solid var(--border-light); background: var(--bg-secondary); }
+  .step { flex: 1; padding: 12px 10px; text-align: center; border-right: 0.5px solid var(--border-light); }
+  .step:last-child { border-right: none; }
+  .step-num { width: 22px; height: 22px; border-radius: 99px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin: 0 auto 5px; }
+  .step.active .step-num { background: var(--blue-600); color: #fff; }
+  .step.done .step-num { background: var(--green-600); color: #fff; }
+  .step-label { font-size: 10px; color: var(--text-secondary); font-weight: 500; }
+  .step.active .step-label { color: var(--blue-600); }
+  .step.done .step-label { color: var(--green-600); }
+
+  /* Asset picker */
+  .asset-picker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 14px 16px; }
+  .picker-thumb {
+    aspect-ratio: 1; background: var(--bg-secondary);
+    border-radius: var(--radius-md); border: 1.5px solid var(--border-light);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; cursor: pointer; transition: border-color 0.12s; position: relative;
+  }
+  .picker-thumb:hover { border-color: var(--blue-400); }
+  .picker-thumb.selected { border-color: var(--blue-600); background: var(--blue-50); }
+  .picker-thumb i { font-size: 22px; color: var(--text-secondary); }
+  .picker-thumb.selected i { color: var(--blue-600); }
+  .picker-thumb-lbl { font-size: 9px; color: var(--text-secondary); text-align: center; padding: 0 3px; }
+  .picker-check { position: absolute; top: 4px; right: 4px; width: 16px; height: 16px; background: var(--blue-600); border-radius: 99px; display: flex; align-items: center; justify-content: center; }
+  .picker-check i { font-size: 10px; color: #fff; }
+  .picker-more { grid-column: span 3; text-align: center; font-size: 11px; color: var(--blue-600); cursor: pointer; padding: 4px; }
+
+  /* Section divider inside composer */
+  .composer-section { border-top: 0.5px solid var(--border-light); }
+  .composer-section-header { padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .composer-section-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; }
+  .composer-section-title i { font-size: 14px; }
+
+  /* Caption area */
+  .caption-wrap { padding: 0 16px 14px; }
+  .caption-tabs { display: flex; gap: 0; margin-bottom: 10px; }
+  .caption-tab { padding: 5px 10px; font-size: 11px; border: 0.5px solid var(--border-light); background: var(--bg-secondary); color: var(--text-secondary); cursor: pointer; }
+  .caption-tab:first-child { border-radius: var(--radius-md) 0 0 var(--radius-md); }
+  .caption-tab:last-child { border-radius: 0 var(--radius-md) var(--radius-md) 0; border-left: none; }
+  .caption-tab.active { background: var(--blue-50); color: var(--blue-600); border-color: var(--blue-400); font-weight: 500; }
+  .caption-box {
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    font-size: 12px; color: var(--text-primary); line-height: 1.7;
+    min-height: 90px; position: relative;
+  }
+  .ai-badge { position: absolute; top: 8px; right: 8px; }
+  .caption-actions { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+  .caption-char { font-size: 10px; color: var(--text-tertiary); flex: 1; }
+
+  /* Platform toggles */
+  .platform-row { padding: 10px 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .platform-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: var(--radius-md);
+    border: 1.5px solid var(--border-light);
+    font-size: 12px; cursor: pointer; font-family: inherit;
+    background: var(--bg-secondary); color: var(--text-secondary);
+    transition: all 0.12s;
+  }
+  .platform-btn.on { border-color: var(--blue-400); background: var(--blue-50); color: var(--blue-600); font-weight: 500; }
+  .platform-btn.disabled { opacity: 0.4; cursor: not-allowed; }
+  .platform-btn i { font-size: 15px; }
+
+  /* Schedule row */
+  .schedule-row { padding: 12px 16px; display: flex; align-items: center; gap: 10px; border-top: 0.5px solid var(--border-light); }
+  .schedule-input {
+    flex: 1; border: 0.5px solid var(--border-mid);
+    border-radius: var(--radius-md); padding: 7px 10px;
+    font-size: 12px; color: var(--text-primary); font-family: inherit;
+    background: var(--bg-primary);
+  }
+
+  /* Approval flow */
+  .approval-flow { padding: 14px 16px; }
+  .flow-steps { display: flex; align-items: center; gap: 0; }
+  .flow-step { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; }
+  .flow-step:not(:last-child)::after {
+    content: ''; position: absolute; top: 12px; left: 50%; right: -50%;
+    height: 2px; background: var(--border-light); z-index: 0;
+  }
+  .flow-dot { width: 24px; height: 24px; border-radius: 99px; display: flex; align-items: center; justify-content: center; font-size: 12px; z-index: 1; }
+  .flow-dot.done { background: var(--green-600); color: #fff; }
+  .flow-dot.current { background: var(--blue-600); color: #fff; }
+  .flow-dot.todo { background: var(--bg-tertiary); color: var(--text-tertiary); border: 1.5px solid var(--border-light); }
+  .flow-label { font-size: 9px; color: var(--text-secondary); margin-top: 5px; text-align: center; max-width: 60px; }
+  .flow-label.current { color: var(--blue-600); font-weight: 600; }
+
+  /* Preview panel */
+  .preview-panel { display: flex; flex-direction: column; gap: 12px; }
+  .phone-frame {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .phone-header { padding: 10px 12px; border-bottom: 0.5px solid var(--border-light); display: flex; align-items: center; gap: 8px; }
+  .phone-header i { font-size: 16px; }
+  .phone-brand { font-size: 12px; font-weight: 600; }
+  .phone-format { font-size: 10px; color: var(--text-secondary); margin-left: auto; }
+  .phone-post-meta { display: flex; align-items: center; gap: 8px; padding: 10px 12px; }
+  .post-avatar { width: 30px; height: 30px; border-radius: 99px; background: var(--purple-50); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .post-avatar i { font-size: 14px; color: var(--purple-600); }
+  .post-account { flex: 1; }
+  .post-account-name { font-size: 12px; font-weight: 600; }
+  .post-account-handle { font-size: 10px; color: var(--text-secondary); }
+  .post-img { width: 100%; aspect-ratio: 1; background: var(--blue-50); display: flex; align-items: center; justify-content: center; }
+  .post-img i { font-size: 56px; color: var(--blue-400); }
+  .post-img.landscape { aspect-ratio: 1200/630; }
+  .post-caption { padding: 10px 12px; font-size: 11px; color: var(--text-primary); line-height: 1.6; }
+  .post-caption strong { font-weight: 600; }
+  .post-hashtags { font-size: 11px; color: var(--blue-600); }
+  .post-actions { padding: 8px 12px; border-top: 0.5px solid var(--border-light); display: flex; gap: 12px; }
+  .post-action-btn { font-size: 10px; color: var(--text-secondary); display: flex; align-items: center; gap: 4px; cursor: pointer; }
+  .post-action-btn i { font-size: 14px; }
+
+  /* Post list in campaign */
+  .post-list { display: flex; flex-direction: column; gap: 0; }
+  .post-row { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 0.5px solid var(--border-light); cursor: pointer; transition: background 0.1s; }
+  .post-row:last-child { border-bottom: none; }
+  .post-row:hover { background: var(--bg-secondary); }
+  .post-row.active { background: var(--blue-50); }
+  .post-thumb { width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--blue-50); display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 0.5px solid #B5D4F4; }
+  .post-thumb i { font-size: 20px; color: var(--blue-400); }
+  .post-info { flex: 1; min-width: 0; }
+  .post-name { font-size: 12px; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .post-meta { font-size: 10px; color: var(--text-secondary); margin-top: 2px; display: flex; align-items: center; gap: 5px; }
+  .post-meta i { font-size: 11px; }
+
+  /* Warning bar */
+  .warning-bar { background: var(--amber-50); border: 0.5px solid #EF9F27; border-radius: var(--radius-md); padding: 10px 14px; font-size: 12px; color: var(--amber-800); display: flex; align-items: center; gap: 8px; }
+  .warning-bar i { font-size: 17px; color: var(--amber-600); flex-shrink: 0; }
+
+  /* Stat strip */
+  .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat-card { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
+  .stat-label i { font-size: 13px; }
+  .stat-value { font-size: 24px; font-weight: 600; color: var(--text-primary); }
+  .stat-sub { font-size: 11px; color: var(--text-secondary); margin-top: 3px; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-name">PIM Studio</div>
+      <div class="logo-sub">Product Info Management</div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">Catalogue</div>
+      <a class="nav-item" href="pim_product_dashboard.html"><i class="ti ti-box"></i> Products</a>
+      <a class="nav-item" href="pim_product_set.html"><i class="ti ti-components"></i> Product Sets</a>
+      <a class="nav-item" href="#"><i class="ti ti-color-swatch"></i> Materials</a>
+
+      <div class="nav-section">Assets</div>
+      <a class="nav-item" href="pim_image_engine.html"><i class="ti ti-photo"></i> Image Engine</a>
+      <a class="nav-item" href="pim_asset_document_hub.html"><i class="ti ti-file-stack"></i> Document Hub</a>
+
+      <div class="nav-section">Publishing</div>
+      <a class="nav-item active" href="pim_social_campaign.html"><i class="ti ti-speakerphone"></i> Social Campaign</a>
+      <a class="nav-item" href="#"><i class="ti ti-send"></i> Publish Flow</a>
+
+      <div class="nav-section">System</div>
+      <a class="nav-item" href="#"><i class="ti ti-refresh"></i> D365 Sync</a>
+      <a class="nav-item" href="pim_settings_connected_accounts.html"><i class="ti ti-settings"></i> Settings</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="breadcrumb">
+        <span>Social Campaign</span>
+        <i class="ti ti-chevron-right"></i>
+        <strong>Alaska Range Launch Q3</strong>
+        <span style="color:var(--text-tertiary)">/ Post composer</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn"><i class="ti ti-calendar"></i> Calendar view</button>
+        <button class="btn"><i class="ti ti-plus"></i> New Campaign</button>
+        <button class="btn btn-primary"><i class="ti ti-plus"></i> New Post</button>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- Warning: Meta review -->
+      <div class="warning-bar">
+        <i class="ti ti-brand-meta"></i>
+        <span><strong>Meta App Review</strong> — ứng dụng đang trong quá trình review (nộp 3 tuần trước). Dự kiến thêm 1–3 tuần. Trong thời gian chờ, posts sẽ được lưu dạng <strong>Scheduled</strong> và tự đăng ngay khi approval granted.</span>
+      </div>
+
+      <!-- Stats -->
+      <div class="stat-strip">
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-speakerphone"></i> Campaigns</div>
+          <div class="stat-value">4</div>
+          <div class="stat-sub">2 active · 2 draft</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-layout-cards"></i> Total posts</div>
+          <div class="stat-value">21</div>
+          <div class="stat-sub">this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-calendar-event" style="color:var(--blue-600)"></i> Scheduled</div>
+          <div class="stat-value" style="color:var(--blue-600)">8</div>
+          <div class="stat-sub">next 30 days</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label"><i class="ti ti-check" style="color:var(--green-600)"></i> Published</div>
+          <div class="stat-value" style="color:var(--green-600)">13</div>
+          <div class="stat-sub">FB + IG combined</div>
+        </div>
+      </div>
+
+      <!-- Campaign list + Composer + Preview -->
+      <div class="three-col">
+
+        <!-- Left: Campaign + posts list -->
+        <div style="display:flex; flex-direction:column; gap:12px;">
+
+          <!-- Campaign list -->
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title"><i class="ti ti-speakerphone"></i> Campaigns</div>
+              <span class="panel-action">+ New</span>
+            </div>
+
+            <div class="campaign-list" style="padding:10px 10px;">
+              <div class="campaign-row active">
+                <div class="camp-icon launch"><i class="ti ti-rocket"></i></div>
+                <div class="camp-info">
+                  <div class="camp-name">Alaska Range Launch Q3</div>
+                  <div class="camp-sub">Jul 1 – Sep 30, 2025</div>
+                </div>
+                <div class="camp-right">
+                  <span class="badge badge-blue">Active</span>
+                  <span style="font-size:10px; color:var(--text-tertiary)">6 posts</span>
+                </div>
+              </div>
+
+              <div class="campaign-row">
+                <div class="camp-icon seasonal"><i class="ti ti-snowflake"></i></div>
+                <div class="camp-info">
+                  <div class="camp-name">Christmas 2025</div>
+                  <div class="camp-sub">Dec 1 – Dec 25, 2025</div>
+                </div>
+                <div class="camp-right">
+                  <span class="badge badge-gray">Draft</span>
+                  <span style="font-size:10px; color:var(--text-tertiary)">2 posts</span>
+                </div>
+              </div>
+
+              <div class="campaign-row">
+                <div class="camp-icon brand"><i class="ti ti-sparkles"></i></div>
+                <div class="camp-info">
+                  <div class="camp-name">Behind the Brand</div>
+                  <div class="camp-sub">Ongoing</div>
+                </div>
+                <div class="camp-right">
+                  <span class="badge badge-green">Active</span>
+                  <span style="font-size:10px; color:var(--text-tertiary)">13 posts</span>
+                </div>
+              </div>
+
+              <div class="campaign-row">
+                <div class="camp-icon seasonal"><i class="ti ti-sun"></i></div>
+                <div class="camp-info">
+                  <div class="camp-name">Summer Collection</div>
+                  <div class="camp-sub">Jun – Aug 2025</div>
+                </div>
+                <div class="camp-right">
+                  <span class="badge badge-gray">Draft</span>
+                  <span style="font-size:10px; color:var(--text-tertiary)">0 posts</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Posts in selected campaign -->
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title"><i class="ti ti-layout-cards"></i> Posts — Alaska Q3</div>
+              <span class="panel-action">+ Post</span>
+            </div>
+            <div class="post-list">
+              <div class="post-row active">
+                <div class="post-thumb"><i class="ti ti-photo"></i></div>
+                <div class="post-info">
+                  <div class="post-name">Alaska Chair — hero shot</div>
+                  <div class="post-meta"><i class="ti ti-brand-facebook"></i> FB <i class="ti ti-brand-instagram"></i> IG · Mon 9:00</div>
+                </div>
+                <span class="badge badge-amber">Pending</span>
+              </div>
+              <div class="post-row">
+                <div class="post-thumb"><i class="ti ti-photo"></i></div>
+                <div class="post-info">
+                  <div class="post-name">Alaska — lifestyle scene</div>
+                  <div class="post-meta"><i class="ti ti-brand-instagram"></i> IG only · Wed 12:00</div>
+                </div>
+                <span class="badge badge-blue">Scheduled</span>
+              </div>
+              <div class="post-row">
+                <div class="post-thumb"><i class="ti ti-photo"></i></div>
+                <div class="post-info">
+                  <div class="post-name">Alaska — detail swatch oak</div>
+                  <div class="post-meta"><i class="ti ti-brand-facebook"></i> FB · Fri 17:00</div>
+                </div>
+                <span class="badge badge-green">Published</span>
+              </div>
+              <div class="post-row">
+                <div class="post-thumb" style="background:var(--bg-secondary); border:none;"><i class="ti ti-photo" style="color:var(--text-tertiary)"></i></div>
+                <div class="post-info">
+                  <div class="post-name">Alaska — colour carousel</div>
+                  <div class="post-meta"><i class="ti ti-brand-instagram"></i> IG carousel · TBD</div>
+                </div>
+                <span class="badge badge-gray">Draft</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Center: Post composer -->
+        <div class="composer">
+
+          <!-- Steps -->
+          <div class="steps">
+            <div class="step done">
+              <div class="step-num"><i class="ti ti-check" style="font-size:11px"></i></div>
+              <div class="step-label">Chọn asset</div>
+            </div>
+            <div class="step active">
+              <div class="step-num">2</div>
+              <div class="step-label">AI caption</div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-label">Platform</div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-label">Schedule</div>
+            </div>
+          </div>
+
+          <!-- Step 1 (done): asset picker  -->
+          <div class="composer-section">
+            <div class="composer-section-header">
+              <div class="composer-section-title" style="color:var(--green-600)"><i class="ti ti-circle-check"></i> Selected assets (2)</div>
+              <span class="panel-action">Change</span>
+            </div>
+            <div class="asset-picker-grid">
+              <div class="picker-thumb selected">
+                <i class="ti ti-photo"></i>
+                <div class="picker-thumb-lbl">Alaska packshot hero</div>
+                <div class="picker-check"><i class="ti ti-check"></i></div>
+              </div>
+              <div class="picker-thumb selected">
+                <i class="ti ti-photo"></i>
+                <div class="picker-thumb-lbl">Alaska lifestyle room</div>
+                <div class="picker-check"><i class="ti ti-check"></i></div>
+              </div>
+              <div class="picker-thumb">
+                <i class="ti ti-photo"></i>
+                <div class="picker-thumb-lbl">Alaska swatch oak</div>
+              </div>
+              <div class="picker-thumb">
+                <i class="ti ti-photo"></i>
+                <div class="picker-thumb-lbl">Alaska rendering</div>
+              </div>
+              <div class="picker-thumb">
+                <i class="ti ti-photo"></i>
+                <div class="picker-thumb-lbl">30317 portrait</div>
+              </div>
+              <div class="picker-thumb" style="background:var(--blue-50); border-color:var(--blue-400)">
+                <i class="ti ti-search" style="color:var(--blue-600)"></i>
+                <div class="picker-thumb-lbl" style="color:var(--blue-600)">Browse PIM</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: AI caption -->
+          <div class="composer-section">
+            <div class="composer-section-header">
+              <div class="composer-section-title" style="color:var(--blue-600)"><i class="ti ti-sparkles"></i> AI Caption</div>
+              <button class="btn" style="font-size:11px; padding:4px 10px;"><i class="ti ti-refresh"></i> Regenerate</button>
+            </div>
+            <div class="caption-wrap">
+              <div class="caption-tabs">
+                <div class="caption-tab active"><i class="ti ti-brand-instagram" style="font-size:12px"></i> Instagram</div>
+                <div class="caption-tab"><i class="ti ti-brand-facebook" style="font-size:12px"></i> Facebook</div>
+              </div>
+              <div class="caption-box">
+                Introducing the Alaska Chair — where Nordic minimalism meets enduring craftsmanship. Solid oak frame, premium upholstery in 100+ finishes. Designed to belong in your space, forever.
+                <br><br>
+                <span style="color:var(--blue-600)">#AlaskaChair #ScandinavianDesign #InteriorDesign #FurnitureDesign #MinimalistHome</span>
+                <div class="ai-badge"><span class="badge badge-purple"><i class="ti ti-sparkles"></i> AI generated</span></div>
+              </div>
+              <div class="caption-actions">
+                <span class="caption-char">247 / 2200 characters</span>
+                <button class="btn" style="font-size:11px; padding:4px 10px;"><i class="ti ti-edit"></i> Edit</button>
+                <button class="btn" style="font-size:11px; padding:4px 10px; background:var(--amber-50); color:var(--amber-800); border-color:#EFC96B;"><i class="ti ti-send"></i> Submit for review</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Platform -->
+          <div class="composer-section">
+            <div class="composer-section-header">
+              <div class="composer-section-title"><i class="ti ti-layout-grid"></i> Platforms</div>
+            </div>
+            <div class="platform-row">
+              <button class="platform-btn on"><i class="ti ti-brand-facebook"></i> Facebook</button>
+              <button class="platform-btn on"><i class="ti ti-brand-instagram"></i> Instagram</button>
+              <button class="platform-btn disabled"><i class="ti ti-brand-linkedin"></i> LinkedIn <span style="font-size:9px; margin-left:2px">(P2)</span></button>
+              <button class="platform-btn disabled"><i class="ti ti-brand-tiktok"></i> TikTok <span style="font-size:9px; margin-left:2px">(P2)</span></button>
+            </div>
+            <div style="padding:0 16px 12px; font-size:11px; color:var(--text-secondary); display:flex; gap:16px;">
+              <span><strong>FB:</strong> 1 200 × 630 px · Single image</span>
+              <span><strong>IG:</strong> 1 080 × 1 080 px · Square post</span>
+            </div>
+          </div>
+
+          <!-- Step 4: Schedule -->
+          <div class="schedule-row">
+            <i class="ti ti-calendar" style="font-size:16px; color:var(--text-secondary); flex-shrink:0"></i>
+            <input class="schedule-input" type="text" value="Monday, Jul 07, 2025  —  09:00 AM">
+            <button class="btn" style="font-size:11px; padding:6px 10px;"><i class="ti ti-clock"></i> Now</button>
+          </div>
+
+          <!-- Approval flow -->
+          <div class="approval-flow" style="border-top:0.5px solid var(--border-light);">
+            <div style="font-size:11px; font-weight:600; color:var(--text-secondary); margin-bottom:12px; display:flex; align-items:center; gap:5px;"><i class="ti ti-shield-check" style="font-size:13px"></i> Approval flow</div>
+            <div class="flow-steps">
+              <div class="flow-step">
+                <div class="flow-dot done"><i class="ti ti-check" style="font-size:11px"></i></div>
+                <div class="flow-label">Draft</div>
+              </div>
+              <div class="flow-step">
+                <div class="flow-dot current"><i class="ti ti-user" style="font-size:11px"></i></div>
+                <div class="flow-label current">Pending review</div>
+              </div>
+              <div class="flow-step">
+                <div class="flow-dot todo"><i class="ti ti-circle-check" style="font-size:11px"></i></div>
+                <div class="flow-label">Approved</div>
+              </div>
+              <div class="flow-step">
+                <div class="flow-dot todo"><i class="ti ti-calendar" style="font-size:11px"></i></div>
+                <div class="flow-label">Scheduled</div>
+              </div>
+              <div class="flow-step">
+                <div class="flow-dot todo"><i class="ti ti-send" style="font-size:11px"></i></div>
+                <div class="flow-label">Published</div>
+              </div>
+            </div>
+            <div style="margin-top:12px; font-size:10px; color:var(--text-tertiary); display:flex; align-items:center; gap:5px;">
+              <i class="ti ti-info-circle" style="font-size:12px"></i>
+              Caption bắt buộc human-approve trước khi đăng — AI generate là bước hỗ trợ, không tự động publish.
+            </div>
+          </div>
+
+          <!-- Composer actions -->
+          <div style="padding:14px 16px; border-top:0.5px solid var(--border-light); display:flex; gap:8px; justify-content:flex-end; background:var(--bg-secondary);">
+            <button class="btn"><i class="ti ti-x"></i> Discard</button>
+            <button class="btn"><i class="ti ti-device-floppy"></i> Save draft</button>
+            <button class="btn btn-primary"><i class="ti ti-send"></i> Submit for review</button>
+          </div>
+
+        </div>
+
+        <!-- Right: Preview -->
+        <div class="preview-panel">
+
+          <!-- Instagram preview -->
+          <div class="phone-frame">
+            <div class="phone-header">
+              <i class="ti ti-brand-instagram" style="color:#E1306C; font-size:16px;"></i>
+              <span class="phone-brand" style="color:#E1306C">Instagram</span>
+              <span class="phone-format">Square 1 080 × 1 080</span>
+            </div>
+            <div class="phone-post-meta">
+              <div class="post-avatar"><i class="ti ti-building-store"></i></div>
+              <div class="post-account">
+                <div class="post-account-name">response_furniture</div>
+                <div class="post-account-handle">Sponsored</div>
+              </div>
+              <i class="ti ti-dots" style="color:var(--text-secondary); font-size:18px;"></i>
+            </div>
+            <div class="post-img">
+              <i class="ti ti-armchair"></i>
+            </div>
+            <div class="post-caption">
+              <strong>response_furniture</strong> Introducing the Alaska Chair — where Nordic minimalism meets enduring craftsmanship. Solid oak frame, premium upholstery in 100+ finishes…
+              <br><span class="post-hashtags">#AlaskaChair #ScandinavianDesign #InteriorDesign</span>
+            </div>
+            <div class="post-actions">
+              <div class="post-action-btn"><i class="ti ti-heart"></i> Like</div>
+              <div class="post-action-btn"><i class="ti ti-message-circle"></i> Comment</div>
+              <div class="post-action-btn"><i class="ti ti-send"></i> Share</div>
+            </div>
+          </div>
+
+          <!-- Facebook preview -->
+          <div class="phone-frame">
+            <div class="phone-header">
+              <i class="ti ti-brand-facebook" style="color:#1877F2; font-size:16px;"></i>
+              <span class="phone-brand" style="color:#1877F2">Facebook</span>
+              <span class="phone-format">Feed 1 200 × 630</span>
+            </div>
+            <div class="phone-post-meta">
+              <div class="post-avatar"><i class="ti ti-building-store"></i></div>
+              <div class="post-account">
+                <div class="post-account-name">Response Furniture</div>
+                <div class="post-account-handle">Mon Jul 7 · 9:00 AM · 🌐</div>
+              </div>
+            </div>
+            <div class="post-img landscape">
+              <i class="ti ti-armchair"></i>
+            </div>
+            <div class="post-caption">
+              Introducing the Alaska Chair — where Nordic minimalism meets enduring craftsmanship. Solid oak frame, premium upholstery in 100+ finishes. Designed to belong in your space, forever.
+              <br><span class="post-hashtags">#AlaskaChair #ScandinavianDesign</span>
+            </div>
+            <div class="post-actions">
+              <div class="post-action-btn"><i class="ti ti-thumb-up"></i> Like</div>
+              <div class="post-action-btn"><i class="ti ti-message"></i> Comment</div>
+              <div class="post-action-btn"><i class="ti ti-share"></i> Share</div>
+            </div>
+          </div>
+
+          <!-- Timing note -->
+          <div style="background:var(--bg-primary); border:0.5px solid var(--border-light); border-radius:var(--radius-lg); padding:12px 14px; font-size:11px; color:var(--text-secondary);">
+            <div style="display:flex; align-items:center; gap:6px; font-weight:600; color:var(--text-primary); margin-bottom:6px;"><i class="ti ti-clock" style="font-size:13px; color:var(--blue-400)"></i> Scheduled</div>
+            <div>Mon, Jul 7, 2025 — 09:00 AM</div>
+            <div style="margin-top:4px; color:var(--text-tertiary)">Auto-publish when Meta approval granted · post_id saved for tracking</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+</div>
+</body>
+</html>
