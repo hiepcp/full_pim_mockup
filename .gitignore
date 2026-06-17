@@ -1,0 +1,36 @@
+# D365 metadata source (52 MB, gitignored - regenerate via extract-pim-metadata.ps1)
+dynamic-metadata.xml
+
+# Logs
+*.log
+npm-debug.log*
+
+# .NET build artifacts
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Node
+node_modules/
+dist/
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Office temporary files
+~$*.pptx
+
+# Env (keep .env.example committed)
+.env.local
+*.local

@@ -1,0 +1,30 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+
+# .NET
+bin/
+obj/
+publish/
+
+# Docker volumes
+postgres_data/
+redis_data/
+
+# IDE
+.vs/
+.idea/
+*.swp
+
+# OS
+Thumbs.db
+.DS_Store

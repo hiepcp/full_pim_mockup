@@ -1,0 +1,44 @@
+## .NET gitignore
+
+# Build results
+bin/
+obj/
+out/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# Publish output
+publish/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Certificates
+certs/
+*.pfx
+*.p12
+*.pem
+*.key
+
+# Environment overrides
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
