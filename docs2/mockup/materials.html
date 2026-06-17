@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Materials — PIM Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Outfit', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#E6F1FB', 100:'#CCDFF7', 400:'#378ADD', 600:'#185FA5', 800:'#0C447C' },
+          },
+          boxShadow: {
+            card: '0 1px 4px rgba(24,95,165,0.06)',
+            hover: '0 4px 14px rgba(24,95,165,0.10)',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <style>
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:translateY(0) } }
+    @keyframes fadeIn   { from { opacity:0 } to { opacity:1 } }
+    @keyframes pulse    { 0%,100% { opacity:1 } 50% { opacity:.45 } }
+    .tabnum { font-variant-numeric: tabular-nums; }
+    ::-webkit-scrollbar { width:5px; height:5px; }
+    ::-webkit-scrollbar-track { background:transparent; }
+    ::-webkit-scrollbar-thumb { background:#d6d3d1; border-radius:99px; }
+
+    /* Wood grain CSS swatch */
+    .swatch-oak {
+      background: repeating-linear-gradient(
+        82deg,
+        #c8a96e 0px, #c8a96e 2px,
+        #b8945c 3px, #c0a068 8px,
+        #c8a96e 9px, #c8a96e 14px,
+        #a8803c 15px, #b89050 20px
+      );
+    }
+    .swatch-ash {
+      background: repeating-linear-gradient(
+        88deg,
+        #d4c4a0 0px, #d4c4a0 3px,
+        #c0b090 4px, #c8b898 10px,
+        #d0c0a0 11px, #d0c0a0 18px,
+        #b8a880 19px, #c8b890 24px
+      );
+    }
+    .swatch-beech {
+      background: repeating-linear-gradient(
+        85deg,
+        #deb887 0px, #deb887 2px,
+        #cca474 3px, #d4ac7c 9px,
+        #deb887 10px, #deb887 16px,
+        #bc9460 17px, #cca070 22px
+      );
+    }
+    .swatch-pine {
+      background: repeating-linear-gradient(
+        78deg,
+        #e8c890 0px, #e8c890 2px,
+        #d4b478 3px, #dcbc80 8px,
+        #e4c48c 9px, #e4c48c 15px,
+        #c8a064 16px, #d8b070 21px
+      );
+    }
+    .swatch-wool-grey {
+      background: repeating-linear-gradient(
+        45deg,
+        #8a8a8a 0px, #8a8a8a 1px, transparent 1px, transparent 4px,
+        #7a7a7a 4px, #7a7a7a 5px, transparent 5px, transparent 8px
+      ), #9a9a9a;
+    }
+    .swatch-wool-teal {
+      background: repeating-linear-gradient(
+        45deg,
+        #2a7a72 0px, #2a7a72 1px, transparent 1px, transparent 4px,
+        #1e6860 4px, #1e6860 5px, transparent 5px, transparent 8px
+      ), #3a8a82;
+    }
+    .swatch-brass {
+      background: linear-gradient(135deg, #d4aa60 0%, #c09840 30%, #e0c070 55%, #b88c30 80%, #d0a850 100%);
+    }
+    .swatch-matte-black {
+      background: repeating-linear-gradient(
+        90deg,
+        #2a2a2a 0px, #2a2a2a 2px,
+        #1e1e1e 2px, #1e1e1e 5px
+      );
+    }
+    .swatch-stain {
+      background: linear-gradient(135deg, #8a9ca0 0%, #7a8c90 40%, #96a8ac 70%, #6a7c80 100%);
+    }
+    .swatch-sunburst {
+      background: linear-gradient(135deg, #f0c040 0%, #e8b030 40%, #f4c850 70%, #d89c20 100%);
+    }
+
+    /* Timeline connector */
+    .timeline-line {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      height: 2px;
+      background: linear-gradient(to right, #3B6D11 33%, #854F0B 33%, #854F0B 66%, #d1d5db 66%);
+    }
+
+    /* Active material item highlight */
+    .mat-item-active {
+      background: #E6F1FB;
+      border-left: 2px solid #185FA5;
+    }
+    .mat-item {
+      border-left: 2px solid transparent;
+      transition: background 0.12s;
+    }
+    .mat-item:hover { background: #f5f5f3; }
+  </style>
+</head>
+<body class="bg-stone-100 font-sans text-stone-900 antialiased">
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="w-[200px] shrink-0 bg-white border-r border-black/10 fixed top-0 left-0 h-screen overflow-y-auto flex flex-col z-10">
+  <div class="px-4 py-[18px] border-b border-black/10">
+    <div class="text-sm font-semibold text-stone-900">PIM Studio</div>
+    <div class="text-[11px] text-stone-500 mt-0.5">Product Info Management</div>
+  </div>
+  <nav class="py-2 flex-1">
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Catalogue</div>
+    <a href="products.html"        class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-box text-base"></i> Products</a>
+    <a href="product-sets.html"    class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-components text-base"></i> Product Sets</a>
+    <a href="materials.html"       class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-brand-600 bg-brand-50 border-l-2 border-brand-600 font-medium"><i class="ti ti-color-swatch text-base"></i> Materials</a>
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Assets</div>
+    <a href="image-engine.html"    class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-photo text-base"></i> Image Engine</a>
+    <a href="document-hub.html"    class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-file-stack text-base"></i> Document Hub</a>
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Publishing</div>
+    <a href="social-campaign.html" class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-speakerphone text-base"></i> Social Campaign</a>
+    <a href="publish-flow.html"                    class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-send text-base"></i> Publish Flow</a>
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">System</div>
+    <a href="settings.html"        class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-settings text-base"></i> Settings</a>
+  </nav>
+  <div class="px-3.5 py-3 border-t border-black/10">
+    <div class="flex items-center gap-2">
+      <div class="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center text-[10px] font-bold text-brand-600">HC</div>
+      <div>
+        <div class="text-[11px] font-medium text-stone-700 leading-tight">Hugo Claes</div>
+        <div class="text-[10px] text-stone-400 leading-tight">Admin</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="ml-[200px] flex flex-col min-h-screen">
+
+  <!-- TOPBAR -->
+  <header class="sticky top-0 z-20 bg-white border-b border-black/10 px-6 h-12 flex items-center justify-between gap-4"
+          style="animation: fadeUp 0.2s ease both">
+    <nav class="flex items-center gap-1.5 text-[12px] text-stone-500">
+      <a href="products.html" class="hover:text-brand-600 transition-colors">Catalogue</a>
+      <i class="ti ti-chevron-right text-[11px] text-stone-300"></i>
+      <span class="font-medium text-stone-800">Materials</span>
+    </nav>
+    <div class="flex items-center gap-2">
+      <button class="rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 text-stone-700 border border-black/10 hover:bg-stone-200 transition-all hover:-translate-y-px active:scale-[0.98] flex items-center gap-1.5">
+        <i class="ti ti-download text-sm"></i> Export report
+      </button>
+      <button class="rounded-lg px-3 py-1.5 text-xs font-medium bg-brand-600 text-white hover:bg-brand-800 transition-all hover:-translate-y-px active:scale-[0.98] flex items-center gap-1.5">
+        <i class="ti ti-plus text-sm"></i> Add material
+      </button>
+    </div>
+  </header>
+
+  <!-- STATS BAR -->
+  <div class="px-6 py-3 bg-white border-b border-black/10 flex items-center gap-6"
+       style="animation: fadeUp 0.2s ease both; animation-delay: 0.05s">
+    <div class="flex items-center gap-2">
+      <span class="text-[22px] font-bold tabnum text-stone-900">49</span>
+      <span class="text-xs text-stone-500">total materials</span>
+    </div>
+    <div class="w-px h-6 bg-black/10"></div>
+    <div class="flex items-center gap-1.5">
+      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+      <span class="text-sm font-semibold tabnum text-emerald-700">34</span>
+      <span class="text-xs text-stone-400">Active</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+      <span class="text-sm font-semibold tabnum text-amber-700">3</span>
+      <span class="text-xs text-stone-400">Phasing Out</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <span class="w-2 h-2 rounded-full bg-red-500"></span>
+      <span class="text-sm font-semibold tabnum text-red-700">4</span>
+      <span class="text-xs text-stone-400">Discontinued</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <span class="w-2 h-2 rounded-full bg-stone-400"></span>
+      <span class="text-sm font-semibold tabnum text-stone-500">8</span>
+      <span class="text-xs text-stone-400">Obsolete</span>
+    </div>
+    <div class="ml-auto flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1.5">
+      <i class="ti ti-alert-triangle text-amber-500 text-sm"></i>
+      <span class="text-xs font-medium text-amber-700">3 materials Phasing Out affect 56 products — review needed</span>
+    </div>
+  </div>
+
+  <!-- MASTER-DETAIL SPLIT -->
+  <div class="flex flex-1 overflow-hidden" style="animation: fadeUp 0.25s ease both; animation-delay: 0.1s">
+
+    <!-- ══ LEFT: MATERIAL LIST ══ -->
+    <aside class="w-[272px] shrink-0 bg-white border-r border-black/10 flex flex-col overflow-hidden">
+
+      <!-- Search + filter -->
+      <div class="p-3 border-b border-black/10 space-y-2">
+        <div class="relative">
+          <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
+          <input type="text" placeholder="Search materials..." value=""
+                 class="w-full pl-8 pr-3 py-1.5 text-xs bg-stone-50 border border-black/10 rounded-lg outline-none focus:border-brand-400 focus:bg-white transition-colors placeholder:text-stone-400">
+        </div>
+        <!-- Type filter pills -->
+        <div class="flex flex-wrap gap-1">
+          <button class="px-2 py-0.5 text-[11px] font-medium rounded-md bg-brand-600 text-white">All</button>
+          <button class="px-2 py-0.5 text-[11px] font-medium rounded-md bg-stone-100 text-stone-600 hover:bg-stone-200 transition-colors">Wood</button>
+          <button class="px-2 py-0.5 text-[11px] font-medium rounded-md bg-stone-100 text-stone-600 hover:bg-stone-200 transition-colors">Fabric</button>
+          <button class="px-2 py-0.5 text-[11px] font-medium rounded-md bg-stone-100 text-stone-600 hover:bg-stone-200 transition-colors">Metal</button>
+          <button class="px-2 py-0.5 text-[11px] font-medium rounded-md bg-stone-100 text-stone-600 hover:bg-stone-200 transition-colors">Surface</button>
+        </div>
+      </div>
+
+      <!-- List -->
+      <div class="flex-1 overflow-y-auto">
+
+        <!-- Section: Active -->
+        <div class="px-3 pt-3 pb-1 text-[10px] font-semibold text-stone-400 uppercase tracking-widest flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active · 34
+        </div>
+
+        <!-- WWASH-001 -->
+        <div class="mat-item px-3 py-2.5 cursor-pointer">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md shrink-0 swatch-ash"></div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-semibold text-stone-800 leading-tight">European Walnut</div>
+              <div class="text-[10px] text-stone-400 tabnum">WWWNT-001 · Wood · 12 products</div>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+          </div>
+        </div>
+
+        <!-- WWEUR-004 -->
+        <div class="mat-item px-3 py-2.5 cursor-pointer">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md shrink-0 swatch-beech"></div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-semibold text-stone-800 leading-tight">European Beech</div>
+              <div class="text-[10px] text-stone-400 tabnum">WWEUR-004 · Wood · 8 products</div>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+          </div>
+        </div>
+
+        <!-- FABRC-002 -->
+        <div class="mat-item px-3 py-2.5 cursor-pointer">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md shrink-0 swatch-wool-grey"></div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-semibold text-stone-800 leading-tight">Hallingdal 65 Wool</div>
+              <div class="text-[10px] text-stone-400 tabnum">FABRC-002 · Fabric · 19 products</div>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+          </div>
+        </div>
+
+        <!-- METL-007 -->
+        <div class="mat-item px-3 py-2.5 cursor-pointer">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md shrink-0 swatch-brass"></div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-semibold text-stone-800 leading-tight">Brushed Brass</div>
+              <div class="text-[10px] text-stone-400 tabnum">METL-007 · Metal · 14 products</div>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+          </div>
+        </div>
+
+        <div class="px-3 py-1.5 text-[11px] text-stone-400 cursor-pointer hover:text-brand-600 transition-colors">
+          + 30 more active materials
+        </div>
+
+        <!-- Section: Phasing Out -->
+        <div class="px-3 pt-3 pb-1 text-[10px] font-semibold text-stone-400 uppercase tracking-widest flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500" style="animation: pulse 2s ease-in-out infinite"></span> Phasing Out · 3
+        </div>
+
+        <!-- WOODWO-003 ← SELECTED -->
+        <div class="mat-item mat-item-active px-3 py-2.5 cursor-pointer">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md shrink-0 swatch-oak ring-2 ring-brand-400"></div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-semibold text-stone-900 leading-tight">American White Oak</div>
+              <div class="text-[10px] text-stone-500 tabnum">WOODWO-003 · Wood · <span class="font-semibold text-amber-700">47 products</span></div>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" style="animation: pulse 2s ease-in-out infinite"></span>
+          </div>
+        </div>
+
+        <!-- FABRC-011 -->
+        <div class="mat-item px-3 py-2.5 cursor-pointer bg-amber-50/40">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md shrink-0 swatch-wool-teal"></div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-semibold text-stone-800 leading-tight">Kvadrat Remix 2</div>
+              <div class="text-[10px] text-stone-400 tabnum">FABRC-011 · Fabric · <span class="text-amber-700 font-semibold">6 products</span></div>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
+          </div>
+        </div>
+
+        <!-- STAIN-009 -->
+        <div class="mat-item px-3 py-2.5 cursor-pointer bg-amber-50/40">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md shrink-0 swatch-stain"></div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-semibold text-stone-800 leading-tight">Nordic Grey Wash</div>
+              <div class="text-[10px] text-stone-400 tabnum">STAIN-009 · Surface · <span class="text-amber-700 font-semibold">3 products</span></div>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
+          </div>
+        </div>
+
+        <!-- Section: Discontinued -->
+        <div class="px-3 pt-3 pb-1 text-[10px] font-semibold text-stone-400 uppercase tracking-widest flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Discontinued · 4
+        </div>
+
+        <!-- METL-019 -->
+        <div class="mat-item px-3 py-2.5 cursor-pointer bg-red-50/30">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md shrink-0 swatch-matte-black opacity-60"></div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-medium text-stone-500 leading-tight line-through decoration-stone-400">Matte Black Powder Coat</div>
+              <div class="text-[10px] text-stone-400 tabnum">METL-019 · Metal · 23 products ⚠</div>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
+          </div>
+        </div>
+
+        <!-- STAIN-003 -->
+        <div class="mat-item px-3 py-2.5 cursor-pointer bg-red-50/30">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md shrink-0 swatch-stain opacity-50"></div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-medium text-stone-500 leading-tight line-through decoration-stone-400">Nordic Grey Stain</div>
+              <div class="text-[10px] text-stone-400 tabnum">STAIN-003 · Surface · 8 products ⚠</div>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0"></span>
+          </div>
+        </div>
+
+        <div class="px-3 py-1.5 text-[11px] text-stone-400 cursor-pointer hover:text-brand-600 transition-colors">
+          + 2 more discontinued
+        </div>
+
+        <!-- Section: Obsolete -->
+        <div class="px-3 pt-3 pb-1 text-[10px] font-semibold text-stone-400 uppercase tracking-widest flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-stone-400"></span> Obsolete · 8
+        </div>
+
+        <div class="mat-item px-3 py-2.5 cursor-pointer opacity-50">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md shrink-0 swatch-pine grayscale"></div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-medium text-stone-400 leading-tight">Scots Pine</div>
+              <div class="text-[10px] text-stone-400 tabnum">WWPIN-015 · Wood · 0 products</div>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-stone-400 shrink-0"></span>
+          </div>
+        </div>
+
+        <div class="mat-item px-3 py-2.5 cursor-pointer opacity-50">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md shrink-0 swatch-sunburst grayscale"></div>
+            <div class="flex-1 min-w-0">
+              <div class="text-[12px] font-medium text-stone-400 leading-tight">Sunburst Yellow Boucle</div>
+              <div class="text-[10px] text-stone-400 tabnum">FABRC-020 · Fabric · 0 products</div>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-stone-400 shrink-0"></span>
+          </div>
+        </div>
+
+        <div class="px-3 py-1.5 text-[11px] text-stone-400 cursor-pointer hover:text-brand-600 transition-colors">
+          + 6 more obsolete
+        </div>
+
+        <div class="h-6"></div>
+      </div>
+    </aside>
+
+    <!-- ══ RIGHT: DETAIL PANEL ══ -->
+    <main class="flex-1 overflow-y-auto p-6 space-y-4" style="animation: fadeIn 0.3s ease both; animation-delay: 0.15s">
+
+      <!-- MATERIAL HEADER CARD -->
+      <div class="bg-white rounded-xl border border-black/10 shadow-card p-5">
+        <div class="flex items-start gap-5">
+
+          <!-- Large swatch -->
+          <div class="w-[88px] h-[88px] rounded-xl shrink-0 swatch-oak shadow-md" title="American White Oak texture"></div>
+
+          <!-- Meta -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start gap-3 flex-wrap">
+              <div>
+                <h1 class="text-lg font-bold text-stone-900 leading-tight">American White Oak</h1>
+                <div class="text-sm text-stone-500 mt-0.5 tabnum">WOODWO-003 &nbsp;·&nbsp; Wood &nbsp;·&nbsp; Grade A &nbsp;·&nbsp; FSC Certified</div>
+              </div>
+              <div class="flex items-center gap-2 mt-0.5 flex-wrap">
+                <span class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500" style="animation: pulse 2s ease-in-out infinite"></span>
+                  Phasing Out
+                </span>
+                <span class="inline-flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium bg-red-50 text-red-700 border border-red-200">
+                  <i class="ti ti-alert-triangle text-sm"></i> 47 products affected
+                </span>
+              </div>
+            </div>
+
+            <div class="mt-3 flex flex-wrap gap-x-6 gap-y-1.5">
+              <div class="flex items-center gap-1.5 text-xs text-stone-500">
+                <i class="ti ti-building-factory2 text-stone-400 text-sm"></i>
+                <span>Supplier: <span class="text-stone-700 font-medium">Oregon Hardwoods Co.</span></span>
+              </div>
+              <div class="flex items-center gap-1.5 text-xs text-stone-500">
+                <i class="ti ti-certificate text-stone-400 text-sm"></i>
+                <span>FSC-C012345 · PEFC</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-xs text-stone-500">
+                <i class="ti ti-calendar text-stone-400 text-sm"></i>
+                <span>Added Jan 2022 &nbsp;·&nbsp; Updated 10 Mar 2025</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-xs text-stone-500">
+                <i class="ti ti-user text-stone-400 text-sm"></i>
+                <span>Owner: <span class="text-stone-700 font-medium">Erik Olsen</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-col gap-2 shrink-0">
+            <button class="rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 border border-black/10 text-stone-700 hover:bg-stone-200 transition-all hover:-translate-y-px active:scale-[0.98] flex items-center gap-1.5 whitespace-nowrap">
+              <i class="ti ti-edit text-sm"></i> Edit
+            </button>
+            <button class="rounded-lg px-3 py-1.5 text-xs font-medium bg-red-50 border border-red-200 text-red-700 hover:bg-red-100 transition-all hover:-translate-y-px active:scale-[0.98] flex items-center gap-1.5 whitespace-nowrap">
+              <i class="ti ti-ban text-sm"></i> Discontinue
+            </button>
+          </div>
+        </div>
+
+        <!-- Warning note -->
+        <div class="mt-4 flex items-start gap-2.5 bg-amber-50 border border-amber-200 rounded-lg px-3.5 py-2.5">
+          <i class="ti ti-info-circle text-amber-500 text-sm mt-0.5 shrink-0"></i>
+          <p class="text-xs text-amber-800 leading-relaxed">
+            <span class="font-semibold">Phasing Out</span> — When this material transitions to Discontinued, all linked assets and products will be automatically flagged. New designs must not use this material. Notify Design &amp; BOM Team before Q4 2025.
+          </p>
+        </div>
+      </div>
+
+      <!-- LIFECYCLE TIMELINE -->
+      <div class="bg-white rounded-xl border border-black/10 shadow-card p-5">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-sm font-semibold text-stone-800">Lifecycle history</h2>
+          <button class="text-xs text-brand-600 hover:underline">Update status</button>
+        </div>
+
+        <!-- Timeline -->
+        <div class="relative pb-2">
+          <!-- Connector line -->
+          <div class="absolute top-[18px] left-[18px] right-0 h-[2px] bg-stone-200" style="right: calc(25% + 18px)"></div>
+          <div class="absolute top-[18px] left-[18px] h-[2px] bg-emerald-500" style="width: calc(33% - 18px)"></div>
+          <div class="absolute top-[18px] h-[2px] bg-amber-400" style="left: 33%; width: 15%"></div>
+
+          <div class="grid grid-cols-4 gap-0">
+
+            <!-- Step 1: Added -->
+            <div class="flex flex-col items-start">
+              <div class="flex items-center gap-0 mb-3">
+                <div class="w-9 h-9 rounded-full bg-emerald-500 flex items-center justify-center shadow-md z-10">
+                  <i class="ti ti-plus text-white text-sm"></i>
+                </div>
+              </div>
+              <div class="pr-3">
+                <div class="text-[11px] font-semibold text-emerald-700 leading-tight">Added to system</div>
+                <div class="text-[11px] font-bold text-stone-800 mt-0.5">Active</div>
+                <div class="text-[10px] text-stone-400 mt-1 leading-snug">Jan 14, 2022</div>
+                <div class="text-[10px] text-stone-500 mt-0.5">Erik Olsen</div>
+                <div class="text-[10px] text-stone-400 mt-1 italic">Grade A sourcing approved. Initial BOM integration complete.</div>
+              </div>
+            </div>
+
+            <!-- Step 2: Phasing Out ← CURRENT -->
+            <div class="flex flex-col items-start">
+              <div class="flex items-center mb-3">
+                <div class="w-9 h-9 rounded-full bg-amber-400 flex items-center justify-center shadow-md z-10 ring-4 ring-amber-100">
+                  <i class="ti ti-alert-triangle text-white text-sm"></i>
+                </div>
+              </div>
+              <div class="pr-3">
+                <div class="text-[11px] font-semibold text-amber-700 leading-tight">Status updated</div>
+                <div class="text-[11px] font-bold text-stone-800 mt-0.5">Phasing Out ← now</div>
+                <div class="text-[10px] text-stone-400 mt-1 leading-snug">Mar 10, 2025</div>
+                <div class="text-[10px] text-stone-500 mt-0.5">Lars Supply Chain</div>
+                <div class="text-[10px] text-stone-400 mt-1 italic">Supplier ending production. Last batch Q3 2025.</div>
+              </div>
+            </div>
+
+            <!-- Step 3: Discontinued (planned) -->
+            <div class="flex flex-col items-start opacity-50">
+              <div class="flex items-center mb-3">
+                <div class="w-9 h-9 rounded-full bg-stone-200 border-2 border-dashed border-stone-400 flex items-center justify-center z-10">
+                  <i class="ti ti-ban text-stone-400 text-sm"></i>
+                </div>
+              </div>
+              <div class="pr-3">
+                <div class="text-[11px] font-semibold text-stone-500 leading-tight">Planned</div>
+                <div class="text-[11px] font-bold text-stone-600 mt-0.5">Discontinued</div>
+                <div class="text-[10px] text-stone-400 mt-1 leading-snug">Target: Q4 2025</div>
+                <div class="text-[10px] text-stone-400 mt-1 italic">Requires Design &amp; BOM Team sign-off.</div>
+              </div>
+            </div>
+
+            <!-- Step 4: Obsolete (future) -->
+            <div class="flex flex-col items-start opacity-30">
+              <div class="flex items-center mb-3">
+                <div class="w-9 h-9 rounded-full bg-stone-100 border-2 border-dashed border-stone-300 flex items-center justify-center z-10">
+                  <i class="ti ti-archive text-stone-300 text-sm"></i>
+                </div>
+              </div>
+              <div>
+                <div class="text-[11px] font-semibold text-stone-400 leading-tight">Future</div>
+                <div class="text-[11px] font-bold text-stone-400 mt-0.5">Obsolete</div>
+                <div class="text-[10px] text-stone-300 mt-1">No longer tracked</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- TWO-COLUMN: Affected Products + Substitute Materials -->
+      <div class="grid grid-cols-2 gap-4">
+
+        <!-- AFFECTED PRODUCTS -->
+        <div class="bg-white rounded-xl border border-black/10 shadow-card p-5">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <h2 class="text-sm font-semibold text-stone-800">Affected products</h2>
+              <span class="rounded-md px-1.5 py-0.5 text-[11px] font-bold bg-red-50 text-red-700 tabnum">47</span>
+            </div>
+            <a href="products.html" class="text-xs text-brand-600 hover:underline">View all →</a>
+          </div>
+
+          <div class="space-y-1">
+
+            <!-- Product row -->
+            <div class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-stone-50 transition-colors cursor-pointer group">
+              <div class="w-7 h-7 rounded-md bg-brand-50 flex items-center justify-center shrink-0">
+                <i class="ti ti-armchair text-brand-600 text-sm"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-xs font-semibold text-stone-800 leading-tight truncate">30317 Forma Lounge Chair</div>
+                <div class="text-[10px] text-stone-400">3 Mother V · 116 SO Variants</div>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <span class="rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-emerald-50 text-emerald-700">Published</span>
+                <i class="ti ti-chevron-right text-stone-300 text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-stone-50 transition-colors cursor-pointer group">
+              <div class="w-7 h-7 rounded-md bg-brand-50 flex items-center justify-center shrink-0">
+                <i class="ti ti-table-column text-brand-600 text-sm"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-xs font-semibold text-stone-800 leading-tight truncate">30318 Forma Side Table</div>
+                <div class="text-[10px] text-stone-400">1 Mother V · 24 SO Variants</div>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <span class="rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-emerald-50 text-emerald-700">Published</span>
+                <i class="ti ti-chevron-right text-stone-300 text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-stone-50 transition-colors cursor-pointer group">
+              <div class="w-7 h-7 rounded-md bg-brand-50 flex items-center justify-center shrink-0">
+                <i class="ti ti-coffee text-brand-600 text-sm"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-xs font-semibold text-stone-800 leading-tight truncate">30512 Bergen Coffee Table</div>
+                <div class="text-[10px] text-stone-400">4 Mother V · 48 SO Variants</div>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <span class="rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-emerald-50 text-emerald-700">Published</span>
+                <i class="ti ti-chevron-right text-stone-300 text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-stone-50 transition-colors cursor-pointer group">
+              <div class="w-7 h-7 rounded-md bg-stone-100 flex items-center justify-center shrink-0">
+                <i class="ti ti-box text-stone-400 text-sm"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-xs font-semibold text-stone-700 leading-tight truncate">30401 Nordvik Archive Shelf</div>
+                <div class="text-[10px] text-stone-400">2 Mother V · 18 SO Variants</div>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <span class="rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-stone-100 text-stone-500">Draft</span>
+                <i class="ti ti-chevron-right text-stone-300 text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-stone-50 transition-colors cursor-pointer group">
+              <div class="w-7 h-7 rounded-md bg-brand-50 flex items-center justify-center shrink-0">
+                <i class="ti ti-sofa text-brand-600 text-sm"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-xs font-semibold text-stone-800 leading-tight truncate">30605 Fjord Three-Seat Sofa</div>
+                <div class="text-[10px] text-stone-400">2 Mother V · 32 SO Variants</div>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <span class="rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-blue-50 text-blue-700">In Review</span>
+                <i class="ti ti-chevron-right text-stone-300 text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mt-3 pt-3 border-t border-black/10 flex items-center justify-between">
+            <span class="text-[11px] text-stone-400 tabnum">Showing 5 of 47 products</span>
+            <button class="text-[11px] text-brand-600 hover:underline">Load more</button>
+          </div>
+        </div>
+
+        <!-- SUGGESTED SUBSTITUTES -->
+        <div class="bg-white rounded-xl border border-black/10 shadow-card p-5">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <h2 class="text-sm font-semibold text-stone-800">Suggested substitutes</h2>
+              <span class="rounded-md px-1.5 py-0.5 text-[11px] font-medium bg-brand-50 text-brand-600">3 options</span>
+            </div>
+            <button class="text-xs text-brand-600 hover:underline">Compare all →</button>
+          </div>
+
+          <div class="space-y-3">
+
+            <!-- Substitute 1 - Best match -->
+            <div class="border border-emerald-200 bg-emerald-50/40 rounded-xl p-3.5 cursor-pointer hover:border-emerald-400 transition-colors">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-lg shrink-0 swatch-ash"></div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-xs font-semibold text-stone-800">European Walnut</span>
+                    <span class="rounded-md px-1.5 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-700">Best match</span>
+                  </div>
+                  <div class="text-[10px] text-stone-500 tabnum mt-0.5">WWWNT-001 · Grade A · FSC Certified</div>
+                  <div class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                    <div class="text-[10px] text-stone-600 flex items-center gap-1">
+                      <i class="ti ti-check text-emerald-500 text-xs"></i> Same grade A
+                    </div>
+                    <div class="text-[10px] text-stone-600 flex items-center gap-1">
+                      <i class="ti ti-check text-emerald-500 text-xs"></i> FSC Certified
+                    </div>
+                    <div class="text-[10px] text-stone-600 flex items-center gap-1">
+                      <i class="ti ti-check text-emerald-500 text-xs"></i> In stock
+                    </div>
+                    <div class="text-[10px] text-stone-600 flex items-center gap-1">
+                      <i class="ti ti-minus text-stone-400 text-xs"></i> Similar appearance
+                    </div>
+                  </div>
+                  <div class="mt-2 flex items-center justify-between">
+                    <span class="text-[10px] text-emerald-700 font-medium">Price delta: comparable</span>
+                    <button class="text-[11px] font-medium text-brand-600 hover:underline">Apply to all 47 products →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Substitute 2 -->
+            <div class="border border-black/10 rounded-xl p-3.5 cursor-pointer hover:border-brand-300 hover:bg-brand-50/20 transition-colors">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-lg shrink-0 swatch-beech"></div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-xs font-semibold text-stone-800">European Beech</span>
+                    <span class="rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-stone-100 text-stone-600">Grade B</span>
+                  </div>
+                  <div class="text-[10px] text-stone-500 tabnum mt-0.5">WWEUR-004 · Grade B · PEFC Certified</div>
+                  <div class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                    <div class="text-[10px] text-stone-600 flex items-center gap-1">
+                      <i class="ti ti-check text-emerald-500 text-xs"></i> In stock
+                    </div>
+                    <div class="text-[10px] text-stone-600 flex items-center gap-1">
+                      <i class="ti ti-alert-triangle text-amber-500 text-xs"></i> Grade B (lower)
+                    </div>
+                    <div class="text-[10px] text-stone-600 flex items-center gap-1">
+                      <i class="ti ti-minus text-stone-400 text-xs"></i> Similar grain pattern
+                    </div>
+                  </div>
+                  <div class="mt-2 flex items-center justify-between">
+                    <span class="text-[10px] text-amber-700 font-medium">Price delta: +8%</span>
+                    <button class="text-[11px] font-medium text-brand-600 hover:underline">Review specs →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Substitute 3 -->
+            <div class="border border-black/10 rounded-xl p-3.5 cursor-pointer hover:border-brand-300 hover:bg-brand-50/20 transition-colors">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-lg shrink-0" style="background: repeating-linear-gradient(85deg,#c4a060 0px,#c4a060 2px,#b49050 3px,#bc9858 9px,#c4a060 10px,#c4a060 16px,#a47c40 17px,#b48c50 22px)"></div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-xs font-semibold text-stone-800">European Oak</span>
+                    <span class="rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-stone-100 text-stone-600">Grade A</span>
+                  </div>
+                  <div class="text-[10px] text-stone-500 tabnum mt-0.5">WWOAK-002 · Grade A · FSC Certified</div>
+                  <div class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                    <div class="text-[10px] text-stone-600 flex items-center gap-1">
+                      <i class="ti ti-check text-emerald-500 text-xs"></i> Grade A · FSC
+                    </div>
+                    <div class="text-[10px] text-stone-600 flex items-center gap-1">
+                      <i class="ti ti-alert-triangle text-amber-500 text-xs"></i> 6-week lead time
+                    </div>
+                    <div class="text-[10px] text-stone-600 flex items-center gap-1">
+                      <i class="ti ti-check text-emerald-500 text-xs"></i> Similar appearance
+                    </div>
+                  </div>
+                  <div class="mt-2 flex items-center justify-between">
+                    <span class="text-[10px] text-amber-700 font-medium">Price delta: +15%</span>
+                    <button class="text-[11px] font-medium text-brand-600 hover:underline">Review specs →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- MATERIAL SPECS + CHANGE LOG -->
+      <div class="grid grid-cols-3 gap-4">
+
+        <!-- Specs -->
+        <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+          <h2 class="text-sm font-semibold text-stone-800 mb-3">Material specs</h2>
+          <dl class="space-y-2">
+            <div class="flex justify-between text-xs">
+              <dt class="text-stone-500">Type</dt>
+              <dd class="font-medium text-stone-800">Hardwood</dd>
+            </div>
+            <div class="flex justify-between text-xs">
+              <dt class="text-stone-500">Species</dt>
+              <dd class="font-medium text-stone-800">Quercus alba</dd>
+            </div>
+            <div class="flex justify-between text-xs">
+              <dt class="text-stone-500">Origin</dt>
+              <dd class="font-medium text-stone-800">Pacific Northwest, USA</dd>
+            </div>
+            <div class="flex justify-between text-xs">
+              <dt class="text-stone-500">Grade</dt>
+              <dd class="font-medium text-stone-800">A (Select &amp; Better)</dd>
+            </div>
+            <div class="flex justify-between text-xs">
+              <dt class="text-stone-500">Thickness</dt>
+              <dd class="font-medium text-stone-800 tabnum">18mm / 22mm / 30mm</dd>
+            </div>
+            <div class="flex justify-between text-xs">
+              <dt class="text-stone-500">Finish options</dt>
+              <dd class="font-medium text-stone-800">Oiled, Lacquered, Raw</dd>
+            </div>
+            <div class="flex justify-between text-xs">
+              <dt class="text-stone-500">Certification</dt>
+              <dd class="font-medium text-stone-800">FSC-C012345 · PEFC</dd>
+            </div>
+            <div class="flex justify-between text-xs">
+              <dt class="text-stone-500">Janka hardness</dt>
+              <dd class="font-medium text-stone-800 tabnum">1360 lbf</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Usage breakdown -->
+        <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+          <h2 class="text-sm font-semibold text-stone-800 mb-3">Usage by category</h2>
+          <div class="space-y-2.5">
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-stone-500">Sofas &amp; Armchairs</span>
+                <span class="font-semibold tabnum text-stone-700">18 products</span>
+              </div>
+              <div class="h-1.5 bg-stone-100 rounded-full overflow-hidden">
+                <div class="h-full bg-brand-400 rounded-full" style="width: 38%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-stone-500">Dining &amp; Tables</span>
+                <span class="font-semibold tabnum text-stone-700">14 products</span>
+              </div>
+              <div class="h-1.5 bg-stone-100 rounded-full overflow-hidden">
+                <div class="h-full bg-brand-400 rounded-full" style="width: 30%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-stone-500">Wardrobes &amp; Shelving</span>
+                <span class="font-semibold tabnum text-stone-700">9 products</span>
+              </div>
+              <div class="h-1.5 bg-stone-100 rounded-full overflow-hidden">
+                <div class="h-full bg-brand-400 rounded-full" style="width: 19%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-stone-500">Outdoor Furniture</span>
+                <span class="font-semibold tabnum text-stone-700">4 products</span>
+              </div>
+              <div class="h-1.5 bg-stone-100 rounded-full overflow-hidden">
+                <div class="h-full bg-brand-400 rounded-full" style="width: 8%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-stone-500">Lighting &amp; Accessories</span>
+                <span class="font-semibold tabnum text-stone-700">2 products</span>
+              </div>
+              <div class="h-1.5 bg-stone-100 rounded-full overflow-hidden">
+                <div class="h-full bg-brand-400 rounded-full" style="width: 4%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 pt-3 border-t border-black/10">
+            <div class="flex justify-between text-xs">
+              <span class="text-stone-500">Published products</span>
+              <span class="font-bold tabnum text-stone-800">34 / 47</span>
+            </div>
+            <div class="flex justify-between text-xs mt-1">
+              <span class="text-stone-500">Draft / In Review</span>
+              <span class="font-bold tabnum text-stone-800">13 / 47</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Change log -->
+        <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+          <h2 class="text-sm font-semibold text-stone-800 mb-3">Change log</h2>
+          <div class="space-y-3">
+            <div class="flex gap-2.5">
+              <div class="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
+                <i class="ti ti-edit text-amber-600 text-[10px]"></i>
+              </div>
+              <div>
+                <div class="text-[11px] font-medium text-stone-700">Status → Phasing Out</div>
+                <div class="text-[10px] text-stone-400 tabnum">10 Mar 2025 · Lars Supply Chain</div>
+                <div class="text-[10px] text-stone-400 italic mt-0.5">"Supplier confirmed last batch Q3 2025."</div>
+              </div>
+            </div>
+            <div class="flex gap-2.5">
+              <div class="w-5 h-5 rounded-full bg-brand-50 flex items-center justify-center shrink-0 mt-0.5">
+                <i class="ti ti-certificate text-brand-600 text-[10px]"></i>
+              </div>
+              <div>
+                <div class="text-[11px] font-medium text-stone-700">FSC Certificate renewed</div>
+                <div class="text-[10px] text-stone-400 tabnum">02 Jan 2025 · Erik Olsen</div>
+              </div>
+            </div>
+            <div class="flex gap-2.5">
+              <div class="w-5 h-5 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-0.5">
+                <i class="ti ti-plus text-stone-400 text-[10px]"></i>
+              </div>
+              <div>
+                <div class="text-[11px] font-medium text-stone-700">Added 30mm thickness option</div>
+                <div class="text-[10px] text-stone-400 tabnum">15 Aug 2023 · Anja Hofer</div>
+              </div>
+            </div>
+            <div class="flex gap-2.5">
+              <div class="w-5 h-5 rounded-full bg-stone-100 flex items-center justify-center shrink-0 mt-0.5">
+                <i class="ti ti-link text-stone-400 text-[10px]"></i>
+              </div>
+              <div>
+                <div class="text-[11px] font-medium text-stone-700">Linked to 12 new products</div>
+                <div class="text-[10px] text-stone-400 tabnum">03 Mar 2023 · BOM Team</div>
+              </div>
+            </div>
+            <div class="flex gap-2.5">
+              <div class="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center shrink-0 mt-0.5">
+                <i class="ti ti-check text-emerald-600 text-[10px]"></i>
+              </div>
+              <div>
+                <div class="text-[11px] font-medium text-stone-700">Material created</div>
+                <div class="text-[10px] text-stone-400 tabnum">14 Jan 2022 · Erik Olsen</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RULES NOTE -->
+      <div class="bg-stone-50 border border-black/10 rounded-xl p-4 flex items-start gap-3">
+        <i class="ti ti-lock text-stone-400 text-sm mt-0.5 shrink-0"></i>
+        <div class="text-xs text-stone-500 leading-relaxed space-y-1">
+          <p><span class="font-semibold text-stone-700">Automated rules:</span> When material status → Discontinued, all linked assets and product records are automatically flagged. New product creation with a Discontinued material is blocked.</p>
+          <p><span class="font-semibold text-stone-700">Notification:</span> Periodic reports sent to Design &amp; BOM Team when material status changes.</p>
+          <p><span class="font-semibold text-stone-700">Substitute workflow:</span> Apply substitute via "Apply to all products" — creates a batch-update task for BOM Team review before committing.</p>
+        </div>
+      </div>
+
+      <div class="h-4"></div>
+    </main>
+  </div>
+</div>
+
+</body>
+</html>

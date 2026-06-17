@@ -1,0 +1,256 @@
+{
+  "product": {
+    "id": "30317",
+    "name": "Greenwood Lounge Chair",
+    "sku": "30317",
+    "category": "Lounge Chair",
+    "collection": "Greenwood",
+    "status": "Active",
+    "year": 2022,
+    "dimensions": {
+      "width": "760 mm",
+      "depth": "840 mm",
+      "height": "730 mm",
+      "seat_height": "420 mm"
+    },
+    "weight": "12.4 kg",
+    "price": null,
+    "currency": null
+  },
+  "products": [
+    {
+      "id": "30317",
+      "sku": "30317",
+      "name": "Greenwood Lounge Chair",
+      "category": "Lounge Chair",
+      "collection": "Greenwood",
+      "status": "Active",
+      "images": 24,
+      "completeness": 72,
+      "updatedAt": "2026-06-14"
+    },
+    {
+      "id": "30318",
+      "sku": "30318",
+      "name": "Greenwood Side Table",
+      "category": "Side Table",
+      "collection": "Greenwood",
+      "status": "Active",
+      "images": 18,
+      "completeness": 85,
+      "updatedAt": "2026-06-12"
+    },
+    {
+      "id": "30321",
+      "sku": "30321",
+      "name": "Greenwood Floor Lamp",
+      "category": "Floor Lamp",
+      "collection": "Greenwood",
+      "status": "Active",
+      "images": 12,
+      "completeness": 91,
+      "updatedAt": "2026-06-10"
+    },
+    {
+      "id": "30402",
+      "sku": "30402",
+      "name": "Haus Series Shelving Unit L300",
+      "category": "Shelving",
+      "collection": "Haus Series",
+      "status": "Active",
+      "images": 31,
+      "completeness": 78,
+      "updatedAt": "2026-06-17"
+    },
+    {
+      "id": "30411",
+      "sku": "30411",
+      "name": "Haus Series Shelving Unit L180",
+      "category": "Shelving",
+      "collection": "Haus Series",
+      "status": "Active",
+      "images": 22,
+      "completeness": 65,
+      "updatedAt": "2026-06-15"
+    },
+    {
+      "id": "30510",
+      "sku": "30510",
+      "name": "Nordic Dining Chair",
+      "category": "Dining Chair",
+      "collection": "Nordic Seating Series",
+      "status": "Active",
+      "images": 19,
+      "completeness": 88,
+      "updatedAt": "2026-06-08"
+    },
+    {
+      "id": "30511",
+      "sku": "30511",
+      "name": "Nordic Bar Stool",
+      "category": "Bar Stool",
+      "collection": "Nordic Seating Series",
+      "status": "Active",
+      "images": 15,
+      "completeness": 74,
+      "updatedAt": "2026-06-06"
+    },
+    {
+      "id": "30512",
+      "sku": "30512",
+      "name": "Nordic Bench 140",
+      "category": "Bench",
+      "collection": "Nordic Seating Series",
+      "status": "Active",
+      "images": 9,
+      "completeness": 56,
+      "updatedAt": "2026-06-01"
+    },
+    {
+      "id": "30601",
+      "sku": "30601",
+      "name": "Outdoor Living Sofa 3-seat",
+      "category": "Outdoor Sofa",
+      "collection": "Outdoor Living Collection 2026",
+      "status": "Active",
+      "images": 48,
+      "completeness": 95,
+      "updatedAt": "2026-06-14"
+    },
+    {
+      "id": "30602",
+      "sku": "30602",
+      "name": "Outdoor Living Armchair",
+      "category": "Outdoor Armchair",
+      "collection": "Outdoor Living Collection 2026",
+      "status": "Active",
+      "images": 36,
+      "completeness": 90,
+      "updatedAt": "2026-06-13"
+    },
+    {
+      "id": "30700",
+      "sku": "30700",
+      "name": "Scandinavian Living Room Coffee Table",
+      "category": "Coffee Table",
+      "collection": "Scandinavian Living Room",
+      "status": "Active",
+      "images": 14,
+      "completeness": 61,
+      "updatedAt": "2026-05-28"
+    },
+    {
+      "id": "30701",
+      "sku": "30701",
+      "name": "Scandinavian Living Room TV Unit",
+      "category": "TV Unit",
+      "collection": "Scandinavian Living Room",
+      "status": "Phasing Out",
+      "images": 7,
+      "completeness": 42,
+      "updatedAt": "2026-05-15"
+    }
+  ],
+  "variants": [
+    {
+      "sku": "30317-001",
+      "finish": "Natural Oak / Fabric A",
+      "color": "#D4B896",
+      "images": 3,
+      "docs": 2,
+      "material": "WOODWO-00001",
+      "status": "Active"
+    },
+    {
+      "sku": "30317-002",
+      "finish": "Natural Oak / Fabric B",
+      "color": "#D4B896",
+      "images": 1,
+      "docs": 2,
+      "material": "WOODWO-00001",
+      "status": "Phasing Out"
+    },
+    {
+      "sku": "30317-003",
+      "finish": "Natural Oak / Leather C",
+      "color": "#D4B896",
+      "images": 5,
+      "docs": 3,
+      "material": "WOODWO-00001",
+      "status": "Active"
+    },
+    {
+      "sku": "30317-011",
+      "finish": "Whitened Oak / Fabric A",
+      "color": "#EDE8E0",
+      "images": 4,
+      "docs": 2,
+      "material": "WOODWO-00002",
+      "status": "Active"
+    },
+    {
+      "sku": "30317-012",
+      "finish": "Whitened Oak / Fabric B",
+      "color": "#EDE8E0",
+      "images": 0,
+      "docs": 2,
+      "material": "WOODWO-00002",
+      "status": "Active"
+    },
+    {
+      "sku": "30317-021",
+      "finish": "Smoked Oak / Fabric A",
+      "color": "#4A3728",
+      "images": 4,
+      "docs": 3,
+      "material": "WOODWO-00005",
+      "status": "Active"
+    },
+    {
+      "sku": "30317-022",
+      "finish": "Smoked Oak / Leather D",
+      "color": "#4A3728",
+      "images": 2,
+      "docs": 1,
+      "material": "WOODWO-00005",
+      "status": "Discontinued"
+    }
+  ],
+  "sales": [
+    {
+      "customer": "John Lewis",
+      "qty": 340,
+      "period": "2024–2025"
+    },
+    {
+      "customer": "Muuto",
+      "qty": 248,
+      "period": "2024"
+    },
+    {
+      "customer": "Normann CPH",
+      "qty": 185,
+      "period": "2025"
+    },
+    {
+      "customer": "HAY",
+      "qty": 92,
+      "period": "2024"
+    },
+    {
+      "customer": "Ferm Living",
+      "qty": 47,
+      "period": "2025"
+    },
+    {
+      "customer": "Menu",
+      "qty": 38,
+      "period": "2024–2025"
+    },
+    {
+      "customer": "Fritz Hansen",
+      "qty": 21,
+      "period": "2025"
+    }
+  ]
+}

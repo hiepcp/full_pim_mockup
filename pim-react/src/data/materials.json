@@ -1,0 +1,139 @@
+{
+  "materials": [
+    {
+      "id": "WWWNT-001",
+      "code": "WWWNT-001",
+      "name": "European Walnut",
+      "category": "Wood",
+      "colorHex": null,
+      "finish": null,
+      "supplier": null,
+      "linkedProducts": 12,
+      "status": "active",
+      "updatedAt": null
+    },
+    {
+      "id": "WWEUR-004",
+      "code": "WWEUR-004",
+      "name": "European Beech",
+      "category": "Wood",
+      "colorHex": null,
+      "finish": null,
+      "supplier": null,
+      "linkedProducts": 8,
+      "status": "active",
+      "updatedAt": null
+    },
+    {
+      "id": "FABRC-002",
+      "code": "FABRC-002",
+      "name": "Hallingdal 65 Wool",
+      "category": "Fabric",
+      "colorHex": null,
+      "imageUrl": "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=400&q=70&auto=format&fit=crop",
+      "finish": null,
+      "supplier": null,
+      "linkedProducts": 19,
+      "status": "active",
+      "updatedAt": null
+    },
+    {
+      "id": "METL-007",
+      "code": "METL-007",
+      "name": "Brushed Brass",
+      "category": "Metal",
+      "colorHex": null,
+      "imageUrl": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=70&auto=format&fit=crop",
+      "finish": null,
+      "supplier": null,
+      "linkedProducts": 14,
+      "status": "active",
+      "updatedAt": null
+    },
+    {
+      "id": "WOODWO-003",
+      "code": "WOODWO-003",
+      "name": "American White Oak",
+      "category": "Wood",
+      "colorHex": null,
+      "imageUrl": "https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=400&q=70&auto=format&fit=crop",
+      "finish": "Oiled, Lacquered, Raw",
+      "supplier": "Oregon Hardwoods Co.",
+      "linkedProducts": 47,
+      "status": "phasing-out",
+      "updatedAt": "2025-03-10"
+    },
+    {
+      "id": "FABRC-011",
+      "code": "FABRC-011",
+      "name": "Kvadrat Remix 2",
+      "category": "Fabric",
+      "colorHex": null,
+      "finish": null,
+      "supplier": null,
+      "linkedProducts": 6,
+      "status": "phasing-out",
+      "updatedAt": null
+    },
+    {
+      "id": "STAIN-009",
+      "code": "STAIN-009",
+      "name": "Nordic Grey Wash",
+      "category": "Surface",
+      "colorHex": null,
+      "finish": null,
+      "supplier": null,
+      "linkedProducts": 3,
+      "status": "phasing-out",
+      "updatedAt": null
+    },
+    {
+      "id": "METL-019",
+      "code": "METL-019",
+      "name": "Matte Black Powder Coat",
+      "category": "Metal",
+      "colorHex": "#2a2a2a",
+      "finish": null,
+      "supplier": null,
+      "linkedProducts": 23,
+      "status": "discontinued",
+      "updatedAt": null
+    },
+    {
+      "id": "STAIN-003",
+      "code": "STAIN-003",
+      "name": "Nordic Grey Stain",
+      "category": "Surface",
+      "colorHex": null,
+      "finish": null,
+      "supplier": null,
+      "linkedProducts": 8,
+      "status": "discontinued",
+      "updatedAt": null
+    },
+    {
+      "id": "WWPIN-015",
+      "code": "WWPIN-015",
+      "name": "Scots Pine",
+      "category": "Wood",
+      "colorHex": null,
+      "finish": null,
+      "supplier": null,
+      "linkedProducts": 0,
+      "status": "obsolete",
+      "updatedAt": null
+    },
+    {
+      "id": "FABRC-020",
+      "code": "FABRC-020",
+      "name": "Sunburst Yellow Boucle",
+      "category": "Fabric",
+      "colorHex": "#f0c040",
+      "finish": null,
+      "supplier": null,
+      "linkedProducts": 0,
+      "status": "obsolete",
+      "updatedAt": null
+    }
+  ]
+}

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIM Studio — Navigation Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Outfit', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#E6F1FB', 100:'#CCDFF7', 400:'#378ADD', 600:'#185FA5', 800:'#0C447C' },
+          },
+          boxShadow: {
+            card: '0 1px 4px rgba(24,95,165,0.06)',
+            hover: '0 4px 14px rgba(24,95,165,0.10)',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <style>
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-stone-100 font-sans min-h-screen">
+
+  <!-- Full centered layout — no sidebar -->
+  <div class="min-h-screen flex flex-col">
+
+    <!-- Top bar -->
+    <header class="bg-white border-b border-black/10 sticky top-0 z-10" style="animation: fadeUp 0.25s ease both; animation-delay: 0s">
+      <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center">
+            <i class="ti ti-cube text-white text-base"></i>
+          </div>
+          <div>
+            <div class="text-sm font-semibold text-stone-900 leading-tight">PIM Studio</div>
+            <div class="text-[11px] text-stone-500 leading-tight">Product Information Management</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] text-stone-500 bg-stone-100 border border-black/10 rounded-md px-2 py-0.5 font-medium">v2.4.1</span>
+          <button class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-stone-600 bg-white border border-black/10 rounded-lg hover:bg-stone-50 hover:-translate-y-px transition-all active:scale-[0.98]">
+            <i class="ti ti-bell text-sm"></i>
+            <span class="tabular-nums">3</span>
+          </button>
+          <div class="w-7 h-7 rounded-full bg-brand-100 flex items-center justify-center text-[11px] font-semibold text-brand-600 border border-brand-200">HC</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero section -->
+    <section class="max-w-4xl mx-auto px-6 pt-12 pb-8 w-full" style="animation: fadeUp 0.25s ease both; animation-delay: 0.05s">
+      <div class="flex flex-col items-start gap-2">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-[11px] font-medium text-brand-600 bg-brand-50 border border-brand-100 rounded-md px-2 py-0.5">Navigation Hub</span>
+          <span class="text-[11px] text-stone-400">6 modules available</span>
+        </div>
+        <h1 class="text-2xl font-bold text-stone-900 leading-tight">Welcome to Forma Studio PIM</h1>
+        <p class="text-sm text-stone-500 max-w-xl leading-relaxed">
+          Centralised product information management — from catalogue, images and documents to multi-channel publishing. Select a module below to get started.
+        </p>
+      </div>
+
+      <!-- Quick stats bar -->
+      <div class="mt-6 grid grid-cols-4 gap-3">
+        <div class="bg-white rounded-xl border border-black/10 shadow-card px-4 py-3">
+          <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest mb-1">Products</div>
+          <div class="text-2xl font-bold text-stone-900 tabular-nums leading-none">4,821</div>
+          <div class="text-[11px] text-stone-400 mt-1">active SKUs</div>
+        </div>
+        <div class="bg-white rounded-xl border border-black/10 shadow-card px-4 py-3">
+          <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest mb-1">Images</div>
+          <div class="text-2xl font-bold text-stone-900 tabular-nums leading-none">18,340</div>
+          <div class="text-[11px] text-stone-400 mt-1">total assets</div>
+        </div>
+        <div class="bg-white rounded-xl border border-black/10 shadow-card px-4 py-3">
+          <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest mb-1">Documents</div>
+          <div class="text-2xl font-bold text-stone-900 tabular-nums leading-none">2,156</div>
+          <div class="text-[11px] text-stone-400 mt-1">documents</div>
+        </div>
+        <div class="bg-white rounded-xl border border-black/10 shadow-card px-4 py-3">
+          <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest mb-1">Campaigns</div>
+          <div class="text-2xl font-bold text-stone-900 tabular-nums leading-none">47</div>
+          <div class="text-[11px] text-stone-400 mt-1">active campaigns</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <main class="max-w-4xl mx-auto px-6 pb-16 w-full flex-1">
+
+      <!-- Section: Catalogue -->
+      <div style="animation: fadeUp 0.25s ease both; animation-delay: 0.1s">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-5 h-5 rounded bg-blue-100 flex items-center justify-center">
+            <i class="ti ti-database text-blue-600 text-xs"></i>
+          </div>
+          <span class="text-xs font-semibold text-stone-700 uppercase tracking-widest">Catalogue</span>
+          <div class="flex-1 h-px bg-black/5"></div>
+          <span class="text-[11px] text-stone-400">Manage product catalogue</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <!-- Products -->
+          <a href="products.html" class="group bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 p-5 flex flex-col gap-3 no-underline">
+            <div class="flex items-start justify-between">
+              <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center border border-blue-100">
+                <i class="ti ti-box text-blue-600 text-lg"></i>
+              </div>
+              <span class="text-[10px] font-medium text-blue-600 bg-blue-50 border border-blue-100 rounded-md px-2 py-0.5">products.html</span>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-stone-900 group-hover:text-brand-600 transition-colors">Products</div>
+              <div class="text-[12px] text-stone-500 mt-1 leading-relaxed">
+                Full SKU list with technical attributes, pricing and channel-specific publication status for all distribution channels.
+              </div>
+            </div>
+            <div class="flex items-center gap-2 mt-auto pt-1 border-t border-black/5">
+              <span class="text-[11px] text-stone-500 tabular-nums font-medium">4,821 SKUs</span>
+              <span class="text-stone-300">&middot;</span>
+              <span class="text-[11px] text-stone-400">Last sync: 12m ago</span>
+              <i class="ti ti-arrow-right text-stone-300 group-hover:text-brand-600 ml-auto text-sm transition-colors"></i>
+            </div>
+          </a>
+
+          <!-- Product Sets -->
+          <a href="product-sets.html" class="group bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 p-5 flex flex-col gap-3 no-underline">
+            <div class="flex items-start justify-between">
+              <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center border border-blue-100">
+                <i class="ti ti-components text-blue-600 text-lg"></i>
+              </div>
+              <span class="text-[10px] font-medium text-blue-600 bg-blue-50 border border-blue-100 rounded-md px-2 py-0.5">product-sets.html</span>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-stone-900 group-hover:text-brand-600 transition-colors">Product Sets</div>
+              <div class="text-[12px] text-stone-500 mt-1 leading-relaxed">
+                Group products by collection, series or bundle. Manage relationships between related SKUs across the furniture range.
+              </div>
+            </div>
+            <div class="flex items-center gap-2 mt-auto pt-1 border-t border-black/5">
+              <span class="text-[11px] text-stone-500 tabular-nums font-medium">312 sets</span>
+              <span class="text-stone-300">&middot;</span>
+              <span class="text-[11px] text-stone-400">8 pending review</span>
+              <i class="ti ti-arrow-right text-stone-300 group-hover:text-brand-600 ml-auto text-sm transition-colors"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Section: Assets -->
+      <div style="animation: fadeUp 0.25s ease both; animation-delay: 0.15s">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-5 h-5 rounded bg-emerald-100 flex items-center justify-center">
+            <i class="ti ti-photo text-emerald-600 text-xs"></i>
+          </div>
+          <span class="text-xs font-semibold text-stone-700 uppercase tracking-widest">Assets</span>
+          <div class="flex-1 h-px bg-black/5"></div>
+          <span class="text-[11px] text-stone-400">Manage images &amp; documents</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <!-- Image Engine -->
+          <a href="image-engine.html" class="group bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 p-5 flex flex-col gap-3 no-underline">
+            <div class="flex items-start justify-between">
+              <div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center border border-emerald-100">
+                <i class="ti ti-photo text-emerald-600 text-lg"></i>
+              </div>
+              <span class="text-[10px] font-medium text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-md px-2 py-0.5">image-engine.html</span>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-stone-900 group-hover:text-emerald-700 transition-colors">Image Engine</div>
+              <div class="text-[12px] text-stone-500 mt-1 leading-relaxed">
+                Upload, classify and optimise product imagery. Supports auto-crop and channel-specific resizing for all sales platforms.
+              </div>
+            </div>
+            <div class="flex items-center gap-2 mt-auto pt-1 border-t border-black/5">
+              <span class="text-[11px] text-stone-500 tabular-nums font-medium">18,340 assets</span>
+              <span class="text-stone-300">&middot;</span>
+              <span class="text-[11px] text-stone-400">234 processing</span>
+              <i class="ti ti-arrow-right text-stone-300 group-hover:text-emerald-600 ml-auto text-sm transition-colors"></i>
+            </div>
+          </a>
+
+          <!-- Document Hub -->
+          <a href="document-hub.html" class="group bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 p-5 flex flex-col gap-3 no-underline">
+            <div class="flex items-start justify-between">
+              <div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center border border-emerald-100">
+                <i class="ti ti-file-stack text-emerald-600 text-lg"></i>
+              </div>
+              <span class="text-[10px] font-medium text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-md px-2 py-0.5">document-hub.html</span>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-stone-900 group-hover:text-emerald-700 transition-colors">Document Hub</div>
+              <div class="text-[12px] text-stone-500 mt-1 leading-relaxed">
+                Store technical datasheets, catalogue PDFs, certifications and assembly guides linked directly to each product SKU.
+              </div>
+            </div>
+            <div class="flex items-center gap-2 mt-auto pt-1 border-t border-black/5">
+              <span class="text-[11px] text-stone-500 tabular-nums font-medium">2,156 docs</span>
+              <span class="text-stone-300">&middot;</span>
+              <span class="text-[11px] text-stone-400">14 expiring soon</span>
+              <i class="ti ti-arrow-right text-stone-300 group-hover:text-emerald-600 ml-auto text-sm transition-colors"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Section: Publishing -->
+      <div style="animation: fadeUp 0.25s ease both; animation-delay: 0.2s">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-5 h-5 rounded bg-amber-100 flex items-center justify-center">
+            <i class="ti ti-speakerphone text-amber-600 text-xs"></i>
+          </div>
+          <span class="text-xs font-semibold text-stone-700 uppercase tracking-widest">Publishing</span>
+          <div class="flex-1 h-px bg-black/5"></div>
+          <span class="text-[11px] text-stone-400">Multi-channel publishing</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <!-- Social Campaign -->
+          <a href="social-campaign.html" class="group bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 p-5 flex flex-col gap-3 no-underline">
+            <div class="flex items-start justify-between">
+              <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center border border-amber-100">
+                <i class="ti ti-speakerphone text-amber-600 text-lg"></i>
+              </div>
+              <span class="text-[10px] font-medium text-amber-700 bg-amber-50 border border-amber-100 rounded-md px-2 py-0.5">social-campaign.html</span>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-stone-900 group-hover:text-amber-700 transition-colors">Social Campaign</div>
+              <div class="text-[12px] text-stone-500 mt-1 leading-relaxed">
+                Create and schedule content campaigns for Instagram, Pinterest and LinkedIn. Directly linked to PIM product data.
+              </div>
+            </div>
+            <div class="flex items-center gap-2 mt-auto pt-1 border-t border-black/5">
+              <span class="text-[11px] text-stone-500 tabular-nums font-medium">47 active</span>
+              <span class="text-stone-300">&middot;</span>
+              <span class="text-[11px] text-stone-400">12 scheduled today</span>
+              <i class="ti ti-arrow-right text-stone-300 group-hover:text-amber-600 ml-auto text-sm transition-colors"></i>
+            </div>
+          </a>
+
+          <!-- Publish Flow -->
+          <a href="publish-flow.html" class="group bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 p-5 flex flex-col gap-3 no-underline">
+            <div class="flex items-start justify-between">
+              <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center border border-amber-100">
+                <i class="ti ti-send text-amber-600 text-lg"></i>
+              </div>
+              <span class="text-[10px] font-medium text-amber-700 bg-amber-50 border border-amber-100 rounded-md px-2 py-0.5">publish-flow.html</span>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-stone-900 group-hover:text-amber-700 transition-colors">Publish Flow</div>
+              <div class="text-[12px] text-stone-500 mt-1 leading-relaxed">
+                Automated publish pipeline to retail channels: Website, Amazon EU, Wayfair and OTTO — with validation and asset checks.
+              </div>
+            </div>
+            <div class="flex items-center gap-2 mt-auto pt-1 border-t border-black/5">
+              <span class="text-[11px] text-stone-500 tabular-nums font-medium">4 channels</span>
+              <span class="text-stone-300">&middot;</span>
+              <span class="text-[11px] text-stone-400">147 SKUs published today</span>
+              <i class="ti ti-arrow-right text-stone-300 group-hover:text-amber-600 ml-auto text-sm transition-colors"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Section: System -->
+      <div style="animation: fadeUp 0.25s ease both; animation-delay: 0.25s">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-5 h-5 rounded bg-purple-100 flex items-center justify-center">
+            <i class="ti ti-settings text-purple-600 text-xs"></i>
+          </div>
+          <span class="text-xs font-semibold text-stone-700 uppercase tracking-widest">System</span>
+          <div class="flex-1 h-px bg-black/5"></div>
+          <span class="text-[11px] text-stone-400">Configuration &amp; integrations</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <!-- D365 Sync -->
+          <a href="settings.html" class="group bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 p-5 flex flex-col gap-3 no-underline">
+            <div class="flex items-start justify-between">
+              <div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center border border-purple-100">
+                <i class="ti ti-refresh text-purple-600 text-lg"></i>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                <span class="text-[10px] font-medium text-purple-700 bg-purple-50 border border-purple-100 rounded-md px-2 py-0.5">settings.html</span>
+              </div>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-stone-900 group-hover:text-purple-700 transition-colors">D365 Sync</div>
+              <div class="text-[12px] text-stone-500 mt-1 leading-relaxed">
+                Bidirectional sync with Microsoft Dynamics 365. Monitor sync status, handle errors and configure field mapping rules.
+              </div>
+            </div>
+            <div class="flex items-center gap-2 mt-auto pt-1 border-t border-black/5">
+              <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+              <span class="text-[11px] text-stone-500 font-medium">Connected</span>
+              <span class="text-stone-300">&middot;</span>
+              <span class="text-[11px] text-stone-400 tabular-nums">Last sync 4m ago</span>
+              <i class="ti ti-arrow-right text-stone-300 group-hover:text-purple-600 ml-auto text-sm transition-colors"></i>
+            </div>
+          </a>
+
+          <!-- Settings -->
+          <a href="settings.html" class="group bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 p-5 flex flex-col gap-3 no-underline">
+            <div class="flex items-start justify-between">
+              <div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center border border-purple-100">
+                <i class="ti ti-settings text-purple-600 text-lg"></i>
+              </div>
+              <span class="text-[10px] font-medium text-purple-700 bg-purple-50 border border-purple-100 rounded-md px-2 py-0.5">settings.html</span>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-stone-900 group-hover:text-purple-700 transition-colors">Settings</div>
+              <div class="text-[12px] text-stone-500 mt-1 leading-relaxed">
+                Configure connected accounts, user permissions, content language settings and global PIM system preferences.
+              </div>
+            </div>
+            <div class="flex items-center gap-2 mt-auto pt-1 border-t border-black/5">
+              <span class="text-[11px] text-stone-500 tabular-nums font-medium">12 users</span>
+              <span class="text-stone-300">&middot;</span>
+              <span class="text-[11px] text-stone-400">4 integrations</span>
+              <i class="ti ti-arrow-right text-stone-300 group-hover:text-purple-600 ml-auto text-sm transition-colors"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div style="animation: fadeUp 0.25s ease both; animation-delay: 0.3s">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-5 h-5 rounded bg-stone-200 flex items-center justify-center">
+            <i class="ti ti-activity text-stone-500 text-xs"></i>
+          </div>
+          <span class="text-xs font-semibold text-stone-700 uppercase tracking-widest">Recent Activity</span>
+          <div class="flex-1 h-px bg-black/5"></div>
+        </div>
+
+        <div class="bg-white rounded-xl border border-black/10 shadow-card overflow-hidden">
+          <div class="divide-y divide-black/5">
+            <div class="flex items-center gap-3 px-5 py-3">
+              <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
+                <i class="ti ti-box text-blue-600 text-xs"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <span class="text-[12px] font-medium text-stone-800">SKU-4821 — Haus Series Shelving Unit L300</span>
+                <span class="text-[11px] text-stone-400 ml-1.5">material attributes updated</span>
+              </div>
+              <span class="text-[11px] text-stone-400 tabular-nums shrink-0">2m ago</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3">
+              <div class="w-7 h-7 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
+                <i class="ti ti-photo text-emerald-600 text-xs"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <span class="text-[12px] font-medium text-stone-800">Batch upload <span class="tabular-nums">48</span> images</span>
+                <span class="text-[11px] text-stone-400 ml-1.5">for Outdoor Living Collection 2026 completed</span>
+              </div>
+              <span class="text-[11px] text-stone-400 tabular-nums shrink-0">14m ago</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3">
+              <div class="w-7 h-7 rounded-lg bg-amber-50 flex items-center justify-center shrink-0">
+                <i class="ti ti-speakerphone text-amber-600 text-xs"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <span class="text-[12px] font-medium text-stone-800">Campaign "Summer Collection 2026"</span>
+                <span class="text-[11px] text-stone-400 ml-1.5">scheduled to publish at 18:00 today</span>
+              </div>
+              <span class="text-[11px] text-stone-400 tabular-nums shrink-0">31m ago</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3">
+              <div class="w-7 h-7 rounded-lg bg-purple-50 flex items-center justify-center shrink-0">
+                <i class="ti ti-refresh text-purple-600 text-xs"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <span class="text-[12px] font-medium text-stone-800">D365 Sync completed</span>
+                <span class="text-[11px] text-stone-400 ml-1.5"><span class="tabular-nums">127</span> products synchronised, 0 errors</span>
+              </div>
+              <span class="text-[11px] text-stone-400 tabular-nums shrink-0">4m ago</span>
+            </div>
+            <div class="flex items-center gap-3 px-5 py-3">
+              <div class="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
+                <i class="ti ti-components text-blue-600 text-xs"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <span class="text-[12px] font-medium text-stone-800">Product Set "Scandinavian Living Room"</span>
+                <span class="text-[11px] text-stone-400 ml-1.5">created with <span class="tabular-nums">8</span> SKUs</span>
+              </div>
+              <span class="text-[11px] text-stone-400 tabular-nums shrink-0">1h ago</span>
+            </div>
+          </div>
+          <div class="px-5 py-2.5 border-t border-black/5 bg-stone-50/60">
+            <button class="text-[11px] font-medium text-brand-600 hover:text-brand-800 transition-colors">View all activity &rarr;</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-black/10 bg-white" style="animation: fadeUp 0.25s ease both; animation-delay: 0.35s">
+      <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] text-stone-400">PIM Studio</span>
+          <span class="text-stone-300">&middot;</span>
+          <span class="text-[11px] text-stone-400">v2.4.1</span>
+          <span class="text-stone-300">&middot;</span>
+          <span class="text-[11px] text-stone-400">&copy; 2026 Forma Studio GmbH</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="products.html" class="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">Products</a>
+          <a href="image-engine.html" class="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">Image Engine</a>
+          <a href="document-hub.html" class="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">Document Hub</a>
+          <a href="social-campaign.html" class="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">Social Campaign</a>
+          <a href="publish-flow.html" class="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">Publish Flow</a>
+          <a href="settings.html" class="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">Settings</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

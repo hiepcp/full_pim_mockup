@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Campaign — PIM Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Outfit', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#E6F1FB', 100:'#CCDFF7', 400:'#378ADD', 600:'#185FA5', 800:'#0C447C' },
+          },
+          boxShadow: {
+            card: '0 1px 4px rgba(24,95,165,0.06)',
+            hover: '0 4px 14px rgba(24,95,165,0.10)',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <style>
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .tabular { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body class="bg-stone-100 font-sans text-stone-800 antialiased">
+
+  <!-- SIDEBAR -->
+  <aside class="w-[200px] shrink-0 bg-white border-r border-black/10 fixed top-0 left-0 h-screen overflow-y-auto flex flex-col z-10">
+    <div class="px-4 py-[18px] border-b border-black/10">
+      <div class="text-sm font-semibold text-stone-900">PIM Studio</div>
+      <div class="text-[11px] text-stone-500 mt-0.5">Product Info Management</div>
+    </div>
+    <nav class="py-2 flex-1">
+      <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Catalogue</div>
+      <a href="products.html"      class="nav-item flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-box text-base"></i> Products</a>
+      <a href="product-sets.html"  class="nav-item flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-components text-base"></i> Product Sets</a>
+      <a href="materials.html" class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-color-swatch text-base"></i> Materials</a>
+      <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Assets</div>
+      <a href="image-engine.html"  class="nav-item flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-photo text-base"></i> Image Engine</a>
+      <a href="document-hub.html"  class="nav-item flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-file-stack text-base"></i> Document Hub</a>
+      <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Publishing</div>
+      <a href="social-campaign.html" class="nav-item flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-brand-600 bg-brand-50 border-l-2 border-brand-600 font-medium"><i class="ti ti-speakerphone text-base"></i> Social Campaign</a>
+      <a href="publish-flow.html"                  class="nav-item flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-send text-base"></i> Publish Flow</a>
+      <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">System</div>
+      <a href="settings.html"      class="nav-item flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-settings text-base"></i> Settings</a>
+    </nav>
+    <div class="px-4 py-3 border-t border-black/10">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center text-[10px] font-semibold text-brand-600">HC</div>
+        <div>
+          <div class="text-[11px] font-medium text-stone-700">Hugo Claes</div>
+          <div class="text-[10px] text-stone-400">Publisher</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN LAYOUT -->
+  <div class="ml-[200px] flex flex-col min-h-screen">
+
+    <!-- TOPBAR -->
+    <header class="sticky top-0 z-10 bg-white border-b border-black/10 px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-1.5 text-[13px]">
+        <span class="text-stone-400">Publishing</span>
+        <i class="ti ti-chevron-right text-stone-300 text-xs"></i>
+        <span class="font-medium text-stone-800">Social Campaign</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 text-stone-600 border border-black/10 hover:-translate-y-px active:scale-[0.98] transition-all">
+          <i class="ti ti-filter text-xs"></i> Filter
+        </button>
+        <button class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-brand-600 text-white hover:bg-brand-800 hover:-translate-y-px active:scale-[0.98] transition-all shadow-sm">
+          <i class="ti ti-plus text-xs"></i> New Campaign
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="flex-1 p-6 flex flex-col gap-5">
+
+      <!-- STATS ROW -->
+      <div class="grid grid-cols-4 gap-4" style="animation: fadeUp 0.25s ease both; animation-delay: 0.05s">
+        <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+          <div class="text-[11px] text-stone-400 font-medium uppercase tracking-wide mb-1">Total Campaigns</div>
+          <div class="text-2xl font-bold tabular text-stone-900">4</div>
+          <div class="text-[11px] text-stone-400 mt-1">2 active, 1 draft</div>
+        </div>
+        <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+          <div class="text-[11px] text-stone-400 font-medium uppercase tracking-wide mb-1">Platforms Connected</div>
+          <div class="text-2xl font-bold tabular text-stone-900">5</div>
+          <div class="text-[11px] text-stone-400 mt-1">FB, IG, LI, YT, PT</div>
+        </div>
+        <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+          <div class="text-[11px] text-stone-400 font-medium uppercase tracking-wide mb-1">Posts Scheduled</div>
+          <div class="text-2xl font-bold tabular text-brand-600">12</div>
+          <div class="text-[11px] text-stone-400 mt-1">Next: 20 Mar 2026</div>
+        </div>
+        <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+          <div class="text-[11px] text-stone-400 font-medium uppercase tracking-wide mb-1">Assets Used</div>
+          <div class="text-2xl font-bold tabular text-stone-900">38</div>
+          <div class="text-[11px] text-stone-400 mt-1">100% from PIM</div>
+        </div>
+      </div>
+
+      <!-- MAIN TWO-COLUMN LAYOUT -->
+      <div class="flex gap-5 items-start" style="animation: fadeUp 0.25s ease both; animation-delay: 0.1s">
+
+        <!-- LEFT: CAMPAIGN LIST -->
+        <div class="w-[280px] shrink-0 flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <h2 class="text-[13px] font-semibold text-stone-700">All Campaigns</h2>
+            <span class="text-[11px] text-stone-400">4 total</span>
+          </div>
+
+          <!-- Search -->
+          <div class="relative">
+            <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
+            <input type="text" placeholder="Search campaign..." class="w-full pl-7 pr-3 py-1.5 rounded-lg border border-black/10 text-[12px] text-stone-700 bg-white placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-brand-400" />
+          </div>
+
+          <!-- Campaign cards -->
+          <div class="flex flex-col gap-2">
+
+            <!-- CAMP-2026-003 — ACTIVE/SELECTED -->
+            <div class="bg-white rounded-xl border border-brand-400 shadow-hover overflow-hidden cursor-pointer">
+              <div class="h-[80px] overflow-hidden relative">
+                <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=320&h=100&fit=crop&q=80" alt="Greenwood Spring" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent flex items-end p-2">
+                  <span class="rounded-md px-2 py-0.5 text-[10px] font-medium bg-blue-500/90 text-white">Scheduled</span>
+                </div>
+              </div>
+              <div class="p-3.5">
+              <div class="flex items-start justify-between mb-2">
+                <div>
+                  <div class="text-[11px] tabular text-stone-400 font-mono">CAMP-2026-003</div>
+                  <div class="text-[13px] font-semibold text-stone-900 mt-0.5 leading-tight">Greenwood Spring Launch</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 text-[11px] text-stone-500">
+                <i class="ti ti-brand-facebook text-xs"></i>
+                <i class="ti ti-brand-instagram text-xs"></i>
+                <i class="ti ti-brand-linkedin text-xs"></i>
+                <span class="ml-0.5">3 platforms</span>
+              </div>
+              <div class="mt-2 pt-2 border-t border-black/5 text-[11px] text-stone-400 flex items-center gap-1">
+                <i class="ti ti-calendar-event text-xs"></i>
+                <span>Scheduled: <span class="tabular font-medium text-stone-600">20 Mar 2026</span></span>
+              </div>
+              </div>
+            </div>
+
+            <!-- CAMP-2026-002 -->
+            <div class="bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 overflow-hidden cursor-pointer">
+              <div class="h-[64px] overflow-hidden relative">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=320&h=80&fit=crop&q=80" alt="Nordic Minimal" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent flex items-end p-2">
+                  <span class="rounded-md px-2 py-0.5 text-[10px] font-medium bg-green-500/90 text-white">Posted</span>
+                </div>
+              </div>
+              <div class="p-3.5">
+              <div class="flex items-start justify-between mb-2">
+                <div>
+                  <div class="text-[11px] tabular text-stone-400 font-mono">CAMP-2026-002</div>
+                  <div class="text-[13px] font-semibold text-stone-900 mt-0.5 leading-tight">Nordic Minimal Series</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 text-[11px] text-stone-500">
+                <i class="ti ti-brand-instagram text-xs"></i>
+                <i class="ti ti-brand-linkedin text-xs"></i>
+                <span class="ml-0.5">2 platforms</span>
+              </div>
+              <div class="mt-2 pt-2 border-t border-black/5 text-[11px] text-stone-400 flex items-center gap-1">
+                <i class="ti ti-check text-xs text-green-500"></i>
+                <span>Posted: <span class="tabular font-medium text-stone-600">10 Mar 2026</span></span>
+              </div>
+              </div>
+            </div>
+
+            <!-- CAMP-2026-001 -->
+            <div class="bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 overflow-hidden cursor-pointer">
+              <div class="h-[64px] overflow-hidden relative">
+                <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=320&h=80&fit=crop&q=80" alt="Sustainable Living" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent flex items-end p-2">
+                  <span class="rounded-md px-2 py-0.5 text-[10px] font-medium bg-green-500/90 text-white">Posted</span>
+                </div>
+              </div>
+              <div class="p-3.5">
+              <div class="flex items-start justify-between mb-2">
+                <div>
+                  <div class="text-[11px] tabular text-stone-400 font-mono">CAMP-2026-001</div>
+                  <div class="text-[13px] font-semibold text-stone-900 mt-0.5 leading-tight">Sustainable Living</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 text-[11px] text-stone-500">
+                <i class="ti ti-brand-facebook text-xs"></i>
+                <i class="ti ti-brand-instagram text-xs"></i>
+                <i class="ti ti-brand-linkedin text-xs"></i>
+                <i class="ti ti-brand-youtube text-xs"></i>
+                <span class="ml-0.5">4 platforms</span>
+              </div>
+              <div class="mt-2 pt-2 border-t border-black/5 text-[11px] text-stone-400 flex items-center gap-1">
+                <i class="ti ti-check text-xs text-green-500"></i>
+                <span>Posted: <span class="tabular font-medium text-stone-600">28 Feb 2026</span></span>
+              </div>
+              </div>
+            </div>
+
+            <!-- CAMP-2026-004 -->
+            <div class="bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 overflow-hidden cursor-pointer">
+              <div class="h-[64px] overflow-hidden relative">
+                <img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=320&h=80&fit=crop&q=80" alt="Summer Outdoor" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent flex items-end p-2">
+                  <span class="rounded-md px-2 py-0.5 text-[10px] font-medium bg-stone-800/80 text-stone-200">Draft</span>
+                </div>
+              </div>
+              <div class="p-3.5">
+              <div class="flex items-start justify-between mb-2">
+                <div>
+                  <div class="text-[11px] tabular text-stone-400 font-mono">CAMP-2026-004</div>
+                  <div class="text-[13px] font-semibold text-stone-900 mt-0.5 leading-tight">Summer Outdoor Preview</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 text-[11px] text-stone-500">
+                <i class="ti ti-brand-instagram text-xs"></i>
+                <i class="ti ti-brand-pinterest text-xs"></i>
+                <span class="ml-0.5">2 platforms</span>
+              </div>
+              <div class="mt-2 pt-2 border-t border-black/5 text-[11px] text-stone-400 flex items-center gap-1">
+                <i class="ti ti-pencil text-xs"></i>
+                <span>Draft — not scheduled</span>
+              </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT: CAMPAIGN BUILDER -->
+        <div class="flex-1 flex flex-col gap-4">
+
+          <!-- Campaign Header -->
+          <div class="bg-white rounded-xl border border-black/10 shadow-card overflow-hidden">
+          <!-- Hero banner -->
+          <div class="h-[110px] relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&h=160&fit=crop&q=85" class="w-full h-full object-cover" alt="Greenwood Spring" />
+            <div class="absolute inset-0 bg-gradient-to-r from-stone-900/70 via-stone-900/30 to-transparent flex items-center px-5">
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-[10px] tabular font-mono text-stone-300">CAMP-2026-003</span>
+                  <span class="rounded-md px-2 py-0.5 text-[10px] font-medium bg-blue-500/80 text-white">Scheduled</span>
+                </div>
+                <h1 class="text-lg font-bold text-white leading-tight">Greenwood Spring Launch</h1>
+                <div class="text-[11px] text-stone-300 mt-0.5">3 platforms &middot; Publish: <span class="tabular font-medium text-white">20 Mar 2026, 10:00 CET</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="px-5 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="flex -space-x-1.5">
+                <img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=32&h=32&fit=crop&q=80" class="w-7 h-7 rounded-md object-cover ring-2 ring-white" alt="" />
+                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=32&h=32&fit=crop&q=80" class="w-7 h-7 rounded-md object-cover ring-2 ring-white" alt="" />
+                <img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=32&h=32&fit=crop&q=80" class="w-7 h-7 rounded-md object-cover ring-2 ring-white" alt="" />
+                <div class="w-7 h-7 rounded-md bg-stone-100 ring-2 ring-white flex items-center justify-center text-[9px] font-semibold text-stone-500">+3</div>
+              </div>
+              <span class="text-[11px] text-stone-400">6 assets ready</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 text-stone-600 border border-black/10 hover:-translate-y-px transition-all">
+                <i class="ti ti-eye text-xs"></i> Preview All
+              </button>
+              <button class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-brand-600 text-white hover:bg-brand-800 hover:-translate-y-px transition-all shadow-sm">
+                <i class="ti ti-rocket text-xs"></i> Publish Now
+              </button>
+            </div>
+          </div>
+          </div>
+
+          <!-- 5-STEP PROGRESS BAR -->
+          <div class="bg-white rounded-xl border border-black/10 shadow-card px-6 py-4" style="animation: fadeUp 0.25s ease both; animation-delay: 0.12s">
+            <div class="flex items-center">
+
+              <!-- Step 1 — Completed -->
+              <div class="flex flex-col items-center">
+                <div class="w-7 h-7 rounded-full bg-green-100 flex items-center justify-center">
+                  <i class="ti ti-check text-green-600 text-sm"></i>
+                </div>
+                <div class="text-[11px] font-medium text-green-600 mt-1.5 whitespace-nowrap">Select Assets</div>
+                <div class="text-[10px] text-stone-400">Step 1</div>
+              </div>
+
+              <div class="flex-1 h-0.5 bg-green-200 mx-2"></div>
+
+              <!-- Step 2 — Completed -->
+              <div class="flex flex-col items-center">
+                <div class="w-7 h-7 rounded-full bg-green-100 flex items-center justify-center">
+                  <i class="ti ti-check text-green-600 text-sm"></i>
+                </div>
+                <div class="text-[11px] font-medium text-green-600 mt-1.5 whitespace-nowrap">AI Content</div>
+                <div class="text-[10px] text-stone-400">Step 2</div>
+              </div>
+
+              <div class="flex-1 h-0.5 bg-brand-200 mx-2"></div>
+
+              <!-- Step 3 — Current -->
+              <div class="flex flex-col items-center">
+                <div class="w-7 h-7 rounded-full bg-brand-600 flex items-center justify-center ring-4 ring-brand-100">
+                  <span class="text-white text-xs font-semibold">3</span>
+                </div>
+                <div class="text-[11px] font-semibold text-brand-600 mt-1.5 whitespace-nowrap">Design</div>
+                <div class="text-[10px] text-stone-400">Step 3</div>
+              </div>
+
+              <div class="flex-1 h-0.5 bg-stone-200 mx-2"></div>
+
+              <!-- Step 4 — Upcoming -->
+              <div class="flex flex-col items-center">
+                <div class="w-7 h-7 rounded-full bg-stone-100 border-2 border-stone-300 flex items-center justify-center">
+                  <span class="text-stone-400 text-xs font-semibold">4</span>
+                </div>
+                <div class="text-[11px] text-stone-400 mt-1.5 whitespace-nowrap">Schedule</div>
+                <div class="text-[10px] text-stone-300">Step 4</div>
+              </div>
+
+              <div class="flex-1 h-0.5 bg-stone-200 mx-2"></div>
+
+              <!-- Step 5 — Upcoming -->
+              <div class="flex flex-col items-center">
+                <div class="w-7 h-7 rounded-full bg-stone-100 border-2 border-stone-300 flex items-center justify-center">
+                  <span class="text-stone-400 text-xs font-semibold">5</span>
+                </div>
+                <div class="text-[11px] text-stone-400 mt-1.5 whitespace-nowrap">Publish</div>
+                <div class="text-[10px] text-stone-300">Step 5</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- STEP 3 CONTENT — Design -->
+          <div class="flex gap-4" style="animation: fadeUp 0.25s ease both; animation-delay: 0.15s">
+
+            <!-- LEFT: Asset Preview + Options -->
+            <div class="w-[240px] shrink-0 flex flex-col gap-3">
+              <div class="bg-white rounded-xl border border-black/10 shadow-card overflow-hidden">
+                <!-- Asset thumbnail -->
+                <div class="aspect-square relative overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=480&h=480&fit=crop&q=85" alt="Greenwood Chair" class="w-full h-full object-cover" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                  <div class="absolute bottom-2 left-2 right-2 flex gap-1">
+                    <span class="bg-white/90 rounded-md px-1.5 py-0.5 text-[10px] font-medium text-stone-600 shadow-sm">Packshot</span>
+                    <span class="bg-green-500/90 rounded-md px-1.5 py-0.5 text-[10px] font-medium text-white shadow-sm">Approved</span>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <div class="text-[12px] font-semibold text-stone-800">Greenwood Chair</div>
+                  <div class="text-[11px] text-stone-400 mt-0.5 tabular">SKU: 30317 &middot; Packshot Hero</div>
+                  <div class="mt-2 text-[11px] text-stone-500 flex items-center gap-1">
+                    <i class="ti ti-dimensions text-xs"></i>
+                    <span class="tabular">3840 &times; 3840 px &middot; PNG</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Design options -->
+              <div class="bg-white rounded-xl border border-black/10 shadow-card p-3.5">
+                <div class="text-[11px] font-semibold text-stone-600 mb-2 uppercase tracking-wide">Design Options</div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="flex items-center gap-2 cursor-pointer group">
+                    <div class="w-4 h-4 rounded-full border-2 border-brand-600 flex items-center justify-center shrink-0">
+                      <div class="w-2 h-2 rounded-full bg-brand-600"></div>
+                    </div>
+                    <span class="text-[12px] text-stone-700 group-hover:text-stone-900">Use as-is</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer group">
+                    <div class="w-4 h-4 rounded-full border-2 border-stone-300 shrink-0"></div>
+                    <span class="text-[12px] text-stone-500 group-hover:text-stone-700">Customize in Canva</span>
+                    <i class="ti ti-external-link text-[10px] text-stone-400"></i>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer group">
+                    <div class="w-4 h-4 rounded-full border-2 border-stone-300 shrink-0"></div>
+                    <span class="text-[12px] text-stone-500 group-hover:text-stone-700">AI crop for platform</span>
+                    <span class="rounded-md px-1.5 py-0.5 text-[9px] font-medium bg-purple-50 text-purple-600">AI</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Campaign asset strip -->
+              <div class="bg-white rounded-xl border border-black/10 shadow-card p-3">
+                <div class="text-[11px] font-semibold text-stone-600 mb-2 uppercase tracking-wide flex items-center justify-between">
+                  <span>Campaign Assets</span>
+                  <span class="text-[10px] text-stone-400 font-normal normal-case">6 selected</span>
+                </div>
+                <div class="grid grid-cols-3 gap-1.5">
+                  <div class="aspect-square rounded-lg overflow-hidden ring-2 ring-brand-400 relative">
+                    <img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=100&h=100&fit=crop&q=80" class="w-full h-full object-cover" alt="" />
+                    <div class="absolute top-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-brand-600 flex items-center justify-center"><i class="ti ti-check text-white" style="font-size:8px"></i></div>
+                  </div>
+                  <div class="aspect-square rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=100&h=100&fit=crop&q=80" class="w-full h-full object-cover" alt="" />
+                  </div>
+                  <div class="aspect-square rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=100&h=100&fit=crop&q=80" class="w-full h-full object-cover" alt="" />
+                  </div>
+                  <div class="aspect-square rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=100&h=100&fit=crop&q=80" class="w-full h-full object-cover" alt="" />
+                  </div>
+                  <div class="aspect-square rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=100&h=100&fit=crop&q=80" class="w-full h-full object-cover" alt="" />
+                  </div>
+                  <div class="aspect-square rounded-lg overflow-hidden bg-stone-100 flex items-center justify-center cursor-pointer hover:bg-stone-200 transition-colors">
+                    <i class="ti ti-plus text-stone-400 text-lg"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AI content card -->
+              <div class="bg-brand-50 rounded-xl border border-brand-100 p-3.5">
+                <div class="flex items-center gap-1.5 mb-2">
+                  <i class="ti ti-sparkles text-brand-600 text-sm"></i>
+                  <span class="text-[11px] font-semibold text-brand-600 uppercase tracking-wide">AI Generated</span>
+                </div>
+                <div class="text-[11px] text-stone-600 leading-relaxed">Caption &amp; hashtags generated based on product attributes from PIM.</div>
+                <div class="mt-2 flex items-center gap-1 text-[10px] text-brand-600 font-medium cursor-pointer hover:underline">
+                  <i class="ti ti-refresh text-xs"></i> Regenerate content
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT: Platform Preview -->
+            <div class="flex-1 flex flex-col gap-3">
+              <div class="bg-white rounded-xl border border-black/10 shadow-card overflow-hidden">
+                <!-- Platform tabs -->
+                <div class="flex items-center border-b border-black/10 px-4 gap-0 overflow-x-auto">
+                  <button class="flex items-center gap-1.5 px-3 py-2.5 text-[12px] text-stone-400 hover:text-stone-700 transition-colors border-b-2 border-transparent hover:border-stone-200 whitespace-nowrap">
+                    <i class="ti ti-brand-facebook text-sm text-blue-500"></i> Facebook
+                  </button>
+                  <button class="flex items-center gap-1.5 px-3 py-2.5 text-[12px] font-semibold text-brand-600 border-b-2 border-brand-600 whitespace-nowrap">
+                    <i class="ti ti-brand-instagram text-sm text-pink-500"></i> Instagram
+                  </button>
+                  <button class="flex items-center gap-1.5 px-3 py-2.5 text-[12px] text-stone-400 hover:text-stone-700 transition-colors border-b-2 border-transparent hover:border-stone-200 whitespace-nowrap">
+                    <i class="ti ti-brand-linkedin text-sm text-blue-700"></i> LinkedIn
+                  </button>
+                  <button class="flex items-center gap-1.5 px-3 py-2.5 text-[12px] text-stone-400 hover:text-stone-700 transition-colors border-b-2 border-transparent hover:border-stone-200 whitespace-nowrap">
+                    <i class="ti ti-brand-youtube text-sm text-red-500"></i> YouTube
+                  </button>
+                  <button class="flex items-center gap-1.5 px-3 py-2.5 text-[12px] text-stone-400 hover:text-stone-700 transition-colors border-b-2 border-transparent hover:border-stone-200 whitespace-nowrap">
+                    <i class="ti ti-brand-pinterest text-sm text-red-600"></i> Pinterest
+                  </button>
+                </div>
+
+                <!-- Instagram Preview -->
+                <div class="p-5 flex gap-5">
+                  <!-- Mock phone frame -->
+                  <div class="shrink-0 w-[190px]">
+                    <div class="bg-stone-800 rounded-[20px] p-2 shadow-xl">
+                      <!-- IG app mockup -->
+                      <div class="bg-white rounded-[14px] overflow-hidden">
+                        <!-- IG header -->
+                        <div class="flex items-center justify-between px-3 py-2 border-b border-stone-100">
+                          <div class="flex items-center gap-1.5">
+                            <div class="w-5 h-5 rounded-full bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600"></div>
+                            <span class="text-[9px] font-semibold text-stone-800">formastudio.eu</span>
+                          </div>
+                          <i class="ti ti-dots text-[10px] text-stone-500"></i>
+                        </div>
+                        <!-- Image area -->
+                        <div class="aspect-square overflow-hidden">
+                          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=200&h=200&fit=crop&q=85" alt="Greenwood Spring" class="w-full h-full object-cover" />
+                        </div>
+                        <!-- IG actions -->
+                        <div class="px-3 py-2">
+                          <div class="flex items-center gap-2 mb-1.5">
+                            <i class="ti ti-heart text-[12px] text-stone-600"></i>
+                            <i class="ti ti-message-circle text-[12px] text-stone-600"></i>
+                            <i class="ti ti-send text-[12px] text-stone-600"></i>
+                          </div>
+                          <div class="text-[8px] font-semibold text-stone-800 leading-relaxed">Where comfort meets craftsmanship. The Greenwood Chair.</div>
+                          <div class="text-[7px] text-blue-500 mt-1 leading-relaxed">#interiordesign #europeanfurniture</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center mt-2 text-[10px] text-stone-400 tabular">1080 &times; 1080 &middot; IG Grid</div>
+                  </div>
+
+                  <!-- Caption & details -->
+                  <div class="flex-1 flex flex-col gap-4">
+                    <div>
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="text-[11px] font-semibold text-stone-600 uppercase tracking-wide">Caption</span>
+                        <div class="flex items-center gap-2">
+                          <button class="text-[11px] text-brand-600 hover:underline font-medium">Edit caption</button>
+                          <span class="text-stone-300">|</span>
+                          <button class="text-[11px] text-purple-600 hover:underline font-medium flex items-center gap-0.5">
+                            <i class="ti ti-sparkles text-xs"></i> Regenerate with AI
+                          </button>
+                        </div>
+                      </div>
+                      <div class="bg-stone-50 rounded-lg border border-black/10 p-3 text-[13px] text-stone-700 leading-relaxed">
+                        Where comfort meets craftsmanship. The Greenwood Chair &mdash; built to last, designed to inspire.
+                      </div>
+                    </div>
+
+                    <div>
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="text-[11px] font-semibold text-stone-600 uppercase tracking-wide">Hashtags</span>
+                        <span class="text-[11px] tabular text-stone-400">4 / 30</span>
+                      </div>
+                      <div class="flex flex-wrap gap-1.5">
+                        <span class="rounded-full bg-blue-50 text-blue-600 px-2.5 py-0.5 text-[11px] font-medium">#interiordesign</span>
+                        <span class="rounded-full bg-blue-50 text-blue-600 px-2.5 py-0.5 text-[11px] font-medium">#europeanfurniture</span>
+                        <span class="rounded-full bg-blue-50 text-blue-600 px-2.5 py-0.5 text-[11px] font-medium">#formastudio</span>
+                        <span class="rounded-full bg-blue-50 text-blue-600 px-2.5 py-0.5 text-[11px] font-medium">#furnituredesign</span>
+                        <button class="rounded-full bg-stone-100 text-stone-500 px-2.5 py-0.5 text-[11px] font-medium hover:bg-stone-200 transition-colors">
+                          <i class="ti ti-plus text-[10px]"></i> Add
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                      <div class="bg-stone-50 rounded-lg border border-black/10 p-3">
+                        <div class="text-[10px] text-stone-400 font-medium uppercase tracking-wide mb-1">Format</div>
+                        <div class="text-[12px] font-semibold text-stone-800 tabular">1080 &times; 1080</div>
+                        <div class="text-[11px] text-stone-400">IG Grid &middot; Square</div>
+                      </div>
+                      <div class="bg-stone-50 rounded-lg border border-black/10 p-3">
+                        <div class="text-[10px] text-stone-400 font-medium uppercase tracking-wide mb-1">Aspect Ratio</div>
+                        <div class="text-[12px] font-semibold text-stone-800 tabular">1:1</div>
+                        <div class="text-[11px] text-stone-400">Feed optimized</div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-1 flex-wrap">
+                      <button class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 text-stone-600 border border-black/10 hover:-translate-y-px transition-all">
+                        <i class="ti ti-copy text-xs"></i> Duplicate for Story
+                      </button>
+                      <button class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 text-stone-600 border border-black/10 hover:-translate-y-px transition-all">
+                        <i class="ti ti-external-link text-xs"></i> Edit in Canva
+                      </button>
+                      <button class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-green-100 text-green-700 border border-green-200 hover:-translate-y-px transition-all ml-auto">
+                        <i class="ti ti-check text-xs"></i> Approve
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SCHEDULE SECTION -->
+              <div class="bg-white rounded-xl border border-black/10 shadow-card p-5" style="animation: fadeUp 0.25s ease both; animation-delay: 0.18s">
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 class="text-[13px] font-semibold text-stone-800">Step 4 &mdash; Schedule</h3>
+                    <p class="text-[11px] text-stone-400 mt-0.5">Set publish time for each platform</p>
+                  </div>
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-[12px] text-stone-600 font-medium">Auto-publish</span>
+                    <!-- Toggle switch (pure CSS) -->
+                    <div class="relative">
+                      <div class="w-9 h-5 rounded-full bg-brand-600 cursor-pointer relative transition-colors" id="toggleSwitch" onclick="toggleAutoPublish(this)">
+                        <div class="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform" id="toggleThumb"></div>
+                      </div>
+                    </div>
+                    <span class="text-[11px] text-green-600 font-medium" id="toggleLabel">On</span>
+                  </div>
+                </div>
+
+                <div class="overflow-hidden rounded-lg border border-black/10">
+                  <table class="w-full text-[12px]">
+                    <thead>
+                      <tr class="bg-stone-50 border-b border-black/10">
+                        <th class="text-left px-4 py-2.5 text-[10px] font-semibold text-stone-500 uppercase tracking-wide">Platform</th>
+                        <th class="text-left px-4 py-2.5 text-[10px] font-semibold text-stone-500 uppercase tracking-wide">Channel</th>
+                        <th class="text-left px-4 py-2.5 text-[10px] font-semibold text-stone-500 uppercase tracking-wide">Date</th>
+                        <th class="text-left px-4 py-2.5 text-[10px] font-semibold text-stone-500 uppercase tracking-wide">Time (CET)</th>
+                        <th class="text-left px-4 py-2.5 text-[10px] font-semibold text-stone-500 uppercase tracking-wide">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-black/[0.04]">
+                      <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="px-4 py-3">
+                          <div class="flex items-center gap-2">
+                            <i class="ti ti-brand-facebook text-blue-500 text-base"></i>
+                            <span class="font-medium text-stone-800">Facebook</span>
+                          </div>
+                        </td>
+                        <td class="px-4 py-3 text-stone-500">Pages</td>
+                        <td class="px-4 py-3 tabular font-medium text-stone-700">20 Mar 2026</td>
+                        <td class="px-4 py-3 tabular text-stone-700">10:00</td>
+                        <td class="px-4 py-3"><span class="rounded-md px-2 py-0.5 text-[10px] font-medium bg-blue-50 text-blue-600">Scheduled</span></td>
+                      </tr>
+                      <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="px-4 py-3">
+                          <div class="flex items-center gap-2">
+                            <i class="ti ti-brand-instagram text-pink-500 text-base"></i>
+                            <span class="font-medium text-stone-800">Instagram</span>
+                          </div>
+                        </td>
+                        <td class="px-4 py-3 text-stone-500">Feed</td>
+                        <td class="px-4 py-3 tabular font-medium text-stone-700">20 Mar 2026</td>
+                        <td class="px-4 py-3 tabular text-stone-700">10:00</td>
+                        <td class="px-4 py-3"><span class="rounded-md px-2 py-0.5 text-[10px] font-medium bg-blue-50 text-blue-600">Scheduled</span></td>
+                      </tr>
+                      <tr class="hover:bg-stone-50 transition-colors">
+                        <td class="px-4 py-3">
+                          <div class="flex items-center gap-2">
+                            <i class="ti ti-brand-linkedin text-blue-700 text-base"></i>
+                            <span class="font-medium text-stone-800">LinkedIn</span>
+                          </div>
+                        </td>
+                        <td class="px-4 py-3 text-stone-500">Company Page</td>
+                        <td class="px-4 py-3 tabular font-medium text-stone-700">20 Mar 2026</td>
+                        <td class="px-4 py-3 tabular text-stone-700">14:00</td>
+                        <td class="px-4 py-3"><span class="rounded-md px-2 py-0.5 text-[10px] font-medium bg-blue-50 text-blue-600">Scheduled</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- BOTTOM ROW -->
+          <div class="grid grid-cols-2 gap-4" style="animation: fadeUp 0.25s ease both; animation-delay: 0.2s">
+
+            <!-- Platform channels info -->
+            <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+              <h3 class="text-[12px] font-semibold text-stone-700 mb-3">Platform Channels</h3>
+              <div class="grid grid-cols-5 gap-2">
+                <div class="flex flex-col items-center gap-1.5 p-2 rounded-lg bg-stone-50 border border-black/[0.06]">
+                  <i class="ti ti-brand-facebook text-xl text-blue-500"></i>
+                  <span class="text-[9px] text-stone-500 text-center leading-tight">Facebook Pages</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                </div>
+                <div class="flex flex-col items-center gap-1.5 p-2 rounded-lg bg-stone-50 border border-black/[0.06]">
+                  <i class="ti ti-brand-instagram text-xl text-pink-500"></i>
+                  <span class="text-[9px] text-stone-500 text-center leading-tight">IG Feed / Story</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                </div>
+                <div class="flex flex-col items-center gap-1.5 p-2 rounded-lg bg-stone-50 border border-black/[0.06]">
+                  <i class="ti ti-brand-linkedin text-xl text-blue-700"></i>
+                  <span class="text-[9px] text-stone-500 text-center leading-tight">LinkedIn Company</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                </div>
+                <div class="flex flex-col items-center gap-1.5 p-2 rounded-lg bg-stone-50 border border-black/[0.06]">
+                  <i class="ti ti-brand-youtube text-xl text-red-500"></i>
+                  <span class="text-[9px] text-stone-500 text-center leading-tight">YouTube Channel</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                </div>
+                <div class="flex flex-col items-center gap-1.5 p-2 rounded-lg bg-stone-50 border border-black/[0.06]">
+                  <i class="ti ti-brand-pinterest text-xl text-red-600"></i>
+                  <span class="text-[9px] text-stone-500 text-center leading-tight">Pinterest Board</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                </div>
+              </div>
+              <div class="mt-3 flex items-center gap-4 text-[10px] text-stone-400">
+                <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-400 inline-block"></span> Connected</span>
+                <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span> Setup needed</span>
+              </div>
+            </div>
+
+            <!-- Workflow rules note -->
+            <div class="bg-amber-50 rounded-xl border border-amber-200 p-4">
+              <div class="flex items-start gap-2.5">
+                <i class="ti ti-shield-check text-amber-600 text-lg shrink-0 mt-0.5"></i>
+                <div>
+                  <div class="text-[12px] font-semibold text-amber-800 mb-2">Publishing Rules</div>
+                  <ul class="text-[11px] text-amber-700 space-y-1.5 leading-relaxed">
+                    <li class="flex items-start gap-1.5">
+                      <i class="ti ti-check text-[10px] text-amber-600 mt-0.5 shrink-0"></i>
+                      <span><strong>100% assets from PIM</strong> &mdash; no direct uploads to social media</span>
+                    </li>
+                    <li class="flex items-start gap-1.5">
+                      <i class="ti ti-check text-[10px] text-amber-600 mt-0.5 shrink-0"></i>
+                      <span>AI-generated content is reviewed and approved before publishing</span>
+                    </li>
+                    <li class="flex items-start gap-1.5">
+                      <i class="ti ti-check text-[10px] text-amber-600 mt-0.5 shrink-0"></i>
+                      <span><strong>Role workflow:</strong> Creator &rarr; Approver &rarr; Publisher</span>
+                    </li>
+                    <li class="flex items-start gap-1.5">
+                      <i class="ti ti-check text-[10px] text-amber-600 mt-0.5 shrink-0"></i>
+                      <span>Full audit log of all publishing activity</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- STEP NAV -->
+          <div class="flex items-center justify-between pt-1" style="animation: fadeUp 0.25s ease both; animation-delay: 0.22s">
+            <button class="flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-medium bg-white text-stone-600 border border-black/10 hover:-translate-y-px active:scale-[0.98] transition-all shadow-card">
+              <i class="ti ti-arrow-left text-xs"></i> Back: AI Content
+            </button>
+            <div class="flex items-center gap-2">
+              <button class="flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-medium bg-white text-stone-600 border border-black/10 hover:-translate-y-px transition-all shadow-card">
+                <i class="ti ti-device-floppy text-xs"></i> Save Draft
+              </button>
+              <button class="flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-medium bg-brand-600 text-white hover:bg-brand-800 hover:-translate-y-px active:scale-[0.98] transition-all shadow-sm">
+                Next: Schedule <i class="ti ti-arrow-right text-xs"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="px-6 py-3 border-t border-black/10 bg-white flex items-center justify-between text-[11px] text-stone-400">
+      <span>PIM Studio v2.4.1 &middot; Connected to D365 &middot; &copy; 2026 Forma Studio GmbH</span>
+      <span class="tabular">Social Campaign &middot; CAMP-2026-003 &middot; Step 3/5</span>
+    </footer>
+
+  </div>
+
+  <script>
+    function toggleAutoPublish(el) {
+      const thumb = document.getElementById('toggleThumb');
+      const label = document.getElementById('toggleLabel');
+      const isOn = el.classList.contains('bg-brand-600');
+      if (isOn) {
+        el.classList.remove('bg-brand-600');
+        el.classList.add('bg-stone-300');
+        thumb.style.transform = 'translateX(0)';
+        label.textContent = 'Off';
+        label.className = 'text-[11px] text-stone-400 font-medium';
+      } else {
+        el.classList.remove('bg-stone-300');
+        el.classList.add('bg-brand-600');
+        thumb.style.transform = 'translateX(16px)';
+        label.textContent = 'On';
+        label.className = 'text-[11px] text-green-600 font-medium';
+      }
+    }
+    // Set initial toggle state
+    document.getElementById('toggleThumb').style.transform = 'translateX(16px)';
+  </script>
+
+</body>
+</html>

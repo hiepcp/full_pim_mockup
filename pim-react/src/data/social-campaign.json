@@ -1,0 +1,83 @@
+{
+  "campaigns": [
+    {
+      "id": "CAMP-2026-003",
+      "name": "Greenwood Spring Launch",
+      "status": "Scheduled",
+      "channels": ["Facebook", "Instagram", "LinkedIn"],
+      "startDate": null,
+      "endDate": "2026-03-20",
+      "posts": 3,
+      "reach": null,
+      "engagement": null
+    },
+    {
+      "id": "CAMP-2026-002",
+      "name": "Nordic Minimal Series",
+      "status": "Posted",
+      "channels": ["Instagram", "LinkedIn"],
+      "startDate": null,
+      "endDate": "2026-03-10",
+      "posts": 2,
+      "reach": null,
+      "engagement": null
+    },
+    {
+      "id": "CAMP-2026-001",
+      "name": "Sustainable Living",
+      "status": "Posted",
+      "channels": ["Facebook", "Instagram", "LinkedIn", "YouTube"],
+      "startDate": null,
+      "endDate": "2026-02-28",
+      "posts": 4,
+      "reach": null,
+      "engagement": null
+    },
+    {
+      "id": "CAMP-2026-004",
+      "name": "Summer Outdoor Preview",
+      "status": "Draft",
+      "channels": ["Instagram", "Pinterest"],
+      "startDate": null,
+      "endDate": null,
+      "posts": 0,
+      "reach": null,
+      "engagement": null
+    }
+  ],
+  "posts": [
+    {
+      "id": "POST-CAMP003-FB-001",
+      "campaignId": "CAMP-2026-003",
+      "channel": "Facebook",
+      "content": "Where comfort meets craftsmanship. The Greenwood Chair — built to last, designed to inspire. #interiordesign #europeanfurniture #formastudio #furnituredesign",
+      "scheduledAt": "2026-03-20T10:00:00+01:00",
+      "status": "Scheduled",
+      "likes": null,
+      "comments": null,
+      "shares": null
+    },
+    {
+      "id": "POST-CAMP003-IG-001",
+      "campaignId": "CAMP-2026-003",
+      "channel": "Instagram",
+      "content": "Where comfort meets craftsmanship. The Greenwood Chair — built to last, designed to inspire. #interiordesign #europeanfurniture #formastudio #furnituredesign",
+      "scheduledAt": "2026-03-20T10:00:00+01:00",
+      "status": "Scheduled",
+      "likes": null,
+      "comments": null,
+      "shares": null
+    },
+    {
+      "id": "POST-CAMP003-LI-001",
+      "campaignId": "CAMP-2026-003",
+      "channel": "LinkedIn",
+      "content": "Where comfort meets craftsmanship. The Greenwood Chair — built to last, designed to inspire. #interiordesign #europeanfurniture #formastudio #furnituredesign",
+      "scheduledAt": "2026-03-20T14:00:00+01:00",
+      "status": "Scheduled",
+      "likes": null,
+      "comments": null,
+      "shares": null
+    }
+  ]
+}

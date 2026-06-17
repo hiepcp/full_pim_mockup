@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Sets — PIM Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Outfit', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#E6F1FB', 100:'#CCDFF7', 400:'#378ADD', 600:'#185FA5', 800:'#0C447C' },
+          },
+          boxShadow: {
+            card: '0 1px 4px rgba(24,95,165,0.06)',
+            hover: '0 4px 14px rgba(24,95,165,0.10)',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <style>
+    @keyframes fadeUp  { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:translateY(0) } }
+    @keyframes fadeIn  { from { opacity:0 } to { opacity:1 } }
+    .tabnum { font-variant-numeric: tabular-nums; }
+    ::-webkit-scrollbar { width:5px; height:5px; }
+    ::-webkit-scrollbar-track { background:transparent; }
+    ::-webkit-scrollbar-thumb { background:#d6d3d1; border-radius:99px; }
+
+    /* Set card active state */
+    .set-card         { transition: background 0.15s, border-color 0.15s, box-shadow 0.15s; }
+    .set-card:hover   { background: #f7f6f3; border-color: rgba(0,0,0,0.15); }
+    .set-card.active  { background: #E6F1FB; border-color: #378ADD; }
+
+    /* Completeness ring (SVG-based, set via JS) */
+    .ring-track  { fill: none; stroke: #e7e5e4; stroke-width: 3; }
+    .ring-fill   { fill: none; stroke-width: 3; stroke-linecap: round;
+                   transition: stroke-dashoffset 0.6s cubic-bezier(0.4,0,0.2,1);
+                   transform: rotate(-90deg); transform-origin: center; }
+
+    /* Component card */
+    .comp-card { transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s; }
+    .comp-card:hover { border-color: #378ADD; box-shadow: 0 4px 12px rgba(24,95,165,0.10); transform: translateY(-2px); }
+
+    /* Publish checklist */
+    .check-row { transition: background 0.1s; }
+    .check-row:hover { background: #f7f6f3; }
+  </style>
+</head>
+<body class="font-sans bg-stone-100 text-stone-900 antialiased">
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="w-[200px] shrink-0 bg-white border-r border-black/10 fixed top-0 left-0 h-screen overflow-y-auto flex flex-col z-10">
+  <div class="px-4 py-[18px] border-b border-black/10">
+    <div class="text-sm font-semibold text-stone-900">PIM Studio</div>
+    <div class="text-[11px] text-stone-500 mt-0.5">Product Info Management</div>
+  </div>
+  <nav class="py-2 flex-1">
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Catalogue</div>
+    <a href="products.html"        class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-box text-base"></i> Products</a>
+    <a href="product-sets.html"    class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-brand-600 bg-brand-50 border-l-2 border-brand-600 font-medium"><i class="ti ti-components text-base"></i> Product Sets</a>
+    <a href="materials.html"       class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-color-swatch text-base"></i> Materials</a>
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Assets</div>
+    <a href="image-engine.html"    class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-photo text-base"></i> Image Engine</a>
+    <a href="document-hub.html"    class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-file-stack text-base"></i> Document Hub</a>
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Publishing</div>
+    <a href="social-campaign.html" class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-speakerphone text-base"></i> Social Campaign</a>
+    <a href="publish-flow.html"                    class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-send text-base"></i> Publish Flow</a>
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">System</div>
+    <a href="settings.html"        class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-settings text-base"></i> Settings</a>
+  </nav>
+  <div class="px-3.5 py-3 border-t border-black/10">
+    <div class="flex items-center gap-2">
+      <div class="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center text-[10px] font-bold text-brand-600">HC</div>
+      <div>
+        <div class="text-[11px] font-medium text-stone-700 leading-tight">Hugo Claes</div>
+        <div class="text-[10px] text-stone-400 leading-tight">Admin</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="ml-[200px] flex flex-col min-h-screen">
+
+  <!-- TOPBAR with inline stats -->
+  <header class="sticky top-0 z-20 bg-white border-b border-black/10 px-6 h-12 flex items-center justify-between gap-4"
+          style="animation: fadeUp 0.2s ease both">
+    <nav class="flex items-center gap-1.5 text-[12px] text-stone-500">
+      <span>Catalogue</span>
+      <i class="ti ti-chevron-right text-[11px] text-stone-300"></i>
+      <span class="font-medium text-stone-800">Product Sets</span>
+    </nav>
+
+    <!-- Inline mini-stats -->
+    <div class="hidden md:flex items-center gap-4 text-[12px]">
+      <span class="text-stone-400">Total <span class="tabnum font-semibold text-stone-700 ml-1">17</span></span>
+      <span class="w-px h-4 bg-stone-200"></span>
+      <span class="flex items-center gap-1 text-emerald-600"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> <span class="tabnum font-semibold">11</span> <span class="text-stone-400 font-normal">published</span></span>
+      <span class="flex items-center gap-1 text-brand-600"><span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span> <span class="tabnum font-semibold">3</span> <span class="text-stone-400 font-normal">approved</span></span>
+      <span class="flex items-center gap-1 text-stone-400"><span class="w-1.5 h-1.5 rounded-full bg-stone-400"></span> <span class="tabnum font-semibold">3</span> <span class="text-stone-400 font-normal">draft</span></span>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <div class="relative">
+        <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
+        <input type="text" placeholder="Search sets…"
+               class="pl-7 pr-3 py-1.5 text-xs bg-stone-50 border border-black/10 rounded-lg outline-none focus:border-brand-400 focus:bg-white transition-colors w-40 placeholder:text-stone-400">
+      </div>
+      <button class="rounded-lg px-3 py-1.5 text-xs font-medium bg-brand-600 text-white hover:bg-brand-800 transition-all hover:-translate-y-px active:scale-[0.98] flex items-center gap-1.5">
+        <i class="ti ti-plus text-sm"></i> Create set
+      </button>
+    </div>
+  </header>
+
+  <!-- MASTER-DETAIL SPLIT -->
+  <div class="flex flex-1 overflow-hidden" style="animation: fadeUp 0.25s ease both; animation-delay: 0.08s">
+
+    <!-- ══ LEFT: SET LIST ══ -->
+    <aside class="w-[288px] shrink-0 bg-white border-r border-black/10 flex flex-col overflow-hidden">
+
+      <!-- Filter pills -->
+      <div class="px-3 py-2.5 border-b border-black/10 flex flex-wrap gap-1">
+        <button data-filter="all"      onclick="filterSets(this)" class="filter-pill px-2.5 py-1 text-[11px] font-medium rounded-md bg-brand-600 text-white transition-colors">All types</button>
+        <button data-filter="Bundle"   onclick="filterSets(this)" class="filter-pill px-2.5 py-1 text-[11px] font-medium rounded-md bg-stone-100 text-stone-500 hover:bg-stone-200 transition-colors">Bundle</button>
+        <button data-filter="Campaign" onclick="filterSets(this)" class="filter-pill px-2.5 py-1 text-[11px] font-medium rounded-md bg-stone-100 text-stone-500 hover:bg-stone-200 transition-colors">Campaign</button>
+        <button data-filter="Display"  onclick="filterSets(this)" class="filter-pill px-2.5 py-1 text-[11px] font-medium rounded-md bg-stone-100 text-stone-500 hover:bg-stone-200 transition-colors">Display</button>
+      </div>
+
+      <!-- Set cards list -->
+      <div class="flex-1 overflow-y-auto py-2 px-2 space-y-1">
+
+        <!-- SET-2024-001 — SELECTED, Bundle, Published -->
+        <div class="set-card active cursor-pointer rounded-xl border px-3 py-3" data-type="Bundle" onclick="selectSet(this,'SET-2024-001')">
+          <div class="flex items-start gap-3">
+            <div class="w-14 h-14 rounded-lg overflow-hidden shrink-0 ring-2 ring-brand-400">
+              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=56&h=56&fit=crop&auto=format" alt="Greenwood Living Room set" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-1">
+                <div class="text-[12px] font-semibold text-stone-900 leading-snug">Greenwood Living Room</div>
+                <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-700 shrink-0 mt-0.5">Live</span>
+              </div>
+              <div class="text-[10px] text-stone-400 tabnum mt-0.5">SET-2024-001 · 4 items</div>
+              <div class="flex items-center gap-2 mt-1.5">
+                <span class="text-[10px] font-medium text-sky-600 bg-sky-50 rounded px-1.5 py-0.5">Bundle</span>
+                <!-- mini completeness bar -->
+                <div class="flex-1 h-1 bg-stone-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width:73%"></div>
+                </div>
+                <span class="text-[10px] tabnum text-stone-400 font-medium">73%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SET-2024-002 — Bundle, Published -->
+        <div class="set-card cursor-pointer rounded-xl border border-black/8 bg-white px-3 py-3" data-type="Bundle" onclick="selectSet(this,'SET-2024-002')">
+          <div class="flex items-start gap-3">
+            <div class="w-14 h-14 rounded-lg overflow-hidden shrink-0">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=56&h=56&fit=crop&auto=format" alt="Nordic Office Set" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-1">
+                <div class="text-[12px] font-semibold text-stone-800 leading-snug">Nordic Office Set</div>
+                <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-700 shrink-0 mt-0.5">Live</span>
+              </div>
+              <div class="text-[10px] text-stone-400 tabnum mt-0.5">SET-2024-002 · 3 items</div>
+              <div class="flex items-center gap-2 mt-1.5">
+                <span class="text-[10px] font-medium text-sky-600 bg-sky-50 rounded px-1.5 py-0.5">Bundle</span>
+                <div class="flex-1 h-1 bg-stone-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full" style="width:91%"></div>
+                </div>
+                <span class="text-[10px] tabnum text-stone-400 font-medium">91%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SET-2024-003 — Campaign, Draft -->
+        <div class="set-card cursor-pointer rounded-xl border border-black/8 bg-white px-3 py-3" data-type="Campaign" onclick="selectSet(this,'SET-2024-003')">
+          <div class="flex items-start gap-3">
+            <div class="w-14 h-14 rounded-lg overflow-hidden shrink-0 opacity-75">
+              <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=56&h=56&fit=crop&auto=format" alt="Summer Outdoor Collection" class="w-full h-full object-cover grayscale">
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-1">
+                <div class="text-[12px] font-semibold text-stone-800 leading-snug">Summer Outdoor</div>
+                <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold bg-stone-100 text-stone-500 shrink-0 mt-0.5">Draft</span>
+              </div>
+              <div class="text-[10px] text-stone-400 tabnum mt-0.5">SET-2024-003 · 6 items</div>
+              <div class="flex items-center gap-2 mt-1.5">
+                <span class="text-[10px] font-medium text-violet-600 bg-violet-50 rounded px-1.5 py-0.5">Campaign</span>
+                <div class="flex-1 h-1 bg-stone-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-stone-300 rounded-full" style="width:55%"></div>
+                </div>
+                <span class="text-[10px] tabnum text-stone-400 font-medium">55%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SET-2024-004 — Campaign, Approved -->
+        <div class="set-card cursor-pointer rounded-xl border border-black/8 bg-white px-3 py-3" data-type="Campaign" onclick="selectSet(this,'SET-2024-004')">
+          <div class="flex items-start gap-3">
+            <div class="w-14 h-14 rounded-lg overflow-hidden shrink-0">
+              <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=56&h=56&fit=crop&auto=format" alt="Minimal Living Ash" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-1">
+                <div class="text-[12px] font-semibold text-stone-800 leading-snug">Minimal Living — Ash</div>
+                <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold bg-brand-50 text-brand-600 shrink-0 mt-0.5">Approved</span>
+              </div>
+              <div class="text-[10px] text-stone-400 tabnum mt-0.5">SET-2024-004 · 5 items</div>
+              <div class="flex items-center gap-2 mt-1.5">
+                <span class="text-[10px] font-medium text-violet-600 bg-violet-50 rounded px-1.5 py-0.5">Campaign</span>
+                <div class="flex-1 h-1 bg-stone-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full" style="width:88%"></div>
+                </div>
+                <span class="text-[10px] tabnum text-stone-400 font-medium">88%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SET-2024-005 — Display, Published -->
+        <div class="set-card cursor-pointer rounded-xl border border-black/8 bg-white px-3 py-3" data-type="Display" onclick="selectSet(this,'SET-2024-005')">
+          <div class="flex items-start gap-3">
+            <div class="w-14 h-14 rounded-lg overflow-hidden shrink-0">
+              <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=56&h=56&fit=crop&auto=format" alt="Café and Contract Pack" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-1">
+                <div class="text-[12px] font-semibold text-stone-800 leading-snug">Café &amp; Contract Pack</div>
+                <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-700 shrink-0 mt-0.5">Live</span>
+              </div>
+              <div class="text-[10px] text-stone-400 tabnum mt-0.5">SET-2024-005 · 8 items</div>
+              <div class="flex items-center gap-2 mt-1.5">
+                <span class="text-[10px] font-medium text-amber-700 bg-amber-50 rounded px-1.5 py-0.5">Display</span>
+                <div class="flex-1 h-1 bg-stone-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full" style="width:96%"></div>
+                </div>
+                <span class="text-[10px] tabnum text-stone-400 font-medium">96%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="px-2 pt-1 pb-2">
+          <button class="w-full text-[11px] text-stone-400 hover:text-brand-600 transition-colors py-1 text-center">
+            + 12 more sets
+          </button>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ══ RIGHT: DETAIL PANEL ══ -->
+    <main class="flex-1 overflow-y-auto" style="animation: fadeIn 0.3s ease both; animation-delay: 0.15s">
+
+      <!-- SET HEADER -->
+      <div class="px-6 pt-5 pb-0">
+        <div class="bg-white rounded-xl border border-black/10 shadow-card overflow-hidden">
+          <!-- Hero banner -->
+          <div class="relative h-40 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&h=160&fit=crop&auto=format"
+                 alt="Greenwood Living Room Bundle hero shot"
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+            <!-- Floating status badge -->
+            <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm rounded-md px-2 py-1 shadow-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Published</span>
+            </div>
+            <!-- Floating set ID -->
+            <div class="absolute bottom-3 left-4 text-white">
+              <div class="text-[10px] font-mono text-white/70 tabnum">SET-2024-001</div>
+            </div>
+          </div>
+          <div class="p-5">
+          <div class="flex items-start justify-between gap-4 flex-wrap">
+            <div class="flex items-start gap-4">
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h1 class="text-lg font-bold text-stone-900 tracking-tight">Greenwood Living Room Bundle</h1>
+                  <span class="rounded-md px-2 py-0.5 text-xs font-semibold bg-emerald-100 text-emerald-700">Published</span>
+                  <span class="rounded-md px-2 py-0.5 text-xs font-medium bg-sky-50 text-sky-700">Bundle</span>
+                </div>
+                <div class="text-sm text-stone-500 mt-0.5">A natural living room bundle in treated oak — designed for spaces of 20–35 m².</div>
+                <div class="flex items-center gap-4 mt-2 text-xs text-stone-400 tabnum">
+                  <span class="flex items-center gap-1"><i class="ti ti-calendar text-xs"></i> SS 2025</span>
+                  <span class="flex items-center gap-1"><i class="ti ti-clock text-xs"></i> Updated 18 Mar 2025</span>
+                  <span class="flex items-center gap-1"><i class="ti ti-user text-xs"></i> Hugo Claes</span>
+                  <span class="flex items-center gap-1"><i class="ti ti-file-text text-xs"></i> iPaper</span>
+                  <span class="flex items-center gap-1"><i class="ti ti-world text-xs"></i> Web</span>
+                </div>
+              </div>
+            </div>
+            <!-- Actions -->
+            <div class="flex items-center gap-2 shrink-0">
+              <button class="rounded-lg px-3 py-1.5 text-xs font-medium border border-black/10 bg-white text-stone-600 hover:bg-stone-50 transition-all hover:-translate-y-px active:scale-[0.98] flex items-center gap-1.5">
+                <i class="ti ti-copy text-sm"></i> Clone
+              </button>
+              <button class="rounded-lg px-3 py-1.5 text-xs font-medium border border-brand-200 text-brand-600 hover:bg-brand-50 transition-all hover:-translate-y-px active:scale-[0.98] flex items-center gap-1.5">
+                <i class="ti ti-pencil text-sm"></i> Edit
+              </button>
+              <button class="rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 text-stone-400 cursor-not-allowed flex items-center gap-1.5" disabled title="Floor lamp completeness < 80%">
+                <i class="ti ti-world-upload text-sm"></i> Re-publish
+              </button>
+            </div>
+          </div>
+
+          <!-- Completeness summary bar -->
+          <div class="mt-4 pt-4 border-t border-black/10 flex items-center gap-4">
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-2xl font-bold tabnum text-amber-600">73%</span>
+              <span class="text-xs text-stone-400">set completeness</span>
+            </div>
+            <div class="flex-1 h-2 bg-stone-100 rounded-full overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all" style="width: 73%"></div>
+            </div>
+            <div class="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1">
+              <i class="ti ti-alert-triangle text-sm"></i>
+              <span>30319 Floor Lamp at 73% — needs 7% to unlock publish</span>
+            </div>
+          </div>
+          </div><!-- /p-5 -->
+        </div>
+      </div>
+
+      <!-- COMPONENT CARDS STRIP -->
+      <div class="px-6 pt-4">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-semibold text-stone-800">Components <span class="ml-1.5 text-xs font-normal text-stone-400 tabnum">4 items</span></h2>
+          <button class="text-xs text-brand-600 hover:underline flex items-center gap-1">
+            <i class="ti ti-plus text-xs"></i> Add item
+          </button>
+        </div>
+
+        <!-- Horizontal component cards -->
+        <div class="grid grid-cols-4 gap-3">
+
+          <!-- Component 1: Lounge Chair — Approved, 92% -->
+          <div class="comp-card bg-white rounded-xl border border-black/10 shadow-card overflow-hidden flex flex-col cursor-pointer">
+            <div class="relative h-28 overflow-hidden bg-stone-100">
+              <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=240&h=112&fit=crop&auto=format" alt="Greenwood Lounge Chair 30317" class="w-full h-full object-cover">
+              <!-- Ring overlay -->
+              <div class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm rounded-full p-0.5 shadow-sm">
+                <svg width="32" height="32" viewBox="0 0 36 36">
+                  <circle class="ring-track" cx="18" cy="18" r="15"/>
+                  <circle class="ring-fill" cx="18" cy="18" r="15" stroke="#3B6D11" stroke-dasharray="94.25" stroke-dashoffset="7.54"/>
+                </svg>
+              </div>
+            </div>
+            <div class="p-3 flex flex-col gap-2 flex-1">
+              <div>
+                <div class="text-[12px] font-semibold text-stone-800 leading-tight">Greenwood Lounge Chair</div>
+                <div class="text-[10px] text-stone-400 tabnum mt-0.5">30317 · 1 pc</div>
+              </div>
+              <div class="mt-auto flex items-center justify-between">
+                <span class="rounded-md px-1.5 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-700">Approved</span>
+                <span class="text-[11px] tabnum font-bold text-emerald-600">92%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Component 2: Side Table — Approved, 88% -->
+          <div class="comp-card bg-white rounded-xl border border-black/10 shadow-card overflow-hidden flex flex-col cursor-pointer">
+            <div class="relative h-28 overflow-hidden bg-stone-100">
+              <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=240&h=112&fit=crop&auto=format" alt="Greenwood Side Table 30318" class="w-full h-full object-cover">
+              <div class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm rounded-full p-0.5 shadow-sm">
+                <svg width="32" height="32" viewBox="0 0 36 36">
+                  <circle class="ring-track" cx="18" cy="18" r="15"/>
+                  <circle class="ring-fill" cx="18" cy="18" r="15" stroke="#3B6D11" stroke-dasharray="94.25" stroke-dashoffset="11.31"/>
+                </svg>
+              </div>
+            </div>
+            <div class="p-3 flex flex-col gap-2 flex-1">
+              <div>
+                <div class="text-[12px] font-semibold text-stone-800 leading-tight">Greenwood Side Table</div>
+                <div class="text-[10px] text-stone-400 tabnum mt-0.5">30318 · 1 pc</div>
+              </div>
+              <div class="mt-auto flex items-center justify-between">
+                <span class="rounded-md px-1.5 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-700">Approved</span>
+                <span class="text-[11px] tabnum font-bold text-emerald-600">88%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Component 3: Floor Lamp — DRAFT, 73% ⚠ -->
+          <div class="comp-card bg-white rounded-xl border border-amber-300 shadow-card overflow-hidden flex flex-col cursor-pointer">
+            <div class="relative h-28 overflow-hidden bg-amber-50">
+              <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=240&h=112&fit=crop&auto=format" alt="Greenwood Floor Lamp 30319" class="w-full h-full object-cover opacity-80">
+              <!-- Amber overlay on draft items -->
+              <div class="absolute inset-0 bg-amber-400/10"></div>
+              <div class="absolute top-2 left-2 flex items-center gap-1 bg-amber-500/90 backdrop-blur-sm rounded px-1.5 py-0.5">
+                <i class="ti ti-alert-triangle text-white text-[10px]"></i>
+                <span class="text-[10px] font-semibold text-white">Draft</span>
+              </div>
+              <div class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm rounded-full p-0.5 shadow-sm">
+                <svg width="32" height="32" viewBox="0 0 36 36">
+                  <circle class="ring-track" cx="18" cy="18" r="15"/>
+                  <circle class="ring-fill" cx="18" cy="18" r="15" stroke="#854F0B" stroke-dasharray="94.25" stroke-dashoffset="25.45"/>
+                </svg>
+              </div>
+            </div>
+            <div class="p-3 flex flex-col gap-2 flex-1">
+              <div>
+                <div class="text-[12px] font-semibold text-stone-800 leading-tight">Greenwood Floor Lamp</div>
+                <div class="text-[10px] text-stone-400 tabnum mt-0.5">30319 · 1 pc</div>
+              </div>
+              <div class="mt-auto">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="text-[10px] font-semibold text-stone-500">In progress</span>
+                  <span class="text-[11px] tabnum font-bold text-amber-700">73%</span>
+                </div>
+                <div class="text-[10px] text-amber-700 bg-amber-50 border border-amber-200 rounded px-2 py-1 leading-snug">
+                  Missing: AI content (15%), 2 docs pending
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Component 4: Cushion Set — Approved, 95% -->
+          <div class="comp-card bg-white rounded-xl border border-black/10 shadow-card overflow-hidden flex flex-col cursor-pointer">
+            <div class="relative h-28 overflow-hidden bg-stone-100">
+              <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?w=240&h=112&fit=crop&auto=format" alt="Greenwood Cushion Set 30320" class="w-full h-full object-cover">
+              <div class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm rounded-full p-0.5 shadow-sm">
+                <svg width="32" height="32" viewBox="0 0 36 36">
+                  <circle class="ring-track" cx="18" cy="18" r="15"/>
+                  <circle class="ring-fill" cx="18" cy="18" r="15" stroke="#3B6D11" stroke-dasharray="94.25" stroke-dashoffset="4.71"/>
+                </svg>
+              </div>
+            </div>
+            <div class="p-3 flex flex-col gap-2 flex-1">
+              <div>
+                <div class="text-[12px] font-semibold text-stone-800 leading-tight">Greenwood Cushion Set</div>
+                <div class="text-[10px] text-stone-400 tabnum mt-0.5">30320 · 2 pcs</div>
+              </div>
+              <div class="mt-auto flex items-center justify-between">
+                <span class="rounded-md px-1.5 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-700">Approved</span>
+                <span class="text-[11px] tabnum font-bold text-emerald-600">95%</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PUBLISH READINESS + SET METADATA — two columns -->
+      <div class="px-6 pt-4 grid grid-cols-5 gap-4">
+
+        <!-- Publish readiness checklist — 3 cols wide -->
+        <div class="col-span-3 bg-white rounded-xl border border-black/10 shadow-card p-5">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-semibold text-stone-800">Publish readiness</h2>
+            <span class="text-xs text-stone-400">3 / 4 checks passed</span>
+          </div>
+
+          <div class="space-y-1">
+            <!-- Check 1 — pass -->
+            <div class="check-row flex items-center gap-3 px-3 py-2 rounded-lg">
+              <div class="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                <i class="ti ti-check text-emerald-600 text-[11px]"></i>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs font-medium text-stone-700">Set metadata complete</div>
+                <div class="text-[11px] text-stone-400">Name, type, description, season — all filled</div>
+              </div>
+              <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 rounded px-1.5 py-0.5">Pass</span>
+            </div>
+
+            <!-- Check 2 — fail -->
+            <div class="check-row flex items-center gap-3 px-3 py-2 rounded-lg bg-amber-50/60">
+              <div class="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
+                <i class="ti ti-x text-amber-600 text-[11px]"></i>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs font-medium text-stone-700">All components ≥ 80% complete</div>
+                <div class="text-[11px] text-amber-700">30319 Greenwood Floor Lamp at 73% — needs 7% more</div>
+              </div>
+              <span class="text-[10px] font-semibold text-amber-700 bg-amber-100 rounded px-1.5 py-0.5">Fail</span>
+            </div>
+
+            <!-- Check 3 — pass -->
+            <div class="check-row flex items-center gap-3 px-3 py-2 rounded-lg">
+              <div class="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                <i class="ti ti-check text-emerald-600 text-[11px]"></i>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs font-medium text-stone-700">3 of 4 components approved</div>
+                <div class="text-[11px] text-stone-400">Chair, Side Table, Cushion Set approved — Floor Lamp in draft</div>
+              </div>
+              <span class="text-[10px] font-semibold text-amber-600 bg-amber-50 rounded px-1.5 py-0.5">3/4</span>
+            </div>
+
+            <!-- Check 4 — pass -->
+            <div class="check-row flex items-center gap-3 px-3 py-2 rounded-lg">
+              <div class="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                <i class="ti ti-check text-emerald-600 text-[11px]"></i>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs font-medium text-stone-700">Set assets attached</div>
+                <div class="text-[11px] text-stone-400">Mood shot + individual item packshots all present</div>
+              </div>
+              <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 rounded px-1.5 py-0.5">Pass</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-black/10">
+            <div class="flex items-start gap-2 text-xs text-stone-500 leading-relaxed">
+              <i class="ti ti-lock text-stone-400 mt-0.5 shrink-0"></i>
+              <span>A set inherits completeness from its <strong class="text-stone-700">lowest-scoring component</strong>. Publish is blocked until all components reach ≥ 80% and are Approved.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Set metadata + channels — 2 cols wide -->
+        <div class="col-span-2 space-y-3">
+
+          <!-- Metadata -->
+          <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+            <h3 class="text-[12px] font-semibold text-stone-700 mb-3">Set details</h3>
+            <dl class="space-y-2">
+              <div class="flex justify-between text-xs">
+                <dt class="text-stone-400">Set ID</dt>
+                <dd class="font-mono font-medium text-stone-700 tabnum">SET-2024-001</dd>
+              </div>
+              <div class="flex justify-between text-xs">
+                <dt class="text-stone-400">Type</dt>
+                <dd><span class="rounded px-1.5 py-0.5 text-[10px] font-medium bg-sky-50 text-sky-700">Bundle</span></dd>
+              </div>
+              <div class="flex justify-between text-xs">
+                <dt class="text-stone-400">Season</dt>
+                <dd class="font-medium text-stone-700">SS 2025</dd>
+              </div>
+              <div class="flex justify-between text-xs">
+                <dt class="text-stone-400">Components</dt>
+                <dd class="font-semibold tabnum text-stone-700">4 items</dd>
+              </div>
+              <div class="flex justify-between text-xs">
+                <dt class="text-stone-400">Created by</dt>
+                <dd class="font-medium text-stone-700">Hugo Claes</dd>
+              </div>
+              <div class="flex justify-between text-xs">
+                <dt class="text-stone-400">Last updated</dt>
+                <dd class="tabnum text-stone-500">18 Mar 2025</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Publish channels -->
+          <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+            <h3 class="text-[12px] font-semibold text-stone-700 mb-3">Published to</h3>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="flex items-center gap-1.5 text-stone-600"><i class="ti ti-file-text text-stone-400 text-sm"></i> iPaper catalogue</span>
+                <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 rounded px-1.5 py-0.5">Live</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="flex items-center gap-1.5 text-stone-600"><i class="ti ti-world text-stone-400 text-sm"></i> Website REST API</span>
+                <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 rounded px-1.5 py-0.5">Live</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="flex items-center gap-1.5 text-stone-400"><i class="ti ti-speakerphone text-stone-300 text-sm"></i> Social Campaign</span>
+                <span class="text-[10px] text-stone-400">Not linked</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- QUICK ACTIONS FOOTER -->
+      <div class="px-6 pt-3 pb-6">
+        <div class="bg-stone-50 rounded-xl border border-black/10 px-4 py-3 flex items-center justify-between">
+          <span class="text-xs text-stone-500">Next: resolve Floor Lamp completeness to enable publish</span>
+          <div class="flex items-center gap-2">
+            <a href="products.html" class="rounded-lg px-3 py-1.5 text-xs font-medium border border-black/10 bg-white text-stone-600 hover:bg-stone-100 transition-all hover:-translate-y-px active:scale-[0.98] flex items-center gap-1.5">
+              <i class="ti ti-external-link text-sm"></i> Open 30319
+            </a>
+            <button class="rounded-lg px-3 py-1.5 text-xs font-medium bg-brand-600 text-white hover:bg-brand-800 transition-all hover:-translate-y-px active:scale-[0.98] flex items-center gap-1.5">
+              <i class="ti ti-speakerphone text-sm"></i> Create campaign from set
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+</div>
+
+<script>
+  function selectSet(el, id) {
+    document.querySelectorAll('.set-card').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function filterSets(btn) {
+    const filter = btn.dataset.filter;
+    // Update pill active state
+    document.querySelectorAll('.filter-pill').forEach(b => {
+      b.classList.remove('bg-brand-600', 'text-white');
+      b.classList.add('bg-stone-100', 'text-stone-500');
+    });
+    btn.classList.remove('bg-stone-100', 'text-stone-500');
+    btn.classList.add('bg-brand-600', 'text-white');
+    // Show/hide cards
+    document.querySelectorAll('.set-card').forEach(card => {
+      const match = filter === 'all' || card.dataset.type === filter;
+      card.style.display = match ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>

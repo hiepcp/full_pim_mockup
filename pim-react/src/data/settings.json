@@ -1,0 +1,112 @@
+{
+  "members": [
+    {
+      "id": 1,
+      "initials": "HC",
+      "name": "Hugo Claes",
+      "email": "h.claes@formastudio.eu",
+      "role": "Admin",
+      "status": "Active",
+      "lastActive": "Just now",
+      "avatarClass": "bg-brand-100 text-brand-600"
+    },
+    {
+      "id": 2,
+      "initials": "EF",
+      "name": "Emma Fischer",
+      "email": "e.fischer@formastudio.eu",
+      "role": "Publisher",
+      "status": "Active",
+      "lastActive": "2h ago",
+      "avatarClass": "bg-rose-100 text-rose-600"
+    },
+    {
+      "id": 3,
+      "initials": "LM",
+      "name": "Luca Moretti",
+      "email": "l.moretti@formastudio.eu",
+      "role": "Creator",
+      "status": "Active",
+      "lastActive": "Yesterday",
+      "avatarClass": "bg-emerald-100 text-emerald-600"
+    },
+    {
+      "id": 4,
+      "initials": "SB",
+      "name": "Sophie Bernard",
+      "email": "s.bernard@formastudio.eu",
+      "role": "Creator",
+      "status": "Invited",
+      "lastActive": "—",
+      "avatarClass": "bg-stone-100 text-stone-400"
+    },
+    {
+      "id": 5,
+      "initials": "NV",
+      "name": "Nina van der Berg",
+      "email": "n.vanderberg@formastudio.eu",
+      "role": "Viewer",
+      "status": "Active",
+      "lastActive": "3 days ago",
+      "avatarClass": "bg-orange-100 text-orange-600"
+    },
+    {
+      "id": 6,
+      "initials": "MK",
+      "name": "Markus Klein",
+      "email": "m.klein@formastudio.eu",
+      "role": "Publisher",
+      "status": "Active",
+      "lastActive": "5h ago",
+      "avatarClass": "bg-teal-100 text-teal-600"
+    }
+  ],
+  "rolePermissions": [
+    { "label": "View Products", "viewer": true, "creator": true, "publisher": true, "admin": true },
+    { "label": "Edit PIM Fields", "viewer": false, "creator": false, "publisher": true, "admin": true },
+    { "label": "Upload Assets", "viewer": false, "creator": true, "publisher": true, "admin": true },
+    { "label": "Approve & Publish", "viewer": false, "creator": false, "publisher": true, "admin": true },
+    { "label": "Manage Settings", "viewer": false, "creator": false, "publisher": false, "admin": true },
+    { "label": "Social Channel Post", "viewer": false, "creator": "draft", "publisher": true, "admin": true },
+    { "label": "View Sync Log", "viewer": false, "creator": false, "publisher": true, "admin": true },
+    { "label": "Manage Team Members", "viewer": false, "creator": false, "publisher": false, "admin": true }
+  ],
+  "syncLog": [
+    { "time": "10:46 AM", "type": "Full product sync", "records": "1,247 records", "status": "Success", "statusClass": "bg-green-50 text-green-700 border-green-200", "note": null, "duration": "8.3s" },
+    { "time": "10:31 AM", "type": "Full product sync", "records": "1,247 records", "status": "Success", "statusClass": "bg-green-50 text-green-700 border-green-200", "note": null, "duration": "7.9s" },
+    { "time": "10:16 AM", "type": "Full product sync", "records": "1,247 records", "status": "Success", "statusClass": "bg-green-50 text-green-700 border-green-200", "note": null, "duration": "8.1s" },
+    { "time": "10:01 AM", "type": "Full product sync", "records": "1,247 records", "status": "Warning", "statusClass": "bg-amber-50 text-amber-700 border-amber-200", "note": "3 validation errors", "duration": "12.4s" },
+    { "time": "09:46 AM", "type": "Full product sync", "records": "1,247 records", "status": "Success", "statusClass": "bg-green-50 text-green-700 border-green-200", "note": null, "duration": "8.0s" }
+  ],
+  "notificationEvents": [
+    { "label": "D365 sync failed", "desc": "Notify after 3 consecutive sync failures", "email": true, "inapp": true },
+    { "label": "Social token expiring", "desc": "30 days before token expiry", "email": true, "inapp": true },
+    { "label": "Pending approval", "desc": "Creator has submitted content awaiting Publisher approval", "email": false, "inapp": true },
+    { "label": "Publish successful", "desc": "Post successfully published to social or iPaper", "email": false, "inapp": true },
+    { "label": "D365 sync warning", "desc": "Validation errors occurred during sync", "email": true, "inapp": true }
+  ],
+  "organization": {
+    "name": "Forma Studio GmbH",
+    "plan": "PIM Studio v2.4.1",
+    "seats": 6,
+    "usedSeats": 5
+  },
+  "d365Config": {
+    "tenantId": "PROD-EU-01",
+    "environment": "D365 Production",
+    "syncInterval": "15 minutes",
+    "lastSync": "10:46 AM, 16 Jun 2026",
+    "status": "Connected"
+  },
+  "completenessRules": [
+    { "field": "Product Name (EN + DE)", "required": true, "weight": 20 },
+    { "field": "Description (EN)", "required": true, "weight": 15 },
+    { "field": "Hero Image (min 1)", "required": true, "weight": 20 },
+    { "field": "Category", "required": true, "weight": 10 },
+    { "field": "Dimensions (W×D×H)", "required": true, "weight": 10 },
+    { "field": "Description (FR / NL)", "required": false, "weight": 5 },
+    { "field": "Lifestyle Images (min 3)", "required": false, "weight": 10 },
+    { "field": "Technical Spec PDF", "required": false, "weight": 5 },
+    { "field": "Materials & Finishes", "required": false, "weight": 5 }
+  ]
+}

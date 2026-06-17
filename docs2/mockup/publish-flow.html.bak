@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publish Flow — PIM Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Outfit', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#E6F1FB', 100:'#CCDFF7', 400:'#378ADD', 600:'#185FA5', 800:'#0C447C' },
+          },
+          boxShadow: {
+            card: '0 1px 4px rgba(24,95,165,0.06)',
+            hover: '0 4px 14px rgba(24,95,165,0.10)',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <style>
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(24,95,165,0.25); }
+      70%  { box-shadow: 0 0 0 6px rgba(24,95,165,0); }
+      100% { box-shadow: 0 0 0 0 rgba(24,95,165,0); }
+    }
+    .pulse-active { animation: pulse-ring 2s infinite; }
+    .tabnum { font-variant-numeric: tabular-nums; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 99px; }
+  </style>
+</head>
+<body class="bg-stone-100 font-sans text-stone-900 antialiased">
+
+<!-- SIDEBAR -->
+<aside class="w-[200px] shrink-0 bg-white border-r border-black/10 fixed top-0 left-0 h-screen overflow-y-auto flex flex-col z-10">
+  <div class="px-4 py-[18px] border-b border-black/10">
+    <a href="index.html" class="block no-underline">
+      <div class="text-sm font-semibold text-stone-900">PIM Studio</div>
+      <div class="text-[11px] text-stone-500 mt-0.5">Product Info Management</div>
+    </a>
+  </div>
+  <nav class="py-2 flex-1">
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Catalogue</div>
+    <a href="products.html"      class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-box text-base"></i> Products</a>
+    <a href="product-sets.html"  class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-components text-base"></i> Product Sets</a>
+    <a href="materials.html"     class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-color-swatch text-base"></i> Materials</a>
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Assets</div>
+    <a href="image-engine.html"  class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-photo text-base"></i> Image Engine</a>
+    <a href="document-hub.html"  class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-file-stack text-base"></i> Document Hub</a>
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">Publishing</div>
+    <a href="social-campaign.html" class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-speakerphone text-base"></i> Social Campaign</a>
+    <a href="publish-flow.html"  class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-brand-600 bg-brand-50 border-l-2 border-brand-600 font-medium"><i class="ti ti-send text-base"></i> Publish Flow</a>
+    <div class="text-[10px] font-medium text-stone-400 uppercase tracking-widest px-3.5 pt-3.5 pb-1">System</div>
+    <a href="settings.html"      class="flex items-center gap-2 px-3.5 py-1.5 text-[13px] text-stone-500 border-l-2 border-transparent hover:bg-stone-50 hover:text-stone-900 transition-colors"><i class="ti ti-settings text-base"></i> Settings</a>
+  </nav>
+  <div class="px-3.5 py-3 border-t border-black/10">
+    <div class="flex items-center gap-2">
+      <div class="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center text-[10px] font-bold text-brand-600">HC</div>
+      <div>
+        <div class="text-[11px] font-medium text-stone-700 leading-tight">Hugo Claes</div>
+        <div class="text-[10px] text-stone-400 leading-tight">Admin</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN WRAPPER -->
+<div class="ml-[200px] flex flex-col min-h-screen">
+
+  <!-- TOPBAR -->
+  <header class="sticky top-0 z-10 bg-white border-b border-black/10 px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-1.5 text-[13px]">
+      <span class="text-stone-400">Publishing</span>
+      <i class="ti ti-chevron-right text-stone-300 text-xs"></i>
+      <span class="font-medium text-stone-800">Publish Flow</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 text-stone-600 border border-black/10 hover:-translate-y-px active:scale-[0.98] transition-all">
+        <i class="ti ti-history text-xs"></i> Job History
+      </button>
+      <button class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-brand-600 text-white hover:bg-brand-800 hover:-translate-y-px active:scale-[0.98] transition-all shadow-sm">
+        <i class="ti ti-plus text-xs"></i> New Publish Job
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="flex-1 p-6 flex flex-col gap-5">
+
+    <!-- STATS ROW -->
+    <div class="grid grid-cols-4 gap-4" style="animation: fadeUp 0.25s ease both; animation-delay: 0.05s">
+      <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+        <div class="text-[11px] text-stone-400 font-medium uppercase tracking-wide mb-1">Channels</div>
+        <div class="text-2xl font-bold tabnum text-stone-900">4</div>
+        <div class="flex items-center gap-1.5 mt-1">
+          <span class="text-[10px] font-medium text-stone-500">Website</span>
+          <span class="text-stone-300">&middot;</span>
+          <span class="text-[10px] font-medium text-stone-500">Amazon EU</span>
+          <span class="text-stone-300">&middot;</span>
+          <span class="text-[10px] font-medium text-stone-500">Wayfair</span>
+          <span class="text-stone-300">&middot;</span>
+          <span class="text-[10px] font-medium text-stone-500">OTTO</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+        <div class="text-[11px] text-stone-400 font-medium uppercase tracking-wide mb-1">In Progress</div>
+        <div class="text-2xl font-bold tabnum text-amber-600">3</div>
+        <div class="text-[11px] text-stone-400 mt-1">jobs in queue</div>
+      </div>
+      <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+        <div class="text-[11px] text-stone-400 font-medium uppercase tracking-wide mb-1">Published Today</div>
+        <div class="text-2xl font-bold tabnum text-green-600">147</div>
+        <div class="text-[11px] text-stone-400 mt-1">SKUs across all channels</div>
+      </div>
+      <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+        <div class="text-[11px] text-stone-400 font-medium uppercase tracking-wide mb-1">Errors</div>
+        <div class="text-2xl font-bold tabnum text-red-500">6</div>
+        <div class="text-[11px] text-stone-400 mt-1">need attention</div>
+      </div>
+    </div>
+
+    <!-- MAIN TWO-COLUMN LAYOUT -->
+    <div class="flex gap-5 items-start" style="animation: fadeUp 0.25s ease both; animation-delay: 0.1s">
+
+      <!-- LEFT: JOB LIST -->
+      <div class="w-[260px] shrink-0 flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+          <h2 class="text-[13px] font-semibold text-stone-700">Publish Jobs</h2>
+          <span class="text-[11px] text-stone-400">5 total</span>
+        </div>
+
+        <!-- Search -->
+        <div class="relative">
+          <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
+          <input type="text" placeholder="Search jobs..." class="w-full pl-7 pr-3 py-1.5 rounded-lg border border-black/10 text-[12px] text-stone-700 bg-white placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-brand-400" />
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="flex gap-1">
+          <button class="flex-1 py-1 rounded-md text-[11px] font-medium bg-stone-900 text-white">All</button>
+          <button class="flex-1 py-1 rounded-md text-[11px] font-medium text-stone-500 bg-white border border-black/10 hover:bg-stone-50">Queue</button>
+          <button class="flex-1 py-1 rounded-md text-[11px] font-medium text-stone-500 bg-white border border-black/10 hover:bg-stone-50">Errors</button>
+        </div>
+
+        <!-- Job cards -->
+        <div class="flex flex-col gap-2">
+
+          <!-- PUB-2026-014 — SELECTED / RUNNING -->
+          <div class="bg-white rounded-xl border border-brand-400 shadow-hover overflow-hidden cursor-pointer">
+            <div class="px-3.5 pt-3.5 pb-2">
+              <div class="flex items-start justify-between mb-2">
+                <div class="flex-1 min-w-0">
+                  <div class="text-[10px] tabnum text-stone-400 font-mono">PUB-2026-014</div>
+                  <div class="text-[13px] font-semibold text-stone-900 mt-0.5 leading-tight">Outdoor Living Collection 2026</div>
+                </div>
+                <span class="ml-2 shrink-0 rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-amber-100 text-amber-700 border border-amber-200">Running</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[11px] text-stone-500 mb-2">
+                <span class="text-stone-400">Forma Website &middot; Amazon EU</span>
+              </div>
+              <!-- Progress bar -->
+              <div class="flex items-center gap-2">
+                <div class="flex-1 h-1.5 bg-stone-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-brand-600 rounded-full" style="width: 62%"></div>
+                </div>
+                <span class="text-[10px] tabnum text-stone-500 font-medium shrink-0">62%</span>
+              </div>
+              <div class="mt-1.5 text-[10px] text-stone-400 tabnum">48 / 78 SKUs published</div>
+            </div>
+            <div class="px-3.5 py-2 border-t border-black/5 bg-brand-50/50 flex items-center gap-1.5">
+              <div class="w-1.5 h-1.5 rounded-full bg-amber-500 pulse-active"></div>
+              <span class="text-[11px] text-amber-700 font-medium">Running...</span>
+              <span class="text-[10px] text-stone-400 ml-auto tabnum">~4m remaining</span>
+            </div>
+          </div>
+
+          <!-- PUB-2026-013 — SUCCESS -->
+          <div class="bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 cursor-pointer">
+            <div class="px-3.5 py-3">
+              <div class="flex items-start justify-between mb-1.5">
+                <div class="flex-1 min-w-0">
+                  <div class="text-[10px] tabnum text-stone-400 font-mono">PUB-2026-013</div>
+                  <div class="text-[13px] font-semibold text-stone-900 mt-0.5 leading-tight">Haus Series — Storage &amp; Shelving</div>
+                </div>
+                <span class="ml-2 shrink-0 rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-green-100 text-green-700 border border-green-200">Done</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[11px] text-stone-500 mb-2">
+                <span class="text-stone-400">Forma Website &middot; Amazon EU &middot; Wayfair</span>
+              </div>
+              <div class="text-[11px] text-stone-400 flex items-center gap-1">
+                <i class="ti ti-check text-xs text-green-500"></i>
+                <span>124 SKUs &middot; Completed at <span class="tabnum font-medium text-stone-600">09:41</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PUB-2026-012 — ERROR -->
+          <div class="bg-white rounded-xl border border-red-200 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 cursor-pointer">
+            <div class="px-3.5 py-3">
+              <div class="flex items-start justify-between mb-1.5">
+                <div class="flex-1 min-w-0">
+                  <div class="text-[10px] tabnum text-stone-400 font-mono">PUB-2026-012</div>
+                  <div class="text-[13px] font-semibold text-stone-900 mt-0.5 leading-tight">Greenwood Spring — Wayfair</div>
+                </div>
+                <span class="ml-2 shrink-0 rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-red-100 text-red-700 border border-red-200">Error</span>
+              </div>
+              <div class="text-[11px] text-red-600 flex items-center gap-1">
+                <i class="ti ti-alert-triangle text-xs"></i>
+                <span>6 SKUs failed — missing primary image</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PUB-2026-011 — QUEUED -->
+          <div class="bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 cursor-pointer">
+            <div class="px-3.5 py-3">
+              <div class="flex items-start justify-between mb-1.5">
+                <div class="flex-1 min-w-0">
+                  <div class="text-[10px] tabnum text-stone-400 font-mono">PUB-2026-011</div>
+                  <div class="text-[13px] font-semibold text-stone-900 mt-0.5 leading-tight">Nordic Minimal — OTTO</div>
+                </div>
+                <span class="ml-2 shrink-0 rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-stone-100 text-stone-500 border border-stone-200">Queued</span>
+              </div>
+              <div class="text-[11px] text-stone-400 flex items-center gap-1">
+                <i class="ti ti-clock text-xs"></i>
+                <span>Waiting — 36 SKUs &middot; OTTO only</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PUB-2026-010 — SUCCESS -->
+          <div class="bg-white rounded-xl border border-black/10 shadow-card hover:shadow-hover hover:-translate-y-px transition-all duration-200 cursor-pointer">
+            <div class="px-3.5 py-3">
+              <div class="flex items-start justify-between mb-1.5">
+                <div class="flex-1 min-w-0">
+                  <div class="text-[10px] tabnum text-stone-400 font-mono">PUB-2026-010</div>
+                  <div class="text-[13px] font-semibold text-stone-900 mt-0.5 leading-tight">Scandinavian Living Set</div>
+                </div>
+                <span class="ml-2 shrink-0 rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-green-100 text-green-700 border border-green-200">Done</span>
+              </div>
+              <div class="text-[11px] text-stone-400 flex items-center gap-1">
+                <i class="ti ti-check text-xs text-green-500"></i>
+                <span>23 SKUs &middot; Yesterday 16:22</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT: JOB DETAIL -->
+      <div class="flex-1 flex flex-col gap-4">
+
+        <!-- Job header -->
+        <div class="bg-white rounded-xl border border-black/10 shadow-card overflow-hidden" style="animation: fadeUp 0.25s ease both; animation-delay: 0.12s">
+          <div class="px-5 py-4 border-b border-black/5">
+            <div class="flex items-start justify-between">
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-[10px] tabnum font-mono text-stone-400">PUB-2026-014</span>
+                  <span class="rounded-md px-2 py-0.5 text-[10px] font-medium bg-amber-100 text-amber-700 border border-amber-200">Running</span>
+                  <span class="text-[10px] text-stone-400">Started at 10:03</span>
+                </div>
+                <h1 class="text-base font-bold text-stone-900 leading-tight">Outdoor Living Collection 2026 — Batch Publish</h1>
+                <div class="text-[12px] text-stone-500 mt-0.5">78 SKUs &middot; 2 channels &middot; Created by Hugo Claes</div>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <button class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 text-stone-600 border border-black/10 hover:-translate-y-px transition-all active:scale-[0.98]">
+                  <i class="ti ti-pause text-xs"></i> Pause
+                </button>
+                <button class="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-red-50 text-red-600 border border-red-200 hover:-translate-y-px transition-all active:scale-[0.98]">
+                  <i class="ti ti-x text-xs"></i> Cancel
+                </button>
+              </div>
+            </div>
+
+            <!-- Overall progress -->
+            <div class="mt-4">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-[11px] font-medium text-stone-600">Overall Progress</span>
+                <span class="text-[11px] tabnum font-semibold text-brand-600">48 / 78 SKUs</span>
+              </div>
+              <div class="h-2 bg-stone-100 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-brand-600 to-brand-400 rounded-full transition-all duration-700" style="width: 62%"></div>
+              </div>
+              <div class="flex items-center justify-between mt-1.5">
+                <span class="text-[10px] text-stone-400">62% complete</span>
+                <span class="text-[10px] text-stone-400 tabnum">~4 minutes remaining</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Channel status strip -->
+          <div class="px-5 py-3 flex items-center gap-6 bg-stone-50/60">
+            <!-- Website -->
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-lg bg-brand-50 border border-brand-100 flex items-center justify-center text-sm font-bold text-brand-600">W</div>
+              <div>
+                <div class="text-[11px] font-semibold text-stone-800">Forma Website</div>
+                <div class="text-[10px] text-stone-400 tabnum">31 / 40 SKUs</div>
+              </div>
+              <div class="ml-1 w-16 h-1 bg-stone-200 rounded-full overflow-hidden">
+                <div class="h-full bg-brand-500 rounded-full" style="width: 78%"></div>
+              </div>
+              <span class="text-[10px] text-brand-600 font-medium tabnum">78%</span>
+            </div>
+
+            <div class="w-px h-8 bg-black/5"></div>
+
+            <!-- Amazon EU -->
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center text-sm font-bold text-amber-600">A</div>
+              <div>
+                <div class="text-[11px] font-semibold text-stone-800">Amazon EU</div>
+                <div class="text-[10px] text-stone-400 tabnum">17 / 38 SKUs</div>
+              </div>
+              <div class="ml-1 w-16 h-1 bg-stone-200 rounded-full overflow-hidden">
+                <div class="h-full bg-amber-500 rounded-full" style="width: 45%"></div>
+              </div>
+              <span class="text-[10px] text-amber-600 font-medium tabnum">45%</span>
+            </div>
+
+            <div class="w-px h-8 bg-black/5"></div>
+
+            <!-- Summary -->
+            <div class="ml-auto flex items-center gap-4 text-[11px]">
+              <div class="flex items-center gap-1 text-green-600">
+                <i class="ti ti-check text-xs"></i>
+                <span class="tabnum font-medium">48 succeeded</span>
+              </div>
+              <div class="flex items-center gap-1 text-amber-600">
+                <i class="ti ti-loader-2 text-xs"></i>
+                <span class="tabnum font-medium">30 in progress</span>
+              </div>
+              <div class="flex items-center gap-1 text-stone-400">
+                <i class="ti ti-circle text-xs"></i>
+                <span class="tabnum font-medium">0 errors</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Workflow steps -->
+        <div class="bg-white rounded-xl border border-black/10 shadow-card px-6 py-4" style="animation: fadeUp 0.25s ease both; animation-delay: 0.14s">
+          <div class="flex items-center">
+
+            <!-- Step 1 — Done -->
+            <div class="flex flex-col items-center">
+              <div class="w-7 h-7 rounded-full bg-green-100 flex items-center justify-center">
+                <i class="ti ti-check text-green-600 text-sm"></i>
+              </div>
+              <div class="text-[11px] font-medium text-green-600 mt-1.5 whitespace-nowrap">Select SKUs</div>
+              <div class="text-[10px] text-stone-400">78 products</div>
+            </div>
+            <div class="flex-1 h-0.5 bg-green-200 mx-2"></div>
+
+            <!-- Step 2 — Done -->
+            <div class="flex flex-col items-center">
+              <div class="w-7 h-7 rounded-full bg-green-100 flex items-center justify-center">
+                <i class="ti ti-check text-green-600 text-sm"></i>
+              </div>
+              <div class="text-[11px] font-medium text-green-600 mt-1.5 whitespace-nowrap">Validate Data</div>
+              <div class="text-[10px] text-stone-400">Pass — 78/78</div>
+            </div>
+            <div class="flex-1 h-0.5 bg-green-200 mx-2"></div>
+
+            <!-- Step 3 — Done -->
+            <div class="flex flex-col items-center">
+              <div class="w-7 h-7 rounded-full bg-green-100 flex items-center justify-center">
+                <i class="ti ti-check text-green-600 text-sm"></i>
+              </div>
+              <div class="text-[11px] font-medium text-green-600 mt-1.5 whitespace-nowrap">Prepare Assets</div>
+              <div class="text-[10px] text-stone-400">234 assets</div>
+            </div>
+            <div class="flex-1 h-0.5 bg-brand-200 mx-2"></div>
+
+            <!-- Step 4 — Active -->
+            <div class="flex flex-col items-center">
+              <div class="w-7 h-7 rounded-full bg-brand-600 flex items-center justify-center ring-4 ring-brand-100 pulse-active">
+                <span class="text-white text-xs font-semibold">4</span>
+              </div>
+              <div class="text-[11px] font-semibold text-brand-600 mt-1.5 whitespace-nowrap">Publishing</div>
+              <div class="text-[10px] text-stone-400">62% done</div>
+            </div>
+            <div class="flex-1 h-0.5 bg-stone-200 mx-2"></div>
+
+            <!-- Step 5 — Upcoming -->
+            <div class="flex flex-col items-center">
+              <div class="w-7 h-7 rounded-full bg-stone-100 border-2 border-stone-300 flex items-center justify-center">
+                <span class="text-stone-400 text-xs font-semibold">5</span>
+              </div>
+              <div class="text-[11px] text-stone-400 mt-1.5 whitespace-nowrap">Confirm</div>
+              <div class="text-[10px] text-stone-300">Not started</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SKU table + Log side by side -->
+        <div class="flex gap-4" style="animation: fadeUp 0.25s ease both; animation-delay: 0.16s">
+
+          <!-- SKU table -->
+          <div class="flex-1 bg-white rounded-xl border border-black/10 shadow-card overflow-hidden">
+            <div class="px-4 py-3 border-b border-black/5 flex items-center justify-between">
+              <h3 class="text-[12px] font-semibold text-stone-700">SKU List</h3>
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] text-stone-400 tabnum">78 total</span>
+                <button class="text-[11px] text-brand-600 font-medium hover:text-brand-800 transition-colors">View all</button>
+              </div>
+            </div>
+            <div class="overflow-auto max-h-[280px]">
+              <table class="w-full text-[12px]">
+                <thead class="bg-stone-50/80 sticky top-0">
+                  <tr class="border-b border-black/5">
+                    <th class="text-left px-4 py-2 text-[10px] font-semibold text-stone-400 uppercase tracking-wide">SKU</th>
+                    <th class="text-left px-3 py-2 text-[10px] font-semibold text-stone-400 uppercase tracking-wide">Product Name</th>
+                    <th class="text-center px-3 py-2 text-[10px] font-semibold text-stone-400 uppercase tracking-wide">Website</th>
+                    <th class="text-center px-3 py-2 text-[10px] font-semibold text-stone-400 uppercase tracking-wide">Amazon EU</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-black/5">
+                  <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-4 py-2.5 font-mono tabnum text-stone-500 text-[11px]">PT-2026-001</td>
+                    <td class="px-3 py-2.5 text-stone-800 font-medium">Lounge Chair V8 — Walnut</td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-green-100"><i class="ti ti-check text-green-600 text-[10px]"></i></span></td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-green-100"><i class="ti ti-check text-green-600 text-[10px]"></i></span></td>
+                  </tr>
+                  <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-4 py-2.5 font-mono tabnum text-stone-500 text-[11px]">PT-2026-002</td>
+                    <td class="px-3 py-2.5 text-stone-800 font-medium">Dining Table Luxe Pro — Oak</td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-green-100"><i class="ti ti-check text-green-600 text-[10px]"></i></span></td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-amber-100"><i class="ti ti-loader-2 text-amber-500 text-[10px]"></i></span></td>
+                  </tr>
+                  <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-4 py-2.5 font-mono tabnum text-stone-500 text-[11px]">PT-2026-003</td>
+                    <td class="px-3 py-2.5 text-stone-800 font-medium">Bookshelf Eco 600 — Birch</td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-green-100"><i class="ti ti-check text-green-600 text-[10px]"></i></span></td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-amber-100"><i class="ti ti-loader-2 text-amber-500 text-[10px]"></i></span></td>
+                  </tr>
+                  <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-4 py-2.5 font-mono tabnum text-stone-500 text-[11px]">PT-2026-004</td>
+                    <td class="px-3 py-2.5 text-stone-800 font-medium">LED Mirror Cabinet — Matte White</td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-green-100"><i class="ti ti-check text-green-600 text-[10px]"></i></span></td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-green-100"><i class="ti ti-check text-green-600 text-[10px]"></i></span></td>
+                  </tr>
+                  <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-4 py-2.5 font-mono tabnum text-stone-500 text-[11px]">PT-2026-005</td>
+                    <td class="px-3 py-2.5 text-stone-800 font-medium">Onyx Side Table — Natural Stone</td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-amber-100"><i class="ti ti-loader-2 text-amber-500 text-[10px]"></i></span></td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-stone-100"><i class="ti ti-clock text-stone-400 text-[10px]"></i></span></td>
+                  </tr>
+                  <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-4 py-2.5 font-mono tabnum text-stone-500 text-[11px]">PT-2026-006</td>
+                    <td class="px-3 py-2.5 text-stone-800 font-medium">Rainfall Floor Lamp 400</td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-amber-100"><i class="ti ti-loader-2 text-amber-500 text-[10px]"></i></span></td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-stone-100"><i class="ti ti-clock text-stone-400 text-[10px]"></i></span></td>
+                  </tr>
+                  <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-4 py-2.5 font-mono tabnum text-stone-500 text-[11px]">PT-2026-007</td>
+                    <td class="px-3 py-2.5 text-stone-800 font-medium">Accessories Set 12M — Brass</td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-stone-100"><i class="ti ti-clock text-stone-400 text-[10px]"></i></span></td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-stone-100"><i class="ti ti-clock text-stone-400 text-[10px]"></i></span></td>
+                  </tr>
+                  <tr class="hover:bg-stone-50 transition-colors">
+                    <td class="px-4 py-2.5 font-mono tabnum text-stone-500 text-[11px]">PT-2026-008</td>
+                    <td class="px-3 py-2.5 text-stone-800 font-medium">Tempered Glass Shelving Unit</td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-stone-100"><i class="ti ti-clock text-stone-400 text-[10px]"></i></span></td>
+                    <td class="px-3 py-2.5 text-center"><span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-stone-100"><i class="ti ti-clock text-stone-400 text-[10px]"></i></span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="px-4 py-2.5 border-t border-black/5 bg-stone-50/60 flex items-center gap-4 text-[11px]">
+              <span class="flex items-center gap-1 text-green-600"><span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span> 48 done</span>
+              <span class="flex items-center gap-1 text-amber-600"><span class="w-2 h-2 rounded-full bg-amber-400 inline-block"></span> 15 running</span>
+              <span class="flex items-center gap-1 text-stone-400"><span class="w-2 h-2 rounded-full bg-stone-300 inline-block"></span> 15 queued</span>
+            </div>
+          </div>
+
+          <!-- Publish Log -->
+          <div class="w-[280px] shrink-0 bg-white rounded-xl border border-black/10 shadow-card overflow-hidden flex flex-col">
+            <div class="px-4 py-3 border-b border-black/5 flex items-center justify-between">
+              <h3 class="text-[12px] font-semibold text-stone-700">Publish Log</h3>
+              <button class="text-[11px] text-stone-400 hover:text-stone-600 transition-colors">
+                <i class="ti ti-refresh text-xs"></i>
+              </button>
+            </div>
+            <div class="flex-1 overflow-auto max-h-[280px] p-3 flex flex-col gap-1.5">
+
+              <div class="flex gap-2">
+                <span class="text-[10px] tabnum text-stone-400 font-mono shrink-0 mt-0.5">10:21</span>
+                <div>
+                  <span class="text-[11px] text-green-600 font-medium">PT-2026-004</span>
+                  <span class="text-[11px] text-stone-500"> published to Amazon EU</span>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <span class="text-[10px] tabnum text-stone-400 font-mono shrink-0 mt-0.5">10:21</span>
+                <div>
+                  <span class="text-[11px] text-green-600 font-medium">PT-2026-004</span>
+                  <span class="text-[11px] text-stone-500"> published to Forma Website</span>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <span class="text-[10px] tabnum text-stone-400 font-mono shrink-0 mt-0.5">10:20</span>
+                <div>
+                  <span class="text-[11px] text-green-600 font-medium">PT-2026-003</span>
+                  <span class="text-[11px] text-stone-500"> published to Forma Website</span>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <span class="text-[10px] tabnum text-stone-400 font-mono shrink-0 mt-0.5">10:19</span>
+                <div>
+                  <span class="text-[11px] text-green-600 font-medium">PT-2026-002</span>
+                  <span class="text-[11px] text-stone-500"> published to Forma Website</span>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <span class="text-[10px] tabnum text-stone-400 font-mono shrink-0 mt-0.5">10:18</span>
+                <div>
+                  <span class="text-[11px] text-green-600 font-medium">PT-2026-001</span>
+                  <span class="text-[11px] text-stone-500"> published to Amazon EU</span>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <span class="text-[10px] tabnum text-stone-400 font-mono shrink-0 mt-0.5">10:18</span>
+                <div>
+                  <span class="text-[11px] text-green-600 font-medium">PT-2026-001</span>
+                  <span class="text-[11px] text-stone-500"> published to Forma Website</span>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <span class="text-[10px] tabnum text-stone-400 font-mono shrink-0 mt-0.5">10:16</span>
+                <div>
+                  <span class="text-[11px] text-amber-600 font-medium">Amazon EU API</span>
+                  <span class="text-[11px] text-stone-500"> rate limit — retry in 2s</span>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <span class="text-[10px] tabnum text-stone-400 font-mono shrink-0 mt-0.5">10:14</span>
+                <div>
+                  <span class="text-[11px] text-brand-600 font-medium">Job started</span>
+                  <span class="text-[11px] text-stone-500"> 78 SKUs queued</span>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <span class="text-[10px] tabnum text-stone-400 font-mono shrink-0 mt-0.5">10:13</span>
+                <div>
+                  <span class="text-[11px] text-brand-600 font-medium">Validation pass</span>
+                  <span class="text-[11px] text-stone-500"> 78/78 SKUs ready</span>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <span class="text-[10px] tabnum text-stone-400 font-mono shrink-0 mt-0.5">10:03</span>
+                <div>
+                  <span class="text-[11px] text-stone-600 font-medium">Job created</span>
+                  <span class="text-[11px] text-stone-500"> by Hugo Claes</span>
+                </div>
+              </div>
+
+            </div>
+            <div class="px-4 py-2.5 border-t border-black/5 bg-stone-50/60">
+              <button class="text-[11px] font-medium text-brand-600 hover:text-brand-800 transition-colors">Export full log &rarr;</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Channel config cards -->
+        <div class="grid grid-cols-2 gap-4" style="animation: fadeUp 0.25s ease both; animation-delay: 0.18s">
+
+          <!-- Website config -->
+          <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-50 border border-brand-100 flex items-center justify-center">
+                  <span class="text-base font-bold text-brand-600">W</span>
+                </div>
+                <div>
+                  <div class="text-[13px] font-semibold text-stone-800">Forma Website</div>
+                  <div class="flex items-center gap-1 mt-0.5">
+                    <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                    <span class="text-[10px] text-stone-500">Connected</span>
+                  </div>
+                </div>
+              </div>
+              <button class="text-[11px] text-stone-400 hover:text-stone-600 transition-colors">
+                <i class="ti ti-settings text-sm"></i>
+              </button>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between text-[12px]">
+                <span class="text-stone-500">Shop ID</span>
+                <span class="tabnum font-mono text-stone-700">store.formastudio.eu</span>
+              </div>
+              <div class="flex items-center justify-between text-[12px]">
+                <span class="text-stone-500">Category mapping</span>
+                <span class="text-green-600 font-medium">78/78 mapped</span>
+              </div>
+              <div class="flex items-center justify-between text-[12px]">
+                <span class="text-stone-500">Main Image</span>
+                <span class="text-green-600 font-medium">234 assets ready</span>
+              </div>
+              <div class="flex items-center justify-between text-[12px]">
+                <span class="text-stone-500">Today's Status</span>
+                <span class="text-orange-600 font-medium tabnum">31 / 40 done</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Amazon EU config -->
+          <div class="bg-white rounded-xl border border-black/10 shadow-card p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center">
+                  <span class="text-base font-bold text-amber-600">A</span>
+                </div>
+                <div>
+                  <div class="text-[13px] font-semibold text-stone-800">Amazon EU</div>
+                  <div class="flex items-center gap-1 mt-0.5">
+                    <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                    <span class="text-[10px] text-stone-500">Connected</span>
+                  </div>
+                </div>
+              </div>
+              <button class="text-[11px] text-stone-400 hover:text-stone-600 transition-colors">
+                <i class="ti ti-settings text-sm"></i>
+              </button>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between text-[12px]">
+                <span class="text-stone-500">Seller ID</span>
+                <span class="tabnum font-mono text-stone-700">amz_eu_DE_48372</span>
+              </div>
+              <div class="flex items-center justify-between text-[12px]">
+                <span class="text-stone-500">Category mapping</span>
+                <span class="text-green-600 font-medium">78/78 mapped</span>
+              </div>
+              <div class="flex items-center justify-between text-[12px]">
+                <span class="text-stone-500">Main Image</span>
+                <span class="text-green-600 font-medium">234 assets ready</span>
+              </div>
+              <div class="flex items-center justify-between text-[12px]">
+                <span class="text-stone-500">Today's Status</span>
+                <span class="text-blue-600 font-medium tabnum">17 / 38 done</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- /RIGHT -->
+
+    </div>
+    <!-- /MAIN TWO-COLUMN -->
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-black/10 bg-white px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-2 text-[11px] text-stone-400">
+      <span>PIM Studio</span>
+      <span class="text-stone-300">&middot;</span>
+      <span>v2.4.1</span>
+      <span class="text-stone-300">&middot;</span>
+      <span>&copy; 2026 Forma Studio GmbH</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="products.html"       class="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">Products</a>
+      <a href="social-campaign.html" class="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">Social Campaign</a>
+      <a href="publish-flow.html"   class="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">Publish Flow</a>
+      <a href="settings.html"       class="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">Settings</a>
+    </div>
+  </footer>
+
+</div>
+<!-- /MAIN WRAPPER -->
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+{
+  "channels": [
+    {
+      "id": "facebook",
+      "name": "Facebook",
+      "type": "social",
+      "status": "connected",
+      "lastSync": null,
+      "productCount": 28,
+      "syncInterval": null
+    },
+    {
+      "id": "instagram",
+      "name": "Instagram",
+      "type": "social",
+      "status": "connected",
+      "lastSync": null,
+      "productCount": 28,
+      "syncInterval": null
+    },
+    {
+      "id": "linkedin",
+      "name": "LinkedIn",
+      "type": "social",
+      "status": "connected",
+      "lastSync": null,
+      "productCount": 22,
+      "syncInterval": null
+    },
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "type": "video",
+      "status": "connected",
+      "lastSync": null,
+      "productCount": 36,
+      "syncInterval": null
+    },
+    {
+      "id": "pinterest",
+      "name": "Pinterest",
+      "type": "social",
+      "status": "error",
+      "lastSync": null,
+      "productCount": null,
+      "syncInterval": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "PUB-2026-014",
+      "channelId": "facebook,instagram,linkedin",
+      "channelName": "FB · IG · LI",
+      "status": "running",
+      "startedAt": "10:03",
+      "completedAt": null,
+      "recordsProcessed": 48,
+      "errors": 0,
+      "warnings": 0,
+      "triggeredBy": "Hiep Chau"
+    },
+    {
+      "id": "PUB-2026-013",
+      "channelId": "facebook,instagram,pinterest",
+      "channelName": "FB · IG · Pinterest",
+      "status": "done",
+      "startedAt": null,
+      "completedAt": "09:41",
+      "recordsProcessed": 124,
+      "errors": 0,
+      "warnings": 0,
+      "triggeredBy": null
+    },
+    {
+      "id": "PUB-2026-012",
+      "channelId": "pinterest",
+      "channelName": "Pinterest",
+      "status": "error",
+      "startedAt": null,
+      "completedAt": null,
+      "recordsProcessed": null,
+      "errors": 6,
+      "warnings": 0,
+      "triggeredBy": null
+    },
+    {
+      "id": "PUB-2026-011",
+      "channelId": "youtube",
+      "channelName": "YouTube",
+      "status": "queued",
+      "startedAt": null,
+      "completedAt": null,
+      "recordsProcessed": 0,
+      "errors": 0,
+      "warnings": 0,
+      "triggeredBy": null
+    },
+    {
+      "id": "PUB-2026-010",
+      "channelId": null,
+      "channelName": null,
+      "status": "done",
+      "startedAt": null,
+      "completedAt": "Yesterday 16:22",
+      "recordsProcessed": 23,
+      "errors": 0,
+      "warnings": 0,
+      "triggeredBy": null
+    }
+  ],
+  "queue": [
+    {
+      "id": "PT-2026-002",
+      "name": "Thermostatic Shower Tap Luxe Pro",
+      "type": "product",
+      "priority": 1,
+      "queuedAt": null
+    },
+    {
+      "id": "PT-2026-003",
+      "name": "Induction Cooktop Eco 600",
+      "type": "product",
+      "priority": 2,
+      "queuedAt": null
+    },
+    {
+      "id": "PT-2026-004",
+      "name": "Smart LED Mirror Cabinet",
+      "type": "product",
+      "priority": 3,
+      "queuedAt": null
+    }
+  ]
+}

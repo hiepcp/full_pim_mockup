@@ -1,0 +1,84 @@
+{
+  "productSets": [
+    {
+      "id": "SET-2024-001",
+      "name": "Greenwood Living Room",
+      "code": "SET-2024-001",
+      "category": "Living Room",
+      "productCount": 4,
+      "status": "Live",
+      "publishedTo": ["iPaper catalogue", "Website REST API"],
+      "updatedAt": "2025-03-18"
+    },
+    {
+      "id": "SET-2024-002",
+      "name": "Nordic Office Set",
+      "code": "SET-2024-002",
+      "category": "Office",
+      "productCount": 3,
+      "status": "Live",
+      "publishedTo": ["iPaper catalogue", "Website REST API"],
+      "updatedAt": "2025-03-10"
+    },
+    {
+      "id": "SET-2024-003",
+      "name": "Summer Outdoor",
+      "code": "SET-2024-003",
+      "category": "Outdoor",
+      "productCount": 6,
+      "status": "Draft",
+      "publishedTo": [],
+      "updatedAt": "2025-02-28"
+    },
+    {
+      "id": "SET-2024-004",
+      "name": "Minimal Living — Ash",
+      "code": "SET-2024-004",
+      "category": "Living Room",
+      "productCount": 5,
+      "status": "Approved",
+      "publishedTo": [],
+      "updatedAt": "2025-03-05"
+    },
+    {
+      "id": "SET-2024-005",
+      "name": "Café & Contract Pack",
+      "code": "SET-2024-005",
+      "category": "Contract",
+      "productCount": 8,
+      "status": "Live",
+      "publishedTo": ["iPaper catalogue", "Website REST API", "Social Campaign"],
+      "updatedAt": "2025-03-12"
+    },
+    {
+      "id": "SET-2024-006",
+      "name": "Winter Bedroom Collection",
+      "code": "SET-2024-006",
+      "category": "Bedroom",
+      "productCount": 5,
+      "status": "Live",
+      "publishedTo": ["iPaper catalogue", "Website REST API"],
+      "updatedAt": "2025-01-20"
+    },
+    {
+      "id": "SET-2024-007",
+      "name": "Kids Room Starter",
+      "code": "SET-2024-007",
+      "category": "Kids",
+      "productCount": 7,
+      "status": "Approved",
+      "publishedTo": [],
+      "updatedAt": "2025-02-14"
+    },
+    {
+      "id": "SET-2024-008",
+      "name": "Home Office Pro Bundle",
+      "code": "SET-2024-008",
+      "category": "Office",
+      "productCount": 4,
+      "status": "Draft",
+      "publishedTo": [],
+      "updatedAt": "2025-03-01"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Hub — PIM Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Outfit', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#E6F1FB', 100:'#CCDFF7', 400:'#378ADD', 600:'#185FA5', 800:'#0C447C' },
+          },
+          boxShadow: {
+            card: '0 1px 4px rgba(24,95,165,0.06)',
+            hover: '0 4px 14px rgba(24,95,165,0.10)',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <style>
+    @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes pulse-ring { 0%{box-shadow:0 0 0 0 rgba(24,95,165,.35)} 70%{box-shadow:0 0 0 6px rgba(24,95,165,0)} 100%{box-shadow:0 0 0 0 rgba(24,95,165,0)} }
+    @keyframes fillBar { from { width:0; } }
+    .pulse-dot { animation: pulse-ring 1.8s ease-out infinite; }
+    .fill-bar  { animation: fillBar 0.9s cubic-bezier(.22,.68,0,1.2) both; }
+    body { font-family:'Outfit',system-ui,sans-serif; }
+    .tabular { font-variant-numeric:tabular-nums; }
+    .doc-shadow { filter:drop-shadow(0 8px 20px rgba(0,0,0,.22)); }
+    .page-hover:hover { transform:perspective(600px) rotateY(-4deg) translateY(-2px); transition:transform .3s ease; }
+    .group-row { background:#f8f9fa; }
+    .group-row:hover { background:#f1f3f5; }
+    tr.selected-row { background:rgba(230,241,251,0.5) !important; border-left:2px solid #185FA5; }
+  </style>
+</head>
+<body class="bg-stone-100 text-stone-800 antialiased">

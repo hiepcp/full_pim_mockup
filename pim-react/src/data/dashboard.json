@@ -1,0 +1,135 @@
+{
+  "stats": {
+    "products": "4,821",
+    "images": "18,340",
+    "documents": "2,156",
+    "campaigns": "47"
+  },
+  "recentActivity": [
+    {
+      "id": 1,
+      "type": "product",
+      "description": "SKU-4821 — Haus Series Shelving Unit L300 — material attributes updated",
+      "time": "2m ago",
+      "user": null
+    },
+    {
+      "id": 2,
+      "type": "image",
+      "description": "Batch upload 48 images for Outdoor Living Collection 2026 completed",
+      "time": "14m ago",
+      "user": null
+    },
+    {
+      "id": 3,
+      "type": "campaign",
+      "description": "Campaign \"Summer Collection 2026\" scheduled to publish at 18:00 today",
+      "time": "31m ago",
+      "user": null
+    },
+    {
+      "id": 4,
+      "type": "sync",
+      "description": "D365 Sync completed — 127 products synchronised, 0 errors",
+      "time": "4m ago",
+      "user": null
+    },
+    {
+      "id": 5,
+      "type": "product-set",
+      "description": "Product Set \"Scandinavian Living Room\" created with 8 SKUs",
+      "time": "1h ago",
+      "user": null
+    }
+  ],
+  "modules": [
+    {
+      "id": "products",
+      "title": "Products",
+      "description": "Full SKU list with technical attributes, pricing and channel-specific publication status for all distribution channels.",
+      "route": "/products",
+      "icon": "ti-box",
+      "stats": {
+        "primary": "4,821 SKUs",
+        "secondary": "Last sync: 12m ago"
+      }
+    },
+    {
+      "id": "product-sets",
+      "title": "Product Sets",
+      "description": "Group products by collection, series or bundle. Manage relationships between related SKUs across the furniture range.",
+      "route": "/product-sets",
+      "icon": "ti-components",
+      "stats": {
+        "primary": "312 sets",
+        "secondary": "8 pending review"
+      }
+    },
+    {
+      "id": "image-engine",
+      "title": "Image Engine",
+      "description": "Upload, classify and optimise product imagery. Supports auto-crop and channel-specific resizing for all sales platforms.",
+      "route": "/image-engine",
+      "icon": "ti-photo",
+      "stats": {
+        "primary": "18,340 assets",
+        "secondary": "234 processing"
+      }
+    },
+    {
+      "id": "document-hub",
+      "title": "Document Hub",
+      "description": "Store technical datasheets, catalogue PDFs, certifications and assembly guides linked directly to each product SKU.",
+      "route": "/document-hub",
+      "icon": "ti-file-stack",
+      "stats": {
+        "primary": "2,156 docs",
+        "secondary": "14 expiring soon"
+      }
+    },
+    {
+      "id": "social-campaign",
+      "title": "Social Campaign",
+      "description": "Create and schedule content campaigns for Instagram, Pinterest and LinkedIn. Directly linked to PIM product data.",
+      "route": "/social-campaign",
+      "icon": "ti-speakerphone",
+      "stats": {
+        "primary": "47 active",
+        "secondary": "12 scheduled today"
+      }
+    },
+    {
+      "id": "publish-flow",
+      "title": "Publish Flow",
+      "description": "Automated publish pipeline to retail channels: Website, Amazon EU, Wayfair and OTTO — with validation and asset checks.",
+      "route": "/publish-flow",
+      "icon": "ti-send",
+      "stats": {
+        "primary": "4 channels",
+        "secondary": "147 SKUs published today"
+      }
+    },
+    {
+      "id": "d365-sync",
+      "title": "D365 Sync",
+      "description": "Bidirectional sync with Microsoft Dynamics 365. Monitor sync status, handle errors and configure field mapping rules.",
+      "route": "/settings",
+      "icon": "ti-refresh",
+      "stats": {
+        "primary": "Connected",
+        "secondary": "Last sync 4m ago"
+      }
+    },
+    {
+      "id": "settings",
+      "title": "Settings",
+      "description": "Configure connected accounts, user permissions, content language settings and global PIM system preferences.",
+      "route": "/settings",
+      "icon": "ti-settings",
+      "stats": {
+        "primary": "12 users",
+        "secondary": "4 integrations"
+      }
+    }
+  ]
+}
