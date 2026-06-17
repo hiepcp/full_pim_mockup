@@ -141,7 +141,54 @@ export default function ProductSets() {
   const [editItem, setEditItem] = useState(null)
   const [form, setForm] = useState({})
 
-  const selectedSet = state.productSets.find((s) => s.id === selectedSetId) || state.productSets[0] || null
+  const selectedSetIndex = state.productSets.findIndex((s) => s.id === selectedSetId)
+  const selectedSet = state.productSets[selectedSetIndex >= 0 ? selectedSetIndex : 0] || null
+  const si = selectedSetIndex >= 0 ? selectedSetIndex : 0
+
+  const SET_HERO_IMAGES = [
+    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&h=160&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&h=160&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=900&h=160&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=900&h=160&fit=crop&auto=format',
+  ]
+  const setHeroImg = SET_HERO_IMAGES[si % SET_HERO_IMAGES.length]
+
+  const SET_DESCRIPTIONS = [
+    'A natural living room bundle in treated oak — designed for spaces of 20–35 m².',
+    'A contemporary bedroom collection in brushed walnut — crafted for modern interiors.',
+    'A minimalist dining set in powder-coated steel — suited for open-plan environments.',
+    'A modular home office bundle in solid beech — optimized for productivity and comfort.',
+  ]
+  const setDescription = SET_DESCRIPTIONS[si % SET_DESCRIPTIONS.length]
+
+  const SEASONS = ['SS 2025', 'AW 2025', 'SS 2026', 'AW 2026']
+  const setSeason = SEASONS[si % SEASONS.length]
+
+  const CREATORS = ['Hugo Claes', 'Marta Kovač', 'David Lind', 'Anna Svensson']
+  const setCreator = CREATORS[si % CREATORS.length]
+
+  const setCompleteness = (() => {
+    const v = (si % 3) * 4
+    if (selectedSet?.status === 'Live') return 100
+    if (selectedSet?.status === 'Approved') return 90 + v
+    return 65 + v
+  })()
+
+  const canPublish = setCompleteness >= 80 && selectedSet?.status !== 'Draft'
+
+  const setComponentCount = Math.min(selectedSet?.productCount || 4, COMPONENTS.length)
+  const setComponents = Array.from({ length: setComponentCount }, (_, i) => COMPONENTS[(i + si) % COMPONENTS.length])
+
+  const setChecks = (() => {
+    const s = selectedSet?.status
+    if (s === 'Live') return CHECKS.map(c => ({ ...c, pass: true, badge: 'Pass', badgeClass: 'text-emerald-600 bg-emerald-50', rowClass: '', iconClass: 'bg-emerald-100', icon: 'ti ti-check', iconColor: 'text-emerald-600' }))
+    if (s === 'Draft') return CHECKS.map((c, i) => i >= 2 ? ({ ...c, pass: false, badge: 'Fail', badgeClass: 'text-amber-700 bg-amber-100', rowClass: 'bg-amber-50/60', iconClass: 'bg-amber-100', icon: 'ti ti-x', iconColor: 'text-amber-600' }) : c)
+    return CHECKS
+  })()
+  const passedChecks = setChecks.filter(c => c.pass).length
+
+  const statusDotColor = selectedSet?.status === 'Live' ? 'bg-emerald-500' : selectedSet?.status === 'Approved' ? 'bg-brand-400' : 'bg-stone-400'
+  const statusTextColor = selectedSet?.status === 'Live' ? 'text-emerald-700' : selectedSet?.status === 'Approved' ? 'text-brand-600' : 'text-stone-500'
 
   function openAdd() {
     setEditItem(null)
@@ -317,16 +364,16 @@ export default function ProductSets() {
                 {/* Hero banner */}
                 <div className="relative h-40 overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&h=160&fit=crop&auto=format"
-                    alt="Greenwood Living Room Bundle hero shot"
+                    src={setHeroImg}
+                    alt={selectedSet?.name}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
                   {/* Floating status badge */}
                   <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm rounded-md px-2 py-1 shadow-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    <span className="text-[11px] font-semibold text-emerald-700">
-                      {selectedSet ? selectedSet.status : 'Published'}
+                    <span className={`w-1.5 h-1.5 rounded-full ${statusDotColor}`}></span>
+                    <span className={`text-[11px] font-semibold ${statusTextColor}`}>
+                      {selectedSet?.status || 'Draft'}
                     </span>
                   </div>
                   {/* Floating set ID */}
@@ -352,15 +399,15 @@ export default function ProductSets() {
                           </span>
                         </div>
                         <div className="text-sm text-stone-500 mt-0.5">
-                          A natural living room bundle in treated oak — designed for spaces of 20–35 m².
+                          {setDescription}
                         </div>
                         <div className="flex items-center gap-4 mt-2 text-xs text-stone-400 tabnum">
-                          <span className="flex items-center gap-1"><i className="ti ti-calendar text-xs"></i> SS 2025</span>
+                          <span className="flex items-center gap-1"><i className="ti ti-calendar text-xs"></i> {setSeason}</span>
                           <span className="flex items-center gap-1">
                             <i className="ti ti-clock text-xs"></i>
-                            Updated {selectedSet ? selectedSet.updatedAt : '18 Mar 2025'}
+                            Updated {selectedSet?.updatedAt || '—'}
                           </span>
-                          <span className="flex items-center gap-1"><i className="ti ti-user text-xs"></i> Hugo Claes</span>
+                          <span className="flex items-center gap-1"><i className="ti ti-user text-xs"></i> {setCreator}</span>
                           <span className="flex items-center gap-1"><i className="ti ti-file-text text-xs"></i> iPaper</span>
                           <span className="flex items-center gap-1"><i className="ti ti-world text-xs"></i> Web</span>
                         </div>
@@ -378,11 +425,11 @@ export default function ProductSets() {
                         <i className="ti ti-pencil text-sm"></i> Edit
                       </button>
                       <button
-                        className="rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 text-stone-400 cursor-not-allowed flex items-center gap-1.5"
-                        disabled
-                        title="Floor lamp completeness < 80%"
+                        className={`rounded-lg px-3 py-1.5 text-xs font-medium flex items-center gap-1.5 ${canPublish ? 'bg-brand-600 text-white hover:bg-brand-800 hover:-translate-y-px transition-all active:scale-[0.98]' : 'bg-stone-100 text-stone-400 cursor-not-allowed'}`}
+                        disabled={!canPublish}
+                        title={canPublish ? 'Publish this set' : `Completeness at ${setCompleteness}% — needs 80%`}
                       >
-                        <i className="ti ti-world-upload text-sm"></i> Re-publish
+                        <i className="ti ti-world-upload text-sm"></i> {selectedSet?.status === 'Live' ? 'Re-publish' : 'Publish'}
                       </button>
                     </div>
                   </div>
@@ -390,19 +437,33 @@ export default function ProductSets() {
                   {/* Completeness summary bar */}
                   <div className="mt-4 pt-4 border-t border-black/10 flex items-center gap-4">
                     <div className="flex items-baseline gap-1.5">
-                      <span className="text-2xl font-bold tabnum text-amber-600">73%</span>
+                      <span className={`text-2xl font-bold tabnum ${setCompleteness >= 90 ? 'text-emerald-600' : setCompleteness >= 80 ? 'text-brand-600' : 'text-amber-600'}`}>
+                        {setCompleteness}%
+                      </span>
                       <span className="text-xs text-stone-400">set completeness</span>
                     </div>
                     <div className="flex-1 h-2 bg-stone-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all"
-                        style={{ width: '73%' }}
+                        className={`h-full rounded-full transition-all ${setCompleteness >= 90 ? 'bg-gradient-to-r from-emerald-400 to-emerald-500' : setCompleteness >= 80 ? 'bg-gradient-to-r from-brand-400 to-brand-500' : 'bg-gradient-to-r from-amber-400 to-amber-500'}`}
+                        style={{ width: `${setCompleteness}%` }}
                       ></div>
                     </div>
-                    <div className="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1">
-                      <i className="ti ti-alert-triangle text-sm"></i>
-                      <span>30319 Floor Lamp at 73% — needs 7% to unlock publish</span>
-                    </div>
+                    {setCompleteness < 80 ? (
+                      <div className="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1">
+                        <i className="ti ti-alert-triangle text-sm"></i>
+                        <span>At {setCompleteness}% — needs {80 - setCompleteness}% more to unlock publish</span>
+                      </div>
+                    ) : setCompleteness < 100 ? (
+                      <div className="flex items-center gap-1.5 text-xs text-brand-700 bg-brand-50 border border-brand-200 rounded-md px-2.5 py-1">
+                        <i className="ti ti-circle-check text-sm"></i>
+                        <span>Ready to publish — {setCompleteness}% complete</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1.5 text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-md px-2.5 py-1">
+                        <i className="ti ti-circle-check text-sm"></i>
+                        <span>Fully complete — live on all channels</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -412,15 +473,15 @@ export default function ProductSets() {
             <div className="px-6 pt-4">
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-sm font-semibold text-stone-800">
-                  Components <span className="ml-1.5 text-xs font-normal text-stone-400 tabnum">4 items</span>
+                  Components <span className="ml-1.5 text-xs font-normal text-stone-400 tabnum">{setComponentCount} items</span>
                 </h2>
                 <button className="text-xs text-brand-600 hover:underline flex items-center gap-1">
                   <i className="ti ti-plus text-xs"></i> Add item
                 </button>
               </div>
 
-              <div className="grid grid-cols-4 gap-3">
-                {COMPONENTS.map((comp) => {
+              <div className={`grid gap-3 ${setComponentCount <= 2 ? 'grid-cols-2' : setComponentCount === 3 ? 'grid-cols-3' : 'grid-cols-4'}`}>
+                {setComponents.map((comp) => {
                   const isDraft = comp.status === 'Draft'
                   return (
                     <div
@@ -505,11 +566,11 @@ export default function ProductSets() {
               <div className="col-span-3 bg-white rounded-xl border border-black/10 shadow-[0_1px_4px_rgba(24,95,165,0.06)] p-5">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-sm font-semibold text-stone-800">Publish readiness</h2>
-                  <span className="text-xs text-stone-400">3 / 4 checks passed</span>
+                  <span className="text-xs text-stone-400">{passedChecks} / {setChecks.length} checks passed</span>
                 </div>
 
                 <div className="space-y-1">
-                  {CHECKS.map((check, idx) => (
+                  {setChecks.map((check, idx) => (
                     <div
                       key={idx}
                       className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors duration-100 hover:bg-[#f7f6f3] ${check.rowClass}`}
@@ -561,7 +622,7 @@ export default function ProductSets() {
                     </div>
                     <div className="flex justify-between text-xs">
                       <dt className="text-stone-400">Season</dt>
-                      <dd className="font-medium text-stone-700">SS 2025</dd>
+                      <dd className="font-medium text-stone-700">{setSeason}</dd>
                     </div>
                     <div className="flex justify-between text-xs">
                       <dt className="text-stone-400">Components</dt>
@@ -571,7 +632,7 @@ export default function ProductSets() {
                     </div>
                     <div className="flex justify-between text-xs">
                       <dt className="text-stone-400">Created by</dt>
-                      <dd className="font-medium text-stone-700">Hugo Claes</dd>
+                      <dd className="font-medium text-stone-700">{setCreator}</dd>
                     </div>
                     <div className="flex justify-between text-xs">
                       <dt className="text-stone-400">Last updated</dt>
@@ -587,16 +648,24 @@ export default function ProductSets() {
                   <h3 className="text-[12px] font-semibold text-stone-700 mb-3">Published to</h3>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="flex items-center gap-1.5 text-stone-600">
-                        <i className="ti ti-file-text text-stone-400 text-sm"></i> iPaper catalogue
+                      <span className={`flex items-center gap-1.5 ${selectedSet?.status === 'Draft' ? 'text-stone-400' : 'text-stone-600'}`}>
+                        <i className={`ti ti-file-text text-sm ${selectedSet?.status === 'Draft' ? 'text-stone-300' : 'text-stone-400'}`}></i> iPaper catalogue
                       </span>
-                      <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 rounded px-1.5 py-0.5">Live</span>
+                      {selectedSet?.status === 'Live' || selectedSet?.status === 'Approved' ? (
+                        <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 rounded px-1.5 py-0.5">Live</span>
+                      ) : (
+                        <span className="text-[10px] text-stone-400">Not published</span>
+                      )}
                     </div>
                     <div className="flex items-center justify-between text-xs">
-                      <span className="flex items-center gap-1.5 text-stone-600">
-                        <i className="ti ti-world text-stone-400 text-sm"></i> Website REST API
+                      <span className={`flex items-center gap-1.5 ${selectedSet?.status === 'Draft' ? 'text-stone-400' : 'text-stone-600'}`}>
+                        <i className={`ti ti-world text-sm ${selectedSet?.status === 'Draft' ? 'text-stone-300' : 'text-stone-400'}`}></i> Website REST API
                       </span>
-                      <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 rounded px-1.5 py-0.5">Live</span>
+                      {selectedSet?.status === 'Live' ? (
+                        <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 rounded px-1.5 py-0.5">Live</span>
+                      ) : (
+                        <span className="text-[10px] text-stone-400">Not published</span>
+                      )}
                     </div>
                     <div className="flex items-center justify-between text-xs">
                       <span className="flex items-center gap-1.5 text-stone-400">
@@ -613,7 +682,13 @@ export default function ProductSets() {
             {/* QUICK ACTIONS FOOTER */}
             <div className="px-6 pt-3 pb-6">
               <div className="bg-stone-50 rounded-xl border border-black/10 px-4 py-3 flex items-center justify-between">
-                <span className="text-xs text-stone-500">Next: resolve Floor Lamp completeness to enable publish</span>
+                <span className="text-xs text-stone-500">
+                  {selectedSet?.status === 'Live'
+                    ? 'Set is live — all channels publishing successfully'
+                    : canPublish
+                    ? `Ready to publish "${selectedSet?.name}" — click Publish to go live`
+                    : `Next: raise completeness to 80% to unlock publish (currently ${setCompleteness}%)`}
+                </span>
                 <div className="flex items-center gap-2">
                   <Link
                     to="/products"

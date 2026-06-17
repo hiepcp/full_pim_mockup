@@ -4,42 +4,31 @@ import Layout from '../components/layout/Layout.jsx'
 import { useData } from '../store/DataContext.jsx'
 import { useFilter } from '../store/useFilter.js'
 
-const AFFECTED_PRODUCTS = [
-  { id: '30317', name: '30317 Forma Lounge Chair', meta: '3 Mother V · 116 SO Variants', status: 'Published', icon: 'ti-armchair', iconBg: 'bg-brand-50', iconColor: 'text-brand-600' },
-  { id: '30318', name: '30318 Forma Side Table', meta: '1 Mother V · 24 SO Variants', status: 'Published', icon: 'ti-table-column', iconBg: 'bg-brand-50', iconColor: 'text-brand-600' },
-  { id: '30512', name: '30512 Bergen Coffee Table', meta: '4 Mother V · 48 SO Variants', status: 'Published', icon: 'ti-coffee', iconBg: 'bg-brand-50', iconColor: 'text-brand-600' },
-  { id: '30401', name: '30401 Nordvik Archive Shelf', meta: '2 Mother V · 18 SO Variants', status: 'Draft', icon: 'ti-box', iconBg: 'bg-stone-100', iconColor: 'text-stone-400' },
-  { id: '30605', name: '30605 Fjord Three-Seat Sofa', meta: '2 Mother V · 32 SO Variants', status: 'In Review', icon: 'ti-sofa', iconBg: 'bg-brand-50', iconColor: 'text-brand-600' },
+const TYPE_FILTERS = ['All', 'Wood', 'Textile', 'Leather', 'Metal', 'Stone', 'Fabric', 'Surface']
+
+const STATUS_ORDER = ['active', 'phasing-out', 'discontinued', 'obsolete']
+
+const LIFECYCLE_STEPS = [
+  { key: 'active',       icon: 'ti-plus',           color: 'emerald', label: 'Added to system', statusText: 'Active' },
+  { key: 'phasing-out',  icon: 'ti-alert-triangle', color: 'amber',   label: 'Status updated',  statusText: 'Phasing Out' },
+  { key: 'discontinued', icon: 'ti-ban',             color: 'red',     label: 'Discontinued',    statusText: 'Discontinued' },
+  { key: 'obsolete',     icon: 'ti-archive',         color: 'stone',   label: 'Archived',        statusText: 'Obsolete' },
 ]
 
-const SPECS = [
-  { label: 'Type', value: 'Hardwood' },
-  { label: 'Species', value: 'Quercus alba' },
-  { label: 'Origin', value: 'Pacific Northwest, USA' },
-  { label: 'Grade', value: 'A (Select & Better)' },
-  { label: 'Thickness', value: '18mm / 22mm / 30mm', tabnum: true },
-  { label: 'Finish options', value: 'Oiled, Lacquered, Raw' },
-  { label: 'Certification', value: 'FSC-C012345 · PEFC' },
-  { label: 'Janka hardness', value: '1360 lbf', tabnum: true },
-]
+function getStepState(stepKey, currentStatus) {
+  const stepIdx    = STATUS_ORDER.indexOf(stepKey)
+  const currentIdx = STATUS_ORDER.indexOf(currentStatus)
+  if (stepIdx < currentIdx)  return 'done'
+  if (stepIdx === currentIdx) return 'current'
+  if (stepIdx === currentIdx + 1) return 'planned'
+  return 'future'
+}
 
-const USAGE_BY_CATEGORY = [
-  { label: 'Sofas & Armchairs', count: 18, pct: 38 },
-  { label: 'Dining & Tables', count: 14, pct: 30 },
-  { label: 'Wardrobes & Shelving', count: 9, pct: 19 },
-  { label: 'Outdoor Furniture', count: 4, pct: 8 },
-  { label: 'Lighting & Accessories', count: 2, pct: 4 },
-]
-
-const CHANGE_LOG = [
-  { icon: 'ti-edit', iconBg: 'bg-amber-100', iconColor: 'text-amber-600', title: 'Status → Phasing Out', date: '10 Mar 2025 · Lars Supply Chain', note: '"Supplier confirmed last batch Q3 2025."' },
-  { icon: 'ti-certificate', iconBg: 'bg-brand-50', iconColor: 'text-brand-600', title: 'FSC Certificate renewed', date: '02 Jan 2025 · Erik Olsen' },
-  { icon: 'ti-plus', iconBg: 'bg-stone-100', iconColor: 'text-stone-400', title: 'Added 30mm thickness option', date: '15 Aug 2023 · Anja Hofer' },
-  { icon: 'ti-link', iconBg: 'bg-stone-100', iconColor: 'text-stone-400', title: 'Linked to 12 new products', date: '03 Mar 2023 · BOM Team' },
-  { icon: 'ti-check', iconBg: 'bg-emerald-50', iconColor: 'text-emerald-600', title: 'Material created', date: '14 Jan 2022 · Erik Olsen' },
-]
-
-const TYPE_FILTERS = ['All', 'Wood', 'Textile', 'Leather', 'Metal', 'Stone']
+function getLifecycleData(mat, stepKey) {
+  if (!mat?.lifecycle) return null
+  const map = { 'active': 'added', 'phasing-out': 'phasingOut', 'discontinued': 'discontinued', 'obsolete': 'obsolete' }
+  return mat.lifecycle[map[stepKey]] || null
+}
 
 function statusBadge(status) {
   if (status === 'Published') return 'bg-emerald-50 text-emerald-700'
@@ -549,76 +538,61 @@ export default function Materials() {
                 <button className="text-xs text-brand-600 hover:underline">Update status</button>
               </div>
 
-              {/* Timeline */}
               <div className="relative pb-2">
                 {/* Connector lines */}
-                <div className="absolute top-[18px] left-[18px] h-[2px] bg-emerald-500" style={{ width: 'calc(33% - 18px)' }}></div>
-                <div className="absolute top-[18px] h-[2px] bg-amber-400" style={{ left: '33%', width: '15%' }}></div>
-                <div className="absolute top-[18px] h-[2px] bg-stone-200" style={{ left: '48%', right: 'calc(25% + 18px)' }}></div>
+                {(() => {
+                  const ci = STATUS_ORDER.indexOf(selectedMaterial?.status)
+                  const lineColors = ['bg-emerald-500','bg-amber-400','bg-red-400','bg-stone-300']
+                  return (
+                    <>
+                      <div className={`absolute top-[18px] left-[18px] h-[2px] ${ci >= 1 ? lineColors[0] : 'bg-stone-200'}`} style={{ width: 'calc(33% - 18px)' }}></div>
+                      <div className={`absolute top-[18px] h-[2px] ${ci >= 2 ? lineColors[1] : 'bg-stone-200'}`} style={{ left: '33%', width: '15%' }}></div>
+                      <div className={`absolute top-[18px] h-[2px] ${ci >= 3 ? lineColors[2] : 'bg-stone-200'}`} style={{ left: '48%', right: 'calc(25% + 18px)' }}></div>
+                    </>
+                  )
+                })()}
 
                 <div className="grid grid-cols-4 gap-0">
-
-                  {/* Step 1: Added */}
-                  <div className="flex flex-col items-start">
-                    <div className="flex items-center gap-0 mb-3">
-                      <div className="w-9 h-9 rounded-full bg-emerald-500 flex items-center justify-center shadow-md z-10">
-                        <i className="ti ti-plus text-white text-sm"></i>
+                  {LIFECYCLE_STEPS.map(step => {
+                    const state = getStepState(step.key, selectedMaterial?.status)
+                    const data  = getLifecycleData(selectedMaterial, step.key)
+                    const colorMap = {
+                      emerald: { bg: 'bg-emerald-500', ring: 'ring-emerald-100', label: 'text-emerald-700', dot: 'text-emerald-700' },
+                      amber:   { bg: 'bg-amber-400',   ring: 'ring-amber-100',   label: 'text-amber-700',   dot: 'text-amber-700' },
+                      red:     { bg: 'bg-red-500',     ring: 'ring-red-100',     label: 'text-red-700',     dot: 'text-red-700' },
+                      stone:   { bg: 'bg-stone-400',   ring: 'ring-stone-100',   label: 'text-stone-600',   dot: 'text-stone-500' },
+                    }
+                    const c = colorMap[step.color]
+                    const opacity = state === 'planned' ? 'opacity-50' : state === 'future' ? 'opacity-30' : ''
+                    const isDashed = state === 'planned' || state === 'future'
+                    return (
+                      <div key={step.key} className={`flex flex-col items-start ${opacity}`}>
+                        <div className="flex items-center mb-3">
+                          <div className={`w-9 h-9 rounded-full flex items-center justify-center z-10 ${isDashed ? 'bg-stone-100 border-2 border-dashed border-stone-300' : `${c.bg} shadow-md`} ${state === 'current' ? `ring-4 ${c.ring}` : ''}`}>
+                            <i className={`ti ${step.icon} ${isDashed ? 'text-stone-400' : 'text-white'} text-sm`}></i>
+                          </div>
+                        </div>
+                        <div className="pr-3">
+                          <div className={`text-[11px] font-semibold leading-tight ${isDashed ? 'text-stone-500' : c.label}`}>
+                            {state === 'planned' ? 'Planned' : state === 'future' ? 'Future' : step.label}
+                          </div>
+                          <div className="text-[11px] font-bold text-stone-800 mt-0.5">
+                            {step.statusText}{state === 'current' ? ' ← now' : ''}
+                          </div>
+                          {data && (
+                            <>
+                              <div className="text-[10px] text-stone-400 mt-1 leading-snug">{data.date || data.targetDate || ''}</div>
+                              {data.by && <div className="text-[10px] text-stone-500 mt-0.5">{data.by}</div>}
+                              {data.note && <div className="text-[10px] text-stone-400 mt-1 italic">{data.note}</div>}
+                            </>
+                          )}
+                          {!data && state === 'future' && (
+                            <div className="text-[10px] text-stone-300 mt-1">No longer tracked</div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div className="pr-3">
-                      <div className="text-[11px] font-semibold text-emerald-700 leading-tight">Added to system</div>
-                      <div className="text-[11px] font-bold text-stone-800 mt-0.5">Active</div>
-                      <div className="text-[10px] text-stone-400 mt-1 leading-snug">Jan 14, 2022</div>
-                      <div className="text-[10px] text-stone-500 mt-0.5">Erik Olsen</div>
-                      <div className="text-[10px] text-stone-400 mt-1 italic">Grade A sourcing approved. Initial BOM integration complete.</div>
-                    </div>
-                  </div>
-
-                  {/* Step 2: Phasing Out - CURRENT */}
-                  <div className="flex flex-col items-start">
-                    <div className="flex items-center mb-3">
-                      <div className="w-9 h-9 rounded-full bg-amber-400 flex items-center justify-center shadow-md z-10 ring-4 ring-amber-100">
-                        <i className="ti ti-alert-triangle text-white text-sm"></i>
-                      </div>
-                    </div>
-                    <div className="pr-3">
-                      <div className="text-[11px] font-semibold text-amber-700 leading-tight">Status updated</div>
-                      <div className="text-[11px] font-bold text-stone-800 mt-0.5">Phasing Out ← now</div>
-                      <div className="text-[10px] text-stone-400 mt-1 leading-snug">Mar 10, 2025</div>
-                      <div className="text-[10px] text-stone-500 mt-0.5">Lars Supply Chain</div>
-                      <div className="text-[10px] text-stone-400 mt-1 italic">Supplier ending production. Last batch Q3 2025.</div>
-                    </div>
-                  </div>
-
-                  {/* Step 3: Discontinued (planned) */}
-                  <div className="flex flex-col items-start opacity-50">
-                    <div className="flex items-center mb-3">
-                      <div className="w-9 h-9 rounded-full bg-stone-200 border-2 border-dashed border-stone-400 flex items-center justify-center z-10">
-                        <i className="ti ti-ban text-stone-400 text-sm"></i>
-                      </div>
-                    </div>
-                    <div className="pr-3">
-                      <div className="text-[11px] font-semibold text-stone-500 leading-tight">Planned</div>
-                      <div className="text-[11px] font-bold text-stone-600 mt-0.5">Discontinued</div>
-                      <div className="text-[10px] text-stone-400 mt-1 leading-snug">Target: Q4 2025</div>
-                      <div className="text-[10px] text-stone-400 mt-1 italic">Requires Design &amp; BOM Team sign-off.</div>
-                    </div>
-                  </div>
-
-                  {/* Step 4: Obsolete (future) */}
-                  <div className="flex flex-col items-start opacity-30">
-                    <div className="flex items-center mb-3">
-                      <div className="w-9 h-9 rounded-full bg-stone-100 border-2 border-dashed border-stone-300 flex items-center justify-center z-10">
-                        <i className="ti ti-archive text-stone-300 text-sm"></i>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-[11px] font-semibold text-stone-400 leading-tight">Future</div>
-                      <div className="text-[11px] font-bold text-stone-400 mt-0.5">Obsolete</div>
-                      <div className="text-[10px] text-stone-300 mt-1">No longer tracked</div>
-                    </div>
-                  </div>
-
+                    )
+                  })}
                 </div>
               </div>
             </div>
@@ -631,36 +605,45 @@ export default function Materials() {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <h2 className="text-sm font-semibold text-stone-800">Affected products</h2>
-                    <span className="rounded-md px-1.5 py-0.5 text-[11px] font-bold bg-red-50 text-red-700 tabnum">47</span>
+                    <span className="rounded-md px-1.5 py-0.5 text-[11px] font-bold bg-red-50 text-red-700 tabnum">{selectedMaterial?.linkedProducts ?? 0}</span>
                   </div>
                   <Link to="/products" className="text-xs text-brand-600 hover:underline">View all →</Link>
                 </div>
 
-                <div className="space-y-1">
-                  {AFFECTED_PRODUCTS.map(product => (
-                    <div
-                      key={product.id}
-                      className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-stone-50 transition-colors cursor-pointer group"
-                    >
-                      <div className={`w-7 h-7 rounded-md ${product.iconBg} flex items-center justify-center shrink-0`}>
-                        <i className={`ti ${product.icon} ${product.iconColor} text-sm`}></i>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-xs font-semibold text-stone-800 leading-tight truncate">{product.name}</div>
-                        <div className="text-[10px] text-stone-400">{product.meta}</div>
-                      </div>
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        <span className={`rounded-md px-1.5 py-0.5 text-[10px] font-medium ${statusBadge(product.status)}`}>{product.status}</span>
-                        <i className="ti ti-chevron-right text-stone-300 text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                      </div>
+                {(selectedMaterial?.affectedProducts?.length ?? 0) === 0 ? (
+                  <div className="py-6 text-center text-xs text-stone-400">No products linked to this material.</div>
+                ) : (
+                  <>
+                    <div className="space-y-1">
+                      {(selectedMaterial?.affectedProducts ?? []).map(product => (
+                        <div
+                          key={product.id}
+                          className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-stone-50 transition-colors cursor-pointer group"
+                        >
+                          <div className={`w-7 h-7 rounded-md flex items-center justify-center shrink-0 ${product.status === 'Draft' ? 'bg-stone-100' : 'bg-brand-50'}`}>
+                            <i className={`ti ${product.icon} text-sm ${product.status === 'Draft' ? 'text-stone-400' : 'text-brand-600'}`}></i>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-xs font-semibold text-stone-800 leading-tight truncate">{product.name}</div>
+                            <div className="text-[10px] text-stone-400">{product.meta}</div>
+                          </div>
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            <span className={`rounded-md px-1.5 py-0.5 text-[10px] font-medium ${statusBadge(product.status)}`}>{product.status}</span>
+                            <i className="ti ti-chevron-right text-stone-300 text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-
-                <div className="mt-3 pt-3 border-t border-black/10 flex items-center justify-between">
-                  <span className="text-[11px] text-stone-400 tabnum">Showing 5 of 47 products</span>
-                  <button className="text-[11px] text-brand-600 hover:underline">Load more</button>
-                </div>
+                    {(selectedMaterial?.linkedProducts ?? 0) > (selectedMaterial?.affectedProducts?.length ?? 0) && (
+                      <div className="mt-3 pt-3 border-t border-black/10 flex items-center justify-between">
+                        <span className="text-[11px] text-stone-400 tabnum">
+                          Showing {selectedMaterial.affectedProducts.length} of {selectedMaterial.linkedProducts} products
+                        </span>
+                        <button className="text-[11px] text-brand-600 hover:underline">Load more</button>
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
 
               {/* SUGGESTED SUBSTITUTES */}
@@ -668,107 +651,61 @@ export default function Materials() {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <h2 className="text-sm font-semibold text-stone-800">Suggested substitutes</h2>
-                    <span className="rounded-md px-1.5 py-0.5 text-[11px] font-medium bg-brand-50 text-brand-600">3 options</span>
+                    <span className="rounded-md px-1.5 py-0.5 text-[11px] font-medium bg-brand-50 text-brand-600">
+                      {selectedMaterial?.substitutes?.length ?? 0} option{(selectedMaterial?.substitutes?.length ?? 0) !== 1 ? 's' : ''}
+                    </span>
                   </div>
                   <button className="text-xs text-brand-600 hover:underline">Compare all →</button>
                 </div>
 
-                <div className="space-y-3">
-
-                  {/* Substitute 1 - Best match */}
-                  <div className="border border-emerald-200 bg-emerald-50/40 rounded-xl p-3.5 cursor-pointer hover:border-emerald-400 transition-colors">
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-lg shrink-0 swatch-ash"></div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-xs font-semibold text-stone-800">European Walnut</span>
-                          <span className="rounded-md px-1.5 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-700">Best match</span>
+                {(selectedMaterial?.substitutes?.length ?? 0) === 0 ? (
+                  <div className="py-6 text-center text-xs text-stone-400">No substitutes defined for this material.</div>
+                ) : (
+                  <div className="space-y-3">
+                    {(selectedMaterial?.substitutes ?? []).map((sub, i) => {
+                      const isFirst = i === 0
+                      const matchColorMap = {
+                        emerald: { border: 'border-emerald-200', bg: 'bg-emerald-50/40', hover: 'hover:border-emerald-400', badge: 'bg-emerald-100 text-emerald-700' },
+                        brand:   { border: 'border-brand-200',   bg: 'bg-brand-50/30',   hover: 'hover:border-brand-400',   badge: 'bg-brand-50 text-brand-700' },
+                        stone:   { border: 'border-black/10',    bg: '',                  hover: 'hover:border-brand-300 hover:bg-brand-50/20', badge: 'bg-stone-100 text-stone-600' },
+                      }
+                      const mc = matchColorMap[sub.matchColor] || matchColorMap.stone
+                      const subMat = state.materials.find(m => m.id === sub.code)
+                      return (
+                        <div key={sub.code} className={`border ${mc.border} ${mc.bg} rounded-xl p-3.5 cursor-pointer ${mc.hover} transition-colors`}>
+                          <div className="flex items-start gap-3">
+                            <MaterialSwatch material={subMat} size="md" rounded="lg" />
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="text-xs font-semibold text-stone-800">{sub.name}</span>
+                                <span className={`rounded-md px-1.5 py-0.5 text-[10px] font-semibold ${mc.badge}`}>{sub.matchLabel}</span>
+                              </div>
+                              <div className="text-[10px] text-stone-500 tabnum mt-0.5">{sub.code} · Grade {sub.grade} · {sub.cert}</div>
+                              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                                {(sub.checks ?? []).map((chk, ci) => (
+                                  <div key={ci} className="text-[10px] text-stone-600 flex items-center gap-1">
+                                    {chk.ok === true  && <i className="ti ti-check text-emerald-500 text-xs"></i>}
+                                    {chk.ok === false && chk.warn && <i className="ti ti-alert-triangle text-amber-500 text-xs"></i>}
+                                    {chk.ok === null  && <i className="ti ti-minus text-stone-400 text-xs"></i>}
+                                    {chk.text}
+                                  </div>
+                                ))}
+                              </div>
+                              <div className="mt-2 flex items-center justify-between">
+                                <span className={`text-[10px] font-medium ${sub.priceNote?.includes('+') ? 'text-amber-700' : 'text-emerald-700'}`}>{sub.priceNote}</span>
+                                {isFirst && (selectedMaterial?.linkedProducts ?? 0) > 0 ? (
+                                  <button className="text-[11px] font-medium text-brand-600 hover:underline">Apply to all {selectedMaterial.linkedProducts} products →</button>
+                                ) : (
+                                  <button className="text-[11px] font-medium text-brand-600 hover:underline">Review specs →</button>
+                                )}
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div className="text-[10px] text-stone-500 tabnum mt-0.5">WWWNT-001 · Grade A · FSC Certified</div>
-                        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                          <div className="text-[10px] text-stone-600 flex items-center gap-1">
-                            <i className="ti ti-check text-emerald-500 text-xs"></i> Same grade A
-                          </div>
-                          <div className="text-[10px] text-stone-600 flex items-center gap-1">
-                            <i className="ti ti-check text-emerald-500 text-xs"></i> FSC Certified
-                          </div>
-                          <div className="text-[10px] text-stone-600 flex items-center gap-1">
-                            <i className="ti ti-check text-emerald-500 text-xs"></i> In stock
-                          </div>
-                          <div className="text-[10px] text-stone-600 flex items-center gap-1">
-                            <i className="ti ti-minus text-stone-400 text-xs"></i> Similar appearance
-                          </div>
-                        </div>
-                        <div className="mt-2 flex items-center justify-between">
-                          <span className="text-[10px] text-emerald-700 font-medium">Price delta: comparable</span>
-                          <button className="text-[11px] font-medium text-brand-600 hover:underline">Apply to all 47 products →</button>
-                        </div>
-                      </div>
-                    </div>
+                      )
+                    })}
                   </div>
-
-                  {/* Substitute 2 */}
-                  <div className="border border-black/10 rounded-xl p-3.5 cursor-pointer hover:border-brand-300 hover:bg-brand-50/20 transition-colors">
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-lg shrink-0 swatch-beech"></div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-xs font-semibold text-stone-800">European Beech</span>
-                          <span className="rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-stone-100 text-stone-600">Grade B</span>
-                        </div>
-                        <div className="text-[10px] text-stone-500 tabnum mt-0.5">WWEUR-004 · Grade B · PEFC Certified</div>
-                        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                          <div className="text-[10px] text-stone-600 flex items-center gap-1">
-                            <i className="ti ti-check text-emerald-500 text-xs"></i> In stock
-                          </div>
-                          <div className="text-[10px] text-stone-600 flex items-center gap-1">
-                            <i className="ti ti-alert-triangle text-amber-500 text-xs"></i> Grade B (lower)
-                          </div>
-                          <div className="text-[10px] text-stone-600 flex items-center gap-1">
-                            <i className="ti ti-minus text-stone-400 text-xs"></i> Similar grain pattern
-                          </div>
-                        </div>
-                        <div className="mt-2 flex items-center justify-between">
-                          <span className="text-[10px] text-amber-700 font-medium">Price delta: +8%</span>
-                          <button className="text-[11px] font-medium text-brand-600 hover:underline">Review specs →</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Substitute 3 */}
-                  <div className="border border-black/10 rounded-xl p-3.5 cursor-pointer hover:border-brand-300 hover:bg-brand-50/20 transition-colors">
-                    <div className="flex items-start gap-3">
-                      <div
-                        className="w-10 h-10 rounded-lg shrink-0"
-                        style={{ background: 'repeating-linear-gradient(85deg,#c4a060 0px,#c4a060 2px,#b49050 3px,#bc9858 9px,#c4a060 10px,#c4a060 16px,#a47c40 17px,#b48c50 22px)' }}
-                      ></div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-xs font-semibold text-stone-800">European Oak</span>
-                          <span className="rounded-md px-1.5 py-0.5 text-[10px] font-medium bg-stone-100 text-stone-600">Grade A</span>
-                        </div>
-                        <div className="text-[10px] text-stone-500 tabnum mt-0.5">WWOAK-002 · Grade A · FSC Certified</div>
-                        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                          <div className="text-[10px] text-stone-600 flex items-center gap-1">
-                            <i className="ti ti-check text-emerald-500 text-xs"></i> Grade A · FSC
-                          </div>
-                          <div className="text-[10px] text-stone-600 flex items-center gap-1">
-                            <i className="ti ti-alert-triangle text-amber-500 text-xs"></i> 6-week lead time
-                          </div>
-                          <div className="text-[10px] text-stone-600 flex items-center gap-1">
-                            <i className="ti ti-check text-emerald-500 text-xs"></i> Similar appearance
-                          </div>
-                        </div>
-                        <div className="mt-2 flex items-center justify-between">
-                          <span className="text-[10px] text-amber-700 font-medium">Price delta: +15%</span>
-                          <button className="text-[11px] font-medium text-brand-600 hover:underline">Review specs →</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
+                )}
               </div>
             </div>
 
@@ -778,63 +715,87 @@ export default function Materials() {
               {/* Specs */}
               <div className="bg-white rounded-xl border border-black/10 shadow-[0_1px_4px_rgba(24,95,165,0.06)] p-4">
                 <h2 className="text-sm font-semibold text-stone-800 mb-3">Material specs</h2>
-                <dl className="space-y-2">
-                  {SPECS.map(spec => (
-                    <div key={spec.label} className="flex justify-between text-xs">
-                      <dt className="text-stone-500">{spec.label}</dt>
-                      <dd className={`font-medium text-stone-800 ${spec.tabnum ? 'tabnum' : ''}`}>{spec.value}</dd>
-                    </div>
-                  ))}
-                </dl>
+                {(selectedMaterial?.specs?.length ?? 0) === 0 ? (
+                  <p className="text-xs text-stone-400">No specs available.</p>
+                ) : (
+                  <dl className="space-y-2">
+                    {(selectedMaterial?.specs ?? []).map(spec => (
+                      <div key={spec.label} className="flex justify-between text-xs">
+                        <dt className="text-stone-500">{spec.label}</dt>
+                        <dd className={`font-medium text-stone-800 text-right ${spec.tabnum ? 'tabnum' : ''}`}>{spec.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
               </div>
 
               {/* Usage breakdown */}
               <div className="bg-white rounded-xl border border-black/10 shadow-[0_1px_4px_rgba(24,95,165,0.06)] p-4">
                 <h2 className="text-sm font-semibold text-stone-800 mb-3">Usage by category</h2>
-                <div className="space-y-2.5">
-                  {USAGE_BY_CATEGORY.map(cat => (
-                    <div key={cat.label}>
-                      <div className="flex justify-between text-xs mb-1">
-                        <span className="text-stone-500">{cat.label}</span>
-                        <span className="font-semibold tabnum text-stone-700">{cat.count} products</span>
-                      </div>
-                      <div className="h-1.5 bg-stone-100 rounded-full overflow-hidden">
-                        <div className="h-full bg-brand-400 rounded-full" style={{ width: `${cat.pct}%` }}></div>
-                      </div>
+                {(selectedMaterial?.usageByCategory?.length ?? 0) === 0 ? (
+                  <p className="text-xs text-stone-400">No usage data available.</p>
+                ) : (
+                  <>
+                    <div className="space-y-2.5">
+                      {(selectedMaterial?.usageByCategory ?? []).map(cat => (
+                        <div key={cat.label}>
+                          <div className="flex justify-between text-xs mb-1">
+                            <span className="text-stone-500">{cat.label}</span>
+                            <span className="font-semibold tabnum text-stone-700">{cat.count} products</span>
+                          </div>
+                          <div className="h-1.5 bg-stone-100 rounded-full overflow-hidden">
+                            <div className="h-full bg-brand-400 rounded-full" style={{ width: `${cat.pct}%` }}></div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                <div className="mt-3 pt-3 border-t border-black/10">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-stone-500">Published products</span>
-                    <span className="font-bold tabnum text-stone-800">34 / 47</span>
-                  </div>
-                  <div className="flex justify-between text-xs mt-1">
-                    <span className="text-stone-500">Draft / In Review</span>
-                    <span className="font-bold tabnum text-stone-800">13 / 47</span>
-                  </div>
-                </div>
+                    {(selectedMaterial?.affectedProducts?.length ?? 0) > 0 && (
+                      <div className="mt-3 pt-3 border-t border-black/10">
+                        {(() => {
+                          const pub = (selectedMaterial.affectedProducts ?? []).filter(p => p.status === 'Published').length
+                          const total = selectedMaterial.linkedProducts ?? 0
+                          return (
+                            <>
+                              <div className="flex justify-between text-xs">
+                                <span className="text-stone-500">Published products</span>
+                                <span className="font-bold tabnum text-stone-800">{pub} / {total}</span>
+                              </div>
+                              <div className="flex justify-between text-xs mt-1">
+                                <span className="text-stone-500">Draft / In Review</span>
+                                <span className="font-bold tabnum text-stone-800">{total - pub} / {total}</span>
+                              </div>
+                            </>
+                          )
+                        })()}
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
 
               {/* Change log */}
               <div className="bg-white rounded-xl border border-black/10 shadow-[0_1px_4px_rgba(24,95,165,0.06)] p-4">
                 <h2 className="text-sm font-semibold text-stone-800 mb-3">Change log</h2>
-                <div className="space-y-3">
-                  {CHANGE_LOG.map((entry, i) => (
-                    <div key={i} className="flex gap-2.5">
-                      <div className={`w-5 h-5 rounded-full ${entry.iconBg} flex items-center justify-center shrink-0 mt-0.5`}>
-                        <i className={`ti ${entry.icon} ${entry.iconColor} text-[10px]`}></i>
+                {(selectedMaterial?.changeLog?.length ?? 0) === 0 ? (
+                  <p className="text-xs text-stone-400">No change history.</p>
+                ) : (
+                  <div className="space-y-3">
+                    {(selectedMaterial?.changeLog ?? []).map((entry, i) => (
+                      <div key={i} className="flex gap-2.5">
+                        <div className={`w-5 h-5 rounded-full ${entry.iconBg} flex items-center justify-center shrink-0 mt-0.5`}>
+                          <i className={`ti ${entry.icon} ${entry.iconColor} text-[10px]`}></i>
+                        </div>
+                        <div>
+                          <div className="text-[11px] font-medium text-stone-700">{entry.title}</div>
+                          <div className="text-[10px] text-stone-400 tabnum">{entry.date}</div>
+                          {entry.note && (
+                            <div className="text-[10px] text-stone-400 italic mt-0.5">{entry.note}</div>
+                          )}
+                        </div>
                       </div>
-                      <div>
-                        <div className="text-[11px] font-medium text-stone-700">{entry.title}</div>
-                        <div className="text-[10px] text-stone-400 tabnum">{entry.date}</div>
-                        {entry.note && (
-                          <div className="text-[10px] text-stone-400 italic mt-0.5">{entry.note}</div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 

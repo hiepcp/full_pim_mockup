@@ -4,6 +4,7 @@ import ProductSets from './pages/ProductSets.jsx'
 import Materials from './pages/Materials.jsx'
 import ImageEngine from './pages/ImageEngine.jsx'
 import DocumentHub from './pages/DocumentHub.jsx'
+import DocumentHubDetail from './pages/DocumentHubDetail.jsx'
 import SocialCampaign from './pages/SocialCampaign.jsx'
 import PublishFlow from './pages/PublishFlow.jsx'
 import Settings from './pages/Settings.jsx'
@@ -18,6 +19,7 @@ export default function App() {
       <Route path="/materials" element={<Materials />} />
       <Route path="/image-engine" element={<ImageEngine />} />
       <Route path="/document-hub" element={<DocumentHub />} />
+      <Route path="/document-hub/:id" element={<DocumentHubDetail />} />
       <Route path="/social-campaign" element={<SocialCampaign />} />
       <Route path="/publish-flow" element={<PublishFlow />} />
       <Route path="/settings" element={<Settings />} />

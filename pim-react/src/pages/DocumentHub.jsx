@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Layout from '../components/layout/Layout.jsx'
 import { useData } from '../store/DataContext.jsx'
 import { useFilter } from '../store/useFilter.js'
@@ -91,6 +91,7 @@ export default function DocumentHub() {
     'status'
   )
 
+  const navigate = useNavigate()
   const [selectedRowId, setSelectedRowId] = useState(3)
   const [isVersionHistoryOpen, setIsVersionHistoryOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
@@ -322,7 +323,7 @@ export default function DocumentHub() {
                     return (
                       <tr
                         key={doc.id}
-                        onClick={() => setSelectedRowId(doc.id)}
+                        onClick={() => navigate(`/document-hub/${doc.id}`)}
                         className={`transition-colors cursor-pointer ${
                           isSelected
                             ? 'bg-brand-50/50 border-l-2 border-brand-600 hover:bg-brand-50'
@@ -334,7 +335,8 @@ export default function DocumentHub() {
                             type="checkbox"
                             className="rounded border-black/20 w-3.5 h-3.5"
                             checked={isSelected}
-                            onChange={() => setSelectedRowId(doc.id)}
+                            onChange={(e) => { e.stopPropagation(); setSelectedRowId(doc.id) }}
+                            onClick={(e) => e.stopPropagation()}
                           />
                         </td>
                         <td className="px-4 py-3">

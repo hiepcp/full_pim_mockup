@@ -6,11 +6,68 @@
       "name": "European Walnut",
       "category": "Wood",
       "colorHex": null,
-      "finish": null,
-      "supplier": null,
+      "finish": "Oiled, Natural",
+      "supplier": "Baltic Timber Group",
       "linkedProducts": 12,
       "status": "active",
-      "updatedAt": null
+      "updatedAt": "2024-11-20",
+      "specs": [
+        { "label": "Type",          "value": "Hardwood" },
+        { "label": "Species",       "value": "Juglans regia" },
+        { "label": "Origin",        "value": "Central Europe" },
+        { "label": "Grade",         "value": "A (Select & Better)" },
+        { "label": "Thickness",     "value": "20mm / 25mm / 35mm", "tabnum": true },
+        { "label": "Finish options","value": "Oiled, Natural, Raw" },
+        { "label": "Certification", "value": "FSC-C087234 · PEFC" },
+        { "label": "Janka hardness","value": "1010 lbf", "tabnum": true }
+      ],
+      "lifecycle": {
+        "added":        { "date": "Oct 12, 2019", "by": "Erik Olsen",   "note": "Premium grade sourcing approved. Initial BOM integration complete." },
+        "phasingOut":   null,
+        "discontinued": null,
+        "obsolete":     null
+      },
+      "affectedProducts": [
+        { "id": "30210", "name": "30210 Nora Dining Chair",     "meta": "2 Mother V · 28 SO Variants",  "status": "Published",  "icon": "ti-armchair" },
+        { "id": "30215", "name": "30215 Nora Dining Table",     "meta": "3 Mother V · 42 SO Variants",  "status": "Published",  "icon": "ti-table-column" },
+        { "id": "30303", "name": "30303 Oslo Lounge Chair",     "meta": "2 Mother V · 16 SO Variants",  "status": "In Review",  "icon": "ti-armchair" },
+        { "id": "30410", "name": "30410 Bergen Bookcase",       "meta": "1 Mother V · 8 SO Variants",   "status": "Draft",      "icon": "ti-box" }
+      ],
+      "substitutes": [
+        {
+          "name": "American White Oak", "code": "WOODWO-003", "grade": "A", "cert": "FSC Certified",
+          "matchLabel": "Close match", "matchColor": "brand",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "Same grade A" },
+            { "ok": true,  "warn": false, "text": "FSC Certified" },
+            { "ok": false, "warn": true,  "text": "Currently phasing out" },
+            { "ok": null,  "warn": false, "text": "Similar grain pattern" }
+          ],
+          "priceNote": "Price delta: comparable"
+        },
+        {
+          "name": "European Beech", "code": "WWEUR-004", "grade": "B", "cert": "PEFC Certified",
+          "matchLabel": "Grade B", "matchColor": "stone",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "In stock" },
+            { "ok": false, "warn": true,  "text": "Grade B (lower)" },
+            { "ok": null,  "warn": false, "text": "Lighter appearance" }
+          ],
+          "priceNote": "Price delta: −12%"
+        }
+      ],
+      "usageByCategory": [
+        { "label": "Dining & Tables",       "count": 5, "pct": 42 },
+        { "label": "Sofas & Armchairs",     "count": 4, "pct": 33 },
+        { "label": "Wardrobes & Shelving",  "count": 2, "pct": 17 },
+        { "label": "Other",                 "count": 1, "pct": 8  }
+      ],
+      "changeLog": [
+        { "icon": "ti-link",        "iconBg": "bg-stone-100",  "iconColor": "text-stone-400",  "title": "Linked to 4 new products",        "date": "20 Nov 2024 · BOM Team" },
+        { "icon": "ti-certificate", "iconBg": "bg-brand-50",   "iconColor": "text-brand-600",  "title": "FSC Certificate renewed",          "date": "05 Jan 2024 · Erik Olsen" },
+        { "icon": "ti-building",    "iconBg": "bg-stone-100",  "iconColor": "text-stone-400",  "title": "Supplier changed to Baltic Timber", "date": "14 Mar 2022 · Supply Chain" },
+        { "icon": "ti-check",       "iconBg": "bg-emerald-50", "iconColor": "text-emerald-600","title": "Material created",                 "date": "12 Oct 2019 · Erik Olsen" }
+      ]
     },
     {
       "id": "WWEUR-004",
@@ -18,11 +75,65 @@
       "name": "European Beech",
       "category": "Wood",
       "colorHex": null,
-      "finish": null,
-      "supplier": null,
+      "finish": "Lacquered, Oiled",
+      "supplier": "Scandinavian Timber AS",
       "linkedProducts": 8,
       "status": "active",
-      "updatedAt": null
+      "updatedAt": "2024-09-03",
+      "specs": [
+        { "label": "Type",          "value": "Hardwood" },
+        { "label": "Species",       "value": "Fagus sylvatica" },
+        { "label": "Origin",        "value": "Germany / Austria" },
+        { "label": "Grade",         "value": "B (Common)" },
+        { "label": "Thickness",     "value": "15mm / 20mm / 25mm", "tabnum": true },
+        { "label": "Finish options","value": "Lacquered, Oiled" },
+        { "label": "Certification", "value": "PEFC-CE1234" },
+        { "label": "Janka hardness","value": "1300 lbf", "tabnum": true }
+      ],
+      "lifecycle": {
+        "added":        { "date": "Mar 22, 2020", "by": "Anna Berg",    "note": "Approved for dining chair frames and shelving units." },
+        "phasingOut":   null,
+        "discontinued": null,
+        "obsolete":     null
+      },
+      "affectedProducts": [
+        { "id": "30105", "name": "30105 Ingrid Dining Chair",   "meta": "2 Mother V · 24 SO Variants",  "status": "Published", "icon": "ti-armchair" },
+        { "id": "30220", "name": "30220 Freja Side Table",      "meta": "1 Mother V · 12 SO Variants",  "status": "Published", "icon": "ti-table-column" },
+        { "id": "30445", "name": "30445 Sigrid Bed Frame",      "meta": "2 Mother V · 18 SO Variants",  "status": "Draft",     "icon": "ti-bed" }
+      ],
+      "substitutes": [
+        {
+          "name": "European Walnut", "code": "WWWNT-001", "grade": "A", "cert": "FSC · PEFC",
+          "matchLabel": "Upgrade", "matchColor": "brand",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "Grade A (higher)" },
+            { "ok": true,  "warn": false, "text": "FSC Certified" },
+            { "ok": true,  "warn": false, "text": "In stock" },
+            { "ok": false, "warn": true,  "text": "Premium pricing" }
+          ],
+          "priceNote": "Price delta: +22%"
+        },
+        {
+          "name": "Scots Pine", "code": "WWPIN-015", "grade": "C", "cert": "—",
+          "matchLabel": "Budget", "matchColor": "stone",
+          "checks": [
+            { "ok": false, "warn": true,  "text": "Lower grade" },
+            { "ok": false, "warn": true,  "text": "Status: Obsolete" },
+            { "ok": null,  "warn": false, "text": "Lighter tone" }
+          ],
+          "priceNote": "Price delta: −30%"
+        }
+      ],
+      "usageByCategory": [
+        { "label": "Dining & Tables",       "count": 4, "pct": 50 },
+        { "label": "Wardrobes & Shelving",  "count": 2, "pct": 25 },
+        { "label": "Beds & Bedroom",        "count": 2, "pct": 25 }
+      ],
+      "changeLog": [
+        { "icon": "ti-certificate", "iconBg": "bg-brand-50",   "iconColor": "text-brand-600",  "title": "PEFC Certificate renewed",         "date": "03 Sep 2024 · Anna Berg" },
+        { "icon": "ti-building",    "iconBg": "bg-stone-100",  "iconColor": "text-stone-400",  "title": "Supplier updated to Scandinavian Timber", "date": "10 Jun 2022 · Supply Chain" },
+        { "icon": "ti-check",       "iconBg": "bg-emerald-50", "iconColor": "text-emerald-600","title": "Material created",                  "date": "22 Mar 2020 · Anna Berg" }
+      ]
     },
     {
       "id": "FABRC-002",
@@ -32,10 +143,56 @@
       "colorHex": null,
       "imageUrl": "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=400&q=70&auto=format&fit=crop",
       "finish": null,
-      "supplier": null,
+      "supplier": "Kvadrat A/S",
       "linkedProducts": 19,
       "status": "active",
-      "updatedAt": null
+      "updatedAt": "2025-01-08",
+      "specs": [
+        { "label": "Type",         "value": "Upholstery Fabric" },
+        { "label": "Composition",  "value": "70% Wool · 30% Viscose" },
+        { "label": "Weight",       "value": "420 g/m²",  "tabnum": true },
+        { "label": "Width",        "value": "145 cm",    "tabnum": true },
+        { "label": "Martindale",   "value": "100,000 rubs", "tabnum": true },
+        { "label": "Fire rating",  "value": "EN 1021-1/2" },
+        { "label": "Colors avail.","value": "40 options" },
+        { "label": "Certification","value": "Oeko-Tex Standard 100" }
+      ],
+      "lifecycle": {
+        "added":        { "date": "Jun 10, 2019", "by": "Maria Holm",   "note": "Approved for all upholstered seating. Passed fire and durability tests." },
+        "phasingOut":   null,
+        "discontinued": null,
+        "obsolete":     null
+      },
+      "affectedProducts": [
+        { "id": "30317", "name": "30317 Forma Lounge Chair",   "meta": "3 Mother V · 116 SO Variants", "status": "Published", "icon": "ti-armchair" },
+        { "id": "30605", "name": "30605 Fjord Three-Seat Sofa","meta": "2 Mother V · 32 SO Variants",  "status": "Published", "icon": "ti-sofa" },
+        { "id": "30318", "name": "30318 Forma Side Chair",     "meta": "2 Mother V · 48 SO Variants",  "status": "Published", "icon": "ti-armchair" },
+        { "id": "30710", "name": "30710 Nest Armchair",        "meta": "1 Mother V · 12 SO Variants",  "status": "In Review", "icon": "ti-armchair" },
+        { "id": "30820", "name": "30820 Arch Dining Chair",    "meta": "1 Mother V · 24 SO Variants",  "status": "Draft",     "icon": "ti-armchair" }
+      ],
+      "substitutes": [
+        {
+          "name": "Kvadrat Remix 2", "code": "FABRC-011", "grade": "—", "cert": "Oeko-Tex",
+          "matchLabel": "Similar spec", "matchColor": "brand",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "Same supplier" },
+            { "ok": false, "warn": true,  "text": "Currently phasing out" },
+            { "ok": null,  "warn": false, "text": "Less color options" }
+          ],
+          "priceNote": "Price delta: comparable"
+        }
+      ],
+      "usageByCategory": [
+        { "label": "Sofas & Armchairs",  "count": 9, "pct": 47 },
+        { "label": "Lounge Chairs",      "count": 6, "pct": 32 },
+        { "label": "Dining Chairs",      "count": 4, "pct": 21 }
+      ],
+      "changeLog": [
+        { "icon": "ti-palette",     "iconBg": "bg-brand-50",   "iconColor": "text-brand-600",  "title": "Color range expanded to 40 options",  "date": "08 Jan 2025 · Maria Holm" },
+        { "icon": "ti-certificate", "iconBg": "bg-brand-50",   "iconColor": "text-brand-600",  "title": "Oeko-Tex certification renewed",       "date": "15 Mar 2023 · Erik Olsen" },
+        { "icon": "ti-link",        "iconBg": "bg-stone-100",  "iconColor": "text-stone-400",  "title": "Linked to 7 new products",             "date": "20 Sep 2021 · BOM Team" },
+        { "icon": "ti-check",       "iconBg": "bg-emerald-50", "iconColor": "text-emerald-600","title": "Material created",                     "date": "10 Jun 2019 · Maria Holm" }
+      ]
     },
     {
       "id": "METL-007",
@@ -43,12 +200,57 @@
       "name": "Brushed Brass",
       "category": "Metal",
       "colorHex": null,
-      "imageUrl": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=70&auto=format&fit=crop",
-      "finish": null,
-      "supplier": null,
+      "imageUrl": "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&q=70&auto=format&fit=crop",
+      "finish": "Brushed, PVD coated",
+      "supplier": "Nordic Metal Craft",
       "linkedProducts": 14,
       "status": "active",
-      "updatedAt": null
+      "updatedAt": "2024-10-14",
+      "specs": [
+        { "label": "Type",         "value": "Alloy" },
+        { "label": "Alloy",        "value": "CW508L Brass" },
+        { "label": "Finish",       "value": "Brushed + PVD coat" },
+        { "label": "Thickness",    "value": "1.2 – 2.0 mm", "tabnum": true },
+        { "label": "Hardness",     "value": "120 HV",  "tabnum": true },
+        { "label": "Corrosion",    "value": "ISO 9227 · 500h" },
+        { "label": "UV resistance","value": "1000h QUV stable" },
+        { "label": "Certification","value": "RoHS · REACH" }
+      ],
+      "lifecycle": {
+        "added":        { "date": "Feb 03, 2021", "by": "Jonas Holt",   "note": "Selected for premium hardware range. PVD coating approved for tarnish resistance." },
+        "phasingOut":   null,
+        "discontinued": null,
+        "obsolete":     null
+      },
+      "affectedProducts": [
+        { "id": "30512", "name": "30512 Bergen Coffee Table",   "meta": "4 Mother V · 48 SO Variants", "status": "Published", "icon": "ti-coffee" },
+        { "id": "30550", "name": "30550 Oslo Side Table",       "meta": "2 Mother V · 16 SO Variants", "status": "Published", "icon": "ti-table-column" },
+        { "id": "30620", "name": "30620 Arc Floor Lamp",        "meta": "1 Mother V · 6 SO Variants",  "status": "Published", "icon": "ti-lamp" },
+        { "id": "30630", "name": "30630 Orb Pendant Light",     "meta": "1 Mother V · 4 SO Variants",  "status": "In Review", "icon": "ti-lamp" }
+      ],
+      "substitutes": [
+        {
+          "name": "Matte Gold PVD", "code": "EXT-GOLD", "grade": "—", "cert": "RoHS",
+          "matchLabel": "Similar tone", "matchColor": "brand",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "RoHS compliant" },
+            { "ok": null,  "warn": false, "text": "Warmer gold tone" },
+            { "ok": true,  "warn": false, "text": "In stock" }
+          ],
+          "priceNote": "Price delta: +5%"
+        }
+      ],
+      "usageByCategory": [
+        { "label": "Tables & Coffee",    "count": 6, "pct": 43 },
+        { "label": "Chairs & Stools",    "count": 4, "pct": 29 },
+        { "label": "Lighting",           "count": 3, "pct": 21 },
+        { "label": "Accessories",        "count": 1, "pct": 7  }
+      ],
+      "changeLog": [
+        { "icon": "ti-shield",      "iconBg": "bg-brand-50",   "iconColor": "text-brand-600",  "title": "Tarnish treatment upgraded to PVD",  "date": "14 Oct 2024 · Jonas Holt" },
+        { "icon": "ti-building",    "iconBg": "bg-stone-100",  "iconColor": "text-stone-400",  "title": "New supplier: Nordic Metal Craft",    "date": "01 Apr 2022 · Supply Chain" },
+        { "icon": "ti-check",       "iconBg": "bg-emerald-50", "iconColor": "text-emerald-600","title": "Material created",                    "date": "03 Feb 2021 · Jonas Holt" }
+      ]
     },
     {
       "id": "WOODWO-003",
@@ -61,7 +263,77 @@
       "supplier": "Oregon Hardwoods Co.",
       "linkedProducts": 47,
       "status": "phasing-out",
-      "updatedAt": "2025-03-10"
+      "updatedAt": "2025-03-10",
+      "specs": [
+        { "label": "Type",          "value": "Hardwood" },
+        { "label": "Species",       "value": "Quercus alba" },
+        { "label": "Origin",        "value": "Pacific Northwest, USA" },
+        { "label": "Grade",         "value": "A (Select & Better)" },
+        { "label": "Thickness",     "value": "18mm / 22mm / 30mm", "tabnum": true },
+        { "label": "Finish options","value": "Oiled, Lacquered, Raw" },
+        { "label": "Certification", "value": "FSC-C012345 · PEFC" },
+        { "label": "Janka hardness","value": "1360 lbf", "tabnum": true }
+      ],
+      "lifecycle": {
+        "added":        { "date": "Jan 14, 2022", "by": "Erik Olsen",       "note": "Grade A sourcing approved. Initial BOM integration complete." },
+        "phasingOut":   { "date": "Mar 10, 2025", "by": "Lars Supply Chain","note": "Supplier confirmed last batch Q3 2025." },
+        "discontinued": { "targetDate": "Q4 2025", "note": "Requires Design & BOM Team sign-off before transition." },
+        "obsolete":     null
+      },
+      "affectedProducts": [
+        { "id": "30317", "name": "30317 Forma Lounge Chair",      "meta": "3 Mother V · 116 SO Variants", "status": "Published",  "icon": "ti-armchair" },
+        { "id": "30318", "name": "30318 Forma Side Table",        "meta": "1 Mother V · 24 SO Variants",  "status": "Published",  "icon": "ti-table-column" },
+        { "id": "30512", "name": "30512 Bergen Coffee Table",     "meta": "4 Mother V · 48 SO Variants",  "status": "Published",  "icon": "ti-coffee" },
+        { "id": "30401", "name": "30401 Nordvik Archive Shelf",   "meta": "2 Mother V · 18 SO Variants",  "status": "Draft",      "icon": "ti-box" },
+        { "id": "30605", "name": "30605 Fjord Three-Seat Sofa",   "meta": "2 Mother V · 32 SO Variants",  "status": "In Review",  "icon": "ti-sofa" }
+      ],
+      "substitutes": [
+        {
+          "name": "European Walnut", "code": "WWWNT-001", "grade": "A", "cert": "FSC Certified",
+          "matchLabel": "Best match", "matchColor": "emerald",
+          "checks": [
+            { "ok": true, "warn": false, "text": "Same grade A" },
+            { "ok": true, "warn": false, "text": "FSC Certified" },
+            { "ok": true, "warn": false, "text": "In stock" },
+            { "ok": null, "warn": false, "text": "Similar appearance" }
+          ],
+          "priceNote": "Price delta: comparable"
+        },
+        {
+          "name": "European Beech", "code": "WWEUR-004", "grade": "B", "cert": "PEFC Certified",
+          "matchLabel": "Grade B", "matchColor": "stone",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "In stock" },
+            { "ok": false, "warn": true,  "text": "Grade B (lower)" },
+            { "ok": null,  "warn": false, "text": "Similar grain pattern" }
+          ],
+          "priceNote": "Price delta: +8%"
+        },
+        {
+          "name": "European Oak (alt.)", "code": "EXT-OAK", "grade": "A", "cert": "FSC Certified",
+          "matchLabel": "Grade A", "matchColor": "stone",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "Grade A · FSC" },
+            { "ok": false, "warn": true,  "text": "6-week lead time" },
+            { "ok": true,  "warn": false, "text": "Similar appearance" }
+          ],
+          "priceNote": "Price delta: +15%"
+        }
+      ],
+      "usageByCategory": [
+        { "label": "Sofas & Armchairs",    "count": 18, "pct": 38 },
+        { "label": "Dining & Tables",      "count": 14, "pct": 30 },
+        { "label": "Wardrobes & Shelving", "count": 9,  "pct": 19 },
+        { "label": "Outdoor Furniture",    "count": 4,  "pct": 8  },
+        { "label": "Lighting & Acc.",      "count": 2,  "pct": 4  }
+      ],
+      "changeLog": [
+        { "icon": "ti-edit",        "iconBg": "bg-amber-100",  "iconColor": "text-amber-600",  "title": "Status → Phasing Out",           "date": "10 Mar 2025 · Lars Supply Chain", "note": "\"Supplier confirmed last batch Q3 2025.\"" },
+        { "icon": "ti-certificate", "iconBg": "bg-brand-50",   "iconColor": "text-brand-600",  "title": "FSC Certificate renewed",        "date": "02 Jan 2025 · Erik Olsen" },
+        { "icon": "ti-plus",        "iconBg": "bg-stone-100",  "iconColor": "text-stone-400",  "title": "Added 30mm thickness option",    "date": "15 Aug 2023 · Anja Hofer" },
+        { "icon": "ti-link",        "iconBg": "bg-stone-100",  "iconColor": "text-stone-400",  "title": "Linked to 12 new products",      "date": "03 Mar 2023 · BOM Team" },
+        { "icon": "ti-check",       "iconBg": "bg-emerald-50", "iconColor": "text-emerald-600","title": "Material created",               "date": "14 Jan 2022 · Erik Olsen" }
+      ]
     },
     {
       "id": "FABRC-011",
@@ -70,10 +342,53 @@
       "category": "Fabric",
       "colorHex": null,
       "finish": null,
-      "supplier": null,
+      "supplier": "Kvadrat A/S",
       "linkedProducts": 6,
       "status": "phasing-out",
-      "updatedAt": null
+      "updatedAt": "2024-12-15",
+      "specs": [
+        { "label": "Type",         "value": "Upholstery Fabric" },
+        { "label": "Composition",  "value": "57% Wool · 29% Nylon · 14% Cotton" },
+        { "label": "Weight",       "value": "380 g/m²",  "tabnum": true },
+        { "label": "Width",        "value": "140 cm",    "tabnum": true },
+        { "label": "Martindale",   "value": "60,000 rubs", "tabnum": true },
+        { "label": "Fire rating",  "value": "EN 1021-1" },
+        { "label": "Colors avail.","value": "12 options" },
+        { "label": "Certification","value": "Oeko-Tex Standard 100" }
+      ],
+      "lifecycle": {
+        "added":        { "date": "Jan 18, 2020", "by": "Maria Holm", "note": "Approved as supplementary upholstery option for premium seating range." },
+        "phasingOut":   { "date": "Dec 15, 2024", "by": "Supply Chain","note": "Kvadrat discontinuing Remix 2 line. Last order placed." },
+        "discontinued": { "targetDate": "Q2 2025", "note": "Transition all products to Hallingdal 65 Wool (FABRC-002)." },
+        "obsolete":     null
+      },
+      "affectedProducts": [
+        { "id": "30317", "name": "30317 Forma Lounge Chair",  "meta": "1 Mother V · 12 SO Variants", "status": "Published", "icon": "ti-armchair" },
+        { "id": "30720", "name": "30720 Modo Armchair",       "meta": "1 Mother V · 6 SO Variants",  "status": "In Review", "icon": "ti-armchair" },
+        { "id": "30810", "name": "30810 Vik Three-Seat Sofa", "meta": "1 Mother V · 8 SO Variants",  "status": "Draft",     "icon": "ti-sofa" }
+      ],
+      "substitutes": [
+        {
+          "name": "Hallingdal 65 Wool", "code": "FABRC-002", "grade": "—", "cert": "Oeko-Tex",
+          "matchLabel": "Best match", "matchColor": "emerald",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "Same supplier (Kvadrat)" },
+            { "ok": true,  "warn": false, "text": "Higher Martindale (100k)" },
+            { "ok": true,  "warn": false, "text": "More color options (40)" },
+            { "ok": null,  "warn": false, "text": "Active status" }
+          ],
+          "priceNote": "Price delta: +6%"
+        }
+      ],
+      "usageByCategory": [
+        { "label": "Sofas & Armchairs", "count": 4, "pct": 67 },
+        { "label": "Lounge Chairs",     "count": 2, "pct": 33 }
+      ],
+      "changeLog": [
+        { "icon": "ti-edit",     "iconBg": "bg-amber-100",  "iconColor": "text-amber-600",  "title": "Status → Phasing Out",            "date": "15 Dec 2024 · Supply Chain", "note": "\"Kvadrat ending Remix 2 production.\"" },
+        { "icon": "ti-mail",     "iconBg": "bg-stone-100",  "iconColor": "text-stone-400",  "title": "Supplier EOL notification received", "date": "01 Nov 2024 · Supply Chain" },
+        { "icon": "ti-check",    "iconBg": "bg-emerald-50", "iconColor": "text-emerald-600","title": "Material created",                 "date": "18 Jan 2020 · Maria Holm" }
+      ]
     },
     {
       "id": "STAIN-009",
@@ -82,10 +397,52 @@
       "category": "Surface",
       "colorHex": null,
       "finish": null,
-      "supplier": null,
+      "supplier": "Jotun Paints",
       "linkedProducts": 3,
       "status": "phasing-out",
-      "updatedAt": null
+      "updatedAt": "2025-02-01",
+      "specs": [
+        { "label": "Type",        "value": "Water-based wash/stain" },
+        { "label": "Substrate",   "value": "Softwood · Hardwood" },
+        { "label": "Coverage",    "value": "12–16 m²/L", "tabnum": true },
+        { "label": "Sheen",       "value": "Matte (≤5 GU)" },
+        { "label": "VOC level",   "value": "<30 g/L",    "tabnum": true },
+        { "label": "Drying time", "value": "4h recoat · 24h full" },
+        { "label": "Colors",      "value": "Nordic Grey (#B0B8BC)" },
+        { "label": "Certification","value":"Nordic Ecolabel" }
+      ],
+      "lifecycle": {
+        "added":        { "date": "Apr 05, 2021", "by": "Anja Hofer",    "note": "Approved as standard grey finish for shelving and storage units." },
+        "phasingOut":   { "date": "Feb 01, 2025", "by": "Product Team", "note": "Replaced by new Nordic Grey Stain formulation. Existing stock to be used first." },
+        "discontinued": { "targetDate": "Q3 2025", "note": "All remaining products to migrate to STAIN-003 or new formulation." },
+        "obsolete":     null
+      },
+      "affectedProducts": [
+        { "id": "30401", "name": "30401 Nordvik Archive Shelf", "meta": "2 Mother V · 18 SO Variants", "status": "Published", "icon": "ti-box" },
+        { "id": "30402", "name": "30402 Nordvik Sideboard",     "meta": "1 Mother V · 6 SO Variants",  "status": "Draft",     "icon": "ti-box" },
+        { "id": "30405", "name": "30405 Nordvik Wall Unit",     "meta": "1 Mother V · 4 SO Variants",  "status": "Draft",     "icon": "ti-box" }
+      ],
+      "substitutes": [
+        {
+          "name": "Nordic Grey Stain", "code": "STAIN-003", "grade": "—", "cert": "—",
+          "matchLabel": "Direct replacement", "matchColor": "emerald",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "Same color family" },
+            { "ok": false, "warn": true,  "text": "Status: Discontinued" },
+            { "ok": null,  "warn": false, "text": "Oil-based (longer dry)" }
+          ],
+          "priceNote": "Price delta: comparable"
+        }
+      ],
+      "usageByCategory": [
+        { "label": "Wardrobes & Shelving", "count": 2, "pct": 67 },
+        { "label": "Storage & Sideboards", "count": 1, "pct": 33 }
+      ],
+      "changeLog": [
+        { "icon": "ti-edit",     "iconBg": "bg-amber-100",  "iconColor": "text-amber-600",  "title": "Status → Phasing Out",          "date": "01 Feb 2025 · Product Team" },
+        { "icon": "ti-package",  "iconBg": "bg-stone-100",  "iconColor": "text-stone-400",  "title": "New formulation announced",     "date": "15 Jan 2025 · Jotun Paints" },
+        { "icon": "ti-check",    "iconBg": "bg-emerald-50", "iconColor": "text-emerald-600","title": "Material created",               "date": "05 Apr 2021 · Anja Hofer" }
+      ]
     },
     {
       "id": "METL-019",
@@ -93,11 +450,58 @@
       "name": "Matte Black Powder Coat",
       "category": "Metal",
       "colorHex": "#2a2a2a",
-      "finish": null,
-      "supplier": null,
+      "finish": "Matte powder coat",
+      "supplier": "—",
       "linkedProducts": 23,
       "status": "discontinued",
-      "updatedAt": null
+      "updatedAt": "2024-01-15",
+      "specs": [
+        { "label": "Type",        "value": "Powder coat finish" },
+        { "label": "Substrate",   "value": "Steel · Aluminium" },
+        { "label": "Thickness",   "value": "60–80 μm", "tabnum": true },
+        { "label": "Color",       "value": "RAL 9005 Jet Black" },
+        { "label": "Adhesion",    "value": "GT0 (ISO 2409)" },
+        { "label": "Hardness",    "value": "2H pencil hardness" },
+        { "label": "UV stability","value": "1000h QUV (moderate fade)" },
+        { "label": "Certification","value":"GSB AL 631 (lapsed)" }
+      ],
+      "lifecycle": {
+        "added":        { "date": "Sep 20, 2018", "by": "Jonas Holt",    "note": "Standard black finish for metal frames and legs across seating range." },
+        "phasingOut":   { "date": "Jun 12, 2023", "by": "Product Team", "note": "UV fading issues reported in outdoor use. Replacement sourcing initiated." },
+        "discontinued": { "date": "Jan 15, 2024", "by": "Design Team",  "note": "Replaced by improved Matte Black v2. All new designs must use updated spec." },
+        "obsolete":     { "targetDate": "Q4 2025", "note": "Archive when all linked products are migrated." }
+      },
+      "affectedProducts": [
+        { "id": "30150", "name": "30150 Havn Dining Chair",  "meta": "2 Mother V · 36 SO Variants", "status": "Published", "icon": "ti-armchair" },
+        { "id": "30155", "name": "30155 Havn Bar Stool",     "meta": "2 Mother V · 18 SO Variants", "status": "Published", "icon": "ti-armchair" },
+        { "id": "30501", "name": "30501 Steel Side Table",   "meta": "1 Mother V · 8 SO Variants",  "status": "Draft",     "icon": "ti-table-column" },
+        { "id": "30520", "name": "30520 Frame Shelving",     "meta": "1 Mother V · 6 SO Variants",  "status": "Draft",     "icon": "ti-box" },
+        { "id": "30530", "name": "30530 Mesh Lounge Chair",  "meta": "1 Mother V · 12 SO Variants", "status": "Draft",     "icon": "ti-armchair" }
+      ],
+      "substitutes": [
+        {
+          "name": "Matte Black v2 (new spec)", "code": "EXT-MB2", "grade": "—", "cert": "GSB AL 631",
+          "matchLabel": "Direct upgrade", "matchColor": "emerald",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "Improved UV stability" },
+            { "ok": true,  "warn": false, "text": "Same RAL 9005 color" },
+            { "ok": true,  "warn": false, "text": "In stock" }
+          ],
+          "priceNote": "Price delta: +3%"
+        }
+      ],
+      "usageByCategory": [
+        { "label": "Chairs & Stools",     "count": 10, "pct": 43 },
+        { "label": "Dining & Tables",     "count": 7,  "pct": 30 },
+        { "label": "Wardrobes & Shelving","count": 4,  "pct": 17 },
+        { "label": "Other",               "count": 2,  "pct": 10 }
+      ],
+      "changeLog": [
+        { "icon": "ti-ban",       "iconBg": "bg-red-100",    "iconColor": "text-red-600",    "title": "Status → Discontinued",          "date": "15 Jan 2024 · Design Team", "note": "\"Superseded by Matte Black v2.\"" },
+        { "icon": "ti-alert-triangle","iconBg":"bg-amber-100","iconColor":"text-amber-600",  "title": "UV fading issue reported",        "date": "12 Jun 2023 · QA Team" },
+        { "icon": "ti-edit",      "iconBg": "bg-amber-100",  "iconColor": "text-amber-600",  "title": "Status → Phasing Out",           "date": "12 Jun 2023 · Product Team" },
+        { "icon": "ti-check",     "iconBg": "bg-emerald-50", "iconColor": "text-emerald-600","title": "Material created",                "date": "20 Sep 2018 · Jonas Holt" }
+      ]
     },
     {
       "id": "STAIN-003",
@@ -106,10 +510,54 @@
       "category": "Surface",
       "colorHex": null,
       "finish": null,
-      "supplier": null,
+      "supplier": "—",
       "linkedProducts": 8,
       "status": "discontinued",
-      "updatedAt": null
+      "updatedAt": "2023-03-20",
+      "specs": [
+        { "label": "Type",        "value": "Oil-based stain" },
+        { "label": "Substrate",   "value": "Softwood (pine, spruce)" },
+        { "label": "Coverage",    "value": "8–12 m²/L", "tabnum": true },
+        { "label": "Sheen",       "value": "Satin (15–25 GU)" },
+        { "label": "VOC level",   "value": "<150 g/L", "tabnum": true },
+        { "label": "Drying time", "value": "8h recoat · 48h full" },
+        { "label": "Colors",      "value": "Nordic Grey (#8A9CA0)" },
+        { "label": "Certification","value":"None (lapsed)" }
+      ],
+      "lifecycle": {
+        "added":        { "date": "Jan 10, 2019", "by": "Anja Hofer",   "note": "Standard grey stain for pine shelving and storage range." },
+        "phasingOut":   { "date": "Dec 01, 2022", "by": "Product Team", "note": "VOC level exceeds new EU regulations. Replacement sourcing started." },
+        "discontinued": { "date": "Mar 20, 2023", "by": "Compliance",   "note": "Non-compliant with EU VOC Directive 2004/42/EC. Immediate halt." },
+        "obsolete":     { "targetDate": "Q2 2025", "note": "Complete migration to Nordic Grey Wash (STAIN-009) for remaining products." }
+      },
+      "affectedProducts": [
+        { "id": "30401", "name": "30401 Nordvik Archive Shelf", "meta": "2 Mother V · 18 SO Variants", "status": "Published", "icon": "ti-box" },
+        { "id": "30402", "name": "30402 Nordvik Sideboard",     "meta": "1 Mother V · 6 SO Variants",  "status": "Draft",     "icon": "ti-box" },
+        { "id": "30405", "name": "30405 Nordvik Wall Unit",     "meta": "1 Mother V · 4 SO Variants",  "status": "Draft",     "icon": "ti-box" }
+      ],
+      "substitutes": [
+        {
+          "name": "Nordic Grey Wash", "code": "STAIN-009", "grade": "—", "cert": "Nordic Ecolabel",
+          "matchLabel": "Recommended", "matchColor": "emerald",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "Low VOC (<30 g/L)" },
+            { "ok": true,  "warn": false, "text": "Nordic Ecolabel" },
+            { "ok": null,  "warn": false, "text": "Water-based (faster dry)" },
+            { "ok": false, "warn": true,  "text": "Also phasing out" }
+          ],
+          "priceNote": "Price delta: comparable"
+        }
+      ],
+      "usageByCategory": [
+        { "label": "Wardrobes & Shelving", "count": 4, "pct": 50 },
+        { "label": "Storage & Sideboards", "count": 2, "pct": 25 },
+        { "label": "Dining & Tables",      "count": 2, "pct": 25 }
+      ],
+      "changeLog": [
+        { "icon": "ti-ban",      "iconBg": "bg-red-100",    "iconColor": "text-red-600",    "title": "Status → Discontinued (compliance)", "date": "20 Mar 2023 · Compliance", "note": "\"VOC exceeds EU Directive 2004/42/EC.\"" },
+        { "icon": "ti-edit",     "iconBg": "bg-amber-100",  "iconColor": "text-amber-600",  "title": "Status → Phasing Out",              "date": "01 Dec 2022 · Product Team" },
+        { "icon": "ti-check",    "iconBg": "bg-emerald-50", "iconColor": "text-emerald-600","title": "Material created",                   "date": "10 Jan 2019 · Anja Hofer" }
+      ]
     },
     {
       "id": "WWPIN-015",
@@ -118,10 +566,46 @@
       "category": "Wood",
       "colorHex": null,
       "finish": null,
-      "supplier": null,
+      "supplier": "—",
       "linkedProducts": 0,
       "status": "obsolete",
-      "updatedAt": null
+      "updatedAt": "2022-06-01",
+      "specs": [
+        { "label": "Type",          "value": "Softwood" },
+        { "label": "Species",       "value": "Pinus sylvestris" },
+        { "label": "Origin",        "value": "Scandinavia" },
+        { "label": "Grade",         "value": "C (Common)" },
+        { "label": "Thickness",     "value": "18mm / 22mm", "tabnum": true },
+        { "label": "Finish options","value": "Natural, Painted" },
+        { "label": "Certification", "value": "None" },
+        { "label": "Janka hardness","value": "870 lbf", "tabnum": true }
+      ],
+      "lifecycle": {
+        "added":        { "date": "May 14, 2015", "by": "Erik Olsen",   "note": "Budget option for entry-level shelving range." },
+        "phasingOut":   { "date": "Aug 20, 2019", "by": "Product Team", "note": "Quality inconsistency. Replaced by European Beech." },
+        "discontinued": { "date": "Feb 10, 2021", "by": "Design Team",  "note": "No active products. Migration to Beech complete." },
+        "obsolete":     { "date": "Jun 01, 2022", "by": "Erik Olsen",   "note": "Archived. No further use in any product line." }
+      },
+      "affectedProducts": [],
+      "substitutes": [
+        {
+          "name": "European Beech", "code": "WWEUR-004", "grade": "B", "cert": "PEFC",
+          "matchLabel": "Recommended", "matchColor": "emerald",
+          "checks": [
+            { "ok": true, "warn": false, "text": "Better quality (Grade B vs C)" },
+            { "ok": true, "warn": false, "text": "PEFC Certified" },
+            { "ok": true, "warn": false, "text": "Active status" }
+          ],
+          "priceNote": "Price delta: +18%"
+        }
+      ],
+      "usageByCategory": [],
+      "changeLog": [
+        { "icon": "ti-archive",  "iconBg": "bg-stone-100",  "iconColor": "text-stone-400",  "title": "Status → Obsolete",              "date": "01 Jun 2022 · Erik Olsen" },
+        { "icon": "ti-ban",      "iconBg": "bg-red-100",    "iconColor": "text-red-600",    "title": "Status → Discontinued",          "date": "10 Feb 2021 · Design Team" },
+        { "icon": "ti-edit",     "iconBg": "bg-amber-100",  "iconColor": "text-amber-600",  "title": "Status → Phasing Out",           "date": "20 Aug 2019 · Product Team" },
+        { "icon": "ti-check",    "iconBg": "bg-emerald-50", "iconColor": "text-emerald-600","title": "Material created",                "date": "14 May 2015 · Erik Olsen" }
+      ]
     },
     {
       "id": "FABRC-020",
@@ -130,10 +614,46 @@
       "category": "Fabric",
       "colorHex": "#f0c040",
       "finish": null,
-      "supplier": null,
+      "supplier": "—",
       "linkedProducts": 0,
       "status": "obsolete",
-      "updatedAt": null
+      "updatedAt": "2022-09-15",
+      "specs": [
+        { "label": "Type",         "value": "Upholstery Fabric (Bouclé)" },
+        { "label": "Composition",  "value": "80% Wool · 20% Polyester" },
+        { "label": "Weight",       "value": "560 g/m²",  "tabnum": true },
+        { "label": "Width",        "value": "140 cm",    "tabnum": true },
+        { "label": "Martindale",   "value": "25,000 rubs", "tabnum": true },
+        { "label": "Fire rating",  "value": "EN 1021-1 (lapsed)" },
+        { "label": "Colors",       "value": "Sunburst Yellow only" },
+        { "label": "Certification","value": "None (lapsed)" }
+      ],
+      "lifecycle": {
+        "added":        { "date": "Feb 01, 2020", "by": "Design Team",  "note": "Limited edition seasonal colorway for spring collection." },
+        "phasingOut":   { "date": "Sep 10, 2021", "by": "Product Team", "note": "Limited edition ended. No reorder." },
+        "discontinued": { "date": "Jan 05, 2022", "by": "Design Team",  "note": "Collection discontinued. All products migrated." },
+        "obsolete":     { "date": "Sep 15, 2022", "by": "Erik Olsen",   "note": "Archived. No longer tracked in active inventory." }
+      },
+      "affectedProducts": [],
+      "substitutes": [
+        {
+          "name": "Hallingdal 65 Wool", "code": "FABRC-002", "grade": "—", "cert": "Oeko-Tex",
+          "matchLabel": "Active alternative", "matchColor": "emerald",
+          "checks": [
+            { "ok": true,  "warn": false, "text": "Active status" },
+            { "ok": true,  "warn": false, "text": "Higher Martindale (100k)" },
+            { "ok": null,  "warn": false, "text": "Different color range" }
+          ],
+          "priceNote": "Price delta: comparable"
+        }
+      ],
+      "usageByCategory": [],
+      "changeLog": [
+        { "icon": "ti-archive",  "iconBg": "bg-stone-100",  "iconColor": "text-stone-400",  "title": "Status → Obsolete",               "date": "15 Sep 2022 · Erik Olsen" },
+        { "icon": "ti-ban",      "iconBg": "bg-red-100",    "iconColor": "text-red-600",    "title": "Status → Discontinued",           "date": "05 Jan 2022 · Design Team" },
+        { "icon": "ti-edit",     "iconBg": "bg-amber-100",  "iconColor": "text-amber-600",  "title": "Status → Phasing Out",            "date": "10 Sep 2021 · Product Team" },
+        { "icon": "ti-check",    "iconBg": "bg-emerald-50", "iconColor": "text-emerald-600","title": "Material created",                 "date": "01 Feb 2020 · Design Team" }
+      ]
     }
   ]
 }

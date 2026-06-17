@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Layout from '../components/layout/Layout.jsx'
 import { useData } from '../store/DataContext.jsx'
 import { useFilter } from '../store/useFilter.js'
@@ -80,6 +80,74 @@ const PLATFORM_TABS = [
   { key: 'pinterest', icon: 'ti-brand-pinterest', iconColor: 'text-red-600',   label: 'Pinterest' },
 ]
 
+const PLATFORM_PREVIEW_CONFIG = {
+  instagram: {
+    format: '1080 × 1080',
+    formatLabel: 'IG Grid · Square',
+    aspectRatio: '1:1',
+    aspectLabel: 'Feed optimized',
+    duplicateLabel: 'Duplicate for Story',
+    frameClass: 'bg-stone-800',
+    accountName: 'formastudio.eu',
+    headerBg: 'bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600',
+    actions: ['ti-heart', 'ti-message-circle', 'ti-send'],
+    sizeLabel: '1080 × 1080 · IG Grid',
+    captionLineClamp: '2',
+  },
+  facebook: {
+    format: '1200 × 630',
+    formatLabel: 'FB Post · Landscape',
+    aspectRatio: '1.91:1',
+    aspectLabel: 'News Feed optimized',
+    duplicateLabel: 'Duplicate for FB Story',
+    frameClass: 'bg-blue-900',
+    accountName: 'Forma Studio EU',
+    headerBg: 'bg-blue-600',
+    actions: ['ti-thumb-up', 'ti-message', 'ti-share'],
+    sizeLabel: '1200 × 630 · FB Post',
+    captionLineClamp: '3',
+  },
+  linkedin: {
+    format: '1200 × 627',
+    formatLabel: 'LI Post · Landscape',
+    aspectRatio: '1.91:1',
+    aspectLabel: 'Feed optimized',
+    duplicateLabel: 'Duplicate as Article',
+    frameClass: 'bg-blue-950',
+    accountName: 'Forma Studio GmbH',
+    headerBg: 'bg-blue-700',
+    actions: ['ti-thumb-up', 'ti-message-dots', 'ti-repeat'],
+    sizeLabel: '1200 × 627 · LI Post',
+    captionLineClamp: '3',
+  },
+  youtube: {
+    format: '1280 × 720',
+    formatLabel: 'YT Thumbnail · 720p',
+    aspectRatio: '16:9',
+    aspectLabel: 'Widescreen',
+    duplicateLabel: 'Duplicate as Short',
+    frameClass: 'bg-stone-900',
+    accountName: 'FormaStudio',
+    headerBg: 'bg-red-600',
+    actions: ['ti-thumb-up', 'ti-thumb-down', 'ti-share'],
+    sizeLabel: '1280 × 720 · YT Thumbnail',
+    captionLineClamp: '2',
+  },
+  pinterest: {
+    format: '1000 × 1500',
+    formatLabel: 'Pinterest Pin · Portrait',
+    aspectRatio: '2:3',
+    aspectLabel: 'Feed optimized',
+    duplicateLabel: 'Duplicate as Idea Pin',
+    frameClass: 'bg-stone-800',
+    accountName: 'formastudio',
+    headerBg: 'bg-red-600',
+    actions: ['ti-heart', 'ti-share', 'ti-bookmark'],
+    sizeLabel: '1000 × 1500 · Pin',
+    captionLineClamp: '2',
+  },
+}
+
 const CAMPAIGN_ASSETS = [
   'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=100&h=100&fit=crop&q=80',
   'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=100&h=100&fit=crop&q=80',
@@ -108,10 +176,14 @@ export default function SocialCampaign() {
   const [selectedPlatformTab, setSelectedPlatformTab] = useState('instagram')
   const [selectedDesignOption, setSelectedDesignOption] = useState('as-is')
   const [isAutoPublishOn, setIsAutoPublishOn] = useState(true)
-  const [captionText] = useState(
-    'Where comfort meets craftsmanship. The Greenwood Chair — built to last, designed to inspire.'
-  )
-  const [hashtags] = useState(['#interiordesign', '#europeanfurniture', '#formastudio', '#furnituredesign'])
+
+  useEffect(() => {
+    if (campaignChannels.length > 0) {
+      const firstKey = CHANNEL_TO_KEY[campaignChannels[0]]
+      if (firstKey) setSelectedPlatformTab(firstKey)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCampaignId])
 
   // Modal state
   const [showModal, setShowModal] = useState(false)
@@ -158,7 +230,56 @@ export default function SocialCampaign() {
     }
   }
 
-  const selectedCampaign = state.campaigns.find(c => c.id === selectedCampaignId)
+  const selectedCampaignIndex = state.campaigns.findIndex(c => c.id === selectedCampaignId)
+  const selectedCampaign = state.campaigns[selectedCampaignIndex]
+
+  // Derived from selected campaign
+  const campaignChannels = selectedCampaign?.channels || []
+
+  const campaignSteps = (() => {
+    const s = selectedCampaign?.status
+    if (!s || s === 'Draft') return STEPS.map((st, i) => ({ ...st, state: i === 0 ? 'current' : 'upcoming' }))
+    if (s === 'Scheduled') return STEPS.map((st, i) => ({ ...st, state: i < 3 ? 'done' : i === 3 ? 'current' : 'upcoming' }))
+    if (s === 'Active') return STEPS.map((st, i) => ({ ...st, state: i < 4 ? 'done' : 'current' }))
+    if (s === 'Posted' || s === 'Ended') return STEPS.map(st => ({ ...st, state: 'done' }))
+    return STEPS
+  })()
+
+  const CHANNEL_TO_KEY = { Facebook: 'facebook', Instagram: 'instagram', LinkedIn: 'linkedin', YouTube: 'youtube', Pinterest: 'pinterest' }
+  const visiblePlatformTabs = campaignChannels.length > 0
+    ? PLATFORM_TABS.filter(t => campaignChannels.map(c => CHANNEL_TO_KEY[c]).includes(t.key))
+    : PLATFORM_TABS
+
+  const CHANNEL_LABEL_MAP = { Facebook: 'Pages', Instagram: 'Feed', LinkedIn: 'Company Page', YouTube: 'Channel', Pinterest: 'Board' }
+  const dynamicScheduleRows = campaignChannels.map(ch => ({
+    platform: ch,
+    icon: CHANNEL_ICON_MAP[ch]?.icon || 'ti-world',
+    iconColor: CHANNEL_ICON_MAP[ch]?.iconColor || 'text-stone-500',
+    channel: CHANNEL_LABEL_MAP[ch] || ch,
+    date: selectedCampaign?.endDate || '20 Mar 2026',
+    time: '10:00',
+    status: (selectedCampaign?.status === 'Posted' || selectedCampaign?.status === 'Active') ? 'Posted' : 'Scheduled',
+  }))
+
+  const idx = selectedCampaignIndex >= 0 ? selectedCampaignIndex : 0
+  const mainAssetSrc = CAMPAIGN_ASSETS[idx % CAMPAIGN_ASSETS.length]
+  const rotatedAssets = CAMPAIGN_ASSETS.map((_, i) => CAMPAIGN_ASSETS[(i + idx) % CAMPAIGN_ASSETS.length])
+
+  const CAPTIONS = [
+    'Where comfort meets craftsmanship. The Greenwood Chair — built to last, designed to inspire.',
+    'Timeless design for modern living. Discover our latest collection this season.',
+    'Crafted with precision. Inspired by nature. Built for your home.',
+    'Elevate your space with our premium European furniture collection.',
+  ]
+  const HASHTAG_SETS = [
+    ['#interiordesign', '#europeanfurniture', '#formastudio', '#furnituredesign'],
+    ['#modernliving', '#homedesign', '#luxuryfurniture', '#scandinavian'],
+    ['#craftsmanship', '#handmade', '#qualityfurniture', '#timelessdesign'],
+    ['#homedecor', '#interiors', '#designlovers', '#sustainablefurniture'],
+  ]
+  const captionText = CAPTIONS[idx % CAPTIONS.length]
+  const hashtags = HASHTAG_SETS[idx % HASHTAG_SETS.length]
+  const platformConfig = PLATFORM_PREVIEW_CONFIG[selectedPlatformTab] || PLATFORM_PREVIEW_CONFIG.instagram
 
   return (
     <Layout>
@@ -340,9 +461,9 @@ export default function SocialCampaign() {
               {/* Hero banner */}
               <div className="h-[110px] relative overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&h=160&fit=crop&q=85"
+                  src={getCampaignImg(selectedCampaign, selectedCampaignIndex)}
                   className="w-full h-full object-cover"
-                  alt="Greenwood Spring"
+                  alt={selectedCampaign?.name}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-stone-900/70 via-stone-900/30 to-transparent flex items-center px-5">
                   <div>
@@ -390,7 +511,7 @@ export default function SocialCampaign() {
             {/* 5-STEP PROGRESS BAR */}
             <div className="bg-white rounded-xl border border-black/10 shadow-card px-6 py-4 animate-fade-up" style={{ animationDelay: '0.12s' }}>
               <div className="flex items-center">
-                {STEPS.map((step, idx) => (
+                {campaignSteps.map((step, idx) => (
                   <div key={step.num} className="contents">
                     <div className="flex flex-col items-center">
                       {step.state === 'done' && (
@@ -419,7 +540,7 @@ export default function SocialCampaign() {
                         Step {step.num}
                       </div>
                     </div>
-                    {idx < STEPS.length - 1 && (
+                    {idx < campaignSteps.length - 1 && (
                       <div className={`flex-1 h-0.5 mx-2 ${
                         idx === 0 ? 'bg-green-200' :
                         idx === 1 ? 'bg-brand-100' :
@@ -440,8 +561,8 @@ export default function SocialCampaign() {
                   {/* Asset thumbnail */}
                   <div className="aspect-square relative overflow-hidden">
                     <img
-                      src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=480&h=480&fit=crop&q=85"
-                      alt="Greenwood Chair"
+                      src={mainAssetSrc}
+                      alt={selectedCampaign?.name}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
@@ -495,12 +616,12 @@ export default function SocialCampaign() {
                   </div>
                   <div className="grid grid-cols-3 gap-1.5">
                     <div className="aspect-square rounded-lg overflow-hidden ring-2 ring-brand-400 relative">
-                      <img src={CAMPAIGN_ASSETS[0]} className="w-full h-full object-cover" alt="" />
+                      <img src={rotatedAssets[0]} className="w-full h-full object-cover" alt="" />
                       <div className="absolute top-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-brand-600 flex items-center justify-center">
                         <i className="ti ti-check text-white" style={{ fontSize: '8px' }}></i>
                       </div>
                     </div>
-                    {CAMPAIGN_ASSETS.slice(1).map((src, i) => (
+                    {rotatedAssets.slice(1).map((src, i) => (
                       <div key={i} className="aspect-square rounded-lg overflow-hidden">
                         <img src={src} className="w-full h-full object-cover" alt="" />
                       </div>
@@ -531,7 +652,7 @@ export default function SocialCampaign() {
                 <div className="bg-white rounded-xl border border-black/10 shadow-card overflow-hidden">
                   {/* Platform tabs */}
                   <div className="flex items-center border-b border-black/10 px-4 gap-0 overflow-x-auto">
-                    {PLATFORM_TABS.map((tab) => {
+                    {visiblePlatformTabs.map((tab) => {
                       const isActive = selectedPlatformTab === tab.key
                       return (
                         <button
@@ -549,44 +670,71 @@ export default function SocialCampaign() {
                     })}
                   </div>
 
-                  {/* Instagram Preview */}
+                  {/* Platform Preview — dynamic per selectedPlatformTab */}
                   <div className="p-5 flex gap-5">
-                    {/* Mock phone frame */}
+                    {/* Mock device frame */}
                     <div className="shrink-0 w-[190px]">
-                      <div className="bg-stone-800 rounded-[20px] p-2 shadow-xl">
-                        {/* IG app mockup */}
+                      <div className={`${platformConfig.frameClass} rounded-[20px] p-2 shadow-xl`}>
                         <div className="bg-white rounded-[14px] overflow-hidden">
-                          {/* IG header */}
+                          {/* Platform header */}
                           <div className="flex items-center justify-between px-3 py-2 border-b border-stone-100">
                             <div className="flex items-center gap-1.5">
-                              <div className="w-5 h-5 rounded-full bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600"></div>
-                              <span className="text-[9px] font-semibold text-stone-800">formastudio.eu</span>
+                              <div className={`w-5 h-5 rounded-full ${platformConfig.headerBg} flex items-center justify-center`}>
+                                {selectedPlatformTab !== 'instagram' && (
+                                  <i className={`ti ${PLATFORM_TABS.find(t => t.key === selectedPlatformTab)?.icon} text-white`} style={{ fontSize: '9px' }}></i>
+                                )}
+                              </div>
+                              <span className="text-[9px] font-semibold text-stone-800">{platformConfig.accountName}</span>
                             </div>
                             <i className="ti ti-dots text-[10px] text-stone-500"></i>
                           </div>
-                          {/* Image area */}
-                          <div className="aspect-square overflow-hidden">
+                          {/* Image area — aspect ratio adapts */}
+                          <div
+                            className="overflow-hidden relative"
+                            style={{
+                              aspectRatio: selectedPlatformTab === 'youtube' ? '16/9'
+                                : selectedPlatformTab === 'pinterest' ? '2/3'
+                                : selectedPlatformTab === 'instagram' ? '1/1'
+                                : '1.91/1'
+                            }}
+                          >
                             <img
-                              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=200&h=200&fit=crop&q=85"
-                              alt="Greenwood Spring"
+                              src={rotatedAssets[1 % rotatedAssets.length]}
+                              alt={selectedCampaign?.name}
                               className="w-full h-full object-cover"
                             />
+                            {selectedPlatformTab === 'youtube' && (
+                              <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                                <div className="w-8 h-8 rounded-full bg-red-600/90 flex items-center justify-center">
+                                  <i className="ti ti-player-play-filled text-white" style={{ fontSize: '10px' }}></i>
+                                </div>
+                              </div>
+                            )}
+                            {selectedPlatformTab === 'pinterest' && (
+                              <div className="absolute top-1.5 right-1.5">
+                                <div className="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center shadow-md">
+                                  <i className="ti ti-brand-pinterest text-white" style={{ fontSize: '9px' }}></i>
+                                </div>
+                              </div>
+                            )}
                           </div>
-                          {/* IG actions */}
+                          {/* Platform actions */}
                           <div className="px-3 py-2">
                             <div className="flex items-center gap-2 mb-1.5">
-                              <i className="ti ti-heart text-[12px] text-stone-600"></i>
-                              <i className="ti ti-message-circle text-[12px] text-stone-600"></i>
-                              <i className="ti ti-send text-[12px] text-stone-600"></i>
+                              {platformConfig.actions.map((action) => (
+                                <i key={action} className={`ti ${action} text-[12px] text-stone-600`}></i>
+                              ))}
                             </div>
-                            <div className="text-[8px] font-semibold text-stone-800 leading-relaxed">
-                              Where comfort meets craftsmanship. The Greenwood Chair.
+                            <div className="text-[8px] font-semibold text-stone-800 leading-relaxed line-clamp-2">
+                              {captionText.split('.')[0]}.
                             </div>
-                            <div className="text-[7px] text-blue-500 mt-1 leading-relaxed">#interiordesign #europeanfurniture</div>
+                            {selectedPlatformTab !== 'youtube' && (
+                              <div className="text-[7px] text-blue-500 mt-1 leading-relaxed">{hashtags.slice(0, 2).join(' ')}</div>
+                            )}
                           </div>
                         </div>
                       </div>
-                      <div className="text-center mt-2 text-[10px] text-stone-400 tabnum">1080 &times; 1080 &middot; IG Grid</div>
+                      <div className="text-center mt-2 text-[10px] text-stone-400 tabnum">{platformConfig.sizeLabel}</div>
                     </div>
 
                     {/* Caption & details */}
@@ -607,39 +755,41 @@ export default function SocialCampaign() {
                         </div>
                       </div>
 
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-[11px] font-semibold text-stone-600 uppercase tracking-wide">Hashtags</span>
-                          <span className="text-[11px] tabnum text-stone-400">{hashtags.length} / 30</span>
+                      {selectedPlatformTab !== 'youtube' && (
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[11px] font-semibold text-stone-600 uppercase tracking-wide">Hashtags</span>
+                            <span className="text-[11px] tabnum text-stone-400">{hashtags.length} / 30</span>
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {hashtags.map((tag) => (
+                              <span key={tag} className="rounded-full bg-blue-50 text-blue-600 px-2.5 py-0.5 text-[11px] font-medium">
+                                {tag}
+                              </span>
+                            ))}
+                            <button className="rounded-full bg-stone-100 text-stone-500 px-2.5 py-0.5 text-[11px] font-medium hover:bg-stone-200 transition-colors">
+                              <i className="ti ti-plus text-[10px]"></i> Add
+                            </button>
+                          </div>
                         </div>
-                        <div className="flex flex-wrap gap-1.5">
-                          {hashtags.map((tag) => (
-                            <span key={tag} className="rounded-full bg-blue-50 text-blue-600 px-2.5 py-0.5 text-[11px] font-medium">
-                              {tag}
-                            </span>
-                          ))}
-                          <button className="rounded-full bg-stone-100 text-stone-500 px-2.5 py-0.5 text-[11px] font-medium hover:bg-stone-200 transition-colors">
-                            <i className="ti ti-plus text-[10px]"></i> Add
-                          </button>
-                        </div>
-                      </div>
+                      )}
 
                       <div className="grid grid-cols-2 gap-3">
                         <div className="bg-stone-50 rounded-lg border border-black/10 p-3">
                           <div className="text-[10px] text-stone-400 font-medium uppercase tracking-wide mb-1">Format</div>
-                          <div className="text-[12px] font-semibold text-stone-800 tabnum">1080 &times; 1080</div>
-                          <div className="text-[11px] text-stone-400">IG Grid &middot; Square</div>
+                          <div className="text-[12px] font-semibold text-stone-800 tabnum">{platformConfig.format}</div>
+                          <div className="text-[11px] text-stone-400">{platformConfig.formatLabel}</div>
                         </div>
                         <div className="bg-stone-50 rounded-lg border border-black/10 p-3">
                           <div className="text-[10px] text-stone-400 font-medium uppercase tracking-wide mb-1">Aspect Ratio</div>
-                          <div className="text-[12px] font-semibold text-stone-800 tabnum">1:1</div>
-                          <div className="text-[11px] text-stone-400">Feed optimized</div>
+                          <div className="text-[12px] font-semibold text-stone-800 tabnum">{platformConfig.aspectRatio}</div>
+                          <div className="text-[11px] text-stone-400">{platformConfig.aspectLabel}</div>
                         </div>
                       </div>
 
                       <div className="flex items-center gap-2 pt-1 flex-wrap">
                         <button className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 text-stone-600 border border-black/10 hover:-translate-y-px transition-all">
-                          <i className="ti ti-copy text-xs"></i> Duplicate for Story
+                          <i className="ti ti-copy text-xs"></i> {platformConfig.duplicateLabel}
                         </button>
                         <button className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium bg-stone-100 text-stone-600 border border-black/10 hover:-translate-y-px transition-all">
                           <i className="ti ti-external-link text-xs"></i> Edit in Canva
@@ -689,7 +839,14 @@ export default function SocialCampaign() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-black/[0.04]">
-                        {SCHEDULE_ROWS.map((row) => (
+                        {dynamicScheduleRows.length === 0 && (
+                          <tr>
+                            <td colSpan={5} className="px-4 py-6 text-center text-[12px] text-stone-400">
+                              No channels assigned — edit campaign to add platforms
+                            </td>
+                          </tr>
+                        )}
+                        {dynamicScheduleRows.map((row) => (
                           <tr key={row.platform} className="hover:bg-stone-50 transition-colors">
                             <td className="px-4 py-3">
                               <div className="flex items-center gap-2">
@@ -791,7 +948,7 @@ export default function SocialCampaign() {
       {/* FOOTER */}
       <footer className="px-6 py-3 border-t border-black/10 bg-white flex items-center justify-between text-[11px] text-stone-400">
         <span>PIM Studio v2.4.1 &middot; Connected to D365 &middot; &copy; 2026 Forma Studio GmbH</span>
-        <span className="tabnum">Social Campaign &middot; {selectedCampaign?.id || 'CAMP-2026-003'} &middot; Step 3/5</span>
+        <span className="tabnum">Social Campaign &middot; {selectedCampaign?.id || 'CAMP-2026-003'} &middot; Step {(campaignSteps.findIndex(s => s.state === 'current') + 1) || 5}/5</span>
       </footer>
 
       {/* MODAL */}
